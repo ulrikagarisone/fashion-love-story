@@ -23,7 +23,7 @@
       <div class="hero__content">
 
         <h1 class="hero__title">
-          <span class="hero__title-line hero__title-line--top">THE LOVE</span>
+          <span class="hero__title-line hero__title-line--top">THE <br> LOVE</span>
           <span class="hero__title-line hero__title-line--bottom">STORY</span>
         </h1>
 
@@ -47,6 +47,93 @@
 
     <div class="hero__logo">
       <span class="hero__logo-text">MM</span>
+    </div>
+  </section>
+
+  <!-- TRANSITION SECTION -->
+  <section class="transition">
+    <svg class="transition__triangle" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <path id="triangleTop" d="M 100,200 L 600,50 L 1100,200" fill="none" />
+        <path id="triangleBottom" d="M 100,200 L 600,350 L 1100,200" fill="none" />
+      </defs>
+
+      <text class="transition__text transition__text--top" font-size="80" font-weight="900" letter-spacing="5">
+        <textPath href="#triangleTop" startOffset="50%" text-anchor="middle">
+          TWO WORLDS
+        </textPath>
+      </text>
+
+      <text class="transition__text transition__text--bottom" font-size="80" font-weight="900" letter-spacing="5">
+        <textPath href="#triangleBottom" startOffset="50%" text-anchor="middle">
+          APART
+        </textPath>
+      </text>
+    </svg>
+
+    <div class="transition__model">
+      <img src="/images/model-walking.png" alt="Model walking down the runway" class="transition__model-image" />
+    </div>
+  </section>
+
+  <!-- TWO WORLDS SECTION -->
+  <section class="two-worlds">
+    <div class="two-worlds__container">
+
+      <div class="two-worlds__intro">
+        <p class="two-worlds__headline">
+          In the 1980s, fashion and sports<br />
+          lived on different planets.
+        </p>
+      </div>
+
+      <div class="two-worlds__content">
+        <div class="two-worlds__text">
+          <p class="two-worlds__paragraph">
+            Fashion lived on runways and red carpets. It was about exclusivity,
+            craftsmanship, and materials that had been perfected over centuries.
+            Meanwhile, sports occupied a completely <em>different universe</em>—one of
+            function, performance, and cutting-edge synthetic materials designed for
+            one purpose: to help athletes move faster, jump higher, push harder.
+          </p>
+          <p class="two-worlds__paragraph">
+            At that time, the world of sports and the world of fashion were two
+            different planets, with apparently nothing in common.
+          </p>
+        </div>
+
+        <div class="two-worlds__grid">
+          <div class="two-worlds__item two-worlds__item--fashion">
+            <div class="two-worlds__image-wrapper">
+              <img src="/images/leather-boot.jpg" alt="Black leather fashion boot" class="two-worlds__image" />
+              <img src="/images/kissy-face-fashion.png" alt="Decorative element" class="two-worlds__decoration" />
+            </div>
+            <p class="two-worlds__caption">
+              <strong>Fashion shows:</strong><br />
+              Leather everywhere.<br />
+              <span class="two-worlds__caption-accent">Lycra? Never.</span>
+            </p>
+          </div>
+
+          <div class="two-worlds__item two-worlds__item--sports">
+            <div class="two-worlds__image-wrapper">
+              <img src="/images/lycra-athlete.jpg" alt="Athlete in striped Lycra sportswear"
+                class="two-worlds__image" />
+            </div>
+            <p class="two-worlds__caption">
+              <strong>Sports stadiums:</strong><br />
+              Lycra everywhere.<br />
+              <span class="two-worlds__caption-accent">Leather? Too stiff.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-worlds__closing">
+        <p class="two-worlds__statement">They lived in<br /><span class="two-worlds__statement-large">SEPARATE
+            WORLDS.</span></p>
+      </div>
+
     </div>
   </section>
 
