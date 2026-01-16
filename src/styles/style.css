@@ -14,7 +14,11 @@
   --font-body: 'Work Sans', sans-serif;
 
   /* Font sizes */
-  --text-body-size: 1.563rem;
+  --text-body-mobile-size: 1.063rem;
+  --text-smaller-mobile-size: 0.95rem;
+  --text-quote-size-mobile: 1.5rem;
+  --text-body-tablet-size: 1.188rem;
+  --text-body-desktop-size: 1.25rem;
   --text-body-start: 2.5rem;
 }
 
@@ -50,9 +54,7 @@ body {
   color: var(--accent);
 }
 
-/* ================================
-   NAVIGATION
-   ================================ */
+/* Navigation */
 .nav {
   position: fixed;
   top: 0;
@@ -96,9 +98,7 @@ body {
   fill: #ff0000;
 }
 
-/* ================================
-   HERO SECTION - MOBILE
-   ================================ */
+/* Hero section  */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -223,9 +223,7 @@ body {
   order: 3;
 }
 
-/* ================================
-   DESKTOP LAYOUT (1024px+)
-   ================================ */
+/* Desktop */
 @media (min-width: 1024px) {
   .hero {
     min-height: 85vh;
@@ -313,9 +311,7 @@ body {
 }
 
 
-/* ================================
-   TRANSITION SECTION
-   ================================ */
+/* Transition section */
 .transition {
   position: relative;
   min-height: 50vh;
@@ -360,9 +356,7 @@ body {
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
 }
 
-/* ================================
-   TWO WORLDS SECTION - MOBILE FIRST
-   ================================ */
+/* Two worlds section */
 .two-worlds {
   background: var(--bg-blue);
   color: var(--text-black);
@@ -412,7 +406,7 @@ body {
 
 .two-worlds__paragraph {
   font-family: var(--font-body);
-  font-size: 21px;
+  font-size: var(--text-body-mobile-size);
   line-height: 1.7;
   max-width: 100%;
 }
@@ -424,8 +418,8 @@ body {
 
 .two-worlds__grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .two-worlds__item {
@@ -470,7 +464,7 @@ body {
 }
 
 .two-worlds__caption {
-  font-size: 0.95rem;
+  font-size: var(--text-smaller-mobile-size);
   line-height: 1.4;
   font-family: var(--font-body);
 }
@@ -499,7 +493,7 @@ body {
 }
 
 .two-worlds__statement-small {
-  font-size: 1.5rem;
+  font-size: var(--text-quote-size-mobile);
   font-weight: 400;
 }
 
@@ -511,9 +505,7 @@ body {
   margin-top: 0.5rem;
 }
 
-/* ================================
-   TABLET (768px+)
-   ================================ */
+/* Tablet */
 @media (min-width: 768px) {
   .transition {
     min-height: 60vh;
@@ -538,7 +530,7 @@ body {
 
   .two-worlds__paragraph {
     max-width: 500px;
-    font-size: 1.05rem;
+    font-size: var(--text-body-tablet-size);
   }
 
   .two-worlds__grid {
@@ -554,9 +546,7 @@ body {
   }
 }
 
-/* ================================
-   DESKTOP (1024px+)
-   ================================ */
+/* Desktop */
 @media (min-width: 1024px) {
   .transition {
     min-height: 70vh;
@@ -600,7 +590,7 @@ body {
 
   .two-worlds__paragraph {
     max-width: 400px;
-    font-size: 1.18rem;
+    font-size: var(--text-body-desktop-size);
   }
 
   .two-worlds__grid {
@@ -624,9 +614,7 @@ body {
   }
 }
 
-/* ================================
-   LARGE DESKTOP (1440px+)
-   ================================ */
+/* Large desktop */
 @media (min-width: 1440px) {
   .transition__svg {
     min-height: 600px;
