@@ -12,7 +12,6 @@
 <body>
 
   <!-- NAVIGATION -->
-  <!-- In your HTML: -->
   <nav class="nav">
     <div class="nav__container">
       <a href="https://www.momu.be" class="nav__logo" target="_blank" rel="noopener noreferrer">
@@ -69,6 +68,80 @@
       </div>
     </div>
   </section>
+
+<!-- TRANSITION SECTION - BIG SVG -->
+<section class="transition">
+  <div class="transition__svg-container">
+   <img src="/svg/two_worlds_apart.svg" alt="Two Worlds apart" >
+  </div>
+
+  <div class="transition__model">
+    <img src="/images/lycra.png" alt="Model walking down the runway" class="transition__model-image" />
+  </div>
+</section>
+
+<!-- TWO WORLDS SECTION -->
+<section class="two-worlds">
+  <div class="two-worlds__container">
+
+    <div class="two-worlds__intro">
+      <h2 class="two-worlds__headline">
+        <span class="two-worlds__headline-line">In the 1980s, fashion and sports</span>
+        <span class="two-worlds__headline-line two-worlds__headline-line--offset">lived on different planets.</span>
+      </h2>
+    </div>
+
+    <div class="two-worlds__content">
+      <div class="two-worlds__text">
+        <p class="two-worlds__paragraph">
+          Fashion lived on <span class="bold-text">runways</span> and <span class="bold-text">red carpets</span>. It was about <span class="bold-text">exclusivity,
+          craftsmanship</span> and materials that had been perfected over centuries.
+          Meanwhile, sports occupied a completely <span class="bold-italic-text">different universe</span>—one of
+          function, performance, and cutting-edge synthetic materials designed for
+          one purpose: to help athletes <span class="highlight-text">move faster, jump higher, push harder.</span>
+        </p>
+        <p class="two-worlds__paragraph">
+          At that time, the world of sports and the world of fashion were <span class="bold-text">two
+          different planets</span>, with apparently nothing in common. Until I—the Matchmaker—changed the rules forever.
+        </p>
+      </div>
+
+      <div class="two-worlds__grid">
+        <div class="two-worlds__item two-worlds__item--fashion">
+          <div class="two-worlds__image-wrapper two-worlds__draggable" data-draggable="left">
+            <img src="/images/kissy_lycra.png" alt="Black leather fashion boot" class="two-worlds__image" />
+            <img src="/images/kissy_leather.png" alt="Decorative element" class="two-worlds__decoration" />
+          </div>
+          <p class="two-worlds__caption">
+            <span class="two-worlds__caption-bold">Fashion shows:</span><br />
+            Leather everywhere.<br />
+            <span class="two-worlds__caption-accent">Lycra? Never.</span>
+          </p>
+        </div>
+
+        <div class="two-worlds__item two-worlds__item--sports">
+          <div class="two-worlds__image-wrapper two-worlds__draggable" data-draggable="right">
+            <img src="/images/kissy_lycra.png" alt="Athlete in striped Lycra sportswear" class="two-worlds__image" />
+            <img src="/images/kissy_lycra.png" alt="Decorative element" class="two-worlds__decoration" />
+          </div>
+          <p class="two-worlds__caption">
+            <span class="two-worlds__caption-bold">Sports stadiums:</span><br />
+            Lycra everywhere.<br />
+            <span class="two-worlds__caption-accent">Leather? Too stiff.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-worlds__closing">
+      <p class="two-worlds__statement">
+        <span class="two-worlds__statement-small">They lived in</span><br />
+        <span class="two-worlds__statement-large">SEPARATE WORLDS.</span>
+      </p>
+    </div>
+
+  </div>
+</section>
 
   <script type="module" src="/src/js/main.js"></script>
 </body>
