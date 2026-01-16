@@ -188,6 +188,64 @@ function initDraggableImages() {
   });
 }
 
+// TWO WORLDS - SCROLL ANIMATIONS
+function initTwoWorldsAnimations() {
+  // Headline fade in
+  const headline = document.querySelector('.two-worlds__headline');
+  if (headline) {
+    gsap.from(headline, {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      scrollTrigger: {
+        trigger: headline,
+        start: 'top 80%',
+      },
+    });
+  }
+
+  // Paragraphs stagger in
+  const paragraphs = document.querySelectorAll('.two-worlds__paragraph');
+  gsap.from(paragraphs, {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    stagger: 0.3,
+    scrollTrigger: {
+      trigger: '.two-worlds__text',
+      start: 'top 75%',
+    },
+  });
+
+  // Grid items reveal
+  const items = document.querySelectorAll('.two-worlds__item');
+  gsap.from(items, {
+    opacity: 0,
+    y: 60,
+    duration: 1,
+    stagger: 0.3,
+    scrollTrigger: {
+      trigger: '.two-worlds__grid',
+      start: 'top 75%',
+    },
+  });
+
+  // Closing statement
+  const statement = document.querySelector('.two-worlds__statement');
+  if (statement) {
+    gsap.from(statement, {
+      opacity: 0,
+      scale: 0.8,
+      duration: 1,
+      ease: 'back.out(1.4)',
+      scrollTrigger: {
+        trigger: '.two-worlds__closing',
+        start: 'top 80%',
+      },
+    });
+  }
+}
+
 // INITIALIZE ALL
 function init() {
   initHero();
@@ -195,7 +253,7 @@ function init() {
   initDraggableImages();
   initTwoWorldsAnimations();
 
-  console.log(' Fashion Love Story initialized');
+  console.log(' Fashion love story');
 }
 
 init();
