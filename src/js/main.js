@@ -246,12 +246,130 @@ function initTwoWorldsAnimations() {
   }
 }
 
+// Leather years scroll lock
+function initLeatherYearsScrollLock() {
+  const section = document.querySelector('.leather-years');
+  const dirkSection = document.querySelector('.leather-years__dirk');
+
+  if (!section || !dirkSection) return;
+
+  // Only apply on desktop
+  const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+  if (!isDesktop) return;
+
+  function updateDirkPosition() {
+    const sectionRect = section.getBoundingClientRect();
+    const sectionTop = sectionRect.top;
+    const sectionBottom = sectionRect.bottom;
+    const windowHeight = window.innerHeight;
+
+    // When section enters viewport, fix the dirk section
+    if (sectionTop <= 0 && sectionBottom > windowHeight) {
+      dirkSection.classList.add('is-fixed');
+      dirkSection.classList.remove('is-bottom');
+    }
+    // When section is above viewport (before scrolling to it)
+    else if (sectionTop > 0) {
+      dirkSection.classList.remove('is-fixed');
+      dirkSection.classList.remove('is-bottom');
+    }
+    // When section is leaving viewport (scrolled past)
+    else if (sectionBottom <= windowHeight) {
+      dirkSection.classList.remove('is-fixed');
+      dirkSection.classList.add('is-bottom');
+    }
+  }
+
+  window.addEventListener('scroll', updateDirkPosition);
+  window.addEventListener('resize', updateDirkPosition);
+  updateDirkPosition(); // Initial call
+}
+
+// Leather yeasr
+function initLeatherYearsAnimations() {
+  const items = document.querySelectorAll('.leather-years__item');
+
+  if (!items.length) return;
+
+  const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
+  if (isDesktop) {
+    // Desktop: Vertical scroll fade-in animations
+    items.forEach((item, index) => {
+      gsap.from(item, {
+        opacity: 0,
+        y: 80,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 85%',
+          end: 'top 40%',
+          toggleActions: 'play none none reverse',
+          markers: false
+        }
+      });
+    });
+  } else {
+    // Mobile: Horizontal scroll fade-in
+    items.forEach((item) => {
+      gsap.from(item, {
+        opacity: 0,
+        x: 60,
+        duration: 0.6,
+        scrollTrigger: {
+          trigger: item,
+          start: 'left 85%',
+          containerAnimation: null,
+          toggleActions: 'play none none none',
+          markers: false
+        }
+      });
+    });
+  }
+
+  // Dirk section animation
+  const dirkContent = document.querySelector('.leather-years__dirk-content');
+  if (dirkContent) {
+    gsap.from(dirkContent, {
+      opacity: 0,
+      x: -50,
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.leather-years',
+        start: 'top 60%',
+        markers: false
+      }
+    });
+  }
+
+  // Boot image animation
+  const bootImage = document.querySelector('.leather-years__boot');
+  if (bootImage && isDesktop) {
+    gsap.from(bootImage, {
+      opacity: 0,
+      scale: 0.8,
+      rotation: -15,
+      duration: 1.2,
+      ease: 'back.out(1.4)',
+      scrollTrigger: {
+        trigger: '.leather-years',
+        start: 'top 60%',
+        markers: false
+      }
+    });
+  }
+}
+
 // INITIALIZE ALL
 function init() {
   initHero();
   initTransition();
   initDraggableImages();
-  initTwoWorldsAnimations();
+  initTwoWorldsAnimations(); 
+  initLeatherYearsScrollLock();
+  initLeatherYearsAnimations();
 
   console.log(' Fashion love story');
 }
