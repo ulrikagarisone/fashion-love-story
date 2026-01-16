@@ -1,0 +1,297 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+  /* Colors */
+  --bg: #F5F5F5;
+  --bg-blue: #178FEA;
+  --text-black: #161718;
+  --text-light: #F5F5F5;
+  --accent: #E7FC93;
+
+  /* Font families */
+  --font-title: 'Myriad Pro', 'Arial Black', sans-serif;
+  --font-body: 'Work Sans', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global image rule - like teacher's reset.css */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+body {
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  background: var(--bg);
+}
+
+/* ================================
+   NAVIGATION
+   ================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0.5rem;
+}
+
+.nav__logo {
+  display: block;
+  width: auto;
+  height: 50px;
+  /* Adjust this for your preferred size */
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  transform: scaleX(1.1);
+}
+
+.nav__logo:hover {
+  transform: scale(1.05);
+}
+
+.nav__logo-svg {
+  width: auto;
+  height: 100%;
+  display: block;
+}
+
+/* First M - always black */
+.nav__m-1 {
+  fill: #010101;
+}
+
+/* Second M - black by default, red on hover */
+.nav__m-2 {
+  fill: #010101;
+  transition: fill 0.3s ease;
+}
+
+.nav__logo:hover .nav__m-2 {
+  fill: #ff0000;
+}
+
+/* ================================
+   HERO SECTION - MOBILE
+   ================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.hero__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero__xoxo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: auto;
+  opacity: 0.09;
+}
+
+.hero__xoxo-text {
+  font-family: var(--font-title);
+  font-size: 500px;
+  font-weight: 900;
+  font-style: italic;
+  fill: var(--bg-blue);
+}
+
+.hero__container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 100vh;
+  padding: 4rem 2rem 2rem 2rem;
+}
+
+.hero__content {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.hero__title {
+  font-family: var(--font-title);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--text-black);
+  line-height: 0.85;
+  text-align: center;
+  order: 2;
+}
+
+.hero__title-line {
+  display: inline;
+}
+
+.hero__main-image {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  order: 1;
+  margin-bottom: 0rem;
+}
+
+.hero__model {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero__floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero__football {
+  position: absolute;
+  width: 40%;
+  height: auto;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.hero__kissy {
+  position: absolute;
+  width: 60px;
+  height: auto;
+}
+
+.hero__kissy--1 {
+  bottom: 1rem;
+  left: 1rem;
+  transform: rotate(-5deg);
+}
+
+.hero__kissy--2 {
+  bottom: 3rem;
+  left: 3rem;
+  transform: rotate(8deg);
+}
+
+.hero__tagline {
+  font-size: 1.125rem;
+  color: var(--text-black);
+  line-height: 1.6;
+  text-align: center;
+  order: 3;
+}
+
+/* ================================
+   DESKTOP LAYOUT (1024px+)
+   ================================ */
+@media (min-width: 1024px) {
+  .hero {
+    min-height: 85vh;
+    /* Smaller on desktop so content shows */
+  }
+
+  .hero__container {
+    min-height: 85vh;
+    padding: 4rem 2rem 2rem 2rem;
+  }
+
+  .hero__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 2rem;
+    padding: 0 2rem;
+    min-height: auto;
+    /* Remove min-height constraint */
+  }
+
+  .hero__title {
+    grid-column: 1 / 2;
+    grid-row: 1;
+    font-size: 5.5rem;
+    text-align: right;
+    order: unset;
+    font-weight: 400;
+    align-self: start;
+  }
+
+  .hero__title-line {
+    display: block;
+  }
+
+  .hero__title-line--middle {
+    font-weight: 700;
+    font-size: 8.5rem;
+  }
+
+  .hero__main-image {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    max-width: 450px;
+    /* Made smaller! */
+    justify-self: center;
+    order: unset;
+    margin-bottom: 0;
+  }
+
+  .hero__tagline {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 1.25rem;
+    text-align: center;
+    margin-top: 1rem;
+    /* Less space */
+    order: unset;
+  }
+
+  .hero__football {
+    width: 30%;
+  }
+
+  .nav {
+    padding: 2.5rem 3rem;
+  }
+
+  .nav__logo {
+    height: 100px;
+  }
+}
+
+/* Larger screens can have bigger image */
+@media (min-width: 1400px) {
+  .hero__main-image {
+    max-width: 500px;
+  }
+
+  .hero__title {
+    font-size: 6rem;
+  }
+}

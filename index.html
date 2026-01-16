@@ -1,13 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>fashion-love-story</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Fashion Love Story | Dirk Bikkembergs</title>
+  <meta name="description"
+    content="Explore how Dirk Bikkembergs revolutionized fashion by merging sports and haute couture in the 1980s.">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <!-- In your HTML: -->
+  <nav class="nav">
+    <div class="nav__container">
+      <a href="https://www.momu.be" class="nav__logo" target="_blank" rel="noopener noreferrer">
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 443.67 281.63"
+          class="nav__logo-svg">
+          <title>MoMu - Mode Museum Antwerp</title>
+          <!-- First M (stays black) -->
+          <path class="nav__m-1"
+            d="M46.08,33.51l80.9,193.11L204.4,33.51h10.74v201.59c0,.1-2,.1-2,0v-105.79l-43.68,105.82-41.99-.52-43.68-105.3v105.79h-45.95V33.51h8.24Z" />
+          <!-- Second M (turns red on hover) -->
+          <path class="nav__m-2"
+            d="M227.37,33.51l80.9,193.11,77.42-193.11h10.74v201.59c0,.1-2,.1-2,0v-106.29l-43.68,106.32-41.99-.52-43.68-105.3v105.79h-45.95V33.51h8.24Z" />
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero__background">
+      <svg class="hero__xoxo" viewBox="0 0 1200 800" aria-hidden="true">
+        <text class="hero__xoxo-text" x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">XOXO</text>
+      </svg>
+    </div>
+
+    <div class="hero__container">
+      <div class="hero__content">
+
+        <h1 class="hero__title">
+          <span class="hero__title-line hero__title-line--top">THE</span>
+          <span class="hero__title-line hero__title-line--middle">LOVE</span>
+          <span class="hero__title-line hero__title-line--bottom">STORY</span>
+        </h1>
+
+        <div class="hero__main-image">
+          <img src="/images/model_hero.png"
+            alt="Dirk Bikkembergs model on runway wearing black leather and neon yellow Lycra" class="hero__model"
+            width="550" height="700" srcset="/images/model_hero.png 320w,
+                    /images/model_hero.png 450w,
+                    /images/model_hero.png 550w,
+                    /images/model_hero.png 700w" sizes="(min-width: 1024px) 550px, (min-width: 768px) 450px, 90vw" />
+        </div>
+
+        <div class="hero__floating-elements">
+          <img src="/images/lycra.png" alt="Football player in motion" class="hero__football" />
+          <img src="/images/kissy_leather.png" alt="Decorative element" class="hero__kissy hero__kissy--1" />
+          <img src="/images/kissy-face-2.png" alt="Decorative element" class="hero__kissy hero__kissy--2" />
+        </div>
+
+        <p class="hero__tagline">
+          One designer's vision.<br />
+          The story that changed fashion.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+
 </html>
