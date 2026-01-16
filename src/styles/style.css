@@ -41,7 +41,7 @@ body {
 }
 
 /* Text highlights, bold parts */
-.bold-text{
+.bold-text {
   font-weight: 600;
 }
 
@@ -50,7 +50,7 @@ body {
   font-style: italic;
 }
 
-.highlight-text{
+.highlight-text {
   color: var(--accent);
 }
 
@@ -361,7 +361,8 @@ body {
   background: var(--bg-blue);
   color: var(--text-black);
   padding: 3rem 1rem;
-  margin-top: -2px; /* Connect with transition */
+  margin-top: -2px;
+  /* Connect with transition */
 }
 
 .two-worlds__container {
@@ -388,7 +389,8 @@ body {
 
 .two-worlds__headline-line--offset {
   font-weight: 400;
-  margin-left: 0; /* No offset on mobile */
+  margin-left: 0;
+  /* No offset on mobile */
 }
 
 .two-worlds__content {
@@ -574,7 +576,7 @@ body {
   }
 
   .two-worlds__headline-line--offset {
-    margin-left: 8rem; 
+    margin-left: 8rem;
   }
 
   .two-worlds__content {
@@ -633,7 +635,7 @@ body {
   }
 }
 
-/* Large desktop */
+/* LEATHER YEARS Large desktop */
 .leather-years {
   position: relative;
   background: var(--bg);
@@ -648,12 +650,12 @@ body {
 /* Mobile */
 .leather-years__dirk {
   background: var(--accent);
-  padding: 3rem 1.5rem;
+  padding: 2rem 1.5rem;
   width: 100%;
 }
 
 .leather-years__dirk-content {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -675,7 +677,7 @@ body {
 
 .leather-years__dirk-paragraph {
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: var(--text-body-mobile-size);
   line-height: 1.6;
   color: var(--text-black);
 }
@@ -691,14 +693,13 @@ body {
 
 .leather-years__dirk-image {
   width: 100%;
-  max-width: 280px;
-  margin: 2rem auto;
+  max-width: 220px;
+  margin: 1.5rem auto;
 }
 
 .leather-years__boot {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
 }
 
 .leather-years__matchmaker {
@@ -775,8 +776,6 @@ body {
   width: 100%;
   aspect-ratio: 3/4;
   overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .leather-years__item-image img {
@@ -812,7 +811,7 @@ body {
   }
 
   .leather-years__dirk-paragraph {
-    font-size: 1.1rem;
+    font-size: var(--text-body-tablet-size);
   }
 
   .leather-years__item--large {
@@ -878,14 +877,14 @@ body {
   }
 
   .leather-years__dirk-paragraph {
-    font-size: 1rem;
+    font-size: var(--text-body-desktop-size);
   }
 
   /* Boot image */
   .leather-years__dirk-image {
     position: absolute;
     right: 0;
-    top: 50%;
+    top: 85%;
     transform: translateY(-50%);
     width: 280px;
     max-width: none;
@@ -980,7 +979,7 @@ body {
   }
 
   .leather-years__dirk-paragraph {
-    font-size: 1.1rem;
+    font-size: var(--text-body-desktop-size);
   }
 
   .leather-years__dirk-image {
@@ -1012,3 +1011,4 @@ body {
     font-size: 1rem;
   }
 }
+
