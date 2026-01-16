@@ -12,6 +12,10 @@
   /* Font families */
   --font-title: 'Myriad Pro', 'Arial Black', sans-serif;
   --font-body: 'Work Sans', sans-serif;
+
+  /* Font sizes */
+  --text-body-size: 1.563rem;
+  --text-body-start: 2.5rem;
 }
 
 * {
@@ -20,7 +24,6 @@
   box-sizing: border-box;
 }
 
-/* Global image rule - like teacher's reset.css */
 img {
   max-width: 100%;
   height: auto;
@@ -31,6 +34,20 @@ body {
   font-family: var(--font-body);
   overflow-x: hidden;
   background: var(--bg);
+}
+
+/* Text highlights, bold parts */
+.bold-text{
+  font-weight: 600;
+}
+
+.bold-italic-text {
+  font-weight: 600;
+  font-style: italic;
+}
+
+.highlight-text{
+  color: var(--accent);
 }
 
 /* ================================
@@ -212,7 +229,6 @@ body {
 @media (min-width: 1024px) {
   .hero {
     min-height: 85vh;
-    /* Smaller on desktop so content shows */
   }
 
   .hero__container {
@@ -293,5 +309,338 @@ body {
 
   .hero__title {
     font-size: 6rem;
+  }
+}
+
+
+/* ================================
+   TRANSITION SECTION
+   ================================ */
+.transition {
+  position: relative;
+  min-height: 50vh;
+  background: var(--bg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transition__svg-container {
+  width: 100%;
+  height: 100%;
+}
+
+.transition__svg {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+}
+
+.transition__text {
+  fill: var(--text-black);
+  text-transform: uppercase;
+  font-family: var(--font-title);
+  font-weight: 900;
+  letter-spacing: 10px;
+}
+
+.transition__model {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  z-index: 10;
+}
+
+.transition__model-image {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+}
+
+/* ================================
+   TWO WORLDS SECTION - MOBILE FIRST
+   ================================ */
+.two-worlds {
+  background: var(--bg-blue);
+  color: var(--text-black);
+  padding: 3rem 1rem;
+  margin-top: -2px; /* Connect with transition */
+}
+
+.two-worlds__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.two-worlds__intro {
+  margin-bottom: 2rem;
+}
+
+.two-worlds__headline {
+  font-family: var(--font-title);
+  color: var(--bg);
+  font-size: clamp(1.5rem, 3.125vw, 2.8125rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+.two-worlds__headline-line {
+  display: block;
+}
+
+.two-worlds__headline-line--offset {
+  font-weight: 400;
+  margin-left: 0; /* No offset on mobile */
+}
+
+.two-worlds__content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.two-worlds__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 100%;
+}
+
+.two-worlds__paragraph {
+  font-family: var(--font-body);
+  font-size: 21px;
+  line-height: 1.7;
+  max-width: 100%;
+}
+
+.two-worlds__paragraph em {
+  font-style: italic;
+  font-weight: 600;
+}
+
+.two-worlds__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.two-worlds__item {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.two-worlds__image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+
+.two-worlds__draggable {
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.two-worlds__draggable:active {
+  cursor: grabbing;
+}
+
+.two-worlds__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.two-worlds__decoration {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: -15px;
+  right: -15px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.two-worlds__caption {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-family: var(--font-body);
+}
+
+.two-worlds__caption-bold {
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.two-worlds__caption-accent {
+  display: block;
+  text-decoration: line-through;
+  color: var(--accent);
+}
+
+.two-worlds__closing {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.two-worlds__statement {
+  font-family: var(--font-title);
+  line-height: 1.1;
+  color: var(--accent);
+}
+
+.two-worlds__statement-small {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.two-worlds__statement-large {
+  display: block;
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+}
+
+/* ================================
+   TABLET (768px+)
+   ================================ */
+@media (min-width: 768px) {
+  .transition {
+    min-height: 60vh;
+  }
+
+  .transition__svg {
+    min-height: 400px;
+  }
+
+  .transition__model {
+    width: 140px;
+  }
+
+  .two-worlds {
+    padding: 5rem 2rem;
+  }
+
+  .two-worlds__text {
+    max-width: 600px;
+    justify-self: end
+  }
+
+  .two-worlds__paragraph {
+    max-width: 500px;
+    font-size: 1.05rem;
+  }
+
+  .two-worlds__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+  }
+
+  .two-worlds__decoration {
+    width: 90px;
+    height: 90px;
+    top: -20px;
+    right: -20px;
+  }
+}
+
+/* ================================
+   DESKTOP (1024px+)
+   ================================ */
+@media (min-width: 1024px) {
+  .transition {
+    min-height: 70vh;
+  }
+
+  .transition__svg {
+    min-height: 500px;
+  }
+
+  .transition__text {
+    font-size: 140px;
+    letter-spacing: 15px;
+  }
+
+  .transition__model {
+    width: 180px;
+  }
+
+  .two-worlds {
+    padding: 7rem 3rem;
+  }
+
+  .two-worlds__headline {
+    font-size: 3.5rem;
+  }
+
+  .two-worlds__headline-line--offset {
+    margin-left: 8rem; 
+  }
+
+  .two-worlds__content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .two-worlds__text {
+    max-width: 450px;
+  }
+
+  .two-worlds__paragraph {
+    max-width: 400px;
+    font-size: 1.18rem;
+  }
+
+  .two-worlds__grid {
+    gap: 5rem;
+  }
+
+  .two-worlds__item--sports {
+    margin-top: 3rem;
+  }
+
+  .two-worlds__closing {
+    margin-top: 6rem;
+  }
+
+  .two-worlds__statement-small {
+    font-size: 2rem;
+  }
+
+  .two-worlds__statement-large {
+    font-size: 6rem;
+  }
+}
+
+/* ================================
+   LARGE DESKTOP (1440px+)
+   ================================ */
+@media (min-width: 1440px) {
+  .transition__svg {
+    min-height: 600px;
+  }
+
+  .two-worlds__headline {
+    font-size: 2.5rem;
+  }
+
+  .two-worlds__headline-line--offset {
+    margin-left: 12rem;
+  }
+
+  .two-worlds__statement-large {
+    font-size: 7rem;
   }
 }
