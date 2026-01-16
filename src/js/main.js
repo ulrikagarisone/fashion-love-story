@@ -7,8 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 function init() {
   const heroModel = document.querySelector('.hero__model');
   const heroFootball = document.querySelector('.hero__football');
-  const transitionModel = document.querySelector('.transition__model-image');
-  const transitionSection = document.querySelector('.transition');
 
   // Hero model fade in on load
   if (heroModel) {
@@ -51,8 +49,6 @@ function init() {
         ease: 'power2.out'
       });
   }
-
 }
 
-
-  init();
+init();

@@ -136,17 +136,17 @@ body {
 }
 
 .hero__title {
-  font-family: 'Myriad Pro', 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-title);
   font-size: 3.5rem;
   font-weight: 900;
-  color: #000;
+  color: var(--text-black);
   line-height: 0.85;
   text-align: center;
   order: 2;
 }
 
 .hero__title-line {
-  display: block;
+  display: inline;
 }
 
 .hero__main-image {
@@ -200,7 +200,7 @@ body {
 
 .hero__tagline {
   font-size: 1.125rem;
-  color: #000;
+  color: var(--text-black);
   line-height: 1.6;
   text-align: center;
   order: 3;
@@ -239,7 +239,17 @@ body {
     font-size: 5.5rem;
     text-align: right;
     order: unset;
+    font-weight: 400;
     align-self: start;
+  }
+
+  .hero__title-line {
+    display: block;
+  }
+
+  .hero__title-line--middle {
+    font-weight: 700;
+    font-size: 8.5rem;
   }
 
   .hero__main-image {
