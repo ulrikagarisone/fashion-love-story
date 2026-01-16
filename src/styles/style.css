@@ -1,3 +1,4 @@
+/* styles.css */
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
 
 :root {
@@ -19,17 +20,72 @@
   box-sizing: border-box;
 }
 
+/* Global image rule - like teacher's reset.css */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 body {
   font-family: var(--font-body);
   overflow-x: hidden;
   background: var(--bg);
 }
 
-/* HERO SECTION */
+/* ================================
+   NAVIGATION
+   ================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0.5rem;
+}
+
+.nav__logo {
+  display: block;
+  width: auto;
+  height: 50px;
+  /* Adjust this for your preferred size */
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  transform: scaleX(1.1);
+}
+
+.nav__logo:hover {
+  transform: scale(1.05);
+}
+
+.nav__logo-svg {
+  width: auto;
+  height: 100%;
+  display: block;
+}
+
+/* First M - always black */
+.nav__m-1 {
+  fill: #010101;
+}
+
+/* Second M - black by default, red on hover */
+.nav__m-2 {
+  fill: #010101;
+  transition: fill 0.3s ease;
+}
+
+.nav__logo:hover .nav__m-2 {
+  fill: #ff0000;
+}
+
+/* ================================
+   HERO SECTION - MOBILE
+   ================================ */
 .hero {
   position: relative;
   min-height: 100vh;
-  background: var(--bg-top);
+  background: var(--bg);
   overflow: hidden;
 }
 
@@ -66,7 +122,7 @@ body {
   z-index: 2;
   width: 100%;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 4rem 2rem 2rem 2rem;
 }
 
 .hero__content {
@@ -98,15 +154,13 @@ body {
   width: 100%;
   max-width: 450px;
   order: 1;
-  margin-bottom: 4rem;
+  margin-bottom: 0rem;
 }
 
 .hero__model {
-  width: 100%;
+  max-width: 100%;
   height: auto;
   display: block;
-  opacity: 1;
-  transform: translateY(50px);
 }
 
 .hero__floating-elements {
@@ -124,8 +178,6 @@ body {
   height: auto;
   bottom: 1rem;
   right: 1rem;
-  opacity: 0;
-  transform: translateX(-100vw) rotate(-45deg);
 }
 
 .hero__kissy {
@@ -154,15 +206,20 @@ body {
   order: 3;
 }
 
-.hero__logo {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  z-index: 1000;
-}
-
-/* DESKTOP LAYOUT */
+/* ================================
+   DESKTOP LAYOUT (1024px+)
+   ================================ */
 @media (min-width: 1024px) {
+  .hero {
+    min-height: 85vh;
+    /* Smaller on desktop so content shows */
+  }
+
+  .hero__container {
+    min-height: 85vh;
+    padding: 4rem 2rem 2rem 2rem;
+  }
+
   .hero__content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -172,6 +229,8 @@ body {
     margin: 0 auto;
     gap: 2rem;
     padding: 0 2rem;
+    min-height: auto;
+    /* Remove min-height constraint */
   }
 
   .hero__title {
@@ -180,12 +239,14 @@ body {
     font-size: 5.5rem;
     text-align: right;
     order: unset;
+    align-self: start;
   }
 
   .hero__main-image {
     grid-column: 2 / 3;
     grid-row: 1;
-    max-width: 550px;
+    max-width: 450px;
+    /* Made smaller! */
     justify-self: center;
     order: unset;
     margin-bottom: 0;
@@ -196,11 +257,31 @@ body {
     grid-row: 2;
     font-size: 1.25rem;
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    /* Less space */
     order: unset;
   }
 
   .hero__football {
-    width: 35%;
+    width: 30%;
+  }
+
+  .nav {
+    padding: 2.5rem 3rem;
+  }
+
+  .nav__logo {
+    height: 100px;
+  }
+}
+
+/* Larger screens can have bigger image */
+@media (min-width: 1400px) {
+  .hero__main-image {
+    max-width: 500px;
+  }
+
+  .hero__title {
+    font-size: 6rem;
   }
 }
