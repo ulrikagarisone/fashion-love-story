@@ -1305,6 +1305,32 @@ body {
   display: block;
 }
 
+/* ANIMATIONS */
+@keyframes flyOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateZ(-1000px) rotate(0deg);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateZ(800px) rotate(180deg);
+  }
+}
+
+@keyframes spinBackground {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
 
 /* Tablet */
 @media (min-width: 768px) {
