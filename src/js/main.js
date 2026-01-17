@@ -362,6 +362,69 @@ function initLeatherYearsAnimations() {
   }
 }
 
+/* VORTEX TEXT ANIMATION*/
+function initVortex() {
+  const vortexContainer = document.querySelector('.vortex-container');
+
+  if (!vortexContainer) return;
+
+  const phrases = [
+    "Leather + Lycra?",
+    "What if...?",
+    "Is it even possible?",
+    "Impossible...",
+    "Two different worlds?",
+    "Could they work together?",
+    "Everyone would say it's impossible...",
+    "Crazy.",
+    "Visionary?",
+    "Risk.",
+    "What if...?",
+    "Two worlds colliding..."
+  ];
+
+  function createWord() {
+    const word = document.createElement('div');
+    word.classList.add('vortex-word');
+
+    // Pick random phrase
+    word.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+
+    // Add random styling variant
+    const variant = Math.floor(Math.random() * 3) + 1;
+    word.classList.add(`word-variant-${variant}`);
+
+    // Randomize position slightly
+    const randomX = (Math.random() - 0.5) * 50;
+    const randomY = (Math.random() - 0.5) * 50;
+
+    // Apply animation with dynamic duration
+    const duration = Math.random() * 2 + 3; // 3-5 seconds
+    word.style.animation = `flyOut ${duration}s linear forwards`;
+
+    // Add offset
+    word.style.marginLeft = `${randomX}vw`;
+    word.style.marginTop = `${randomY}vh`;
+
+    // Append
+    vortexContainer.appendChild(word);
+
+    // Remove after animation
+    setTimeout(() => {
+      word.remove();
+    }, duration * 1000);
+  }
+
+  // Spawn word every 400ms
+  setInterval(createWord, 400);
+
+  // Start immediately with a few words
+  createWord();
+  setTimeout(createWord, 100);
+  setTimeout(createWord, 200);
+}
+
+
 
 // INITIALIZE ALL
 function init() {
@@ -371,6 +434,7 @@ function init() {
   initTwoWorldsAnimations(); 
   initLeatherYearsScrollLock();
   initLeatherYearsAnimations();
+  initVortex();
 
   console.log(' Fashion love story');
 }

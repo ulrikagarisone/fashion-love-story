@@ -1203,3 +1203,175 @@ body {
   }
 }
 
+/*  VORTEX / QUESTIONS SECTION */
+.vortex-section {
+  position: relative;
+  height: 60vh;
+  min-height: 500px;
+  background-color: var(--text-black);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  z-index: 10;
+}
+
+/* Hypnotic spiral background */
+.vortex-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200vmax;
+  height: 200vmax;
+  background: repeating-radial-gradient(circle at center,
+      #1a1a1a 0,
+      #1a1a1a 20px,
+      var(--text-black) 21px,
+      var(--text-black) 40px);
+  opacity: 0.3;
+  animation: spinBackground 60s linear infinite;
+  z-index: 1;
+}
+
+.vortex-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Hide the HTML text questions */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Flying Words - dynamically created by JS */
+.vortex-word {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateZ(-1000px);
+  color: var(--text-light);
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-style: italic;
+  text-transform: none;
+  white-space: nowrap;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Word style variants */
+.word-variant-1 {
+  color: #fff;
+}
+
+.word-variant-2 {
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.word-variant-3 {
+  color: var(--bg-blue);
+}
+
+/* Center - Dirk Image */
+.vortex-center {
+  position: relative;
+  z-index: 5;
+  width: 200px;
+  height: 200px;
+}
+
+.vortex-center__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ANIMATIONS */
+@keyframes flyOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateZ(-1000px) rotate(0deg);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateZ(800px) rotate(180deg);
+  }
+}
+
+@keyframes spinBackground {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .vortex-section {
+    height: 70vh;
+  }
+
+  .vortex-word {
+    font-size: 1.8rem;
+  }
+
+  .vortex-center {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .vortex-section {
+    height: 80vh;
+  }
+
+  .vortex-word {
+    font-size: 2rem;
+  }
+
+  .vortex-center {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .vortex-word {
+    font-size: 2.2rem;
+  }
+
+  .vortex-center {
+    width: 350px;
+    height: 350px;
+  }
+}
