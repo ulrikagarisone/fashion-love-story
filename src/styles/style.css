@@ -1717,12 +1717,12 @@ body {
 }
 
 .failed-dates__headline-line {
-  display: block;
+  display: inline;
 }
 
 .failed-dates__headline-line--offset {
   font-weight: 400;
-  margin-left: 3rem;
+  margin-left: 0;
   /* No offset on mobile */
 }
 
@@ -1871,9 +1871,9 @@ body {
     align-items: start;
   }
 
-    .failed-dates__bottom-text{
-      font-size: var(--text-body-desktop-size);
-    }
+  .failed-dates__bottom-text {
+    font-size: var(--text-body-desktop-size);
+  }
 
   .failed-dates__left {
     padding-right: 2rem;
@@ -1909,9 +1909,21 @@ body {
 
 /* LARGE DESKTOP */
 @media (min-width: 1440px) {
+  .failed-dates__headline-line {
+    display: block;
+  }
+
+  .failed-dates__bottom-text {
+    font-size: var(--text-body-desktop-size);
+  }
+
+  .failed-dates__headline-line--offset {
+    margin-left: 3rem;
+  }
+
   .failed-dates__main-title {
     font-size: 10rem;
-    margin-bottom: 6rem;
+    margin-bottom: 10rem;
   }
 
   .failed-dates__subtitle {
