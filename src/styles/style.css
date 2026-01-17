@@ -604,7 +604,7 @@ body {
   }
 
   .two-worlds__closing {
-    margin-top: 6rem;
+    margin-top: 3rem;
   }
 
   .two-worlds__statement-small {
@@ -1450,6 +1450,7 @@ body {
   margin-top: 2rem;
   padding: 0;
 }
+
 .meeting__subtitle {
   font-family: var(--font-title);
   font-size: 1.3rem;
@@ -1638,5 +1639,296 @@ body {
 
   .meeting__big-question {
     font-size: 2.2rem;
+  }
+}
+
+/* ================================
+   THE FAILED DATES SECTION
+   ================================ */
+.failed-dates {
+  background: var(--bg-blue);
+  color: var(--text-light);
+  padding: 5rem 2rem;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.failed-dates__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* BIG CENTERED TITLE */
+.failed-dates__main-title {
+  font-family: var(--font-title);
+  font-size: clamp(3rem, 12vw, 8rem);
+  font-weight: 900;
+  text-align: center;
+  line-height: 0.9;
+  margin-bottom: 4rem;
+  color: var(--text-light);
+}
+
+.failed-dates__title-word {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.failed-dates__title-word--failed {
+  color: var(--text-light);
+}
+
+/* CONTENT GRID */
+.failed-dates__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* LEFT SIDE */
+.failed-dates__left {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.failed-dates__subtitle {
+  font-family: var(--font-title);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  color: var(--text-black);
+}
+
+.failed-dates__text-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.failed-dates__headline {
+  font-family: var(--font-title);
+  color: var(--bg);
+  font-size: clamp(1.5rem, 3.125vw, 2.8125rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.failed-dates__headline-line {
+  display: block;
+}
+
+.failed-dates__headline-line--offset {
+  font-weight: 400;
+  margin-left: 3rem;
+  /* No offset on mobile */
+}
+
+.failed-dates__text-body {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 500px;
+  color: var(--text-black);
+}
+
+/* CENTER IMAGE */
+.failed-dates__image-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.failed-dates__image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* QUOTE LINES - Hidden on mobile */
+.failed-dates__quote-line {
+  position: absolute;
+  width: 2px;
+  background: var(--text-black);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.failed-dates__quote-line--leather {
+  background: var(--text-black);
+}
+
+.failed-dates__quote-line--lycra {
+  background: var(--accent);
+}
+
+.failed-dates__image-container:hover .failed-dates__quote-line {
+  opacity: 1;
+}
+
+/* QUOTES */
+.failed-dates__quotes {
+  display: none;
+}
+
+.failed-dates__quote {
+  position: absolute;
+  max-width: 300px;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.failed-dates__image-container:hover .failed-dates__quote {
+  opacity: 1;
+}
+
+.failed-dates__quote-label {
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.failed-dates__quote-text {
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-light);
+}
+
+.failed-dates__quote--leather {
+  top: 10%;
+  right: -280px;
+}
+
+.failed-dates__quote--lycra {
+  bottom: 20%;
+  right: -280px;
+}
+
+.failed-dates__quote--lycra .failed-dates__quote-text {
+  color: var(--accent);
+}
+
+/* BOTTOM TEXT */
+.failed-dates__bottom {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.failed-dates__bottom-text {
+  font-size: var(--text-body-mobile-size);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: var(--text-black);
+}
+
+.failed-dates__bottom-small {
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.failed-dates__bottom-big {
+  font-family: var(--font-title);
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+  .failed-dates__text-columns {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .failed-dates__text-intro {
+    flex: 0 0 auto;
+    margin-right: 2rem;
+  }
+
+  .failed-dates__text-body {
+    flex: 1;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+  .failed-dates {
+    padding: 6rem 3rem;
+  }
+
+  .failed-dates__content {
+    grid-template-columns: 1fr 2fr;
+    align-items: start;
+  }
+
+    .failed-dates__bottom-text{
+      font-size: var(--text-body-desktop-size);
+    }
+
+  .failed-dates__left {
+    padding-right: 2rem;
+  }
+
+  .failed-dates__text-columns {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .failed-dates__text-intro {
+    margin-left: 2rem;
+  }
+
+  .failed-dates__quotes {
+    display: block;
+  }
+
+  .failed-dates__image-container {
+    max-width: 600px;
+  }
+
+  .failed-dates__text-body {
+    font-size: var(--text-body-desktop-size);
+    max-width: 475px;
+    justify-self: end;
+  }
+
+  .failed-dates__headline {
+    margin-bottom: 1rem;
+  }
+}
+
+/* LARGE DESKTOP */
+@media (min-width: 1440px) {
+  .failed-dates__main-title {
+    font-size: 10rem;
+    margin-bottom: 6rem;
+  }
+
+  .failed-dates__subtitle {
+    font-size: 5rem;
+  }
+
+  .failed-dates__text-intro {
+    font-size: 1.5rem;
+  }
+
+  .failed-dates__text-body {
+    font-size: var(--text-body-desktop-size);
+    max-width: 475px;
+    justify-self: end;
+  }
+
+  .failed-dates__headline {
+    margin-bottom: 1rem;
   }
 }
