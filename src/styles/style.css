@@ -1012,3 +1012,193 @@ body {
   }
 }
 
+/* WATCHING LYCRA SECTION */
+.watching-lycra {
+  position: relative;
+  background: var(--bg-light);
+  padding: 4rem 1.5rem;
+  overflow: hidden;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.watching-lycra__container {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.watching-lycra__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: center;
+}
+
+.watching-lycra__text {
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: var(--text-black);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.watching-lycra__line {
+  display: inline;
+}
+
+.watching-lycra__highlight {
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  font-weight: 600;
+}
+
+.watching-lycra__highlight--yellow {
+  background: var(--accent);
+  color: var(--text-black);
+}
+
+.watching-lycra__highlight--blue {
+  background: var(--bg-blue);
+  color: var(--text-black);
+}
+
+/* Eyes */
+.watching-lycra__eyes {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0 0.3rem;
+}
+
+.watching-lycra__eyes--small .watching-lycra__eye {
+  width: 35px;
+  height: 35px;
+}
+
+.watching-lycra__eyes--small .watching-lycra__pupil {
+  width: 15px;
+  height: 15px;
+}
+
+.watching-lycra__eye {
+  width: 45px;
+  height: 45px;
+  background: white;
+  border: 3px solid var(--text-black);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.watching-lycra__pupil {
+  width: 20px;
+  height: 20px;
+  background: var(--text-black);
+  border-radius: 50%;
+  position: absolute;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .watching-lycra {
+    padding: 6rem 2rem;
+    min-height: 70vh;
+  }
+
+  .watching-lycra__container {
+    max-width: 1000px;
+  }
+
+  .watching-lycra__text {
+    font-size: 1.6rem;
+  }
+
+  .watching-lycra__eye {
+    width: 50px;
+    height: 50px;
+  }
+
+  .watching-lycra__pupil {
+    width: 22px;
+    height: 22px;
+  }
+
+  .watching-lycra__eyes--small .watching-lycra__eye {
+    width: 40px;
+    height: 40px;
+  }
+
+  .watching-lycra__eyes--small .watching-lycra__pupil {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .watching-lycra {
+    padding: 8rem 3rem;
+    min-height: 80vh;
+  }
+
+  .watching-lycra__container {
+    max-width: 1100px;
+  }
+
+  .watching-lycra__text {
+    font-size: 1.9rem;
+  }
+
+  .watching-lycra__eye {
+    width: 55px;
+    height: 55px;
+  }
+
+  .watching-lycra__pupil {
+    width: 24px;
+    height: 24px;
+  }
+
+  .watching-lycra__eyes--small .watching-lycra__eye {
+    width: 45px;
+    height: 45px;
+  }
+
+  .watching-lycra__eyes--small .watching-lycra__pupil {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .watching-lycra__container {
+    max-width: 1200px;
+  }
+
+  .watching-lycra__text {
+    font-size: 2.1rem;
+  }
+
+  .watching-lycra__eye {
+    width: 60px;
+    height: 60px;
+  }
+
+  .watching-lycra__pupil {
+    width: 26px;
+    height: 26px;
+  }
+}
