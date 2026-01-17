@@ -1393,42 +1393,50 @@ body {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
-  overflow-x: hidden;
 }
 
-/* --- MOBILE --- */
+/* MOBILE STYLES */
 .meeting__headline {
-  font-family: var(--font-title);
-  font-weight: 900;
-  line-height: 0.8;
-  text-transform: uppercase;
-  margin-bottom: 3rem;
+  display: block;
+  margin-bottom: 2rem;
+  width: 100%;
 }
 
 .meeting__line-top {
   font-size: 18vw;
-  display: block;
+  line-height: 0.9;
+  font-weight: 900;
   text-align: left;
 }
 
 .meeting__line-split {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: flex-start;
+  display: block;
+  width: 100%;
 }
 
-.meeting__text {
-  font-size: 18vw;
-  line-height: 0.8;
+.meeting__text:first-child {
+  font-size: 13.5vw;
+  line-height: 0.9;
+  font-weight: 900;
   text-align: left;
+  display: block;
+}
+
+.meeting__text:first-child::after {
+  content: "ING";
+}
+
+.meeting__text:last-child {
+  display: none;
 }
 
 .meeting__image-wrapper {
   width: 100%;
   height: 250px;
+  margin-top: 1.5rem;
+  border-radius: 4px;
   overflow: hidden;
-  margin: 1rem 0;
+  background-color: #000;
 }
 
 .meeting__image {
@@ -1437,13 +1445,11 @@ body {
   object-fit: cover;
 }
 
-/* --- TEXT CONTENT --- */
+/* Content resets */
 .meeting__content {
-  max-width: 100%;
-  margin: 2rem 0 0;
+  margin-top: 2rem;
   padding: 0;
 }
-
 .meeting__subtitle {
   font-family: var(--font-title);
   font-size: 1.3rem;
@@ -1478,38 +1484,20 @@ body {
   line-height: 1.2;
 }
 
-/* --- TABLET --- */
+/* --- TABLET  --- */
 @media (min-width: 768px) {
   .meeting {
     padding: 4rem 2rem;
   }
 
-  .meeting__line-top {
-    font-size: 14vw;
-  }
-
-  .meeting__text {
-    font-size: 14vw;
-  }
-
-  .meeting__line-split {
-    flex-direction: row;
-    align-items: flex-end;
-    gap: 1.5rem;
-  }
-
   .meeting__image-wrapper {
-    width: 22vw;
-    height: auto;
-    aspect-ratio: 4/3;
-    margin: 0;
-    flex-shrink: 0;
+    height: 400px;
+    margin-top: 2rem;
   }
 
   .meeting__content {
-    max-width: 600px;
     margin-left: auto;
-    margin-right: 5%;
+    margin-right: auto;
   }
 
   .meeting__subtitle {
@@ -1527,6 +1515,19 @@ body {
 
 /* --- DESKTOP: IMAGE SPANS 2 ROWS --- */
 @media (min-width: 1024px) {
+
+  .meeting__text:first-child::after {
+    content: none;
+  }
+
+  .meeting__text:last-child {
+    display: block;
+  }
+
+  .meeting__line-split {
+    display: contents;
+  }
+
   .meeting {
     padding: 6rem 3rem;
   }
@@ -1545,7 +1546,6 @@ body {
     display: contents;
   }
 
-  /* ROW 1: "THE" in Column 1 */
   .meeting__line-top {
     grid-column: 1;
     grid-row: 1;
@@ -1553,13 +1553,9 @@ body {
     line-height: 0.85;
     margin: 0;
     align-self: end;
+    font-weight: 900;
   }
 
-  .meeting__line-split {
-    display: contents;
-  }
-
-  /* ROW 2: "MEET" in Column 1 */
   .meeting__text:first-child {
     grid-column: 1;
     grid-row: 2;
@@ -1568,9 +1564,9 @@ body {
     text-align: left;
     margin: 0;
     align-self: end;
+    font-weight: 900;
   }
 
-  /* IMAGE: Column 2, SPANS ROWS 1 & 2 */
   .meeting__image-wrapper {
     grid-column: 2;
     grid-row: 1 / 3;
@@ -1584,12 +1580,6 @@ body {
     flex-shrink: 0;
   }
 
-  .meeting__image {
-    height: 100%;
-    width: 100%;
-  }
-
-  /* ROW 2: "ING" in Column 3 */
   .meeting__text:last-child {
     grid-column: 3;
     grid-row: 2;
@@ -1597,9 +1587,9 @@ body {
     line-height: 0.85;
     margin: 0;
     align-self: end;
+    font-weight: 900;
   }
 
-  /* ROW 3: CONTENT */
   .meeting__content {
     grid-column: 2;
     grid-row: 3;
@@ -1622,32 +1612,6 @@ body {
   .meeting__big-question {
     font-size: 1.9rem;
     margin-top: 1rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .meeting__line-top {
-    font-size: clamp(5rem, 10vw, 11rem);
-  }
-
-  .meeting__text {
-    font-size: clamp(5rem, 10vw, 11rem);
-  }
-
-  .meeting__image-wrapper {
-    max-width: 550px;
-  }
-
-  .meeting__subtitle {
-    font-size: 1.7rem;
-  }
-
-  .meeting__paragraph {
-    font-size: 1.2rem;
-  }
-
-  .meeting__big-question {
-    font-size: 2rem;
   }
 }
 
