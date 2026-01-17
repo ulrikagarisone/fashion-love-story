@@ -362,6 +362,7 @@ function initLeatherYearsAnimations() {
   }
 }
 
+
 // INITIALIZE ALL
 function init() {
   initHero();
