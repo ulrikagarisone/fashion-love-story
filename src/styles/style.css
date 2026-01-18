@@ -2083,14 +2083,14 @@ body {
     margin-bottom: 0;
   }
 
-    .blind-date__subtitle{
-      margin-bottom: 1rem;
-    }
+  .blind-date__subtitle {
+    margin-bottom: 1rem;
+  }
 
-    .blind-date__paragraph{
-      margin-bottom: 0;
-      max-width: 350px;
-    }
+  .blind-date__paragraph {
+    margin-bottom: 0;
+    max-width: 350px;
+  }
 
   .blind-date__text-group {
     grid-column: 2 / 3;
@@ -2183,5 +2183,204 @@ body {
 
   .blind-date__look:nth-child(3) {
     margin-top: -3rem;
+  }
+}
+
+/* THE HAPPY ACCIDENT (MINIMALIST) */
+.happy-accident {
+  background: var(--bg-blue);
+  color: var(--text-black);
+  padding: 6rem 1.5rem;
+  overflow: hidden;
+}
+
+.happy-accident__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* --- TYPOGRAPHY --- */
+.happy-accident__title {
+  font-family: var(--font-title);
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  letter-spacing: -0.02em;
+}
+
+.happy-accident__lead {
+  font-family: var(--font-title);
+  color: var(--bg);
+  font-size: clamp(1.5rem, 3.125vw, 2.8125rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+.happy-accident__text {
+  font-family: var(--font-body);
+  font-size: var(--text-body-mobile-size);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 450px;
+}
+
+.highlight-yellow {
+  background-color: var(--accent);
+  padding: 0 0.2rem;
+  color: var(--text-black);
+  font-weight: 700;
+}
+
+.text-bold {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.happy-accident__list {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.happy-accident__list li {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--text-black);
+}
+
+.happy-accident__visuals {
+  position: relative;
+  width: 100%;
+  min-height: 60vh;
+}
+
+.happy-accident__team-wrapper {
+  position: relative;
+  width: 90%;
+  margin: 0;
+  z-index: 1;
+}
+
+.happy-accident__team-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.9;
+}
+
+.happy-accident__caption {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+  opacity: 0.7;
+}
+
+.happy-accident__hero-wrapper {
+  position: absolute;
+  bottom: 40%;
+  right: 0;
+  width: 25%;
+  z-index: 5;
+}
+
+.happy-accident__hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.happy-accident__tag {
+  position: absolute;
+  top: 20%;
+  left: -20px;
+  background: var(--accent);
+  padding: 0.3rem 0.3rem;
+  z-index: 6;
+}
+
+.happy-accident__tag-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-black);
+}
+
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+
+  .happy-accident__text {
+    font-size: var(--text-body-desktop-size);
+  }
+
+  .happy-accident {
+    padding: 8rem 4rem;
+  }
+
+  .happy-accident__container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  /* TEXT PLACEMENT */
+  .happy-accident__content {
+    grid-column: 1 / 2;
+    order: 1;
+  }
+
+  .happy-accident__title {
+    font-size: 5rem;
+  }
+
+  .happy-accident__visuals {
+    grid-column: 2 / 3;
+    order: 2;
+    margin-top: 0;
+    min-height: auto;
+    display: flex;
+    align-items: center;
+    align-self: end;
+    justify-content: center;
+    transform: translateY(2rem);
+  }
+
+  .happy-accident__team-wrapper {
+    width: 85%;
+    margin-right: auto;
+  }
+
+  .happy-accident__hero-wrapper {
+    width: 40%;
+    right: -2rem;
+    bottom: -10%;
+  }
+}
+
+/* LARGE SCREENS */
+@media (min-width: 1440px) {
+  .happy-accident__title {
+    font-size: 7rem;
+  }
+
+  .happy-accident__team-wrapper {
+    width: 90%;
+  }
+
+  .happy-accident__hero-wrapper {
+    width: 35%;
   }
 }
