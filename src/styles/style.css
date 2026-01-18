@@ -2670,8 +2670,7 @@ body {
   display: none;
 }
 
-/* DESKTOP ARTISTRY */
-
+/* DESKTOP */
 @media (min-width: 1024px) {
 
   .typo-breakthrough {
