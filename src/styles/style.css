@@ -2055,3 +2055,133 @@ body {
   letter-spacing: 1px;
 }
 
+
+/*  DESKTOP */
+@media (min-width: 1024px) {
+
+  .blind-date {
+    padding: 6rem 3rem;
+  }
+
+  .blind-date__container {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 4rem;
+  }
+
+  .blind-date__top-content {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .blind-date__title {
+    grid-column: 1 / 3;
+    margin-bottom: 0;
+  }
+
+    .blind-date__subtitle{
+      margin-bottom: 1rem;
+    }
+
+    .blind-date__paragraph{
+      margin-bottom: 0;
+      max-width: 350px;
+    }
+
+  .blind-date__text-group {
+    grid-column: 2 / 3;
+    padding-top: 1rem;
+  }
+
+  .blind-date__gallery {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    overflow-x: visible;
+    margin: 0;
+    padding: 0;
+    align-items: start;
+  }
+
+  .blind-date__look {
+    flex: unset;
+    display: flex;
+    align-items: end;
+    gap: 1rem;
+  }
+
+  /* VARIED SIZES & POSITIONS ON DESKTOP */
+  .blind-date__look:nth-child(1) {
+    margin-top: 0;
+  }
+
+  .blind-date__look:nth-child(1) .blind-date__image-wrapper {
+    aspect-ratio: 3/4;
+    max-width: 100%;
+  }
+
+  .blind-date__look:nth-child(2) {
+    margin-top: 4rem;
+  }
+
+  .blind-date__look:nth-child(2) .blind-date__image-wrapper {
+    aspect-ratio: 3/4.8;
+    max-width: 100%;
+  }
+
+  .blind-date__look:nth-child(3) {
+    margin-top: -2rem;
+  }
+
+  .blind-date__look:nth-child(3) .blind-date__image-wrapper {
+    aspect-ratio: 3/3.8;
+    max-width: 100%;
+  }
+
+  .blind-date__caption {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    margin: 0;
+    white-space: nowrap;
+  }
+}
+
+/* LARGE DESKTOP */
+@media (min-width: 1440px) {
+  .blind-date__title {
+    font-size: 6rem;
+  }
+
+  .blind-date__line {
+    display: block;
+  }
+
+  .blind-date__line--offset {
+    margin-left: 3rem;
+  }
+
+  .blind-date__subtitle {
+    font-size: clamp(1.5rem, 3.125vw, 2.8125rem);
+    grid-column: 1/4;
+    margin-bottom: 2rem;
+  }
+
+  .blind-date__paragraph {
+    margin-left: 3rem;
+    font-size: var(--text-body-desktop-size);
+  }
+
+  /* EVEN MORE VARIED POSITIONS */
+  .blind-date__look:nth-child(2) {
+    margin-top: 6rem;
+  }
+
+  .blind-date__look:nth-child(3) {
+    margin-top: -3rem;
+  }
+}
