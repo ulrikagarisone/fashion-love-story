@@ -2767,3 +2767,241 @@ body {
     transform: rotate(-5deg);
   }
 }
+
+/* STICKER LAB */
+.sticker-lab {
+  background-color: var(--bg);
+  min-height: 100vh;
+  padding: 4rem 1rem;
+  font-family: var(--font-title);
+  position: relative;
+  overflow: hidden;
+}
+
+.sticker-lab__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sticker-lab__title {
+  font-size: clamp(3rem, 10vw, 6rem);
+  line-height: 0.9;
+  margin-bottom: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--text-black);
+}
+
+.sticker-lab__title--outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--text-black);
+}
+
+.sticker-lab__instruction {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: var(--text-black);
+  margin-bottom: 3rem;
+}
+
+.sticker-lab__icon {
+  display: inline-block;
+  background: var(--accent);
+  width: 24px;
+  height: 24px;
+  line-height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--text-black);
+  font-weight: bold;
+}
+
+.sticker-lab__stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.sticker-lab__model-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+}
+
+.sticker-lab__image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sticker-lab__hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.sticker-lab__add-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--text-black);
+  font-size: 2rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sticker-lab__add-btn:hover {
+  transform: scale(1.1) rotate(90deg);
+  background: var(--text-light);
+}
+
+.sticker-lab__badge {
+  display: none;
+  width: 90px;
+  height: 90px;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: var(--text-light);
+  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
+  animation: badgePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Modifiers for Badge */
+.sticker-lab__badge--leather {
+  display: flex;
+  background: var(--text-black);
+  transform: rotate(-8deg);
+}
+
+.sticker-lab__badge--leather::after {
+  content: "LEATHER";
+}
+
+.sticker-lab__badge--lycra {
+  display: flex;
+  background: var(--accent);
+  /* Blue */
+  border-radius: 50%;
+  transform: rotate(8deg);
+}
+
+.sticker-lab__badge--lycra::after {
+  content: "LYCRA";
+}
+
+@keyframes badgePop {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1) rotate(var(--rot));
+  }
+}
+
+.sticker-lab__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(5px);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sticker-lab__modal--active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.sticker-lab__card {
+  background: #fff;
+  border: 4px solid #000;
+  padding: 2.5rem;
+  width: 90%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 15px 15px 0px #E7FC93;
+  transform: translateY(50px) rotate(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.sticker-lab__modal--active .sticker-lab__card {
+  transform: translateY(0) rotate(0deg);
+}
+
+.sticker-lab__card-title {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.sticker-lab__options {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.sticker-lab__option {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.sticker-lab__option:hover {
+  transform: scale(1.1);
+}
+
+/* Option Previews */
+.sticker-lab__preview {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #000;
+}
+
+.sticker-lab__preview--square {
+  background: #000;
+}
+
+.sticker-lab__preview--circle {
+  background: #2F80ED;
+  border-radius: 50%;
+  border: none;
+}
+
+.sticker-lab__label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.sticker-lab__close-btn {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  font-family: var(--font-body);
+  color: #888;
+  cursor: pointer;
+}
