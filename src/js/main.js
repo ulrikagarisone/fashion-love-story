@@ -423,6 +423,67 @@ function initVortex() {
   setTimeout(createWord, 200);
 }
 
+
+const overlay = document.getElementById('spotlightOverlay');
+const stage = document.querySelector('.san-siro');
+const yearDisplay = document.getElementById('yearDisplay');
+
+// 1. MOUSE SPOTLIGHT (Only works while overlay is visible)
+stage.addEventListener('mousemove', (e) => {
+  if (!overlay.classList.contains('san-siro__dark-overlay--hidden')) {
+    const rect = stage.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    overlay.style.setProperty('--x', `${x}px`);
+    overlay.style.setProperty('--y', `${y}px`);
+  }
+});
+
+// 2. SCROLL OBSERVER (Trigger animations)
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+
+      // A. Handle "Lights On" Logic
+      if (entry.target.classList.contains('san-siro__trigger--intro')) {
+        // We are at the start: Keep it dark
+        overlay.classList.remove('san-siro__dark-overlay--hidden');
+        yearDisplay.classList.remove('san-siro__year-display--visible');
+      } else {
+        // We scrolled past start: Turn lights ON
+        overlay.classList.add('san-siro__dark-overlay--hidden');
+        yearDisplay.classList.add('san-siro__year-display--visible');
+
+        // Update Year Text
+        const year = entry.target.getAttribute('data-year');
+        if (year) yearDisplay.innerText = year;
+
+        // Switch Model Image
+        const index = entry.target.getAttribute('data-target');
+        if (index) updateModel(index);
+      }
+
+      // B. Animate Text Card
+      entry.target.classList.add('san-siro__trigger--active');
+
+    } else {
+      entry.target.classList.remove('san-siro__trigger--active');
+    }
+  });
+}, { threshold: 0.5 }); // Trigger when 50% of the section is visible
+
+// Observe all triggers
+document.querySelectorAll('.san-siro__trigger').forEach(el => observer.observe(el));
+
+// Helper function to switch images
+function updateModel(index) {
+  document.querySelectorAll('.san-siro__model').forEach(img => {
+    img.classList.remove('san-siro__model--active');
+  });
+  const active = document.querySelector(`.san-siro__model[data-step="${index}"]`);
+  if (active) active.classList.add('san-siro__model--active');
+}
+
 // INITIALIZE ALL
 function init() {
   initHero();
