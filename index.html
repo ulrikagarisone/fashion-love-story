@@ -620,6 +620,68 @@
 
   </div>
 </section>
+
+<section class="sticker-lab">
+
+  <div class="sticker-lab__container">
+
+    <div class="sticker-lab__header">
+      <h2 class="sticker-lab__title">
+        STYLE THE <span class="sticker-lab__title--outline">ATHLETE</span>
+      </h2>
+      <p class="sticker-lab__instruction">
+        Tap the <span class="sticker-lab__icon">+</span> to drop a material.
+      </p>
+    </div>
+
+    <div class="sticker-lab__stage">
+
+      <div class="sticker-lab__model-wrapper">
+        <img src="/images/look2.png" alt="Model" class="sticker-lab__image">
+
+        <div class="sticker-lab__hotspot" style="top: 22%; left: 68%;">
+          <button class="sticker-lab__add-btn" onclick="openStickerMenu('shoulder')">+</button>
+          <div id="badge-shoulder" class="sticker-lab__badge"></div>
+        </div>
+
+        <div class="sticker-lab__hotspot" style="top: 45%; left: 50%;">
+          <button class="sticker-lab__add-btn" onclick="openStickerMenu('core')">+</button>
+          <div id="badge-core" class="sticker-lab__badge"></div>
+        </div>
+
+        <div class="sticker-lab__hotspot" style="top: 75%; left: 40%;">
+          <button class="sticker-lab__add-btn" onclick="openStickerMenu('knees')">+</button>
+          <div id="badge-knees" class="sticker-lab__badge"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="sticker-lab__modal" id="stickerModal">
+      <div class="sticker-lab__card">
+        <h3 class="sticker-lab__card-title">SELECT MATERIAL</h3>
+
+        <div class="sticker-lab__options">
+
+          <button class="sticker-lab__option" onclick="applySticker('leather')">
+            <div class="sticker-lab__preview sticker-lab__preview--square"></div>
+            <span class="sticker-lab__label">LEATHER</span>
+          </button>
+
+          <button class="sticker-lab__option" onclick="applySticker('lycra')">
+            <div class="sticker-lab__preview sticker-lab__preview--circle"></div>
+            <span class="sticker-lab__label">LYCRA</span>
+          </button>
+
+        </div>
+
+        <button class="sticker-lab__close-btn" onclick="closeStickerMenu()">CANCEL</button>
+      </div>
+    </div>
+
+  </div>
+</section>
   <script type="module" src="/src/js/main.js"></script>
 </body>
 
