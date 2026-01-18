@@ -1642,306 +1642,362 @@ body {
   }
 }
 
+/* FAILED DATES SECTION */
 /* ================================
-   THE FAILED DATES SECTION
+   FAILED DATES (Mobile First)
    ================================ */
 .failed-dates {
   background: var(--bg-blue);
-  color: var(--text-light);
-  padding: 5rem 2rem;
+  color: var(--text-black);
+  padding: 3rem 1.5rem;
   min-height: 100vh;
-  position: relative;
-  overflow: hidden;
+  box-sizing: border-box;
 }
 
-.failed-dates__container {
+.failed-container {
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* BIG CENTERED TITLE */
-.failed-dates__main-title {
+/* --- HEADER --- */
+.failed-header {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.failed-title {
   font-family: var(--font-title);
-  font-size: clamp(3rem, 12vw, 8rem);
+  font-size: clamp(3rem, 10vw, 8rem);
   font-weight: 900;
   text-align: center;
-  line-height: 0.9;
-  margin-bottom: 4rem;
-  color: var(--text-light);
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent);
+  text-transform: uppercase;
+  margin: 0;
 }
 
-.failed-dates__title-word {
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-.failed-dates__title-word--failed {
-  color: var(--text-light);
-}
-
-/* CONTENT GRID */
-.failed-dates__content {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
-  align-items: center;
-}
-
-/* LEFT SIDE */
-.failed-dates__left {
+/* --- BODY LAYOUT --- */
+.failed-body {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
 }
 
-.failed-dates__subtitle {
-  font-family: var(--font-title);
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  font-weight: 900;
-  line-height: 0.9;
-  color: var(--text-black);
-}
-
-.failed-dates__text-columns {
+/* --- TEXT COLUMN (MOBILE REORDERING MAGIC) --- */
+.failed-text-col {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  order: 1;
 }
 
-.failed-dates__headline {
+/* 1. Subtitle First */
+.failed-subtitle {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  font-weight: 900;
+  text-align: left;
+  margin: 0;
+  order: 1;
+  /* First */
+}
+
+/* 2. Number Second (Extracted from container using display: contents) */
+.failed-number {
+  font-family: var(--font-title);
+  font-size: 5rem;
+  line-height: 0.8;
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 2px rgb(231, 252, 147, 0.2);
+  order: 2;
+  /* Second */
+}
+
+/* 3. Intro Third */
+.failed-intro {
   font-family: var(--font-title);
   color: var(--bg);
-  font-size: clamp(1.5rem, 3.125vw, 2.8125rem);
+  font-size: clamp(1.2rem, 4vw, 2.2rem);
   font-weight: 400;
   line-height: 1.1;
+  text-align: left;
+  order: 3;
+  /* Third */
 }
 
-.failed-dates__headline-line {
-  display: inline;
+.intro-line {
+  margin: 0;
 }
 
-.failed-dates__headline-line--offset {
-  font-weight: 400;
+.intro-line--indent {
   margin-left: 0;
-  /* No offset on mobile */
 }
 
-.failed-dates__text-body {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  max-width: 500px;
-  color: var(--text-black);
+.failed-prose {
+  width: 100%;
+  order: 4;
 }
 
-/* CENTER IMAGE */
-.failed-dates__image-container {
+.failed-content {
+  display: contents;
+}
+
+.failed-p {
+  font-family: var(--font-body);
+  font-size: var(--text-body-mobile-size);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+/* --- IMAGE COLUMN --- */
+.failed-image-col {
+  width: 100%;
+  order: 2;
+}
+
+.failed-image-wrapper {
   position: relative;
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
 }
 
-.failed-dates__image {
+.failed-img {
   width: 100%;
   height: auto;
-  display: block;
+  transition: filter 0.4s ease;
 }
 
-/* QUOTE LINES - Hidden on mobile */
-.failed-dates__quote-line {
-  position: absolute;
-  width: 2px;
-  background: var(--text-black);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+.failed-image-wrapper:hover .failed-img {
+  filter: grayscale(0%);
 }
 
-.failed-dates__quote-line--leather {
-  background: var(--text-black);
-}
-
-.failed-dates__quote-line--lycra {
-  background: var(--accent);
-}
-
-.failed-dates__image-container:hover .failed-dates__quote-line {
-  opacity: 1;
-}
-
-/* QUOTES */
-.failed-dates__quotes {
+.failed-quotes {
   display: none;
 }
 
-.failed-dates__quote {
-  position: absolute;
-  max-width: 300px;
-  padding: 1rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
 
-.failed-dates__image-container:hover .failed-dates__quote {
-  opacity: 1;
-}
-
-.failed-dates__quote-label {
-  font-weight: 700;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-.failed-dates__quote-text {
-  font-style: italic;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: var(--text-light);
-}
-
-.failed-dates__quote--leather {
-  top: 10%;
-  right: -280px;
-}
-
-.failed-dates__quote--lycra {
-  bottom: 20%;
-  right: -280px;
-}
-
-.failed-dates__quote--lycra .failed-dates__quote-text {
-  color: var(--accent);
-}
-
-/* BOTTOM TEXT */
-.failed-dates__bottom {
-  margin-top: 4rem;
+/* --- BOTTOM & CLOSING --- */
+.failed-bottom {
+  margin-top: 3rem;
   text-align: center;
+  order: 3;
 }
 
-.failed-dates__bottom-text {
+.failed-bottom-text {
+  font-family: var(--font-body);
   font-size: var(--text-body-mobile-size);
   line-height: 1.6;
-  margin-bottom: 1rem;
   color: var(--text-black);
 }
 
-.failed-dates__bottom-small {
-  font-size: 1rem;
-  color: var(--accent);
-  margin-bottom: 1rem;
+.failed-closing {
+  margin-top: 2rem;
+  text-align: center;
+  order: 4;
 }
 
-.failed-dates__bottom-big {
+.failed-statement {
   font-family: var(--font-title);
-  font-size: clamp(3rem, 10vw, 6rem);
-  font-weight: 900;
+  line-height: 1.1;
   color: var(--accent);
-  line-height: 1;
 }
 
-/* TABLET */
-@media (min-width: 768px) {
-  .failed-dates__text-columns {
-    flex-direction: row;
-    gap: 2rem;
-  }
-
-  .failed-dates__text-intro {
-    flex: 0 0 auto;
-    margin-right: 2rem;
-  }
-
-  .failed-dates__text-body {
-    flex: 1;
-  }
+.failed-statement-small {
+  font-size: var(--text-quote-size-mobile);
+  font-weight: 400;
 }
 
-/* DESKTOP */
+.failed-statement-large {
+  display: block;
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+}
+
+
+/* =========================================
+   DESKTOP (Restoring your exact layout)
+   ========================================= */
 @media (min-width: 1024px) {
   .failed-dates {
-    padding: 6rem 3rem;
+    padding: 6rem 4rem;
   }
 
-  .failed-dates__content {
-    grid-template-columns: 1fr 2fr;
+  .failed-header {
+    margin-bottom: 5rem;
+  }
+
+  .failed-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
     align-items: start;
   }
 
-  .failed-dates__bottom-text {
-    font-size: var(--text-body-desktop-size);
-  }
-
-  .failed-dates__left {
+  /* Reset the Flex/Order logic from mobile */
+  .failed-text-col {
     padding-right: 2rem;
-  }
-
-  .failed-dates__text-columns {
+    order: 1;
+    display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
-  .failed-dates__text-intro {
-    margin-left: 2rem;
+  /* Reset Orders to default (0) */
+  .failed-subtitle {
+    order: 0;
   }
 
-  .failed-dates__quotes {
-    display: block;
+  .failed-intro {
+    order: 0;
   }
 
-  .failed-dates__image-container {
-    max-width: 600px;
+  .failed-number {
+    order: 0;
   }
 
-  .failed-dates__text-body {
+  .failed-prose {
+    order: 0;
+  }
+
+  .intro-line--indent {
+    margin-left: 3rem;
+  }
+
+  /* RESTORE THE GRID LAYOUT FOR CONTENT */
+  .failed-content {
+    display: grid;
+    /* Turn grid back on */
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: start;
+    margin-top: 1rem;
+  }
+
+  .failed-number {
+    font-size: 8rem;
+  }
+
+  .failed-prose {
+    padding-top: 0.5rem;
+  }
+
+  .failed-p {
     font-size: var(--text-body-desktop-size);
-    max-width: 475px;
-    justify-self: end;
   }
 
-  .failed-dates__headline {
-    margin-bottom: 1rem;
+  /* IMAGE QUOTES (Desktop Only) */
+  .failed-image-col {
+    order: 2;
+  }
+
+  .failed-image-wrapper {
+    max-width: 100%;
+  }
+
+  .failed-quotes {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .failed-quote {
+    position: absolute;
+    background: var(--bg-blue);
+    border: 1px solid var(--text-black);
+    padding: 1rem;
+    width: 220px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+
+  .quote-label {
+    font-family: var(--font-title);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .failed-quote p {
+    font-family: var(--font-body);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .failed-quote--leather {
+    top: 10%;
+    left: -240px;
+  }
+
+  .failed-quote--lycra {
+    bottom: 15%;
+    left: -240px;
+  }
+
+  .failed-image-wrapper:hover .failed-quote {
+    opacity: 1;
+    transform: translateX(-10px);
+  }
+
+  /* BOTTOM & CLOSING */
+  .failed-bottom {
+    grid-column: 1 / -1;
+    margin-top: 5rem;
+    order: 3;
+  }
+
+  .failed-bottom-text {
+    font-size: var(--text-body-desktop-size);
+  }
+
+  .failed-closing {
+    grid-column: 1 / -1;
+    margin-top: 4rem;
+    order: 4;
+  }
+
+  .failed-statement-small {
+    font-size: 2rem;
+  }
+
+  .failed-statement-large {
+    font-size: 6rem;
   }
 }
 
 /* LARGE DESKTOP */
 @media (min-width: 1440px) {
-  .failed-dates__headline-line {
-    display: block;
+  .failed-title {
+    font-size: 8rem;
   }
 
-  .failed-dates__bottom-text {
-    font-size: var(--text-body-desktop-size);
+  .failed-subtitle {
+    font-size: 4.5rem;
   }
 
-  .failed-dates__headline-line--offset {
-    margin-left: 3rem;
-  }
-
-  .failed-dates__main-title {
+  .failed-number {
     font-size: 10rem;
-    margin-bottom: 10rem;
   }
 
-  .failed-dates__subtitle {
-    font-size: 5rem;
-  }
-
-  .failed-dates__text-intro {
-    font-size: 1.5rem;
-  }
-
-  .failed-dates__text-body {
-    font-size: var(--text-body-desktop-size);
-    max-width: 475px;
-    justify-self: end;
-  }
-
-  .failed-dates__headline {
-    margin-bottom: 1rem;
+  .failed-statement-large {
+    font-size: 7rem;
   }
 }
 
@@ -2005,7 +2061,7 @@ body {
   line-height: 0.8;
   font-weight: 900;
   color: transparent;
-  -webkit-text-stroke: 2px rgba(0, 0, 0, 0.2);
+  -webkit-text-stroke: 2px rgb(231, 252, 147, 0.2);
   order: 1;
 }
 
@@ -2218,11 +2274,11 @@ body {
 /* LARGE DESKTOP */
 @media (min-width: 1440px) {
   .blue-title {
-    font-size: 7.5rem;
+    font-size: 4.5rem;
   }
 }
 
-/* THE HAPPY ACCIDENT (MINIMALIST) */
+/* THE HAPPY ACCIDENT */
 .happy-accident {
   background: var(--bg-blue);
   color: var(--text-black);
@@ -2238,7 +2294,6 @@ body {
   gap: 4rem;
 }
 
-/* --- TYPOGRAPHY --- */
 .happy-accident__lead {
   font-family: var(--font-title);
   color: var(--bg);
