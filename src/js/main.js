@@ -362,7 +362,6 @@ function initLeatherYearsAnimations() {
   }
 }
 
-/* VORTEX TEXT ANIMATION*/
 function initVortex() {
   const vortexContainer = document.querySelector('.vortex-container');
 
@@ -424,8 +423,6 @@ function initVortex() {
   setTimeout(createWord, 200);
 }
 
-
-
 // INITIALIZE ALL
 function init() {
   initHero();
@@ -435,7 +432,6 @@ function init() {
   initLeatherYearsScrollLock();
   initLeatherYearsAnimations();
   initVortex();
-
   console.log(' Fashion love story');
 }
 
