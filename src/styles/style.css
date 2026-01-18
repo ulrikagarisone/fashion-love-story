@@ -1944,3 +1944,114 @@ body {
     margin-bottom: 1rem;
   }
 }
+
+/* THE BLIND DATE SECTION*/
+.blind-date {
+  background: var(--bg-blue);
+  color: var(--text-black);
+  padding: 5rem 0;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.blind-date__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --- TYPOGRAPHY --- */
+.blind-date__title {
+  font-family: var(--font-title);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.blind-date__subtitle {
+  font-family: var(--font-title);
+  color: var(--bg);
+  font-size: clamp(1.5rem, 3.125vw, 2.8125rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.blind-date__line {
+  display: inline;
+}
+
+.blind-date__line--offset {
+  margin-left: 0;
+}
+
+.blind-date__paragraph {
+  font-family: var(--font-body);
+  font-size: var(--text-body-mobile-size);
+  line-height: 1.6;
+  margin-bottom: 3rem;
+}
+
+.blind-date__gallery {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  margin-right: -1.5rem;
+  margin-left: -1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+/* Hides scrollbar in Chrome/Safari/Opera */
+.blind-date__gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.blind-date__look {
+  flex: 0 0 85vw;
+  scroll-snap-align: center;
+  position: relative;
+}
+
+/* VARIED SIZES ON MOBILE */
+.blind-date__look:nth-child(1) .blind-date__image-wrapper {
+  aspect-ratio: 2/3;
+  max-width: 280px;
+}
+
+.blind-date__look:nth-child(2) .blind-date__image-wrapper {
+  aspect-ratio: 3/4.5;
+  max-width: 320px;
+}
+
+.blind-date__look:nth-child(3) .blind-date__image-wrapper {
+  aspect-ratio: 2/3.2;
+  max-width: 300px;
+}
+
+.blind-date__image-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.blind-date__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.blind-date__caption {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  letter-spacing: 1px;
+}
+
