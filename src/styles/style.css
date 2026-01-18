@@ -3005,3 +3005,155 @@ body {
   color: #888;
   cursor: pointer;
 }
+
+/* SAN SIRO EXPERIENCE */
+
+.san-siro {
+  position: relative;
+  background-color: #000;
+}
+
+.san-siro__stage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.san-siro__bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.san-siro__dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10; /* Top layer */
+  
+  /* The Mouse Spotlight Effect */
+  background: radial-gradient(
+    circle 300px at var(--x, 50%) var(--y, 50%), 
+    transparent 0%, 
+    rgba(0, 0, 0, 0.98) 30%
+  );
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  transition: opacity 0.8s ease; /* Smooth fade out */
+}
+
+/* Modifier: Lights On (Added via JS) */
+.san-siro__dark-overlay--hidden {
+  opacity: 0;
+  pointer-events: none; /* Let clicks pass through */
+}
+
+.san-siro__title {
+  font-family: var(--font-title);
+  font-size: 5rem;
+  mix-blend-mode: difference;
+}
+
+.san-siro__subtitle {
+  font-family: var(--font-body);
+  margin-top: 1rem;
+  font-weight: 700;
+  color: #E7FC93;
+}
+
+.san-siro__model-container {
+  position: relative;
+  z-index: 5; /* Above background, below overlay */
+  height: 85vh;
+  width: auto;
+  aspect-ratio: 1/2;
+  margin-top: 5vh;
+}
+
+.san-siro__model {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+.san-siro__model--active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.san-siro__year-display {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  font-family: var(--font-title);
+  font-size: 8rem;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent);
+  z-index: 4;
+  opacity: 0; /* Hidden during darkness */
+  transition: opacity 0.5s;
+}
+
+.san-siro__year-display--visible {
+  opacity: 0.5;
+}
+
+.san-siro__timeline {
+  position: relative;
+  z-index: 20;
+  margin-top: -100vh; 
+}
+
+.san-siro__trigger {
+  min-height: 100vh; 
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5%;
+}
+
+.san-siro__card {
+  background: rgba(0,0,0,0.8);
+  border: 1px solid var(--accent);
+  color: var(--bg);
+  padding: 2rem;
+  max-width: 350px;
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.5s ease;
+  backdrop-filter: blur(5px);
+}
+
+.san-siro__card h3 {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: #E7FC93;
+  margin-bottom: 0.5rem;
+}
+
+/* Make card visible */
+.san-siro__trigger--active .san-siro__card {
+  opacity: 1;
+  transform: translateX(0);
+}
