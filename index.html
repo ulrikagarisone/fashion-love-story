@@ -620,6 +620,65 @@
 
   </div>
 </section>
+
+<section class="sticker-book">
+
+  <div class="sticker-container">
+
+    <div class="sticker-header">
+      <h2 class="fun-title">STYLE THE <span class="outline-text">ATHLETE</span></h2>
+      <p class="fun-instruction">
+        Click the <span class="plus-icon">+</span> to choose:
+        <strong>Structure</strong> or <strong>Movement</strong>?
+      </p>
+    </div>
+
+    <div class="play-area">
+
+      <div class="model-zone">
+        <img src="/images/look2.png" alt="Model" class="base-model">
+
+        <div class="spot-wrapper" style="top: 22%; left: 68%;">
+          <button class="add-btn" onclick="openTag('shoulder')">+</button>
+          <div class="sticker-result" id="sticker-shoulder"></div>
+        </div>
+
+        <div class="spot-wrapper" style="top: 45%; left: 50%;">
+          <button class="add-btn" onclick="openTag('core')">+</button>
+          <div class="sticker-result" id="sticker-core"></div>
+        </div>
+
+        <div class="spot-wrapper" style="top: 75%; left: 40%;">
+          <button class="add-btn" onclick="openTag('knees')">+</button>
+          <div class="sticker-result" id="sticker-knees"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="tag-popup" id="tagPopup">
+      <div class="tag-card">
+        <h3 class="tag-title">PICK ONE</h3>
+
+        <div class="tag-choices">
+          <button class="choice-item leather-choice" onclick="placeSticker('leather')">
+            <div class="shape-preview square-shape"></div>
+            <span>LEATHER</span>
+          </button>
+
+          <button class="choice-item lycra-choice" onclick="placeSticker('lycra')">
+            <div class="shape-preview circle-shape"></div>
+            <span>LYCRA</span>
+          </button>
+        </div>
+
+        <button class="close-tag" onclick="closeTag()">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</section>
   <script type="module" src="/src/js/main.js"></script>
 </body>
 
