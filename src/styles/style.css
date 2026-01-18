@@ -2551,3 +2551,121 @@ body {
     font-size: clamp(4rem, 10vw, 7rem);
   }
 }
+
+/* TYPOGRAPHIC PLAY SECTION */
+
+.typo-breakthrough {
+  background-color: #E7FC93;
+  color: var(--text-black);
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.typo-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.typo-header {
+  margin-bottom: 1rem;
+  z-index: 10;
+  position: relative;
+  text-align: center;
+}
+
+.main-title {
+  font-family: var(--font-title);
+  font-size: 3.5rem;
+  line-height: 0.9;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.03em;
+}
+
+.story-text {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin: 0 auto;
+}
+
+.highlight-blue {
+  color: var(--bg-blue);
+  font-weight: 700;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.composition-layer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-top: 2rem;
+  align-items: center;
+}
+
+.image-float {
+  order: 1;
+  width: 100%;
+  max-width: 350px;
+  position: relative;
+  margin: 0;
+  transform: rotate(-3deg);
+}
+
+.leather-pos {
+  order: 2;
+  width: 100%;
+  text-align: left;
+}
+
+.lycra-pos {
+  order: 3;
+  width: 100%;
+  text-align: right;
+}
+
+.giant-word {
+  font-family: var(--font-title);
+  font-size: 3rem;
+  line-height: 0.8;
+  margin: 0;
+  padding: 0;
+  letter-spacing: -0.04em;
+}
+
+.solid {
+  color: #000;
+}
+
+.outline {
+  color: transparent;
+  -webkit-text-stroke: 1px #000;
+}
+
+.small-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.kiss-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(10px 10px 0px rgba(0, 0, 0, 0.1));
+}
+
+.img-caption {
+  display: none;
+}
