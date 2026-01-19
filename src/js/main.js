@@ -16,199 +16,363 @@ const initHero = () => {
   setTimeout(triggerPop, 4200);
 };
 
-// TRANSITION - MODEL WALKS VERTICALLY
-function initTransition() {
-  const model = document.querySelector('.transition__model');
-  const section = document.querySelector('.transition');
+// HERO SECTION - SECOND MODEL SCROLL ANIMATION
+function initHeroScrollModel() {
+  const heroSection = document.querySelector('.hero');
+  const secondModel = document.querySelector('.hero__scroll-model');
 
-  if (!model || !section) return;
+  if (!heroSection || !secondModel) return;
 
-  // Model walks down vertically through the section
-  gsap.timeline({
+  gsap.set(secondModel, {
+    y: 0,
+    opacity: 1
+  });
+
+  // Smooth scroll down animation
+  gsap.to(secondModel, {
+    y: '120vh',
+    ease: 'none',
     scrollTrigger: {
-      trigger: section,
+      trigger: heroSection,
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1.5,
+    }
+  });
+}
+
+// TRANSITION - RUNWAY MODEL ANIMATION
+function initTransitionRunway() {
+  const transitionSection = document.querySelector('.transition');
+  const runwayModel = document.querySelector('.transition__model');
+
+  if (!transitionSection || !runwayModel) return;
+
+  // Set initial state
+  gsap.set(runwayModel, {
+    y: '-50%',
+    opacity: 1,
+    scale: 1.2,
+  });
+
+  // Model walks down the runway (SVG) as you scroll
+  gsap.to(runwayModel, {
+    y: '0%',
+    opacity: 1,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: transitionSection,
       start: 'top center',
       end: 'bottom center',
-      scrub: 1,
-    },
-  })
-    .fromTo(model,
-      { y: '-30vh', opacity: 0 },
-      { y: '30vh', opacity: 1, ease: 'none' }
-    );
+      scrub: 1.5,
+    }
+  });
 
-  // SVG text fade in
-  const svgTexts = document.querySelectorAll('.transition__text');
-  gsap.from(svgTexts, {
+  // Model disappears before blue section - exit animation
+  gsap.to(runwayModel, {
+    x: '-120vw',
+    rotation: -15,
     opacity: 0,
-    y: 50,
-    duration: 1,
-    stagger: 0.2,
+    ease: 'power2.in',
     scrollTrigger: {
-      trigger: section,
-      start: 'top 80%',
-    },
+      trigger: transitionSection,
+      start: 'bottom 80%',
+      end: 'bottom 20%',
+      scrub: 1.5,
+    }
   });
 }
 
-// TWO WORLDS - DRAGGABLE IMAGES
-function initDraggableImages() {
-  const draggables = document.querySelectorAll('.two-worlds__draggable');
+// TWO WORLDS - "SEPARATE WORLDS" POP-IN (NO FLOATING)
+function initSeparateWorldsPopIn() {
+  const closingStatement = document.querySelector('.two-worlds__closing');
 
-  draggables.forEach((element) => {
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
-    const side = element.getAttribute('data-draggable');
-    const maxDrag = 150; // Maximum pixels they can drag
-
-    // Mouse/Touch start
-    const handleStart = (e) => {
-      isDragging = true;
-      element.style.cursor = 'grabbing';
-
-      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-
-      startX = clientX - currentX;
-      startY = clientY - currentY;
-    };
-
-    // Mouse/Touch move
-    const handleMove = (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-
-      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-
-      let deltaX = clientX - startX;
-      let deltaY = clientY - startY;
-
-      // Limit drag distance
-      if (side === 'left') {
-        deltaX = Math.max(-maxDrag, Math.min(maxDrag, deltaX));
-      } else {
-        deltaX = Math.max(-maxDrag, Math.min(maxDrag, deltaX));
+  if (!closingStatement) {
+    console.error("ERROR: .two-worlds__closing not found! Check your HTML.");
+    return;
+  }
+  console.log("Element found, initializing animation");
+  gsap.fromTo(closingStatement,
+    {
+      opacity: 0,
+      scale: 0.5,
+      y: 50
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'back.out(1.7)',
+      scrollTrigger: {
+        trigger: closingStatement,
+        start: "top bottom",
+        toggleActions: "play none none reverse",
+        //markers: true, 
+        id: "closing-text"
       }
-      deltaY = Math.max(-maxDrag, Math.min(maxDrag, deltaY));
+    }
+  );
+}
 
-      currentX = deltaX;
-      currentY = deltaY;
+// DRAG INTERACTION - HOVER HINT WITH MOUSE FOLLOW
+function initDragResistance() {
+  const leatherImage = document.querySelector('[data-draggable="left"]');
+  const lycraImage = document.querySelector('[data-draggable="right"]');
+  const gridContainer = document.querySelector('.two-worlds__grid');
 
-      element.style.transform = `translate(${currentX}px, ${currentY}px)`;
-    };
+  if (!leatherImage || !lycraImage || !gridContainer) return;
 
-    // Mouse/Touch end - snap back
-    const handleEnd = () => {
-      if (!isDragging) return;
-      isDragging = false;
-      element.style.cursor = 'grab';
+  // Create mouse-follow hint for desktop
+  const mouseHint = document.createElement('div');
+  mouseHint.className = 'drag-hint';
+  mouseHint.textContent = 'Try to drag me';
+  mouseHint.style.cssText = `
+    position: fixed;
+    pointer-events: none;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--accent);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    opacity: 0;
+    z-index: 100;
+    transform: translate(-50%, -120%);
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+  `;
+  document.body.appendChild(mouseHint);
 
-      // Check if images are close together
-      const leftImage = document.querySelector('[data-draggable="left"]');
-      const rightImage = document.querySelector('[data-draggable="right"]');
+  // Create tap hint for mobile (static)
+  const tapHint = document.createElement('div');
+  tapHint.textContent = '← Tap and drag to bring them together →';
+  tapHint.style.cssText = `
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-align: center;
+    font-weight: 600;
+    animation: pulseHint 2s ease-in-out infinite;
+    pointer-events: none;
+    display: none;
+  `;
 
-      if (leftImage && rightImage) {
-        const leftRect = leftImage.getBoundingClientRect();
-        const rightRect = rightImage.getBoundingClientRect();
-        const distance = Math.abs(leftRect.right - rightRect.left);
+  gridContainer.style.position = 'relative';
+  gridContainer.appendChild(tapHint);
 
-        // If close together, snap them together briefly
-        if (distance < 50) {
-          gsap.to([leftImage, rightImage], {
-            scale: 1.05,
-            duration: 0.2,
-            yoyo: true,
-            repeat: 1,
-          });
-        }
-      }
+  // Show mobile hint on touch devices
+  if ('ontouchstart' in window) {
+    tapHint.style.display = 'block';
+  }
 
-      // Snap back to original position with elastic bounce
-      gsap.to(element, {
-        x: 0,
-        y: 0,
-        duration: 0.6,
-        ease: 'elastic.out(1, 0.5)',
-        onUpdate: () => {
-          currentX = 0;
-          currentY = 0;
-        }
+  // Pulse animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes pulseHint {
+      0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Mouse follow for desktop
+  let isOverLeather = false;
+  let isOverLycra = false;
+
+  function handleMouseMove(e) {
+    if (window.innerWidth < 768) return; // Skip on mobile
+
+    if (isOverLeather || isOverLycra) {
+      mouseHint.style.left = e.clientX + 'px';
+      mouseHint.style.top = e.clientY + 'px';
+      mouseHint.style.opacity = '1';
+    } else {
+      mouseHint.style.opacity = '0';
+    }
+  }
+
+  leatherImage.addEventListener('mouseenter', () => {
+    isOverLeather = true;
+  });
+
+  leatherImage.addEventListener('mouseleave', () => {
+    isOverLeather = false;
+    mouseHint.style.opacity = '0';
+  });
+
+  lycraImage.addEventListener('mouseenter', () => {
+    isOverLycra = true;
+  });
+
+  lycraImage.addEventListener('mouseleave', () => {
+    isOverLycra = false;
+    mouseHint.style.opacity = '0';
+  });
+
+  document.addEventListener('mousemove', handleMouseMove);
+
+  // DRAG INTERACTION LOGIC
+  let isDraggingLeather = false;
+  let isDraggingLycra = false;
+  let startX = 0;
+  let currentX = 0;
+
+  function getDistance() {
+    const leatherRect = leatherImage.getBoundingClientRect();
+    const lycraRect = lycraImage.getBoundingClientRect();
+    return lycraRect.left - leatherRect.right;
+  }
+
+  function getResistanceForce(distance) {
+    const minDistance = 50;
+    if (distance < minDistance) {
+      return (minDistance - distance) / minDistance;
+    }
+    return 0;
+  }
+
+  // LEATHER drag handlers
+  function handleLeatherStart(e) {
+    isDraggingLeather = true;
+    leatherImage.style.cursor = 'grabbing';
+    startX = (e.type.includes('mouse') ? e.clientX : e.touches[0].clientX) - currentX;
+
+    mouseHint.style.opacity = '0';
+    if (tapHint) tapHint.style.display = 'none';
+  }
+
+  function handleLeatherMove(e) {
+    if (!isDraggingLeather) return;
+    e.preventDefault();
+
+    const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    let deltaX = clientX - startX;
+    deltaX = Math.max(0, Math.min(150, deltaX));
+
+    const distance = getDistance();
+    const resistance = getResistanceForce(distance);
+
+    if (resistance > 0) {
+      deltaX = deltaX * (1 - resistance);
+
+      gsap.to(leatherImage, {
+        x: deltaX,
+        rotation: Math.sin(Date.now() / 100) * 5 * resistance,
+        duration: 0.1
       });
-    };
 
-    // Add event listeners
-    element.addEventListener('mousedown', handleStart);
-    element.addEventListener('touchstart', handleStart, { passive: false });
+      gsap.to(lycraImage, {
+        rotation: -Math.sin(Date.now() / 100) * 5 * resistance,
+        duration: 0.1
+      });
+    } else {
+      currentX = deltaX;
+      leatherImage.style.transform = `translate(${currentX}px, 0)`;
+    }
+  }
 
-    document.addEventListener('mousemove', handleMove);
-    document.addEventListener('touchmove', handleMove, { passive: false });
+  function handleLeatherEnd() {
+    if (!isDraggingLeather) return;
+    isDraggingLeather = false;
+    leatherImage.style.cursor = 'grab';
 
-    document.addEventListener('mouseup', handleEnd);
-    document.addEventListener('touchend', handleEnd);
-  });
-}
+    gsap.to(leatherImage, {
+      x: 0,
+      rotation: 0,
+      duration: 0.6,
+      ease: 'elastic.out(1, 0.5)',
+      onUpdate: () => currentX = 0
+    });
 
-// TWO WORLDS - SCROLL ANIMATIONS
-function initTwoWorldsAnimations() {
-  // Headline fade in
-  const headline = document.querySelector('.two-worlds__headline');
-  if (headline) {
-    gsap.from(headline, {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      scrollTrigger: {
-        trigger: headline,
-        start: 'top 80%',
-      },
+    gsap.to(lycraImage, {
+      rotation: 0,
+      duration: 0.6,
+      ease: 'elastic.out(1, 0.5)'
     });
   }
 
-  // Paragraphs stagger in
-  const paragraphs = document.querySelectorAll('.two-worlds__paragraph');
-  gsap.from(paragraphs, {
-    opacity: 0,
-    y: 30,
-    duration: 0.8,
-    stagger: 0.3,
-    scrollTrigger: {
-      trigger: '.two-worlds__text',
-      start: 'top 75%',
-    },
-  });
+  leatherImage.addEventListener('mousedown', handleLeatherStart);
+  leatherImage.addEventListener('touchstart', handleLeatherStart, { passive: false });
+  document.addEventListener('mousemove', handleLeatherMove);
+  document.addEventListener('touchmove', handleLeatherMove, { passive: false });
+  document.addEventListener('mouseup', handleLeatherEnd);
+  document.addEventListener('touchend', handleLeatherEnd);
 
-  // Grid items reveal
-  const items = document.querySelectorAll('.two-worlds__item');
-  gsap.from(items, {
-    opacity: 0,
-    y: 60,
-    duration: 1,
-    stagger: 0.3,
-    scrollTrigger: {
-      trigger: '.two-worlds__grid',
-      start: 'top 75%',
-    },
-  });
+  // LYCRA - mirror behavior
+  let lycraStartX = 0;
+  let lycraCurrentX = 0;
 
-  // Closing statement
-  const statement = document.querySelector('.two-worlds__statement');
-  if (statement) {
-    gsap.from(statement, {
-      opacity: 0,
-      scale: 0.8,
-      duration: 1,
-      ease: 'back.out(1.4)',
-      scrollTrigger: {
-        trigger: '.two-worlds__closing',
-        start: 'top 80%',
-      },
+  function handleLycraStart(e) {
+    isDraggingLycra = true;
+    lycraImage.style.cursor = 'grabbing';
+    lycraStartX = (e.type.includes('mouse') ? e.clientX : e.touches[0].clientX) - lycraCurrentX;
+
+    mouseHint.style.opacity = '0';
+    if (tapHint) tapHint.style.display = 'none';
+  }
+
+  function handleLycraMove(e) {
+    if (!isDraggingLycra) return;
+    e.preventDefault();
+
+    const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    let deltaX = clientX - lycraStartX;
+    deltaX = Math.min(0, Math.max(-150, deltaX));
+
+    const distance = getDistance();
+    const resistance = getResistanceForce(distance);
+
+    if (resistance > 0) {
+      deltaX = deltaX * (1 - resistance);
+
+      gsap.to(lycraImage, {
+        x: deltaX,
+        rotation: -Math.sin(Date.now() / 100) * 5 * resistance,
+        duration: 0.1
+      });
+
+      gsap.to(leatherImage, {
+        rotation: Math.sin(Date.now() / 100) * 5 * resistance,
+        duration: 0.1
+      });
+    } else {
+      lycraCurrentX = deltaX;
+      lycraImage.style.transform = `translate(${lycraCurrentX}px, 0)`;
+    }
+  }
+
+  function handleLycraEnd() {
+    if (!isDraggingLycra) return;
+    isDraggingLycra = false;
+    lycraImage.style.cursor = 'grab';
+
+    gsap.to(lycraImage, {
+      x: 0,
+      rotation: 0,
+      duration: 0.6,
+      ease: 'elastic.out(1, 0.5)',
+      onUpdate: () => lycraCurrentX = 0
+    });
+
+    gsap.to(leatherImage, {
+      rotation: 0,
+      duration: 0.6,
+      ease: 'elastic.out(1, 0.5)'
     });
   }
+
+  lycraImage.addEventListener('mousedown', handleLycraStart);
+  lycraImage.addEventListener('touchstart', handleLycraStart, { passive: false });
+  document.addEventListener('mousemove', handleLycraMove);
+  document.addEventListener('touchmove', handleLycraMove, { passive: false });
+  document.addEventListener('mouseup', handleLycraEnd);
+  document.addEventListener('touchend', handleLycraEnd);
 }
 
 // Leather years scroll lock
@@ -475,10 +639,11 @@ if (ticket) {
 
 // INITIALIZE ALL
 function init() {
-  initHero();
-  initTransition();
-  initDraggableImages();
-  initTwoWorldsAnimations(); 
+  initHero();  
+  initHeroScrollModel();    
+  initTransitionRunway();
+  initSeparateWorldsPopIn();
+  initDragResistance();
   initLeatherYearsScrollLock();
   initLeatherYearsAnimations();
   initVortex();
