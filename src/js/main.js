@@ -116,263 +116,103 @@ function initSeparateWorldsPopIn() {
 }
 
 // DRAG INTERACTION - HOVER HINT WITH MOUSE FOLLOW
-function initDragResistance() {
-  const leatherImage = document.querySelector('[data-draggable="left"]');
-  const lycraImage = document.querySelector('[data-draggable="right"]');
-  const gridContainer = document.querySelector('.two-worlds__grid');
 
-  if (!leatherImage || !lycraImage || !gridContainer) return;
+// HERO SECTION - SECOND MODEL SCROLL ANIMATION
+function initHeroScrollModel() {
+  const heroSection = document.querySelector('.hero');
+  const secondModel = document.querySelector('.hero__scroll-model');
 
-  // Create mouse-follow hint for desktop
-  const mouseHint = document.createElement('div');
-  mouseHint.className = 'drag-hint';
-  mouseHint.textContent = 'Try to drag me';
-  mouseHint.style.cssText = `
-    position: fixed;
-    pointer-events: none;
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    color: var(--accent);
-    background: rgba(0, 0, 0, 0.8);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: 600;
-    opacity: 0;
-    z-index: 100;
-    transform: translate(-50%, -120%);
-    white-space: nowrap;
-    transition: opacity 0.3s ease;
-  `;
-  document.body.appendChild(mouseHint);
+  if (!heroSection || !secondModel) return;
 
-  // Create tap hint for mobile (static)
-  const tapHint = document.createElement('div');
-  tapHint.textContent = '← Tap and drag to bring them together →';
-  tapHint.style.cssText = `
-    position: absolute;
-    top: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    color: var(--accent);
-    text-align: center;
-    font-weight: 600;
-    animation: pulseHint 2s ease-in-out infinite;
-    pointer-events: none;
-    display: none;
-  `;
-
-  gridContainer.style.position = 'relative';
-  gridContainer.appendChild(tapHint);
-
-  // Show mobile hint on touch devices
-  if ('ontouchstart' in window) {
-    tapHint.style.display = 'block';
-  }
-
-  // Pulse animation
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes pulseHint {
-      0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
-      50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Mouse follow for desktop
-  let isOverLeather = false;
-  let isOverLycra = false;
-
-  function handleMouseMove(e) {
-    if (window.innerWidth < 768) return; // Skip on mobile
-
-    if (isOverLeather || isOverLycra) {
-      mouseHint.style.left = e.clientX + 'px';
-      mouseHint.style.top = e.clientY + 'px';
-      mouseHint.style.opacity = '1';
-    } else {
-      mouseHint.style.opacity = '0';
-    }
-  }
-
-  leatherImage.addEventListener('mouseenter', () => {
-    isOverLeather = true;
+  // Set initial position - model starts at top of hero, visible
+  gsap.set(secondModel, {
+    y: 0,
+    opacity: 1
   });
 
-  leatherImage.addEventListener('mouseleave', () => {
-    isOverLeather = false;
-    mouseHint.style.opacity = '0';
+  // Smooth scroll down animation
+  gsap.to(secondModel, {
+    y: '120vh',
+    ease: 'none',
+    scrollTrigger: {
+      trigger: heroSection,
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1.5, // Increased for smoother animation
+      // markers: true, // Uncomment for debugging
+    }
+  });
+}
+
+// TRANSITION - RUNWAY MODEL ANIMATION
+function initTransitionRunway() {
+  const transitionSection = document.querySelector('.transition');
+  const runwayModel = document.querySelector('.transition__model');
+
+  if (!transitionSection || !runwayModel) return;
+
+  // Set initial state
+  gsap.set(runwayModel, {
+    y: '-50%',
+    opacity: 0.5
   });
 
-  lycraImage.addEventListener('mouseenter', () => {
-    isOverLycra = true;
+  // Model walks down the runway (SVG) as you scroll
+  gsap.to(runwayModel, {
+    y: '50%',
+    opacity: 1,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: transitionSection,
+      start: 'top center',
+      end: 'bottom center',
+      scrub: 1.5,
+      // markers: true, // Uncomment for debugging
+    }
   });
 
-  lycraImage.addEventListener('mouseleave', () => {
-    isOverLycra = false;
-    mouseHint.style.opacity = '0';
+  // Model disappears before blue section - exit animation
+  gsap.to(runwayModel, {
+    x: '-120vw',
+    rotation: -15,
+    opacity: 0,
+    ease: 'power2.in',
+    scrollTrigger: {
+      trigger: transitionSection,
+      start: 'bottom 80%',
+      end: 'bottom 20%',
+      scrub: 1.5,
+      // markers: true, // Uncomment for debugging
+    }
+  });
+}
+
+// TWO WORLDS - "SEPARATE WORLDS" POP-IN (NO FLOATING)
+function initSeparateWorldsPopIn() {
+  const closingStatement = document.querySelector('.two-worlds__closing');
+
+  if (!closingStatement) return;
+
+  // Initial state - hidden and scaled down
+  gsap.set(closingStatement, {
+    opacity: 0,
+    scale: 0.5,
+    y: 50
   });
 
-  document.addEventListener('mousemove', handleMouseMove);
-
-  // DRAG INTERACTION LOGIC
-  let isDraggingLeather = false;
-  let isDraggingLycra = false;
-  let startX = 0;
-  let currentX = 0;
-
-  function getDistance() {
-    const leatherRect = leatherImage.getBoundingClientRect();
-    const lycraRect = lycraImage.getBoundingClientRect();
-    return lycraRect.left - leatherRect.right;
-  }
-
-  function getResistanceForce(distance) {
-    const minDistance = 50;
-    if (distance < minDistance) {
-      return (minDistance - distance) / minDistance;
+  // Pop in animation ONCE when scrolling to it
+  gsap.to(closingStatement, {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    duration: 0.8,
+    ease: 'back.out(1.7)',
+    scrollTrigger: {
+      trigger: closingStatement,
+      start: 'top 80%',
+      toggleActions: 'play none none none' // Only play once, no reverse
     }
-    return 0;
-  }
-
-  // LEATHER drag handlers
-  function handleLeatherStart(e) {
-    isDraggingLeather = true;
-    leatherImage.style.cursor = 'grabbing';
-    startX = (e.type.includes('mouse') ? e.clientX : e.touches[0].clientX) - currentX;
-
-    mouseHint.style.opacity = '0';
-    if (tapHint) tapHint.style.display = 'none';
-  }
-
-  function handleLeatherMove(e) {
-    if (!isDraggingLeather) return;
-    e.preventDefault();
-
-    const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-    let deltaX = clientX - startX;
-    deltaX = Math.max(0, Math.min(150, deltaX));
-
-    const distance = getDistance();
-    const resistance = getResistanceForce(distance);
-
-    if (resistance > 0) {
-      deltaX = deltaX * (1 - resistance);
-
-      gsap.to(leatherImage, {
-        x: deltaX,
-        rotation: Math.sin(Date.now() / 100) * 5 * resistance,
-        duration: 0.1
-      });
-
-      gsap.to(lycraImage, {
-        rotation: -Math.sin(Date.now() / 100) * 5 * resistance,
-        duration: 0.1
-      });
-    } else {
-      currentX = deltaX;
-      leatherImage.style.transform = `translate(${currentX}px, 0)`;
-    }
-  }
-
-  function handleLeatherEnd() {
-    if (!isDraggingLeather) return;
-    isDraggingLeather = false;
-    leatherImage.style.cursor = 'grab';
-
-    gsap.to(leatherImage, {
-      x: 0,
-      rotation: 0,
-      duration: 0.6,
-      ease: 'elastic.out(1, 0.5)',
-      onUpdate: () => currentX = 0
-    });
-
-    gsap.to(lycraImage, {
-      rotation: 0,
-      duration: 0.6,
-      ease: 'elastic.out(1, 0.5)'
-    });
-  }
-
-  leatherImage.addEventListener('mousedown', handleLeatherStart);
-  leatherImage.addEventListener('touchstart', handleLeatherStart, { passive: false });
-  document.addEventListener('mousemove', handleLeatherMove);
-  document.addEventListener('touchmove', handleLeatherMove, { passive: false });
-  document.addEventListener('mouseup', handleLeatherEnd);
-  document.addEventListener('touchend', handleLeatherEnd);
-
-  // LYCRA - mirror behavior
-  let lycraStartX = 0;
-  let lycraCurrentX = 0;
-
-  function handleLycraStart(e) {
-    isDraggingLycra = true;
-    lycraImage.style.cursor = 'grabbing';
-    lycraStartX = (e.type.includes('mouse') ? e.clientX : e.touches[0].clientX) - lycraCurrentX;
-
-    mouseHint.style.opacity = '0';
-    if (tapHint) tapHint.style.display = 'none';
-  }
-
-  function handleLycraMove(e) {
-    if (!isDraggingLycra) return;
-    e.preventDefault();
-
-    const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-    let deltaX = clientX - lycraStartX;
-    deltaX = Math.min(0, Math.max(-150, deltaX));
-
-    const distance = getDistance();
-    const resistance = getResistanceForce(distance);
-
-    if (resistance > 0) {
-      deltaX = deltaX * (1 - resistance);
-
-      gsap.to(lycraImage, {
-        x: deltaX,
-        rotation: -Math.sin(Date.now() / 100) * 5 * resistance,
-        duration: 0.1
-      });
-
-      gsap.to(leatherImage, {
-        rotation: Math.sin(Date.now() / 100) * 5 * resistance,
-        duration: 0.1
-      });
-    } else {
-      lycraCurrentX = deltaX;
-      lycraImage.style.transform = `translate(${lycraCurrentX}px, 0)`;
-    }
-  }
-
-  function handleLycraEnd() {
-    if (!isDraggingLycra) return;
-    isDraggingLycra = false;
-    lycraImage.style.cursor = 'grab';
-
-    gsap.to(lycraImage, {
-      x: 0,
-      rotation: 0,
-      duration: 0.6,
-      ease: 'elastic.out(1, 0.5)',
-      onUpdate: () => lycraCurrentX = 0
-    });
-
-    gsap.to(leatherImage, {
-      rotation: 0,
-      duration: 0.6,
-      ease: 'elastic.out(1, 0.5)'
-    });
-  }
-
-  lycraImage.addEventListener('mousedown', handleLycraStart);
-  lycraImage.addEventListener('touchstart', handleLycraStart, { passive: false });
-  document.addEventListener('mousemove', handleLycraMove);
-  document.addEventListener('touchmove', handleLycraMove, { passive: false });
-  document.addEventListener('mouseup', handleLycraEnd);
-  document.addEventListener('touchend', handleLycraEnd);
+  });
 }
 
 // Leather years scroll lock
@@ -647,7 +487,8 @@ function init() {
   initLeatherYearsScrollLock();
   initLeatherYearsAnimations();
   initVortex();
-  console.log(' Fashion love story');
+  createDragHandler();
+    console.log(' Fashion love story');
 }
 
 init();
