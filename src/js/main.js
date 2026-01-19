@@ -484,6 +484,30 @@ function updateModel(index) {
   if (active) active.classList.add('san-siro__model--active');
 }
 
+
+const ticket = document.getElementById('ticket3D');
+
+if (ticket) {
+  ticket.addEventListener('mousemove', (e) => {
+    const rect = ticket.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Calculate rotation (-10deg to 10deg)
+    const xRot = ((y / rect.height) - 0.5) * -10;
+    const yRot = ((x / rect.width) - 0.5) * 10;
+
+    ticket.style.transform = `rotateX(${xRot}deg) rotateY(${yRot}deg)`;
+  });
+
+  ticket.addEventListener('mouseleave', () => {
+    ticket.style.transform = `rotateX(0deg) rotateY(0deg)`; // Reset
+  });
+}
+
+
+
+
 // INITIALIZE ALL
 function init() {
   initHero();
