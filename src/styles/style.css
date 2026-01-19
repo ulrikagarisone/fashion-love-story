@@ -3160,20 +3160,21 @@ body {
 
 
 /* THE LINEUP */
-.lineup-section {
+/* --- BLOCK: LINEUP --- */
+.lineup {
   padding: 5rem 1rem;
   background: var(--bg);
   color: var(--text-black);
 }
 
-.lineup-header {
+.lineup__header {
   max-width: 1000px;
   margin: 0 auto 3rem auto;
   border-bottom: 4px solid var(--text-black);
   padding-bottom: 1rem;
 }
 
-.section-title {
+.lineup__title {
   font-family: var(--font-title);
   font-size: 3rem;
   text-transform: uppercase;
@@ -3181,17 +3182,18 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.section-subtitle {
+.lineup__subtitle {
   font-family: var(--font-body);
   font-size: var(--text-body-tablet-size);
 }
 
-.lineup-list {
+.lineup__list {
   max-width: 1000px;
   margin: 0 auto;
 }
 
-.lineup-row {
+/* --- BLOCK: ARCHIVE-ROW (Nested) --- */
+.archive-row {
   display: grid;
   grid-template-columns: 100px 1fr auto;
   gap: 1.5rem;
@@ -3203,31 +3205,36 @@ body {
   transition: background 0.3s ease;
 }
 
-.lineup-row:hover {
+.archive-row:hover {
   background: #e6e6e6;
 }
 
-.row-date {
+.archive-row__date {
   font-family: var(--font-body);
   font-weight: 500;
   opacity: 0.6;
 }
 
-.row-content {
+.archive-row__content {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 1rem;
 }
 
-.designer-name {
+.archive-row__name {
   font-family: var(--font-title);
   font-size: 1.5rem;
   font-weight: bold;
   text-transform: uppercase;
 }
 
-.est-tag {
+/* Transition specific element on hover */
+.archive-row:hover .archive-row__name {
+  color: var(--bg-blue);
+}
+
+.archive-row__tag {
   background: var(--text-black);
   color: var(--bg);
   padding: 2px 6px;
@@ -3235,22 +3242,18 @@ body {
   border-radius: 4px;
 }
 
-.story-name {
+.archive-row__story {
   font-style: italic;
   font-weight: 500;
 }
 
-.row-arrow {
+.archive-row__arrow {
   font-weight: 600;
   font-size: 1.2rem;
 }
 
-.lineup-row:hover .designer-name {
-  color: var(--bg-blue);
-}
 
-
-/* THE TICKET */
+/* --- BLOCK: TICKET SECTION --- */
 .ticket-section {
   padding: 4rem 1rem;
   background: var(--bg-blue);
@@ -3259,7 +3262,8 @@ body {
   perspective: 1000px;
 }
 
-.ticket-container {
+/* --- BLOCK: TICKET --- */
+.ticket {
   display: flex;
   width: 100%;
   max-width: 900px;
@@ -3269,14 +3273,28 @@ body {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-.ticket-left {
-  flex: 2;
+/* Element: Side (Base) */
+.ticket__side {
   padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modifier: Left */
+.ticket__side--left {
+  flex: 2;
   border-right: 2px dashed #333;
   position: relative;
 }
 
-.ticket-top-row {
+/* Modifier: Right */
+.ticket__side--right {
+  flex: 1;
+  background: #1a1a1a;
+  justify-content: space-between;
+}
+
+.ticket__meta {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #333;
@@ -3287,7 +3305,7 @@ body {
   font-size: 0.9rem;
 }
 
-.ticket-main-title {
+.ticket__title {
   font-family: var(--font-title);
   font-size: 3.5rem;
   line-height: 0.9;
@@ -3296,30 +3314,30 @@ body {
   transform: scaleX(1.1);
 }
 
-.ticket-details {
+.ticket__details {
   display: flex;
   gap: 3rem;
   margin-bottom: 2.5rem;
 }
 
-.detail-group {
+.ticket__detail-group {
   display: flex;
   flex-direction: column;
 }
 
-.d-label {
+.ticket__detail-label {
   font-size: 0.75rem;
   color: #888;
   margin-bottom: 0.25rem;
 }
 
-.d-value {
+.ticket__detail-value {
   font-family: var(--font-title);
   color: var(--accent);
   font-size: 1.25rem;
 }
 
-.ticket-cta {
+.ticket__cta {
   display: inline-block;
   background: var(--accent);
   color: var(--text-black);
@@ -3328,13 +3346,16 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   transition: transform 0.2s;
+  align-self: flex-start;
+  /* Fix for flex container */
 }
 
-.ticket-cta:hover {
+.ticket__cta:hover {
   transform: scale(1.05);
 }
 
-.ticket-rip {
+/* Element: Rip */
+.ticket__rip {
   width: 4px;
   position: relative;
   background-image: linear-gradient(to bottom, #333 50%, transparent 50%);
@@ -3343,8 +3364,9 @@ body {
   background-position: center;
 }
 
-.ticket-rip::before,
-.ticket-rip::after {
+/* Pseudo-elements for the holes */
+.ticket__rip::before,
+.ticket__rip::after {
   content: '';
   position: absolute;
   left: -10px;
@@ -3355,36 +3377,28 @@ body {
   z-index: 10;
 }
 
-.ticket-rip::before {
+.ticket__rip::before {
   top: -12px;
 }
 
-.ticket-rip::after {
+.ticket__rip::after {
   bottom: -12px;
 }
 
-.ticket-right {
-  flex: 1;
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #1a1a1a;
-}
-
-.roster-text {
+.ticket__text {
   color: #aaa;
   font-size: 0.95rem;
   margin-bottom: 1.5rem;
 }
 
-.input-wrapper {
+/* --- BLOCK: ROSTER FORM --- */
+.roster-form__wrapper {
   display: flex;
   border-bottom: 2px solid var(--accent);
   margin-bottom: 2rem;
 }
 
-.input-wrapper input {
+.roster-form__input {
   width: 100%;
   background: transparent;
   border: none;
@@ -3394,7 +3408,7 @@ body {
   font-family: var(--font-body);
 }
 
-.input-wrapper button {
+.roster-form__btn {
   background: transparent;
   border: none;
   color: var(--accent);
@@ -3402,46 +3416,52 @@ body {
   cursor: pointer;
 }
 
-.barcode {
+/* --- BLOCK: BARCODE --- */
+.ticket__barcode {
   display: flex;
   height: 25px;
   gap: 4px;
   opacity: 0.4;
 }
 
-.barcode span {
+.ticket__barcode span {
   background: #fff;
   flex: 1;
 }
 
-.barcode span.thin {
-  flex: 0.5;
+.ticket__barcode-thin {
+  flex: 0.5 !important;
+  /* Force override flex 1 */
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-  .ticket-container {
+  .ticket {
     flex-direction: column;
   }
 
-  .lineup-row {
+  .ticket__side--left {
+    border-right: none;
+  }
+
+  .archive-row {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }
 
-  .ticket-rip {
+  .ticket__rip {
     width: 100%;
     height: 4px;
     background-image: linear-gradient(to right, #333 50%, transparent 50%);
     background-size: 20px 2px;
   }
 
-  .ticket-rip::before {
+  .ticket__rip::before {
     top: -10px;
     left: -12px;
   }
 
-  .ticket-rip::after {
+  .ticket__rip::after {
     top: -10px;
     right: -12px;
     left: auto;
