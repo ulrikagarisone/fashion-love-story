@@ -5,6 +5,15 @@ import '../styles/style.css';
 gsap.registerPlugin(ScrollTrigger);
 
 // HERO ANIMATIONS
+const initHero = () => {
+  const football = document.querySelector('.hero__football');
+
+  if (!football) return;
+  const triggerPop = () => {
+    football.classList.add('is-active');
+  };
+  setTimeout(triggerPop, 4200);
+};
 
 // TRANSITION - MODEL WALKS VERTICALLY
 function initTransition() {
