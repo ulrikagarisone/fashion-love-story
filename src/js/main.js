@@ -7,207 +7,212 @@ gsap.registerPlugin(ScrollTrigger);
 // HERO ANIMATIONS
 const initHero = () => {
   const football = document.querySelector('.hero__football');
-
   if (!football) return;
+
   const triggerPop = () => {
     football.classList.add('is-active');
   };
+
   setTimeout(triggerPop, 4200);
 };
 
-// TRANSITION - MODEL WALKS VERTICALLY
-function initTransition() {
-  const model = document.querySelector('.transition__model');
-  const section = document.querySelector('.transition');
+// HERO SECTION - SECOND MODEL SCROLL ANIMATION
+function initHeroScrollModel() {
+  const heroSection = document.querySelector('.hero');
+  const secondModel = document.querySelector('.hero__scroll-model');
 
-  if (!model || !section) return;
+  if (!heroSection || !secondModel) return;
 
-  // Model walks down vertically through the section
-  gsap.timeline({
+  gsap.set(secondModel, {
+    y: 0,
+    opacity: 1
+  });
+
+  // Smooth scroll down animation
+  gsap.to(secondModel, {
+    y: '120vh',
+    ease: 'none',
     scrollTrigger: {
-      trigger: section,
+      trigger: heroSection,
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1.5,
+    }
+  });
+}
+
+// TRANSITION - RUNWAY MODEL ANIMATION
+function initTransitionRunway() {
+  const transitionSection = document.querySelector('.transition');
+  const runwayModel = document.querySelector('.transition__model');
+
+  if (!transitionSection || !runwayModel) return;
+
+  // Set initial state
+  gsap.set(runwayModel, {
+    y: '-50%',
+    opacity: 1,
+    scale: 1.2,
+  });
+
+  // Model walks down the runway (SVG) as you scroll
+  gsap.to(runwayModel, {
+    y: '0%',
+    opacity: 1,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: transitionSection,
       start: 'top center',
       end: 'bottom center',
-      scrub: 1,
-    },
-  })
-    .fromTo(model,
-      { y: '-30vh', opacity: 0 },
-      { y: '30vh', opacity: 1, ease: 'none' }
-    );
+      scrub: 1.5,
+    }
+  });
 
-  // SVG text fade in
-  const svgTexts = document.querySelectorAll('.transition__text');
-  gsap.from(svgTexts, {
+  // Model disappears before blue section - exit animation
+  gsap.to(runwayModel, {
+    x: '-120vw',
+    rotation: -15,
     opacity: 0,
-    y: 50,
-    duration: 1,
-    stagger: 0.2,
+    ease: 'power2.in',
     scrollTrigger: {
-      trigger: section,
-      start: 'top 80%',
-    },
+      trigger: transitionSection,
+      start: 'bottom 80%',
+      end: 'bottom 20%',
+      scrub: 1.5,
+    }
   });
 }
 
-// TWO WORLDS - DRAGGABLE IMAGES
-function initDraggableImages() {
-  const draggables = document.querySelectorAll('.two-worlds__draggable');
+// TWO WORLDS - "SEPARATE WORLDS" POP-IN (NO FLOATING)
+function initSeparateWorldsPopIn() {
+  const closingStatement = document.querySelector('.two-worlds__closing');
 
-  draggables.forEach((element) => {
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
-    const side = element.getAttribute('data-draggable');
-    const maxDrag = 150; // Maximum pixels they can drag
-
-    // Mouse/Touch start
-    const handleStart = (e) => {
-      isDragging = true;
-      element.style.cursor = 'grabbing';
-
-      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-
-      startX = clientX - currentX;
-      startY = clientY - currentY;
-    };
-
-    // Mouse/Touch move
-    const handleMove = (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-
-      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-
-      let deltaX = clientX - startX;
-      let deltaY = clientY - startY;
-
-      // Limit drag distance
-      if (side === 'left') {
-        deltaX = Math.max(-maxDrag, Math.min(maxDrag, deltaX));
-      } else {
-        deltaX = Math.max(-maxDrag, Math.min(maxDrag, deltaX));
-      }
-      deltaY = Math.max(-maxDrag, Math.min(maxDrag, deltaY));
-
-      currentX = deltaX;
-      currentY = deltaY;
-
-      element.style.transform = `translate(${currentX}px, ${currentY}px)`;
-    };
-
-    // Mouse/Touch end - snap back
-    const handleEnd = () => {
-      if (!isDragging) return;
-      isDragging = false;
-      element.style.cursor = 'grab';
-
-      // Check if images are close together
-      const leftImage = document.querySelector('[data-draggable="left"]');
-      const rightImage = document.querySelector('[data-draggable="right"]');
-
-      if (leftImage && rightImage) {
-        const leftRect = leftImage.getBoundingClientRect();
-        const rightRect = rightImage.getBoundingClientRect();
-        const distance = Math.abs(leftRect.right - rightRect.left);
-
-        // If close together, snap them together briefly
-        if (distance < 50) {
-          gsap.to([leftImage, rightImage], {
-            scale: 1.05,
-            duration: 0.2,
-            yoyo: true,
-            repeat: 1,
-          });
-        }
-      }
-
-      // Snap back to original position with elastic bounce
-      gsap.to(element, {
-        x: 0,
-        y: 0,
-        duration: 0.6,
-        ease: 'elastic.out(1, 0.5)',
-        onUpdate: () => {
-          currentX = 0;
-          currentY = 0;
-        }
-      });
-    };
-
-    // Add event listeners
-    element.addEventListener('mousedown', handleStart);
-    element.addEventListener('touchstart', handleStart, { passive: false });
-
-    document.addEventListener('mousemove', handleMove);
-    document.addEventListener('touchmove', handleMove, { passive: false });
-
-    document.addEventListener('mouseup', handleEnd);
-    document.addEventListener('touchend', handleEnd);
-  });
-}
-
-// TWO WORLDS - SCROLL ANIMATIONS
-function initTwoWorldsAnimations() {
-  // Headline fade in
-  const headline = document.querySelector('.two-worlds__headline');
-  if (headline) {
-    gsap.from(headline, {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      scrollTrigger: {
-        trigger: headline,
-        start: 'top 80%',
-      },
-    });
+  if (!closingStatement) {
+    console.error("ERROR: .two-worlds__closing not found! Check your HTML.");
+    return;
   }
+  console.log("Element found, initializing animation");
+  gsap.fromTo(closingStatement,
+    {
+      opacity: 0,
+      scale: 0.5,
+      y: 50
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'back.out(1.7)',
+      scrollTrigger: {
+        trigger: closingStatement,
+        start: "top bottom",
+        toggleActions: "play none none reverse",
+        //markers: true, 
+        id: "closing-text"
+      }
+    }
+  );
+}
 
-  // Paragraphs stagger in
-  const paragraphs = document.querySelectorAll('.two-worlds__paragraph');
-  gsap.from(paragraphs, {
+// DRAG INTERACTION - HOVER HINT WITH MOUSE FOLLOW
+
+// HERO SECTION - SECOND MODEL SCROLL ANIMATION
+function initHeroScrollModel() {
+  const heroSection = document.querySelector('.hero');
+  const secondModel = document.querySelector('.hero__scroll-model');
+
+  if (!heroSection || !secondModel) return;
+
+  // Set initial position - model starts at top of hero, visible
+  gsap.set(secondModel, {
+    y: 0,
+    opacity: 1
+  });
+
+  // Smooth scroll down animation
+  gsap.to(secondModel, {
+    y: '120vh',
+    ease: 'none',
+    scrollTrigger: {
+      trigger: heroSection,
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1.5, // Increased for smoother animation
+      // markers: true, // Uncomment for debugging
+    }
+  });
+}
+
+// TRANSITION - RUNWAY MODEL ANIMATION
+function initTransitionRunway() {
+  const transitionSection = document.querySelector('.transition');
+  const runwayModel = document.querySelector('.transition__model');
+
+  if (!transitionSection || !runwayModel) return;
+
+  // Set initial state
+  gsap.set(runwayModel, {
+    y: '-50%',
+    opacity: 0.5
+  });
+
+  // Model walks down the runway (SVG) as you scroll
+  gsap.to(runwayModel, {
+    y: '50%',
+    opacity: 1,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: transitionSection,
+      start: 'top center',
+      end: 'bottom center',
+      scrub: 1.5,
+      // markers: true, // Uncomment for debugging
+    }
+  });
+
+  // Model disappears before blue section - exit animation
+  gsap.to(runwayModel, {
+    x: '-120vw',
+    rotation: -15,
     opacity: 0,
-    y: 30,
+    ease: 'power2.in',
+    scrollTrigger: {
+      trigger: transitionSection,
+      start: 'bottom 80%',
+      end: 'bottom 20%',
+      scrub: 1.5,
+      // markers: true, // Uncomment for debugging
+    }
+  });
+}
+
+// TWO WORLDS - "SEPARATE WORLDS" POP-IN (NO FLOATING)
+function initSeparateWorldsPopIn() {
+  const closingStatement = document.querySelector('.two-worlds__closing');
+
+  if (!closingStatement) return;
+
+  // Initial state - hidden and scaled down
+  gsap.set(closingStatement, {
+    opacity: 0,
+    scale: 0.5,
+    y: 50
+  });
+
+  // Pop in animation ONCE when scrolling to it
+  gsap.to(closingStatement, {
+    opacity: 1,
+    scale: 1,
+    y: 0,
     duration: 0.8,
-    stagger: 0.3,
+    ease: 'back.out(1.7)',
     scrollTrigger: {
-      trigger: '.two-worlds__text',
-      start: 'top 75%',
-    },
+      trigger: closingStatement,
+      start: 'top 80%',
+      toggleActions: 'play none none none' // Only play once, no reverse
+    }
   });
-
-  // Grid items reveal
-  const items = document.querySelectorAll('.two-worlds__item');
-  gsap.from(items, {
-    opacity: 0,
-    y: 60,
-    duration: 1,
-    stagger: 0.3,
-    scrollTrigger: {
-      trigger: '.two-worlds__grid',
-      start: 'top 75%',
-    },
-  });
-
-  // Closing statement
-  const statement = document.querySelector('.two-worlds__statement');
-  if (statement) {
-    gsap.from(statement, {
-      opacity: 0,
-      scale: 0.8,
-      duration: 1,
-      ease: 'back.out(1.4)',
-      scrollTrigger: {
-        trigger: '.two-worlds__closing',
-        start: 'top 80%',
-      },
-    });
-  }
 }
 
 // Leather years scroll lock
@@ -474,14 +479,16 @@ if (ticket) {
 
 // INITIALIZE ALL
 function init() {
-  initHero();
-  initTransition();
-  initDraggableImages();
-  initTwoWorldsAnimations(); 
+  initHero();  
+  initHeroScrollModel();    
+  initTransitionRunway();
+  initSeparateWorldsPopIn();
+  initDragResistance();
   initLeatherYearsScrollLock();
   initLeatherYearsAnimations();
   initVortex();
-  console.log(' Fashion love story');
+  createDragHandler();
+    console.log(' Fashion love story');
 }
 
 init();
