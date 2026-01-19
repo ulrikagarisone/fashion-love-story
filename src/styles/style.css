@@ -20,6 +20,28 @@
   --text-body-tablet-size: 1.188rem;
   --text-body-desktop-size: 1.25rem;
   --text-body-start: 2.5rem;
+
+  --font-title: 'Myriad Pro', 'Arial Black', sans-serif;
+  --font-body: 'Work Sans', sans-serif;
+
+  /* Fluid Typography using clamp() */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-md: clamp(1.125rem, 1rem + 0.625vw, 1.5rem);
+  --text-lg: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --text-xl: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  --text-2xl: clamp(3rem, 2rem + 5vw, 6rem);
+  --text-3xl: clamp(4rem, 3rem + 5vw, 8.5rem);
+  --text-hero-title: clamp(3.5rem, 2.5rem + 5vw, 5.5rem);
+  --text-hero-middle: clamp(5rem, 4rem + 5vw, 8.5rem);
+
+  /* Spacing */
+  --space-xs: clamp(0.5rem, 0.45rem + 0.25vw, 0.75rem);
+  --space-sm: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
+  --space-md: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+  --space-lg: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+  --space-xl: clamp(3rem, 2rem + 5vw, 6rem);
 }
 
 * {
@@ -66,16 +88,12 @@ body {
 .nav__logo {
   display: block;
   width: auto;
-  height: 50px;
-  /* Adjust this for your preferred size */
+  height: 100px;
   text-decoration: none;
   transition: transform 0.3s ease;
-  transform: scaleX(1.1);
+  transform: scale(1.05)
 }
 
-.nav__logo:hover {
-  transform: scale(1.05);
-}
 
 .nav__logo-svg {
   width: auto;
@@ -95,15 +113,108 @@ body {
 }
 
 .nav__logo:hover .nav__m-2 {
-  fill: #ff0000;
+  fill: var(--bg-blue);
 }
 
-/* Hero section  */
+/* INTRO ANIMATION */
+.intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: introFadeOut 0.8s ease-out 3.5s forwards;
+}
+
+.intro__kissy-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro__kissy {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  font-size: 200px;
+  animation: kissyGrow 2s ease-out forwards;
+}
+
+.intro__xoxo {
+  position: absolute;
+  font-family: var(--font-title);
+  font-size: 120px;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--bg-blue);
+  opacity: 0;
+  animation: xoxoGrow 2s ease-out 0.5s forwards;
+}
+
+@keyframes kissyGrow {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.3) translateX(-80vw) translateY(70vh);
+    opacity: 0.8;
+  }
+}
+
+@keyframes xoxoGrow {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(8);
+    opacity: 0.05;
+  }
+}
+
+@keyframes introFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ===== HERO SECTION ===== */
 .hero {
   position: relative;
   min-height: 100vh;
   background: var(--bg);
   overflow: hidden;
+  opacity: 0;
+  animation: heroFadeIn 1s ease-out 0.5s forwards;
+}
+
+@keyframes heroFadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 .hero__background {
@@ -139,45 +250,78 @@ body {
   z-index: 2;
   width: 100%;
   min-height: 100vh;
-  padding: 4rem 2rem 2rem 2rem;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .hero__content {
   width: 100%;
-  min-height: 80vh;
+  max-width: 1400px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* Stack Vertically */
   gap: 2rem;
-}
-
-.hero__title {
-  font-family: var(--font-title);
-  font-size: 3.5rem;
-  font-weight: 900;
-  color: var(--text-black);
-  line-height: 0.85;
-  text-align: center;
-  order: 2;
-}
-
-.hero__title-line {
-  display: inline;
 }
 
 .hero__main-image {
   position: relative;
   width: 100%;
-  max-width: 450px;
-  order: 1;
-  margin-bottom: 0rem;
+  max-width: 400px;
+  order: -1;
+  align-self: center;
 }
 
 .hero__model {
-  max-width: 100%;
+  width: 100%;
   height: auto;
   display: block;
+}
+
+.hero__text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  order: 2;
+  width: 100%;
+}
+
+.hero__designer-name {
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  color: var(--text-black);
+  display: block;
+}
+
+.hero__title {
+  color: var(--text-black);
+  line-height: 0.85;
+  margin-bottom: 1.5rem;
+}
+
+.hero__title-line {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: clamp(3.5rem, 10vw, 5rem);
+  display: inline-block;
+}
+
+.hero__tagline {
+  font-size: 1rem;
+  color: var(--text-black);
+  line-height: 1.5;
+  max-width: 300px;
+}
+
+.hero__spacer {
+  display: none;
 }
 
 .hero__floating-elements {
@@ -187,126 +331,164 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .hero__football {
   position: absolute;
-  width: 40%;
+  right: -15%;
+  bottom: 14%;
+  width: clamp(340px, 30vw, 350px);
   height: auto;
-  bottom: 1rem;
-  right: 1rem;
+  opacity: 0;
+  transform: translateX(-120vw) rotate(-45deg);
+  transform-origin: center;
+  transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero__football.is-active {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
 }
 
 .hero__kissy {
   position: absolute;
-  width: 60px;
+  width: clamp(100px, 8vw, 200px);
   height: auto;
+  bottom: 86%;
+  left: 5%;
 }
 
-.hero__kissy--1 {
-  bottom: 1rem;
-  left: 1rem;
-  transform: rotate(-5deg);
-}
 
-.hero__kissy--2 {
-  bottom: 3rem;
-  left: 3rem;
-  transform: rotate(8deg);
-}
-
-.hero__tagline {
-  font-size: 1.125rem;
-  color: var(--text-black);
-  line-height: 1.6;
-  text-align: center;
-  order: 3;
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-  .hero {
-    min-height: 85vh;
-  }
+@media (min-width: 460px) {
 
   .hero__container {
-    min-height: 85vh;
-    padding: 4rem 2rem 2rem 2rem;
+    padding: 0 3rem;
   }
 
   .hero__content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
-    gap: 2rem;
-    padding: 0 2rem;
-    min-height: auto;
-    /* Remove min-height constraint */
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: 1.5rem;
   }
 
-  .hero__title {
+  .hero__text-group {
     grid-column: 1 / 2;
-    grid-row: 1;
-    font-size: 5.5rem;
+    align-items: flex-end;
     text-align: right;
     order: unset;
-    font-weight: 400;
-    align-self: start;
-  }
-
-  .hero__title-line {
-    display: block;
-  }
-
-  .hero__title-line--middle {
-    font-weight: 700;
-    font-size: 8.5rem;
+    padding-right: 0;
   }
 
   .hero__main-image {
     grid-column: 2 / 3;
-    grid-row: 1;
-    max-width: 450px;
-    /* Made smaller! */
-    justify-self: center;
     order: unset;
-    margin-bottom: 0;
+    width: 35vw;
+    max-width: 500px;
+    min-width: 300px;
+    margin: 0;
+  }
+
+  .hero__spacer {
+    display: block;
+    grid-column: 3 / 4;
+  }
+
+  .hero__designer-name {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero__title-line {
+    display: block;
+    font-size: clamp(4rem, 6vw, 5.5rem);
+  }
+
+  .hero__title-line--middle {
+    font-size: clamp(6rem, 9vw, 8rem);
   }
 
   .hero__tagline {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    font-size: 1.25rem;
-    text-align: center;
-    margin-top: 1rem;
-    /* Less space */
-    order: unset;
+    text-align: right;
+    margin-top: 0rem;
+    font-size: 1.1rem;
+    max-width: 350px;
+    align-self: flex-end;
   }
 
   .hero__football {
-    width: 30%;
+    width: 300px;
+    right: 5%;
+    bottom: 6%;
   }
 
-  .nav {
-    padding: 2.5rem 3rem;
-  }
-
-  .nav__logo {
-    height: 100px;
+  .hero__kissy {
+    left: 69%;
+    bottom: 72%;
+    width: 100px;
   }
 }
 
-/* Larger screens can have bigger image */
-@media (min-width: 1400px) {
-  .hero__main-image {
-    max-width: 500px;
+@media (min-width: 800px) {
+  .hero__football {
+    right: 10%;
+    bottom: 0%;
+    width: 350px;
+    opacity: 1;
   }
 
-  .hero__title {
-    font-size: 6rem;
+  .hero__kissy {
+    left: 60%;
+    bottom: 69%;
+    width: 150px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero__football {
+    right: 15%;
+    bottom: -13%;
+    width: 450px;
+    opacity: 1;
+  }
+
+  .hero__kissy {
+    left: 57%;
+    bottom: 75%;
+    width: 200px;
+  }
+}
+
+/* LARGE SCREENS */
+@media (min-width: 1400px) {
+  .hero__content {
+    gap: 4rem;
+  }
+
+  .hero__title-line {
+    font-size: 6.5rem;
+  }
+
+  .hero__title-line--middle {
+    font-size: 9rem;
+  }
+
+  .hero__main-image {
+    width: auto;
+    max-width: 550px;
+  }
+
+  .hero__football {
+    right: 20%;
+    bottom: -13%;
+    width: 500px;
+  }
+
+  .hero__background {
+    position: fixed;
+    top: 7%;
   }
 }
 
@@ -2759,7 +2941,7 @@ body {
     bottom: 10px;
     right: -10px;
     background: var(--text-black);
-    color:  var(--text-light);
+    color: var(--text-light);
     font-family: var(--font-body);
     font-size: 0.8rem;
     padding: 5px 10px;
@@ -3008,9 +3190,12 @@ body {
 
 /* SAN SIRO EXPERIENCE */
 
+/* SAN SIRO EXPERIENCE */
 .san-siro {
   position: relative;
   background-color: #000;
+  /* SAFETY: Cut off anything that sticks out */
+  overflow-x: hidden;
 }
 
 .san-siro__stage {
@@ -3040,33 +3225,31 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10; /* Top layer */
-  
-  /* The Mouse Spotlight Effect */
-  background: radial-gradient(
-    circle 300px at var(--x, 50%) var(--y, 50%), 
-    transparent 0%, 
-    rgba(0, 0, 0, 0.98) 30%
-  );
-  
+  z-index: 10;
+  background: radial-gradient(circle 300px at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(0, 0, 0, 0.98) 30%);
   display: flex;
+  flex-direction: column;
+  /* Stack text vertical */
   justify-content: center;
   align-items: center;
   text-align: center;
   color: #fff;
-  transition: opacity 0.8s ease; /* Smooth fade out */
+  transition: opacity 0.8s ease;
+  padding: 1rem;
+  /* Prevent text touching edges */
 }
 
-/* Modifier: Lights On (Added via JS) */
 .san-siro__dark-overlay--hidden {
   opacity: 0;
-  pointer-events: none; /* Let clicks pass through */
+  pointer-events: none;
 }
 
 .san-siro__title {
   font-family: var(--font-title);
-  font-size: 5rem;
+  /* Responsive Font: 3rem on phone, 5rem on desktop */
+  font-size: clamp(3rem, 10vw, 5rem);
   mix-blend-mode: difference;
+  line-height: 1;
 }
 
 .san-siro__subtitle {
@@ -3078,7 +3261,7 @@ body {
 
 .san-siro__model-container {
   position: relative;
-  z-index: 5; /* Above background, below overlay */
+  z-index: 5;
   height: 85vh;
   width: auto;
   aspect-ratio: 1/2;
@@ -3107,11 +3290,12 @@ body {
   bottom: 2rem;
   right: 2rem;
   font-family: var(--font-title);
-  font-size: 8rem;
+  /* Responsive Font: 4rem on phone, 8rem on desktop */
+  font-size: clamp(4rem, 15vw, 8rem);
   color: transparent;
   -webkit-text-stroke: 2px var(--accent);
   z-index: 4;
-  opacity: 0; /* Hidden during darkness */
+  opacity: 0;
   transition: opacity 0.5s;
 }
 
@@ -3122,11 +3306,11 @@ body {
 .san-siro__timeline {
   position: relative;
   z-index: 20;
-  margin-top: -100vh; 
+  margin-top: -100vh;
 }
 
 .san-siro__trigger {
-  min-height: 100vh; 
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -3134,13 +3318,17 @@ body {
 }
 
 .san-siro__card {
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   border: 1px solid var(--accent);
   color: var(--bg);
   padding: 2rem;
   max-width: 350px;
+  width: 100%;
+  /* Ensure it fits on small screens */
+
+  /* DEFAULT (Mobile): Slide Up, not Right (Fixes overflow) */
   opacity: 0;
-  transform: translateX(50px);
+  transform: translateY(50px);
   transition: all 0.5s ease;
   backdrop-filter: blur(5px);
 }
@@ -3152,10 +3340,21 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Make card visible */
 .san-siro__trigger--active .san-siro__card {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
+  /* Reset to 0 */
+}
+
+/* DESKTOP ANIMATION: Slide from Right (Only on big screens) */
+@media (min-width: 768px) {
+  .san-siro__card {
+    transform: translateX(50px);
+  }
+
+  .san-siro__trigger--active .san-siro__card {
+    transform: translateX(0);
+  }
 }
 
 
@@ -3263,8 +3462,22 @@ body {
 }
 
 /* --- BLOCK: TICKET --- */
+/* --- BLOCK: TICKET SECTION --- */
+.ticket-section {
+  padding: 4rem 1rem;
+  background: var(--bg-blue);
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll here */
+}
+
+/* --- BLOCK: TICKET --- */
 .ticket {
   display: flex;
+  flex-direction: column;
+  /* Default to mobile stack */
   width: 100%;
   max-width: 900px;
   background: var(--text-black);
@@ -3275,7 +3488,8 @@ body {
 
 /* Element: Side (Base) */
 .ticket__side {
-  padding: 2.5rem;
+  padding: 2rem;
+  /* Reduced padding for mobile */
   display: flex;
   flex-direction: column;
 }
@@ -3283,7 +3497,10 @@ body {
 /* Modifier: Left */
 .ticket__side--left {
   flex: 2;
-  border-right: 2px dashed #333;
+  border-right: none;
+  /* No border on mobile */
+  border-bottom: 2px dashed #333;
+  /* Dashed line on bottom for mobile */
   position: relative;
 }
 
@@ -3292,6 +3509,8 @@ body {
   flex: 1;
   background: #1a1a1a;
   justify-content: space-between;
+  gap: 2rem;
+  /* Add space between elements on mobile */
 }
 
 .ticket__meta {
@@ -3302,22 +3521,25 @@ body {
   margin-bottom: 2rem;
   font-family: monospace;
   color: #888;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .ticket__title {
   font-family: var(--font-title);
-  font-size: 3.5rem;
+  /* Responsive Title Size */
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   line-height: 0.9;
   color: var(--text-light);
   margin-bottom: 2rem;
-  transform: scaleX(1.1);
+  transform-origin: left;
+  /* Scale from left */
 }
 
 .ticket__details {
   display: flex;
-  gap: 3rem;
+  gap: 2rem;
   margin-bottom: 2.5rem;
+  flex-wrap: wrap;
 }
 
 .ticket__detail-group {
@@ -3347,123 +3569,78 @@ body {
   text-transform: uppercase;
   transition: transform 0.2s;
   align-self: flex-start;
-  /* Fix for flex container */
 }
 
 .ticket__cta:hover {
   transform: scale(1.05);
 }
 
-/* Element: Rip */
+/* Rip Styles - Mobile Horizontal */
 .ticket__rip {
-  width: 4px;
+  width: 100%;
+  height: 4px;
   position: relative;
-  background-image: linear-gradient(to bottom, #333 50%, transparent 50%);
-  background-size: 2px 20px;
-  background-repeat: repeat-y;
-  background-position: center;
+  background-image: linear-gradient(to right, #333 50%, transparent 50%);
+  background-size: 20px 2px;
 }
 
-/* Pseudo-elements for the holes */
 .ticket__rip::before,
 .ticket__rip::after {
   content: '';
   position: absolute;
-  left: -10px;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   background: var(--bg-blue);
   border-radius: 50%;
   z-index: 10;
 }
 
+/* Holes on left/right for horizontal rip */
 .ticket__rip::before {
-  top: -12px;
+  top: -8px;
+  left: -10px;
 }
 
 .ticket__rip::after {
-  bottom: -12px;
+  top: -8px;
+  right: -10px;
 }
 
-.ticket__text {
-  color: #aaa;
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
-}
-
-/* --- BLOCK: ROSTER FORM --- */
-.roster-form__wrapper {
-  display: flex;
-  border-bottom: 2px solid var(--accent);
-  margin-bottom: 2rem;
-}
-
-.roster-form__input {
-  width: 100%;
-  background: transparent;
-  border: none;
-  color: var(--text-light);
-  padding: 0.8rem 0;
-  outline: none;
-  font-family: var(--font-body);
-}
-
-.roster-form__btn {
-  background: transparent;
-  border: none;
-  color: var(--accent);
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-/* --- BLOCK: BARCODE --- */
-.ticket__barcode {
-  display: flex;
-  height: 25px;
-  gap: 4px;
-  opacity: 0.4;
-}
-
-.ticket__barcode span {
-  background: #fff;
-  flex: 1;
-}
-
-.ticket__barcode-thin {
-  flex: 0.5 !important;
-  /* Force override flex 1 */
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
+/* Desktop Ticket Styles */
+@media (min-width: 768px) {
   .ticket {
-    flex-direction: column;
+    flex-direction: row;
+  }
+
+  .ticket__side {
+    padding: 2.5rem;
   }
 
   .ticket__side--left {
-    border-right: none;
-  }
-
-  .archive-row {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
+    border-right: 2px dashed #333;
+    border-bottom: none;
   }
 
   .ticket__rip {
-    width: 100%;
-    height: 4px;
-    background-image: linear-gradient(to right, #333 50%, transparent 50%);
-    background-size: 20px 2px;
+    width: 4px;
+    height: auto;
+    background-image: linear-gradient(to bottom, #333 50%, transparent 50%);
+    background-size: 2px 20px;
+    background-repeat: repeat-y;
   }
 
+  /* Holes on top/bottom for vertical rip */
   .ticket__rip::before {
-    top: -10px;
-    left: -12px;
+    top: -12px;
+    left: -8px;
+    bottom: auto;
+    right: auto;
   }
 
   .ticket__rip::after {
-    top: -10px;
-    right: -12px;
-    left: auto;
+    bottom: -12px;
+    left: -8px;
+    top: auto;
+    right: auto;
   }
 }
