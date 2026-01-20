@@ -290,6 +290,40 @@ function initLeatherYearsAnimations() {
   });
 }
 
+const initEyeTracker = () => {
+  const lycraSection = document.querySelector('.watching-lycra');
+  const pupils = document.querySelectorAll('.watching-lycra__pupil');
+
+  if (!lycraSection || pupils.length === 0) return;
+
+  const handleMove = (e) => {
+    // Get coordinates from either mouse or the first touch point
+    const xCoord = e.touches ? e.touches[0].clientX : e.clientX;
+    const yCoord = e.touches ? e.touches[0].clientY : e.clientY;
+
+    pupils.forEach((pupil) => {
+      const eye = pupil.parentElement;
+      const rect = eye.getBoundingClientRect();
+
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const angle = Math.atan2(yCoord - centerY, xCoord - centerX);
+      const distance = Math.min(rect.width / 4, 15);
+
+      const moveX = Math.cos(angle) * distance;
+      const moveY = Math.sin(angle) * distance;
+
+      pupil.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+    });
+  };
+
+  // Add touchstart so they react immediately on tap
+  lycraSection.addEventListener('mousemove', handleMove);
+  lycraSection.addEventListener('touchmove', handleMove, { passive: true });
+  lycraSection.addEventListener('touchstart', handleMove, { passive: true });
+};
+
 // 7. VORTEX ANIMATION
 function initVortex() {
   const container = document.querySelector('.vortex-container');
@@ -395,20 +429,91 @@ function initSanSiro() {
   }
 }
 
+const initFailedQuotes = () => {
+  const wrapper = document.querySelector('.failed-image-wrapper');
 
-function init(){
+  wrapper.addEventListener('click', () => {
+    if (window.innerWidth < 1024) {
+      wrapper.classList.toggle('is-active');
+    }
+  });
+};
+
+
+const initBlindDateArchive = () => {
+  const section = document.getElementById('blind-date-section');
+  const toggle = document.getElementById('inspector-switch');
+  const layers = document.querySelectorAll('.secret-layer');
+
+  // Guard clause: Exit if elements don't exist
+  if (!section || !toggle) return;
+
+  // 1. Toggle Change Logic
+  toggle.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      section.classList.add('is-inspecting');
+
+      // Force reveal on mobile immediately
+      if (window.innerWidth < 1024) {
+        layers.forEach(layer => layer.style.opacity = "1");
+      }
+    } else {
+      section.classList.remove('is-inspecting');
+
+      // Clean up styles when turning off
+      layers.forEach(layer => {
+        layer.style.opacity = "0";
+        if (window.innerWidth >= 1024) {
+          layer.style.webkitMaskSize = "0px 0px";
+          layer.style.maskSize = "0px 0px";
+        }
+      });
+    }
+  });
+
+  // 2. Desktop Mouse Move (Lens Logic)
+  section.addEventListener('mousemove', (e) => {
+    // Only run if the Archive toggle is ON and user is on Desktop
+    if (toggle.checked && window.innerWidth >= 1024) {
+      layers.forEach(layer => {
+        const rect = layer.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Reveal the lens
+        layer.style.opacity = '1';
+        layer.style.webkitMaskSize = '200% 200%';
+        layer.style.maskSize = '200% 200%';
+
+        const maskCss = `radial-gradient(circle 120px at ${x}px ${y}px, black 100%, transparent 100%)`;
+        layer.style.webkitMaskImage = maskCss;
+        layer.style.maskImage = maskCss;
+      });
+    }
+  });
+
+  // 3. Desktop Mouse Leave (Hide Lens)
+  section.addEventListener('mouseleave', () => {
+    if (toggle.checked && window.innerWidth >= 1024) {
+      layers.forEach(layer => layer.style.opacity = '0');
+    }
+  });
+};
+
+function init() {
 
   initHero();
   initHeroScrollModel();
   initTransitionRunway();
   initSeparateWorldsPopIn();
   initLeatherYearsMobileScroll();
-  initDragResistance(); 
-
+  initDragResistance();
+  initBlindDateArchive();
+  initEyeTracker();
   initLeatherYearsScrollLock();
   initLeatherYearsAnimations();
   initVortex();
-
+  initFailedQuotes();
   initSanSiro();
 
   console.log('Fashion Love Story Ready');
