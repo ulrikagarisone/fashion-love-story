@@ -1887,14 +1887,14 @@ body {
 
 .failed-title {
   font-family: var(--font-title);
-  font-size: clamp(3rem, 10vw, 8rem);
+  font-size: var(--text-3xl);
   font-weight: 900;
   text-align: center;
   line-height: 0.8;
   color: transparent;
   -webkit-text-stroke: 2px var(--accent);
   text-transform: uppercase;
-  margin: 0;
+  margin-bottom: var(--space-xl);
 }
 
 /* --- BODY LAYOUT --- */
@@ -1914,7 +1914,7 @@ body {
 
 .failed-subtitle {
   font-family: var(--font-title);
-  font-size: clamp(2rem, 6vw, 4rem);
+  font-size: var(--text-2xl);
   line-height: 0.9;
   text-transform: uppercase;
   font-weight: 900;
@@ -1933,7 +1933,6 @@ body {
   order: 2;
 }
 
-/* 3. Intro Third */
 .failed-intro {
   font-family: var(--font-title);
   color: var(--bg);
@@ -1942,7 +1941,6 @@ body {
   line-height: 1.1;
   text-align: left;
   order: 3;
-  /* Third */
 }
 
 .intro-line {
@@ -1970,7 +1968,6 @@ body {
   text-align: left;
 }
 
-/* --- IMAGE COLUMN --- */
 .failed-image-col {
   width: 100%;
   order: 2;
@@ -1986,13 +1983,13 @@ body {
 /* The Tag/Indicator */
 .failed-indicator {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0px;
+  right: -40px;
   background: var(--accent);
   color: var(--text-black);
-  padding: 5px 10px;
+  padding: 20px 40px;
   font-family: var(--font-title);
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 900;
   z-index: 20;
   display: flex;
@@ -2105,7 +2102,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-    align-items: start;
+    align-items: end;
   }
 
   .failed-text-col {
@@ -2181,7 +2178,6 @@ body {
     width: 220px;
     margin-bottom: 0;
     right: -240px;
-    /* Moves to the right side as requested */
     opacity: 0;
   }
 
@@ -2220,7 +2216,6 @@ body {
     transform: translateX(-10px);
   }
 
-  /* BOTTOM & CLOSING */
   .failed-bottom {
     grid-column: 1 / -1;
     margin-top: 5rem;
@@ -2284,12 +2279,12 @@ body {
 .blue-header {
   margin-bottom: 1rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .blue-title {
   font-family: var(--font-title);
-  font-size: clamp(3rem, 8vw, 7.5rem);
+  font-size: var(--text-2xl);
   line-height: 0.8;
   text-transform: uppercase;
   font-weight: 900;
@@ -2300,7 +2295,7 @@ body {
 .blue-p-subtitle {
   font-family: var(--font-title);
   color: var(--bg);
-  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+  font-size: clamp(1.2rem, 4vw, 2.2rem);
   font-weight: 400;
   line-height: 1.1;
 }
@@ -2308,7 +2303,6 @@ body {
 .blue-body {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
 }
 
 .blue-content {
@@ -2325,7 +2319,7 @@ body {
   line-height: 0.8;
   font-weight: 900;
   color: transparent;
-  -webkit-text-stroke: 2px rgb(231, 252, 147, 0.2);
+  -webkit-text-stroke: 2px rgb(231, 252, 147, 0.8);
   order: 1;
 }
 
@@ -2397,7 +2391,6 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%);
   transition: filter 0.4s ease;
 }
 
@@ -2419,6 +2412,7 @@ body {
 @media (min-width: 768px) {
   .blue-header {
     margin-bottom: 2rem;
+    align-items: flex-start;
   }
 
   .blue-body {
@@ -2473,11 +2467,12 @@ body {
 
   .blue-header {
     margin-bottom: 3rem;
+    display: block;
   }
 
   .blue-body {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr 1.3fr;
     gap: 4rem;
     align-items: start;
   }
@@ -2527,12 +2522,11 @@ body {
 
   .blue-prose {
     text-align: right;
-    max-width: 320px;
+    max-width: 500px;
     order: 1;
   }
 
   .giant-number {
-    font-size: 8rem;
     order: 2;
   }
 
@@ -2545,6 +2539,18 @@ body {
 @media (min-width: 1440px) {
   .blue-title {
     font-size: 4.5rem;
+  }
+
+  .blue-body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .giant-number {
+    font-size: 8rem;
+    order: 2;
   }
 }
 
