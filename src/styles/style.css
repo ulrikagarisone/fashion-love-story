@@ -2386,6 +2386,75 @@ body {
   position: relative;
 }
 
+.inspector-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 3rem;
+  z-index: 100;
+}
+
+.control-label {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: .2s;
+}
+
+ .slider:before {
+  position: absolute;
+  content: "OFF";
+  /* Text inside the knob */
+  font-family: var(--font-title);
+  font-size: 10px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  width: 26px;
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--text-black);
+  color: var(--accent);
+  transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+input:checked+.slider {
+  background-color: var(--accent);
+}
+
+input:checked+.slider:before {
+  content: "ON";
+  transform: translateX(26px);
+  background-color: var(--text-black);
+  color: var(--accent);
+}
+
 .blue-img {
   width: 100%;
   height: 100%;
@@ -2406,6 +2475,71 @@ body {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--text-black);
+}
+
+.img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.secret-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--accent);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+/* The Scattered Text style */
+.scatter-txt {
+  position: absolute;
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Mask for Desktop Lens */
+@media (min-width: 1024px) {
+  .inspector-control {
+      margin-bottom: 0;
+    }
+  .secret-layer {
+    background: rgb(0, 0, 0);
+    -webkit-mask-image: radial-gradient(circle 120px at 50% 50%, black 100%, transparent 100%);
+    mask-image: radial-gradient(circle 120px at 50% 50%, black 100%, transparent 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 0px 0px;
+    mask-size: 0px 0px;
+  }
+
+  .blind-date-blue.is-inspecting .secret-layer {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+.blind-date-blue.is-inspecting .secret-layer {
+  opacity: 1 !important;
+}
+
+.blind-date-blue.is-inspecting .blue-img {
+  filter: grayscale(1) brightness(0.3);
 }
 
 /* TABLET */
@@ -2573,7 +2707,7 @@ body {
 .happy-accident__lead {
   font-family: var(--font-title);
   color: var(--bg);
-  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+  font-size: clamp(1.2rem, 4vw, 2.2rem);
   font-weight: 400;
   line-height: 1.2;
   margin-bottom: 2rem;
@@ -2585,7 +2719,7 @@ body {
   font-size: var(--text-body-large);
   line-height: 1.6;
   margin-bottom: 1.5rem;
-  max-width: 450px;
+  max-width: 550px;
 }
 
 .highlight-yellow {
