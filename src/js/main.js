@@ -395,6 +395,16 @@ function initSanSiro() {
   }
 }
 
+const initFailedQuotes = () => {
+  const wrapper = document.querySelector('.failed-image-wrapper');
+
+  wrapper.addEventListener('click', () => {
+    if (window.innerWidth < 1024) {
+      wrapper.classList.toggle('is-active');
+    }
+  });
+};
+
 
 function init(){
 
@@ -408,7 +418,7 @@ function init(){
   initLeatherYearsScrollLock();
   initLeatherYearsAnimations();
   initVortex();
-
+  initFailedQuotes();
   initSanSiro();
 
   console.log('Fashion Love Story Ready');
