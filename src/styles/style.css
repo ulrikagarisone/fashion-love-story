@@ -1179,6 +1179,7 @@ body {
       display: block;
       margin-top: 0rem;
   }
+}
 
   /* Large desktop */
   @media (min-width: 1440px) {
@@ -3677,4 +3678,3 @@ body {
       right: auto;
     }
   }
-}
