@@ -289,6 +289,39 @@ function initLeatherYearsAnimations() {
     });
   });
 }
+const initEyeTracker = () => {
+  const lycraSection = document.querySelector('.watching-lycra');
+  const pupils = document.querySelectorAll('.watching-lycra__pupil');
+
+  if (!lycraSection || pupils.length === 0) return;
+
+  const handleMove = (e) => {
+    // Get coordinates from either mouse or the first touch point
+    const xCoord = e.touches ? e.touches[0].clientX : e.clientX;
+    const yCoord = e.touches ? e.touches[0].clientY : e.clientY;
+
+    pupils.forEach((pupil) => {
+      const eye = pupil.parentElement;
+      const rect = eye.getBoundingClientRect();
+
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const angle = Math.atan2(yCoord - centerY, xCoord - centerX);
+      const distance = Math.min(rect.width / 4, 15);
+
+      const moveX = Math.cos(angle) * distance;
+      const moveY = Math.sin(angle) * distance;
+
+      pupil.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+    });
+  };
+
+  // Add touchstart so they react immediately on tap
+  lycraSection.addEventListener('mousemove', handleMove);
+  lycraSection.addEventListener('touchmove', handleMove, { passive: true });
+  lycraSection.addEventListener('touchstart', handleMove, { passive: true });
+};
 
 // 7. VORTEX ANIMATION
 function initVortex() {
@@ -404,7 +437,7 @@ function init(){
   initSeparateWorldsPopIn();
   initLeatherYearsMobileScroll();
   initDragResistance(); 
-
+  initEyeTracker();
   initLeatherYearsScrollLock();
   initLeatherYearsAnimations();
   initVortex();

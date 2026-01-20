@@ -1283,22 +1283,21 @@ body {
 /* Eyes */
 .watching-lycra__eye {
   position: relative;
-  width: var(--space-xl);
-  height: calc(var(--space-xl) * 0.7);
+  width: var(--space-lg);
+  height: calc(var(--space-lg) * 0.7);
   background: var(--bg-light);
-  border: 1.5px solid var(--text-black);
+  border: 1px solid var(--text-black);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 50% 45% 52% 48%;
   overflow: hidden;
-  margin: 0 var(--space-xs);
 }
 
 .watching-lycra__pupil {
   position: absolute;
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   background: var(--text-black);
   border-radius: 50%;
   top: 50%;
@@ -1325,7 +1324,7 @@ body {
 
 .watching-lycra:hover .watching-lycra__eye {
   height: calc(var(--space-xl) * 0.8);
-  border-width: 2px;
+  border-width:1px;
   transform: scale(1.1);
 }
 
