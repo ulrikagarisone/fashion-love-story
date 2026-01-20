@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Fashion Love Story | Dirk Bikkembergs</title>
+  <link rel="stylesheet" href="src/styles/reset.css">
+  <link rel="stylesheet" href="src/styles/style.css">
   <link rel="icon" type="image/svg+xml" href="/svg/xoxo.svg" />
   <meta name="description"
     content="Explore how Dirk Bikkembergs revolutionized fashion by merging sports and haute couture in the 1980s.">
@@ -726,68 +728,88 @@
     </div>
   </section>
 
-  <section class="san-siro">
-
-    <div class="san-siro__stage">
-
-      <img src="/images/stadium.png" alt="San Siro Stadium" class="san-siro__bg-image">
-
-      <div class="san-siro__dark-overlay" id="spotlightOverlay">
+    <section class="san-siro">
+    
+      <div class="san-siro__stage">
+        <img src="/images/stadium.png" alt="Stadium"
+          class="san-siro__bg-image">
+    
+        <div class="san-siro__model-container">
+          <img src="/images/look1.png" alt="2001"
+            class="san-siro__model san-siro__model--active" data-step="1">
+          <img src="/images/look2.png" alt="2006"
+            class="san-siro__model" data-step="2">
+          <img src="/images/look3.png" alt="2011"
+            class="san-siro__model" data-step="3">
+        </div>
+    
+        <div class="san-siro__year-display" id="yearDisplay">2001</div>
+      </div>
+    
+      <div class="san-siro__dark-overlay" id="gameOverlay">
         <div class="san-siro__intro-text">
           <h2 class="san-siro__title">JUNE 2001</h2>
-          <h3 class="san-siro__location">IT'S TIME.</h3>
-          <div class="san-siro__pill">THE WORLD NEEDS TO SEE THEM</div>
+          <h3 class="san-siro__location">IT'S PITCH BLACK</h3>
+          <div class="san-siro__pill">CLAP TO LIGHT UP THE STADIUM</div>
+    
+          <button id="micBtn" class="cheer-btn">🎙️ START</button>
+    
+          <div id="visualizer" style="display:none;">
+            <div class="volume-bar-wrapper">
+              <div id="volumeBar" class="volume-bar"></div>
+            </div>
+            <p class="instruction-text">👏 CLAP! 👏</p>
+            <div class="progress-wrapper">
+              <div class="progress-track">
+                <div id="energyBar" class="progress-fill"></div>
+              </div>
+              <div class="progress-label" id="energyText">0%</div>
+            </div>
+          </div>
+    
+          <p id="error" class="error-text"></p>
         </div>
       </div>
-
-      <div class="san-siro__model-container">
-        <img src="/images/look1.png" alt="2001" class="san-siro__model san-siro__model--active" data-step="1">
-        <img src="/images/look2.png" alt="2005" class="san-siro__model" data-step="2">
-        <img src="/images/look3.png" alt="2011" class="san-siro__model" data-step="3">
+    
+      <!-- SCROLL INDICATOR -->
+      <div class="san-siro__scroll-indicator" id="scrollIndicator">
+        <span class="san-siro__scroll-text">Scroll Down</span>
+        <div class="san-siro__scroll-arrow"></div>
       </div>
-
-      <div class="san-siro__year-display" id="yearDisplay">2001</div>
-
-    </div>
-
-    div class="san-siro__timeline">
-
-    <div class="san-siro__trigger san-siro__trigger--intro"></div>
-
-    <div class="san-siro__trigger" data-target="1" data-year="2001">
-      <div class="san-siro__card">
-        <h3>THE ARRANGED MARRIAGE</h3>
-        <p>People said they didn't belong together. That rough Leather and technical Lycra were opposites.</p>
-        <p class="san-siro__highlight">
-          But I saw the chemistry. I brought them to this stadium, and <span class="text-acid">I watched them fall in
-            love.</span>
-        </p>
+    
+      <div class="san-siro__timeline">
+        <div class="san-siro__trigger san-siro__trigger--intro"></div>
+    
+        <div class="san-siro__trigger" data-target="1" data-year="2001">
+          <div class="san-siro__card">
+            <h3>THE ARRANGED MARRIAGE</h3>
+            <p>People said they didn't belong together. That rough Leather and technical Lycra were opposites.
+            </p>
+            <p class="san-siro__highlight">But I saw the chemistry. I brought them to this stadium, and <span
+                class="text-acid">I watched them fall in love.</span></p>
+          </div>
+        </div>
+    
+        <div class="san-siro__trigger" data-target="2" data-year="2006">
+          <div class="san-siro__card">
+            <h3>THEIR OFFSPRING</h3>
+            <p>Their union was potent. Year after year, their love created a family of designs.</p>
+            <p class="san-siro__highlight">They were beautiful together.</p>
+          </div>
+        </div>
+    
+        <div class="san-siro__trigger" data-target="3" data-year="2011">
+          <div class="san-siro__card">
+            <h3>INSEPARABLE</h3>
+            <p>I stepped away in 2011. But Leather and Lycra? They never let go of each other.</p>
+            <p class="san-siro__highlight">That is <span class="text-acid">their love story</span>, living on
+              forever.</p>
+          </div>
+        </div>
+    
       </div>
-    </div>
-
-    <div class="san-siro__trigger" data-target="2" data-year="2006">
-      <div class="san-siro__card">
-        <h3>THEIR OFFSPRING</h3>
-        <p>Their union was potent. Year after year, their love created a family of designs.</p>
-        <p>Every piece was a child of two worlds. The elegance of tailoring holding hands with the pulse of sport.</p>
-        <p class="san-siro__highlight">They were beautiful together.</p>
-      </div>
-    </div>
-
-    <div class="san-siro__trigger" data-target="3" data-year="2011">
-      <div class="san-siro__card">
-        <h3>INSEPARABLE</h3>
-        <p>I stepped away in 2011. But Leather and Lycra? They never let go of each other.</p>
-        <p>Look around you today. Athleisure. Performance suits. That isn't just fashion.</p>
-        <p class="san-siro__highlight">
-          That is <span class="text-acid">their love story</span>, living on forever.
-        </p>
-      </div>
-    </div>
-
-    </div>
-  </section>
-
+    
+    </section>
 
   <section class="lineup">
 
@@ -886,8 +908,9 @@
 
     </div>
   </section>
-
   <script type="module" src="/src/js/main.js"></script>
+      <script type="module" src="/src/js/interaction1.js"></script>
+      <script type="module" src="/src/js/interaction2.js"></script>
 </body>
 
 </html>
