@@ -156,13 +156,20 @@ function createDragHandler(main, other, maxDrag, dir) {
 }
 
 // 6. LEATHER YEARS LOGIC
+// 6. LEATHER YEARS LOGIC
+
+// Desktop scroll lock (unchanged)
 function initLeatherYearsScrollLock() {
   const section = document.querySelector('.leather-years');
   const dirkSection = document.querySelector('.leather-years__dirk');
-  if (!section || !dirkSection || window.innerWidth < 1024) return;
 
-  function update() {
+  if (!section || !dirkSection || window.innerWidth < 1024) {
+    return;
+  }
+
+  const update = () => {
     const rect = section.getBoundingClientRect();
+
     if (rect.top <= 0 && rect.bottom > window.innerHeight) {
       dirkSection.classList.add('is-fixed');
       dirkSection.classList.remove('is-bottom');
@@ -172,21 +179,113 @@ function initLeatherYearsScrollLock() {
       dirkSection.classList.remove('is-fixed');
       dirkSection.classList.add('is-bottom');
     }
-  }
+  };
+
   window.addEventListener('scroll', update);
   update();
 }
 
+// Mobile horizontal scroll converter
+function initLeatherYearsMobileScroll() {
+  const scrollContainer = document.querySelector('.leather-years__scroll-container');
+  const section = document.querySelector('.leather-years');
+
+  if (!scrollContainer || !section) {
+    return;
+  }
+
+  // Only run on mobile
+  if (window.innerWidth >= 1024) {
+    return;
+  }
+
+  let isScrolling = false;
+
+  const handleScroll = () => {
+    const rect = section.getBoundingClientRect();
+
+    // Check if section is in viewport
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      isScrolling = true;
+    } else {
+      isScrolling = false;
+    }
+  };
+
+  const handleWheel = (e) => {
+    if (!isScrolling) {
+      return;
+    }
+
+    const rect = section.getBoundingClientRect();
+
+    // Only hijack scroll when section is visible
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      e.preventDefault();
+
+      // Convert vertical scroll to horizontal
+      scrollContainer.scrollLeft += e.deltaY;
+    }
+  };
+
+  const handleTouchStart = (e) => {
+    if (!isScrolling) {
+      return;
+    }
+
+    scrollContainer.dataset.touchStartY = e.touches[0].clientY;
+    scrollContainer.dataset.touchStartX = scrollContainer.scrollLeft;
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isScrolling || !scrollContainer.dataset.touchStartY) {
+      return;
+    }
+
+    const touchStartY = parseFloat(scrollContainer.dataset.touchStartY);
+    const touchStartX = parseFloat(scrollContainer.dataset.touchStartX);
+    const touchCurrentY = e.touches[0].clientY;
+
+    const deltaY = touchStartY - touchCurrentY;
+
+    // Prevent default to stop vertical scroll
+    e.preventDefault();
+
+    // Convert vertical touch to horizontal scroll
+    scrollContainer.scrollLeft = touchStartX + (deltaY * 2);
+  };
+
+  const handleTouchEnd = () => {
+    delete scrollContainer.dataset.touchStartY;
+    delete scrollContainer.dataset.touchStartX;
+  };
+
+  window.addEventListener('scroll', handleScroll);
+  scrollContainer.addEventListener('wheel', handleWheel, { passive: false });
+  scrollContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+  scrollContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
+  scrollContainer.addEventListener('touchend', handleTouchEnd);
+
+  handleScroll();
+}
+
+// Desktop animations (unchanged)
 function initLeatherYearsAnimations() {
   const items = document.querySelectorAll('.leather-years__item');
-  if (!items.length) return;
 
-  items.forEach(item => {
+  if (!items.length) {
+    return;
+  }
+
+  items.forEach((item) => {
     gsap.from(item, {
       opacity: 0,
       y: 80,
       duration: 0.8,
-      scrollTrigger: { trigger: item, start: 'top 85%' }
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 85%'
+      }
     });
   });
 }
@@ -303,7 +402,7 @@ function init(){
   initHeroScrollModel();
   initTransitionRunway();
   initSeparateWorldsPopIn();
-
+  initLeatherYearsMobileScroll();
   initDragResistance(); 
 
   initLeatherYearsScrollLock();
