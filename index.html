@@ -492,8 +492,16 @@
 
     </div>
   </section>
-  <section class="blind-date-blue">
+  <section class="blind-date-blue" id="blind-date-section">
     <div class="blue-container">
+
+      <div class="inspector-control">
+        <span class="control-label">ARCHIVE MODE</span>
+        <label class="switch">
+          <input type="checkbox" id="inspector-switch">
+          <span class="slider"></span>
+        </label>
+      </div>
 
       <div class="blue-header">
         <h2 class="blue-title">BLIND<br> DATE WITH DESTINY</h2>
@@ -502,32 +510,44 @@
       <div class="blue-body">
 
         <div class="blue-gallery">
-
           <figure class="blue-item">
             <div class="img-wrapper">
-              <img src="/images/look1.png" alt="Look 1" class="blue-img">
+              <img src="/images/look1.png" class="blue-img">
+              <div class="secret-layer">
+                <span class="scatter-txt" style="top:10%; left:10%;">TOO MUCH LYCRA</span>
+                <span class="scatter-txt" style="bottom:20%; right:5%;">[REJECTED]</span>
+                <span class="scatter-txt" style="top:50%; left:20%; transform:rotate(90deg);">NO SHAPE</span>
+              </div>
             </div>
             <span class="tag-vertical">LOOK 01</span>
           </figure>
 
           <figure class="blue-item">
             <div class="img-wrapper">
-              <img src="/images/look2.png" alt="Look 2" class="blue-img">
+              <img src="/images/look2.png" class="blue-img">
+              <div class="secret-layer">
+                <span class="scatter-txt" style="top:15%; right:10%;">STIFF LEATHER</span>
+                <span class="scatter-txt" style="bottom:10%; left:5%;">FAILED FIT</span>
+                <span class="scatter-txt" style="top:40%; right:20%;">NO MOVEMENT</span>
+              </div>
             </div>
             <span class="tag-vertical">LOOK 02</span>
           </figure>
 
           <figure class="blue-item">
             <div class="img-wrapper">
-              <img src="/images/look3.png" alt="Look 3" class="blue-img">
+              <img src="/images/look3.png" class="blue-img">
+              <div class="secret-layer secret-layer--perfect">
+                <span class="scatter-txt" style="top:5%; left:30%;">PERFECT BALANCE</span>
+                <span class="scatter-txt" style="bottom:15%; right:15%;">PILOT SAMPLE</span>
+                <span class="scatter-txt" style="top:60%; left:10%; transform:rotate(-15deg);">THE CAPTAIN</span>
+              </div>
             </div>
             <span class="tag-vertical">LOOK 03</span>
           </figure>
-
         </div>
 
         <div class="blue-content">
-
           <div class="blue-prose">
             <p class="blue-p">
               <span class="blue-p-subtitle">Circa 2000.</span> <br>
@@ -539,9 +559,7 @@
               He wasn't just an employee; he was a captain.
             </p>
           </div>
-
           <span class="giant-number">02</span>
-
         </div>
 
       </div>
