@@ -1983,10 +1983,10 @@ body {
 .failed-indicator {
   position: absolute;
   top: 0px;
-  right: -40px;
+  right: 0px;
   background: var(--accent);
   color: var(--text-black);
-  padding: 20px 40px;
+  padding: 20px 25px;
   font-family: var(--font-title);
   font-size: 16px;
   font-weight: 900;
