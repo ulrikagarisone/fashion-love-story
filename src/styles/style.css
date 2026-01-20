@@ -1880,7 +1880,6 @@ body {
 
 /* --- HEADER --- */
 .failed-header {
-  margin-bottom: 3rem;
   display: flex;
   justify-content: center;
 }
@@ -2092,10 +2091,6 @@ body {
 
   .failed-dates {
     padding: 6rem 4rem;
-  }
-
-  .failed-header {
-    margin-bottom: 5rem;
   }
 
   .failed-body {
