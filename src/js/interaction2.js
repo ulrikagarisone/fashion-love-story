@@ -19,38 +19,56 @@ const init = () => {
     // --- 3. HELPER FUNCTIONS ---
 
     // Logic to process audio
+    // CLAPPING LOGIC (Updated for Safari & No Warnings)
     const startClapping = (stream) => {
-        const ctx = new AudioContext();
+        // 1. SAFARI FIX: Handle different browser names
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContextClass();
+
+        // 2. SAFARI FIX: Ensure context is running (sometimes it starts 'suspended')
+        if (ctx.state === 'suspended') {
+            ctx.resume();
+        }
+
         const analyser = ctx.createAnalyser();
         const mic = ctx.createMediaStreamSource(stream);
-        const processor = ctx.createScriptProcessor(2048, 1, 1);
 
+        // Setup the Analyser
         analyser.smoothingTimeConstant = 0.8;
         analyser.fftSize = 1024;
-
         mic.connect(analyser);
-        analyser.connect(processor);
-        processor.connect(ctx.destination);
 
-        processor.onaudioprocess = () => {
-            if (unlocked) return;
+        // 3. THE VS CODE FIX: Use a Visual Loop instead of ScriptProcessor
+        // We don't need to process audio, we just need to 'look' at it 60 times a second.
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
-            const data = new Uint8Array(analyser.frequencyBinCount);
-            analyser.getByteFrequencyData(data);
+        const checkVolume = () => {
+            // Stop the loop if the game is won
+            if (unlocked) {
+                // Optional: Close audio context to save battery
+                ctx.close();
+                return;
+            }
 
+            // Get the latest data
+            analyser.getByteFrequencyData(dataArray);
+
+            // Calculate Average Volume
             let sum = 0;
-            for (let i = 0; i < data.length; i++) sum += data[i];
-            const vol = sum / data.length;
+            for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+            const vol = sum / dataArray.length;
 
+            // --- UPDATE UI ---
             if (volBar) volBar.style.height = Math.min(100, vol * 2) + '%';
 
-            // Game Logic
-            if (vol > 25) {
-                energy += 3;
+            // Game Logic (Adjusted slightly for loop speed)
+            if (vol > 20) { // Lowered slightly as visual loops can feel different
+                energy += 2; // Increase slower for smoothness
             } else {
                 energy -= 0.5;
             }
 
+            // Clamp energy between 0 and 100
             energy = Math.max(0, Math.min(100, energy));
 
             if (energyBar) energyBar.style.width = energy + '%';
@@ -59,12 +77,17 @@ const init = () => {
             // Win Condition
             if (energy >= 100) {
                 unlocked = true;
-                processor.disconnect();
                 if (modal) modal.classList.remove('clapping-modal--active');
                 if (overlay) overlay.classList.add('san-siro__dark-overlay--hidden');
                 console.log('🔓 Unlocked!');
+            } else {
+                // Keep looping
+                requestAnimationFrame(checkVolume);
             }
         };
+
+        // Kick off the loop
+        checkVolume();
     };
 
     // Microphone access request
