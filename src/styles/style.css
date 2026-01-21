@@ -4106,3 +4106,4 @@ input:checked+.slider:before {
   /* Performance hint for Safari */
   will-change: mask-image, opacity;
 }
+
