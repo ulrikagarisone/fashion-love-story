@@ -4090,3 +4090,19 @@ input:checked+.slider:before {
     left: auto;
   }
 }
+
+
+.secret-layer {
+  /* ... your existing styles ... */
+
+  /* SAFARI NEEDS THESE PREFIXES: */
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  /* Ensure it doesn't tile */
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  /* Performance hint for Safari */
+  will-change: mask-image, opacity;
+}

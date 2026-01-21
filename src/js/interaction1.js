@@ -1,3 +1,5 @@
+
+
 const initBlindDateArchive = () => {
     const section = document.getElementById('blind-date-section');
     const toggle = document.getElementById('inspector-switch');
@@ -31,7 +33,6 @@ const initBlindDateArchive = () => {
 
     // 2. Desktop Mouse Move (Lens Logic)
     section.addEventListener('mousemove', (e) => {
-        // Only run if the Archive toggle is ON and user is on Desktop
         if (toggle.checked && window.innerWidth >= 1024) {
             layers.forEach(layer => {
                 const rect = layer.getBoundingClientRect();
@@ -40,10 +41,19 @@ const initBlindDateArchive = () => {
 
                 // Reveal the lens
                 layer.style.opacity = '1';
-                layer.style.webkitMaskSize = '200% 200%';
-                layer.style.maskSize = '200% 200%';
 
-                const maskCss = `radial-gradient(circle 120px at ${x}px ${y}px, black 100%, transparent 100%)`;
+                // SAFARI FIX: Use standard 100% size, don't stretch it to 200%
+                // The gradient positions itself, so we don't need to stretch the box.
+                layer.style.webkitMaskSize = '100% 100%';
+                layer.style.maskSize = '100% 100%';
+
+                layer.style.webkitMaskRepeat = 'no-repeat';
+                layer.style.maskRepeat = 'no-repeat';
+
+                // SAFARI FIX: Use 'rgba(0,0,0,0)' instead of 'transparent' 
+                // and add a softer edge (100% -> 100% can be jagged in Safari)
+                const maskCss = `radial-gradient(circle 120px at ${x}px ${y}px, black 50%, rgba(0,0,0,0) 100%)`;
+
                 layer.style.webkitMaskImage = maskCss;
                 layer.style.maskImage = maskCss;
             });

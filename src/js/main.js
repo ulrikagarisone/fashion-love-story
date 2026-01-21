@@ -82,83 +82,9 @@ function initSeparateWorldsPopIn() {
   );
 }
 
-// 5. DRAG INTERACTION (Restored)
-function initDragResistance() {
-  const items = {
-    left: document.querySelector('[data-draggable="left"]'),
-    right: document.querySelector('[data-draggable="right"]')
-  };
-  const grid = document.querySelector('.two-worlds__grid');
-
-  if (!items.left || !items.right || !grid) return;
-
-  // Helpers
-  items.left.style.cursor = 'grab';
-  items.right.style.cursor = 'grab';
-
-  // Initialize Logic
-  createDragHandler(items.left, items.right, 150, 1);
-  createDragHandler(items.right, items.left, 150, -1);
-}
-
-// Helper for Drag (Restored)
-function createDragHandler(main, other, maxDrag, dir) {
-  let dragging = false;
-  let startX = 0;
-  const xSet = gsap.quickSetter(main, "x", "px");
-
-  const getClientX = (e) => e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-
-  const getResistance = () => {
-    const r1 = main.getBoundingClientRect();
-    const r2 = other.getBoundingClientRect();
-    const gap = r2.left - r1.right;
-    return gap < 50 ? (50 - gap) / 50 : 0;
-  };
-
-  const start = (e) => {
-    dragging = true;
-    main.style.cursor = 'grabbing';
-    startX = getClientX(e) - gsap.getProperty(main, "x");
-  };
-
-  const move = (e) => {
-    if (!dragging) return;
-    if (e.type === 'touchmove') e.preventDefault();
-
-    let delta = getClientX(e) - startX;
-    delta = dir === 1 ? Math.max(0, Math.min(maxDrag, delta)) : Math.min(0, Math.max(-maxDrag, delta));
-
-    const resist = getResistance();
-    if (resist > 0.1) {
-      const shake = Math.sin(Date.now() / 50) * 2 * resist;
-      gsap.to(main, { x: delta * (1 - resist * 0.5), rotation: shake * dir, duration: 0.1, overwrite: true });
-      gsap.to(other, { rotation: -shake * dir, duration: 0.1, overwrite: true });
-    } else {
-      xSet(delta);
-      gsap.to([main, other], { rotation: 0, duration: 0.2, overwrite: true });
-    }
-  };
-
-  const end = () => {
-    if (!dragging) return;
-    dragging = false;
-    main.style.cursor = 'grab';
-    gsap.to([main, other], { x: 0, rotation: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
-  };
-
-  main.addEventListener('mousedown', start);
-  main.addEventListener('touchstart', start, { passive: false });
-  document.addEventListener('mousemove', move);
-  document.addEventListener('touchmove', move, { passive: false });
-  document.addEventListener('mouseup', end);
-  document.addEventListener('touchend', end);
-}
 
 // 6. LEATHER YEARS LOGIC
-// 6. LEATHER YEARS LOGIC
-
-// Desktop scroll lock (unchanged)
+// Desktop scroll lock 
 function initLeatherYearsScrollLock() {
   const section = document.querySelector('.leather-years');
   const dirkSection = document.querySelector('.leather-years__dirk');
@@ -452,7 +378,6 @@ function init() {
   initTransitionRunway();
   initSeparateWorldsPopIn();
   initLeatherYearsMobileScroll();
-  initDragResistance();
   initEyeTracker();
   initLeatherYearsScrollLock();
   initLeatherYearsAnimations();

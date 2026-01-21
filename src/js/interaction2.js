@@ -1,149 +1,154 @@
-console.log('Script loaded');
+const init = () => {
+    console.log('Init started');
 
-// ELEMENTS
-const modal = document.querySelector('#clappingModal');
-const startBtn = document.querySelector('#startExperience');
-const skipBtn = document.querySelector('#skipBtn');
-const volBar = document.querySelector('#volumeBar');
-const energyBar = document.querySelector('#energyBar');
-const energyText = document.querySelector('#energyText');
-const overlay = document.querySelector('#spotlightOverlay');
+    // --- 1. ELEMENTS ---
+    const modal = document.querySelector('#clappingModal');
+    const startBtn = document.querySelector('#startExperience');
+    const skipBtn = document.querySelector('#skipBtn');
+    const volBar = document.querySelector('#volumeBar');
+    const energyBar = document.querySelector('#energyBar');
+    const energyText = document.querySelector('#energyText');
+    const overlay = document.querySelector('#spotlightOverlay');
+    const stage = document.querySelector('#sanSiroStage');
+    const yearDisplay = document.querySelector('#yearDisplay');
 
-console.log('Button found:', startBtn);
+    // --- 2. STATE ---
+    let energy = 0;
+    let unlocked = false;
 
-// STATE
-let energy = 0;
-let unlocked = false;
+    // --- 3. HELPER FUNCTIONS ---
 
-// GLOBAL FUNCTION FOR ONCLICK
-window.openModal = () => {
-    console.log('✅ BUTTON CLICKED!!!');
-    modal.classList.add('clapping-modal--active');
-    startMicrophoneCheck();
-};
+    // Logic to process audio
+    const startClapping = (stream) => {
+        const ctx = new AudioContext();
+        const analyser = ctx.createAnalyser();
+        const mic = ctx.createMediaStreamSource(stream);
+        const processor = ctx.createScriptProcessor(2048, 1, 1);
 
-// ALSO TRY addEventListener
-if (startBtn) {
-    startBtn.onclick = () => {
-        console.log('✅ ONCLICK WORKS!!!');
-        window.openModal();
-    };
+        analyser.smoothingTimeConstant = 0.8;
+        analyser.fftSize = 1024;
 
-    startBtn.addEventListener('click', () => {
-        console.log('✅ LISTENER WORKS!!!');
-        window.openModal();
-    });
-}
+        mic.connect(analyser);
+        analyser.connect(processor);
+        processor.connect(ctx.destination);
 
-// START MICROPHONE
-const startMicrophoneCheck = async () => {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        console.log('Mic access granted');
-        startClapping(stream);
-    } catch (e) {
-        console.log('Mic denied:', e);
-        skipBtn.textContent = 'Mic denied. Click to continue';
-    }
-};
+        processor.onaudioprocess = () => {
+            if (unlocked) return;
 
-// SKIP BUTTON
-if (skipBtn) {
-    skipBtn.addEventListener('click', () => {
-        console.log('Skip clicked');
-        modal.classList.remove('clapping-modal--active');
-        overlay.classList.add('san-siro__dark-overlay--hidden');
-    });
-}
+            const data = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(data);
 
-// CLAPPING LOGIC
-const startClapping = (stream) => {
-    const ctx = new AudioContext();
-    const analyser = ctx.createAnalyser();
-    const mic = ctx.createMediaStreamSource(stream);
-    const processor = ctx.createScriptProcessor(2048, 1, 1);
+            let sum = 0;
+            for (let i = 0; i < data.length; i++) sum += data[i];
+            const vol = sum / data.length;
 
-    analyser.smoothingTimeConstant = 0.8;
-    analyser.fftSize = 1024;
+            if (volBar) volBar.style.height = Math.min(100, vol * 2) + '%';
 
-    mic.connect(analyser);
-    analyser.connect(processor);
-    processor.connect(ctx.destination);
-
-    processor.onaudioprocess = () => {
-        if (unlocked) return;
-
-        const data = new Uint8Array(analyser.frequencyBinCount);
-        analyser.getByteFrequencyData(data);
-
-        let sum = 0;
-        for (let i = 0; i < data.length; i++) sum += data[i];
-        const vol = sum / data.length;
-
-        volBar.style.height = Math.min(100, vol * 2) + '%';
-
-        if (vol > 25) {
-            energy += 3;
-        } else {
-            energy -= 0.5;
-        }
-
-        energy = Math.max(0, Math.min(100, energy));
-
-        energyBar.style.width = energy + '%';
-        energyText.textContent = Math.floor(energy) + '%';
-
-        if (energy >= 100) {
-            unlocked = true;
-            processor.disconnect();
-            modal.classList.remove('clapping-modal--active');
-            overlay.classList.add('san-siro__dark-overlay--hidden');
-            console.log('Unlocked!');
-        }
-    };
-};
-
-// SAN SIRO SCROLL
-const stage = document.querySelector('#sanSiroStage');
-const yearDisplay = document.querySelector('#yearDisplay');
-
-if (stage && overlay) {
-    stage.addEventListener('mousemove', (e) => {
-        if (!overlay.classList.contains('san-siro__dark-overlay--hidden')) {
-            const rect = stage.getBoundingClientRect();
-            overlay.style.setProperty('--x', `${e.clientX - rect.left}px`);
-            overlay.style.setProperty('--y', `${e.clientY - rect.top}px`);
-        }
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (entry.target.classList.contains('san-siro__trigger--intro')) {
-                    overlay.classList.remove('san-siro__dark-overlay--hidden');
-                    if (yearDisplay) yearDisplay.classList.remove('san-siro__year-display--visible');
-                } else {
-                    overlay.classList.add('san-siro__dark-overlay--hidden');
-                    if (yearDisplay) {
-                        yearDisplay.classList.add('san-siro__year-display--visible');
-                        yearDisplay.textContent = entry.target.getAttribute('data-year') || yearDisplay.textContent;
-                    }
-                }
-                entry.target.classList.add('san-siro__trigger--active');
+            // Game Logic
+            if (vol > 25) {
+                energy += 3;
             } else {
-                entry.target.classList.remove('san-siro__trigger--active');
+                energy -= 0.5;
             }
 
-            const step = entry.target.getAttribute('data-target');
-            if (step && entry.isIntersecting) {
-                document.querySelectorAll('.san-siro__model').forEach(m => m.classList.remove('san-siro__model--active'));
-                const active = document.querySelector(`.san-siro__model[data-step="${step}"]`);
-                if (active) active.classList.add('san-siro__model--active');
+            energy = Math.max(0, Math.min(100, energy));
+
+            if (energyBar) energyBar.style.width = energy + '%';
+            if (energyText) energyText.textContent = Math.floor(energy) + '%';
+
+            // Win Condition
+            if (energy >= 100) {
+                unlocked = true;
+                processor.disconnect();
+                if (modal) modal.classList.remove('clapping-modal--active');
+                if (overlay) overlay.classList.add('san-siro__dark-overlay--hidden');
+                console.log('🔓 Unlocked!');
+            }
+        };
+    };
+
+    // Microphone access request
+    const startMicrophoneCheck = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            console.log(' Mic access granted');
+            startClapping(stream);
+        } catch (e) {
+            console.log(' Mic denied:', e);
+            if (skipBtn) skipBtn.textContent = 'Mic denied. Click to continue';
+        }
+    };
+
+    // Helper to open modal
+    const openModal = () => {
+        console.log('Opening Modal...');
+        if (modal) modal.classList.add('clapping-modal--active');
+        startMicrophoneCheck();
+    };
+
+    // --- 4. EVENT LISTENERS ---
+
+    // Make openModal available globally just in case you use onclick="window.openModal()" in HTML
+    window.openModal = openModal;
+
+    if (startBtn) {
+        startBtn.addEventListener('click', openModal);
+        console.log('Button listener attached');
+    }
+
+    if (skipBtn) {
+        skipBtn.addEventListener('click', () => {
+            console.log('Skipping game...');
+            if (modal) modal.classList.remove('clapping-modal--active');
+            if (overlay) overlay.classList.add('san-siro__dark-overlay--hidden');
+        });
+    }
+
+    // --- 5. SPOTLIGHT & SCROLL LOGIC ---
+    if (stage && overlay) {
+        // Spotlight effect
+        stage.addEventListener('mousemove', (e) => {
+            if (!overlay.classList.contains('san-siro__dark-overlay--hidden')) {
+                const rect = stage.getBoundingClientRect();
+                overlay.style.setProperty('--x', `${e.clientX - rect.left}px`);
+                overlay.style.setProperty('--y', `${e.clientY - rect.top}px`);
             }
         });
-    }, { threshold: 0.5 });
 
-    document.querySelectorAll('.san-siro__trigger').forEach(el => observer.observe(el));
-}
+        // Scroll Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Handle Intro vs Other Sections
+                    if (entry.target.classList.contains('san-siro__trigger--intro')) {
+                        overlay.classList.remove('san-siro__dark-overlay--hidden');
+                        if (yearDisplay) yearDisplay.classList.remove('san-siro__year-display--visible');
+                    } else {
+                        overlay.classList.add('san-siro__dark-overlay--hidden');
+                        if (yearDisplay) {
+                            yearDisplay.classList.add('san-siro__year-display--visible');
+                            yearDisplay.textContent = entry.target.getAttribute('data-year') || yearDisplay.textContent;
+                        }
+                    }
+                    entry.target.classList.add('san-siro__trigger--active');
+                } else {
+                    entry.target.classList.remove('san-siro__trigger--active');
+                }
 
-console.log('Script fully loaded');
+                // Handle Model Swapping
+                const step = entry.target.getAttribute('data-target');
+                if (step && entry.isIntersecting) {
+                    document.querySelectorAll('.san-siro__model').forEach(m => m.classList.remove('san-siro__model--active'));
+                    const active = document.querySelector(`.san-siro__model[data-step="${step}"]`);
+                    if (active) active.classList.add('san-siro__model--active');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.san-siro__trigger').forEach(el => observer.observe(el));
+    }
+
+    console.log('Init finished');
+};
+
+init(); 
