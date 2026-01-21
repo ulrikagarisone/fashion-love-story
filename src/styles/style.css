@@ -2282,6 +2282,8 @@ body {
 /* THE BLIND DATE */
 
 .blind-date-blue {
+  z-index: 5;
+  position: relative;
   background: var(--bg-blue);
   color: var(--text-black);
   min-height: 100vh;
@@ -2506,10 +2508,11 @@ input:checked+.slider:before {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 2px;
+  font-size: 0.7rem;
   text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+  opacity: 0.7;
   color: var(--text-black);
 }
 
@@ -2737,6 +2740,9 @@ input:checked+.slider:before {
 
 /* THE HAPPY ACCIDENT */
 .happy-accident {
+  z-index: 1;
+  position: relative;
+  overflow: visible;
   background: var(--bg-blue);
   color: var(--text-black);
   padding: 6rem 1.5rem;
@@ -2829,6 +2835,8 @@ input:checked+.slider:before {
   right: 0;
   width: 25%;
   z-index: 5;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .happy-accident__hero-img {

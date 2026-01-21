@@ -509,6 +509,61 @@ function initFailedDates() {
   }
 }
 
+//Captain MOVE ANIMATION
+const initCaptainAnimation = () => {
+  //Only run on Desktop
+  if (window.innerWidth < 1024) return;
+  const source = document.querySelector('.blue-item:nth-child(3) .img-wrapper');
+  const sourceLabel = document.querySelector('.blue-item:nth-child(3) .tag-vertical');
+  const dest = document.querySelector('.happy-accident__hero-wrapper');
+
+  //Logic to calculate positions
+  const moveCaptain = () => {
+    const state1 = source.getBoundingClientRect();
+    const state2 = dest.getBoundingClientRect();
+
+    const deltaX = state2.left - state1.left;
+    const deltaY = state2.top - state1.top;
+
+    // Create Timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".blind-date-blue",
+        start: "top top",
+        end: "bottom center",
+        scrub: 1.5,
+      }
+    });
+
+    // FADE OUT THE LABEL
+    tl.to(sourceLabel, { autoAlpha: 0, duration: 0.1 }, 0.15);
+
+    // THE MOVE 
+    tl.to(source, {
+      x: deltaX,
+      y: deltaY,
+      width: state2.width,
+      height: state2.height,
+      rotation: -5,
+      borderRadius: "0px",
+      ease: "power2.inOut",
+      zIndex: 100
+    }, 0);
+
+    // THE SWAP 
+    tl.to(dest, { autoAlpha: 1, duration: 0.2 }, "-=0.2");
+    tl.to(source, { autoAlpha: 0, duration: 0.2 }, "<");
+  };
+
+  // Wait for layout to be stable
+  setTimeout(moveCaptain, 100);
+
+  window.addEventListener('resize', () => {
+    ScrollTrigger.refresh();
+  });
+};
+
+
 function init() {
   playHeroAnimations();
   initIntro();
@@ -527,6 +582,8 @@ function init() {
 
   initFailedDates();
 
+
+  initCaptainAnimation();
   console.log('Fashion Love Story Ready');
 }
 init();
