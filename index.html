@@ -31,14 +31,12 @@
   </nav>
 
   <!-- INTRO ANIMATION -->
-  <!--<div class="intro">
-    <div class="intro__kissy-container">
-      <div class="intro__kissy">
-        <img src="/images/kissy1.png" alt="Kissy Face start" width="550" height="700" />
-      </div>
-      <div class="intro__xoxo">XOXO</div>
+  <div class="intro-curtain">
+    <div class="intro-curtain__content">
+      <h1 class="intro-curtain__text">XOXO</h1>
+      <img src="/images/kissy1.png" class="intro-curtain__img" alt="Kiss">
     </div>
-  </div>-->
+  </div>
 
   <!-- HERO SECTION -->
   <section class="hero">
@@ -726,93 +724,90 @@
     </div>
   </section>
 
-<div class="clapping-modal" id="clappingModal">
-  <div class="clapping-modal__content">
-    <h2 class="clapping-modal__title">LIGHT UP THE STADIUM</h2>
-    <p class="clapping-modal__subtitle">CLAP TO BEGIN THE SHOW</p>
+  <div class="clapping-modal" id="clappingModal">
+    <div class="clapping-modal__content">
+      <h2 class="clapping-modal__title">LIGHT UP THE STADIUM</h2>
+      <p class="clapping-modal__subtitle">CLAP TO BEGIN THE SHOW</p>
 
-    <div class="clapping-modal__bar-wrapper">
-      <div id="volumeBar" class="clapping-modal__bar"></div>
-    </div>
-    <p class="clapping-modal__instruction">KEEP CLAPPING!</p>
-
-    <div class="clapping-modal__progress">
-      <div id="energyBar" class="clapping-modal__fill"></div>
-    </div>
-    <div class="clapping-modal__label" id="energyText">0%</div>
-
-    <p class="clapping-modal__skip" id="skipBtn">Skip clapping (Click here)</p>
-  </div>
-</div>
-
-<!-- SAN SIRO SECTION -->
-<section class="san-siro">
-
-  <!-- BUTTON OUTSIDE EVERYTHING -->
-  <button class="san-siro__start-btn" id="startExperience"
-    style="position: relative; z-index: 999999; top: 50%; left: 50%; transform: translate(-50%, -50%); background: red; padding: 2rem 4rem; font-size: 2rem;">CLICK
-    ME NOW</button>
-
-  <div class="san-siro__stage" id="sanSiroStage">
-    <img src="/images/stadium.png" class="san-siro__bg-image">
-
-    <div class="san-siro__dark-overlay" id="spotlightOverlay">
-      <div class="san-siro__intro-text">
-        <h2 class="san-siro__title">JUNE<br>2001</h2>
-        <h3 class="san-siro__location">SAN SIRO • MILAN</h3>
+      <div class="clapping-modal__bar-wrapper">
+        <div id="volumeBar" class="clapping-modal__bar"></div>
       </div>
-    </div>
+      <p class="clapping-modal__instruction">KEEP CLAPPING!</p>
 
-    <div class="san-siro__model-container">
-      <img src="/images/look1.png"
-        class="san-siro__model san-siro__model--active" data-step="1">
-      <img src="/images/look2.png"
-        class="san-siro__model" data-step="2">
-      <img src="/images/look3.png"
-        class="san-siro__model" data-step="3">
-    </div>
+      <div class="clapping-modal__progress">
+        <div id="energyBar" class="clapping-modal__fill"></div>
+      </div>
+      <div class="clapping-modal__label" id="energyText">0%</div>
 
-    <div class="san-siro__year-display" id="yearDisplay">2001</div>
+      <p class="clapping-modal__skip" id="skipBtn">Skip clapping (Click here)</p>
+    </div>
   </div>
 
-  <div class="san-siro__timeline">
-    <div class="san-siro__trigger san-siro__trigger--intro"></div>
+  <!-- SAN SIRO SECTION -->
+  <section class="san-siro">
 
-    <div class="san-siro__trigger" data-target="1" data-year="2001">
-      <div class="san-siro__card">
-        <h3>THE ARRANGED MARRIAGE</h3>
-        <p>People said they didn't belong together. That rough Leather and technical Lycra were opposites.</p>
-        <p class="san-siro__highlight">
-          But I saw the chemistry. I brought them to this stadium, and <span class="text-acid">I watched them fall in
-            love.</span>
-        </p>
+    <!-- BUTTON OUTSIDE EVERYTHING -->
+    <button class="san-siro__start-btn" id="startExperience"
+      style="position: relative; z-index: 999999; top: 50%; left: 50%; transform: translate(-50%, -50%); background: red; padding: 2rem 4rem; font-size: 2rem;">CLICK
+      ME NOW</button>
+
+    <div class="san-siro__stage" id="sanSiroStage">
+      <img src="/images/stadium.png" class="san-siro__bg-image">
+
+      <div class="san-siro__dark-overlay" id="spotlightOverlay">
+        <div class="san-siro__intro-text">
+          <h2 class="san-siro__title">JUNE<br>2001</h2>
+          <h3 class="san-siro__location">SAN SIRO • MILAN</h3>
+        </div>
       </div>
+
+      <div class="san-siro__model-container">
+        <img src="/images/look1.png" class="san-siro__model san-siro__model--active" data-step="1">
+        <img src="/images/look2.png" class="san-siro__model" data-step="2">
+        <img src="/images/look3.png" class="san-siro__model" data-step="3">
+      </div>
+
+      <div class="san-siro__year-display" id="yearDisplay">2001</div>
     </div>
 
-    <div class="san-siro__trigger" data-target="2" data-year="2006">
-      <div class="san-siro__card">
-        <h3>THEIR OFFSPRING</h3>
-        <p>Their union was potent. Year after year, their love created a family of designs.</p>
-        <p class="san-siro__highlight">They were beautiful together.</p>
-      </div>
-    </div>
+    <div class="san-siro__timeline">
+      <div class="san-siro__trigger san-siro__trigger--intro"></div>
 
-    <div class="san-siro__trigger" data-target="3" data-year="2011">
-      <div class="san-siro__card">
-        <h3>INSEPARABLE</h3>
-        <p>I stepped away in 2011. But Leather and Lycra? They never let go of each other.</p>
-        <ul class="san-siro__list">
-          <li>ATHLEISURE</li>
-          <li>TECH FABRICS</li>
-          <li>PERFORMANCE WEAR</li>
-        </ul>
-        <p class="san-siro__highlight">
-          That is <span class="text-acid">their love story</span>, living on forever.
-        </p>
+      <div class="san-siro__trigger" data-target="1" data-year="2001">
+        <div class="san-siro__card">
+          <h3>THE ARRANGED MARRIAGE</h3>
+          <p>People said they didn't belong together. That rough Leather and technical Lycra were opposites.</p>
+          <p class="san-siro__highlight">
+            But I saw the chemistry. I brought them to this stadium, and <span class="text-acid">I watched them fall in
+              love.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="san-siro__trigger" data-target="2" data-year="2006">
+        <div class="san-siro__card">
+          <h3>THEIR OFFSPRING</h3>
+          <p>Their union was potent. Year after year, their love created a family of designs.</p>
+          <p class="san-siro__highlight">They were beautiful together.</p>
+        </div>
+      </div>
+
+      <div class="san-siro__trigger" data-target="3" data-year="2011">
+        <div class="san-siro__card">
+          <h3>INSEPARABLE</h3>
+          <p>I stepped away in 2011. But Leather and Lycra? They never let go of each other.</p>
+          <ul class="san-siro__list">
+            <li>ATHLEISURE</li>
+            <li>TECH FABRICS</li>
+            <li>PERFORMANCE WEAR</li>
+          </ul>
+          <p class="san-siro__highlight">
+            That is <span class="text-acid">their love story</span>, living on forever.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
   <section class="lineup">
 
     <div class="lineup__header">
@@ -911,6 +906,7 @@
     </div>
   </section>
   <script type="module" src="/src/js/main.js"></script>
+  <script type="module" src="/src/js/hero.js"></script>
   <script type="module" src="/src/js/interaction1.js"></script>
   <script type="module" src="/src/js/interaction2.js"></script>
 </body>
