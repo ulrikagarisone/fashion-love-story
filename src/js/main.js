@@ -82,83 +82,9 @@ function initSeparateWorldsPopIn() {
   );
 }
 
-// 5. DRAG INTERACTION (Restored)
-function initDragResistance() {
-  const items = {
-    left: document.querySelector('[data-draggable="left"]'),
-    right: document.querySelector('[data-draggable="right"]')
-  };
-  const grid = document.querySelector('.two-worlds__grid');
-
-  if (!items.left || !items.right || !grid) return;
-
-  // Helpers
-  items.left.style.cursor = 'grab';
-  items.right.style.cursor = 'grab';
-
-  // Initialize Logic
-  createDragHandler(items.left, items.right, 150, 1);
-  createDragHandler(items.right, items.left, 150, -1);
-}
-
-// Helper for Drag (Restored)
-function createDragHandler(main, other, maxDrag, dir) {
-  let dragging = false;
-  let startX = 0;
-  const xSet = gsap.quickSetter(main, "x", "px");
-
-  const getClientX = (e) => e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-
-  const getResistance = () => {
-    const r1 = main.getBoundingClientRect();
-    const r2 = other.getBoundingClientRect();
-    const gap = r2.left - r1.right;
-    return gap < 50 ? (50 - gap) / 50 : 0;
-  };
-
-  const start = (e) => {
-    dragging = true;
-    main.style.cursor = 'grabbing';
-    startX = getClientX(e) - gsap.getProperty(main, "x");
-  };
-
-  const move = (e) => {
-    if (!dragging) return;
-    if (e.type === 'touchmove') e.preventDefault();
-
-    let delta = getClientX(e) - startX;
-    delta = dir === 1 ? Math.max(0, Math.min(maxDrag, delta)) : Math.min(0, Math.max(-maxDrag, delta));
-
-    const resist = getResistance();
-    if (resist > 0.1) {
-      const shake = Math.sin(Date.now() / 50) * 2 * resist;
-      gsap.to(main, { x: delta * (1 - resist * 0.5), rotation: shake * dir, duration: 0.1, overwrite: true });
-      gsap.to(other, { rotation: -shake * dir, duration: 0.1, overwrite: true });
-    } else {
-      xSet(delta);
-      gsap.to([main, other], { rotation: 0, duration: 0.2, overwrite: true });
-    }
-  };
-
-  const end = () => {
-    if (!dragging) return;
-    dragging = false;
-    main.style.cursor = 'grab';
-    gsap.to([main, other], { x: 0, rotation: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
-  };
-
-  main.addEventListener('mousedown', start);
-  main.addEventListener('touchstart', start, { passive: false });
-  document.addEventListener('mousemove', move);
-  document.addEventListener('touchmove', move, { passive: false });
-  document.addEventListener('mouseup', end);
-  document.addEventListener('touchend', end);
-}
 
 // 6. LEATHER YEARS LOGIC
-// 6. LEATHER YEARS LOGIC
-
-// Desktop scroll lock (unchanged)
+// Desktop scroll lock 
 function initLeatherYearsScrollLock() {
   const section = document.querySelector('.leather-years');
   const dirkSection = document.querySelector('.leather-years__dirk');
@@ -440,65 +366,10 @@ const initFailedQuotes = () => {
 };
 
 
-const initBlindDateArchive = () => {
-  const section = document.getElementById('blind-date-section');
-  const toggle = document.getElementById('inspector-switch');
-  const layers = document.querySelectorAll('.secret-layer');
+// interaction 2 
 
-  // Guard clause: Exit if elements don't exist
-  if (!section || !toggle) return;
+//interaction 3
 
-  // 1. Toggle Change Logic
-  toggle.addEventListener('change', (e) => {
-    if (e.target.checked) {
-      section.classList.add('is-inspecting');
-
-      // Force reveal on mobile immediately
-      if (window.innerWidth < 1024) {
-        layers.forEach(layer => layer.style.opacity = "1");
-      }
-    } else {
-      section.classList.remove('is-inspecting');
-
-      // Clean up styles when turning off
-      layers.forEach(layer => {
-        layer.style.opacity = "0";
-        if (window.innerWidth >= 1024) {
-          layer.style.webkitMaskSize = "0px 0px";
-          layer.style.maskSize = "0px 0px";
-        }
-      });
-    }
-  });
-
-  // 2. Desktop Mouse Move (Lens Logic)
-  section.addEventListener('mousemove', (e) => {
-    // Only run if the Archive toggle is ON and user is on Desktop
-    if (toggle.checked && window.innerWidth >= 1024) {
-      layers.forEach(layer => {
-        const rect = layer.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        // Reveal the lens
-        layer.style.opacity = '1';
-        layer.style.webkitMaskSize = '200% 200%';
-        layer.style.maskSize = '200% 200%';
-
-        const maskCss = `radial-gradient(circle 120px at ${x}px ${y}px, black 100%, transparent 100%)`;
-        layer.style.webkitMaskImage = maskCss;
-        layer.style.maskImage = maskCss;
-      });
-    }
-  });
-
-  // 3. Desktop Mouse Leave (Hide Lens)
-  section.addEventListener('mouseleave', () => {
-    if (toggle.checked && window.innerWidth >= 1024) {
-      layers.forEach(layer => layer.style.opacity = '0');
-    }
-  });
-};
 
 function init() {
 
@@ -507,8 +378,6 @@ function init() {
   initTransitionRunway();
   initSeparateWorldsPopIn();
   initLeatherYearsMobileScroll();
-  initDragResistance();
-  initBlindDateArchive();
   initEyeTracker();
   initLeatherYearsScrollLock();
   initLeatherYearsAnimations();
