@@ -443,6 +443,18 @@ const initFailedQuotes = () => {
 
 //interaction 3
 
+function initCardFlip() {
+  const cards = document.querySelectorAll('.leather-years__item-image');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      // Only do click toggle on mobile/tablet (below 1024px)
+      if (window.innerWidth < 1024) {
+        card.classList.toggle('is-flipped');
+      }
+    });
+  });
+}
 
 function init() {
   playHeroAnimations();
@@ -457,6 +469,8 @@ function init() {
   initVortex();
   initFailedQuotes();
   initSanSiro();
+
+  initCardFlip();
 
   console.log('Fashion Love Story Ready');
 }

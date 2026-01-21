@@ -50,8 +50,6 @@ function initMeetingSection() {
             ease: "power4.out"
         }, "<") // "<" means start at same time as previous animation
 
-        // 4. IMAGE REVEAL (The "Cool" Part)
-        // We use clip-path to make it look like it's unfolding from the center
         .fromTo(imageWrapper,
             {
                 clipPath: "inset(0 50% 0 50%)", // Hidden as a thin line in the center

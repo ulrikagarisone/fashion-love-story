@@ -1173,6 +1173,81 @@ body {
   }
 }
 
+/* LEATHER YEARS FLIP CARD  */
+
+/* 1. The Container (Scene) */
+.leather-years__item-image {
+  perspective: 1000px;
+  /* Creates the 3D depth */
+  background: transparent;
+  cursor: pointer;
+  overflow: visible !important;
+  /* Allows 3D rotation to show */
+}
+
+/* 2. The Moving Part (The Card) */
+.leather-years__card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  /* Keeps children in 3D space */
+}
+
+/* 3. HOVER EFFECT (Desktop) */
+@media (min-width: 1024px) {
+  .leather-years__item-image:hover .leather-years__card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+/* 4. CLICK EFFECT (Mobile Class) */
+.leather-years__item-image.is-flipped .leather-years__card-inner {
+  transform: rotateY(180deg);
+}
+
+/* 5. Front and Back Faces */
+.leather-years__card-front,
+.leather-years__card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  /* Hides back when turned */
+  backface-visibility: hidden;
+  overflow: hidden;
+  /* Keeps image inside corners */
+}
+
+/* Front is just the image */
+.leather-years__card-front {
+  background-color: var(--bg);
+}
+
+/* Back is the text explanation */
+.leather-years__card-back {
+  background-color: var(--text-black);
+  color: var(--accent);
+  transform: rotateY(180deg);
+  /* Start pre-rotated */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.leather-years__card-back p {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--accent);
+  text-align: left;
+}
+
 /* WATCHING LYCRA SECTION */
 .watching-lycra {
   position: relative;
