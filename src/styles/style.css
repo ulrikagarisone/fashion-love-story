@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
 
 :root {
-  
+
   /* Colors */
   --bg: #F5F5F5;
   --bg-blue: #178FEA;
@@ -2290,6 +2290,7 @@ body {
 }
 
 .blue-container {
+  position: relative;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -2322,6 +2323,7 @@ body {
 .blue-body {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
 }
 
 .blue-content {
@@ -2365,7 +2367,7 @@ body {
   padding-bottom: 1rem;
   margin-left: -1.5rem;
   margin-right: -1.5rem;
-  order: 2;
+  order: 3;
   align-items: flex-end;
 }
 
@@ -2408,24 +2410,27 @@ body {
 .inspector-control {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 3rem;
-  z-index: 100;
+  margin-bottom: 0;
+  padding-left: 0;
+  gap: 1.5rem;
+  width: fit-content;
+  order: 2;
 }
 
 .control-label {
   font-family: var(--font-title);
   font-weight: 900;
-  font-size: 10px;
-  letter-spacing: 2px;
+  font-size: 14px;
+  letter-spacing: 1px;
   text-transform: uppercase;
+  color: var(--text-black);
 }
 
 .switch {
   position: relative;
   display: inline-block;
-  width: 40px;
-  height: 20px;
+  width: 70px;
+  height: 36px;
 }
 
 .switch input {
@@ -2441,26 +2446,41 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  transition: .2s;
+  border-radius: 0px;
+  border: 3px solid var(--text-black);
+  background-color: transparent;
+  transition: 0.2s ease-in-out;
 }
 
 .slider:before {
   position: absolute;
+  content: "";
+  height: 100%;
+  width: 50%;
+  left: 0;
+  bottom: 0;
+  background-color: var(--text-black);
+  border-radius: 0px;
+  transition: 0.3s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.slider:after {
   content: "OFF";
-  /* Text inside the knob */
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   font-family: var(--font-title);
   font-size: 10px;
   font-weight: 900;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 22px;
-  width: 26px;
-  left: 2px;
-  bottom: 2px;
-  background-color: var(--text-black);
-  color: var(--accent);
-  transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: var(--text-black);
+  pointer-events: none;
+}
+
+input:checked+.slider:after {
+  content: "ON";
+  right: auto;
+  left: 8px;
 }
 
 input:checked+.slider {
@@ -2468,10 +2488,7 @@ input:checked+.slider {
 }
 
 input:checked+.slider:before {
-  content: "ON";
-  transform: translateX(26px);
-  background-color: var(--text-black);
-  color: var(--accent);
+  transform: translateX(100%);
 }
 
 .blue-img {
@@ -2532,34 +2549,13 @@ input:checked+.slider:before {
   pointer-events: none;
 }
 
-/* Mask for Desktop Lens */
-@media (min-width: 1024px) {
-  .inspector-control {
-    margin-bottom: 0;
-  }
-
-  .secret-layer {
-    background: rgb(0, 0, 0);
-    -webkit-mask-image: radial-gradient(circle 120px at 50% 50%, black 100%, transparent 100%);
-    mask-image: radial-gradient(circle 120px at 50% 50%, black 100%, transparent 100%);
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: 0px 0px;
-    mask-size: 0px 0px;
-  }
-
-  .blind-date-blue.is-inspecting .secret-layer {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-}
-
 .blind-date-blue.is-inspecting .secret-layer {
   opacity: 1 !important;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .blind-date-blue.is-inspecting .blue-img {
-  filter: grayscale(1) brightness(0.3);
+  filter: grayscale(0.3) brightness(0.7);
 }
 
 /* TABLET */
@@ -2620,7 +2616,7 @@ input:checked+.slider:before {
   }
 
   .blue-header {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     display: block;
   }
 
@@ -2686,6 +2682,37 @@ input:checked+.slider:before {
 
   .blue-p {
     font-size: var(--text-body-large);
+  }
+
+  .inspector-control {
+    position: absolute;
+    top: 5vw;
+    left: 0;
+    width: auto;
+    margin: 0;
+    order: unset;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .secret-layer {
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.85);
+    transition: opacity 0.3s ease;
+    -webkit-mask-image: radial-gradient(circle 150px at var(--x, 50%) var(--y, 50%), black 100%, transparent 100%);
+    mask-image: radial-gradient(circle 150px at var(--x, 50%) var(--y, 50%), black 100%, transparent 100%);
+    -webkit-mask-size: 0% 0%;
+    mask-size: 0% 0%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  .blind-date-blue.is-inspecting .secret-layer {
+    opacity: 1;
+    cursor: crosshair;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
   }
 }
 
@@ -4121,4 +4148,3 @@ input:checked+.slider:before {
   /* Performance hint for Safari */
   will-change: mask-image, opacity;
 }
-
