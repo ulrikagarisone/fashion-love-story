@@ -4,6 +4,65 @@ import '../styles/style.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// hero animation
+function playHeroAnimations() {
+  const tl = gsap.timeline();
+
+  // 1. KISSY FACE POPS 
+  tl.to('.hero__kissy', {
+    scale: 1,
+    rotation: 0,
+    opacity: 1,
+    duration: 0.8,
+    ease: "elastic.out(1, 0.5)"
+  })
+
+    // 2. ATHLETE SLIDES IN 
+    .to('.hero__football', {
+      x: 0,
+      rotation: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: "power3.out"
+    }, "-=0.6");
+}
+
+// INTRO SEQUENCER
+function initIntro() {
+  const tl = gsap.timeline();
+  const curtain = document.querySelector('.intro-curtain');
+  const introText = document.querySelector('.intro-curtain__text');
+  const introKiss = document.querySelector('.intro-curtain__img');
+
+  // If no curtain exists (e.g. dev mode), just play hero and return
+  if (!curtain) {
+    playHeroAnimations();
+    return;
+  }
+
+  // 1. Intro Animation
+  tl.to(introText, { opacity: 1, scale: 1, duration: 1 })
+    .to(introKiss, { opacity: 1, scale: 1, rotation: -15, ease: "elastic.out" }, "-=0.2")
+    .to({}, { duration: 0.5 }) // Pause
+
+    // 2. Lift Curtain
+    .to(curtain, {
+      y: '-100%',
+      duration: 1.1,
+      ease: "power3.inOut",
+      onStart: () => {
+        // Start hero animations while curtain is lifting
+        gsap.delayedCall(0.3, playHeroAnimations);
+      },
+      onComplete: () => {
+        // Hide the curtain element completely
+        curtain.style.display = 'none';
+
+        // Recalculate ALL ScrollTriggers because the page height just changed.
+        ScrollTrigger.refresh();
+      }
+    });
+}
 
 // 2. HERO SCROLL MODEL
 function initHeroScrollModel() {
@@ -61,24 +120,34 @@ function initTransitionRunway() {
 // 4. SEPARATE WORLDS POP-IN
 function initSeparateWorldsPopIn() {
   const closingStatement = document.querySelector('.two-worlds__closing');
-  if (!closingStatement) return;
+  const grid = document.querySelector('.two-worlds__grid');
 
-  gsap.fromTo(closingStatement,
-    { opacity: 0, scale: 0.5, y: 50 },
-    {
-      opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'back.out(1.7)',
-      scrollTrigger: {
-        trigger: closingStatement,
-        start: "top 90%",
-        toggleActions: "play none none reverse",
-      }
+  if (!closingStatement || !grid) return;
+
+  gsap.set(closingStatement, {
+    opacity: 0,
+    scale: 0.8,
+    y: 50,
+    position: 'relative',
+    zIndex: 10
+  });
+
+  gsap.to(closingStatement, {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    duration: 0.6,
+    ease: 'back.out(1.7)',
+    scrollTrigger: {
+      trigger: grid,       
+      start: "bottom 75%", // Triggers when bottom of images is 75% down screen
+      toggleActions: "play none none reverse",
     }
-  );
+  });
 }
 
 
 // 6. LEATHER YEARS LOGIC
-// Desktop scroll lock 
 function initLeatherYearsScrollLock() {
   const section = document.querySelector('.leather-years');
   const dirkSection = document.querySelector('.leather-years__dirk');
@@ -248,54 +317,64 @@ const initEyeTracker = () => {
 function initVortex() {
   const container = document.querySelector('.vortex-container');
   if (!container) return;
-  const vortexContainer = document.querySelector('.vortex-container');
-  if (!vortexContainer) return;
+
   const phrases = [
-    "Leather + Lycra?",
-    "What if...?",
-    "Is it even possible?",
-    "Impossible...",
-    "Two different worlds?",
-    "Could they work together?",
-    "Everyone would say it's impossible...",
-    "Crazy.",
-    "Visionary?",
-    "Risk.",
-    "What if...?",
-    "Two worlds colliding..."
+    "Leather + Lycra?", "What if...?", "Is it even possible?",
+    "Impossible...", "Two different worlds?", "Could they work together?",
+    "Everyone would say it's impossible...", "Crazy.", "Visionary?",
+    "Risk.", "What if...?", "Two worlds colliding..."
   ];
 
-
+  let vortexInterval = null;
 
   function createWord() {
+    if (!document.body.contains(container)) return;
+
     const word = document.createElement('div');
     word.classList.add('vortex-word');
     word.innerText = phrases[Math.floor(Math.random() * phrases.length)];
-    // Add random styling variant
+
+    // Random styling & Position
     const variant = Math.floor(Math.random() * 3) + 1;
     word.classList.add(`word-variant-${variant}`);
-    // Randomize position slightly
     const randomX = (Math.random() - 0.5) * 50;
     const randomY = (Math.random() - 0.5) * 50;
-    // Apply animation with dynamic duration
-    const duration = Math.random() * 2 + 3; // 3-5 seconds
+    const duration = Math.random() * 2 + 3;
+
     word.style.animation = `flyOut ${duration}s linear forwards`;
-    // Add offset
     word.style.marginLeft = `${randomX}vw`;
     word.style.marginTop = `${randomY}vh`;
-    // Append
-    vortexContainer.appendChild(word);
-    setTimeout(() => {
-      word.remove();
-    }, duration * 1000);
 
+    container.appendChild(word);
+
+    setTimeout(() => word.remove(), duration * 1000);
   }
 
-  setInterval(createWord, 400);
-  createWord();
-  setTimeout(createWord, 100);
-  setTimeout(createWord, 200);
+  // CONTROLS: Only run when visible
+  function startVortex() {
+    if (!vortexInterval) {
+      createWord();
+      vortexInterval = setInterval(createWord, 400);
+    }
+  }
 
+  function stopVortex() {
+    if (vortexInterval) {
+      clearInterval(vortexInterval);
+      vortexInterval = null;
+      container.innerHTML = ''; // Clean up to prevent lag
+    }
+  }
+
+  ScrollTrigger.create({
+    trigger: container,
+    start: "top bottom",
+    end: "bottom top",
+    onEnter: startVortex,
+    onLeave: stopVortex,
+    onEnterBack: startVortex,
+    onLeaveBack: stopVortex
+  });
 }
 
 
@@ -366,7 +445,8 @@ const initFailedQuotes = () => {
 
 
 function init() {
-
+  playHeroAnimations();
+  initIntro();
   initHeroScrollModel();
   initTransitionRunway();
   initSeparateWorldsPopIn();
