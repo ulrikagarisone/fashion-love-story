@@ -456,6 +456,59 @@ function initCardFlip() {
   });
 }
 
+
+// FAILED DATES ANIMATIONS
+function initFailedDates() {
+  const section = document.querySelector('.failed-dates');
+  const title = document.querySelector('.failed-title');
+  const closingStatement = document.querySelector('.failed-statement');
+
+  if (!section) return;
+
+  // THE "FALLING" TITLE
+  gsap.fromTo(title,
+    {
+      y: -50,   
+      rotation: 0
+    },
+    {
+      y: 100,   
+      rotation: 8, 
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top center", 
+        end: "bottom top",   
+        scrub: 1             
+      }
+    }
+  );
+
+  // THE POP-IN 
+  if (closingStatement) {
+    gsap.set(closingStatement, {
+      opacity: 0,
+      scale: 0.8,
+      y: 50,
+      position: 'relative',
+      zIndex: 10
+    });
+
+    gsap.to(closingStatement, {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'back.out(1.7)',
+      scrollTrigger: {
+        trigger: closingStatement,
+        start: "top 85%", 
+        toggleActions: "play none none reverse",
+      }
+    });
+  }
+}
+
 function init() {
   playHeroAnimations();
   initIntro();
@@ -471,6 +524,8 @@ function init() {
   initSanSiro();
 
   initCardFlip();
+
+  initFailedDates();
 
   console.log('Fashion Love Story Ready');
 }
