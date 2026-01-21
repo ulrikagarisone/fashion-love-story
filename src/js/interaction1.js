@@ -15,7 +15,14 @@ const initBlindDateArchive = () => {
 
             // Force reveal on mobile immediately
             if (window.innerWidth < 1024) {
-                layers.forEach(layer => layer.style.opacity = "1");
+                layers.forEach(layer => {
+                    layer.style.opacity = "1";
+
+                    // --- THE MISSING FIX ---
+                    // Remove the "flashlight" mask so the full image shows
+                    layer.style.webkitMaskImage = "none";
+                    layer.style.maskImage = "none";
+                });
             }
         } else {
             section.classList.remove('is-inspecting');
@@ -23,6 +30,8 @@ const initBlindDateArchive = () => {
             // Clean up styles when turning off
             layers.forEach(layer => {
                 layer.style.opacity = "0";
+
+                // Optional: Reset mask to avoid glitches if they resize back to desktop
                 if (window.innerWidth >= 1024) {
                     layer.style.webkitMaskSize = "0px 0px";
                     layer.style.maskSize = "0px 0px";
