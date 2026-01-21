@@ -2776,10 +2776,13 @@ input:checked+.slider:before {
 }
 
 .highlight-yellow {
-  background-color: var(--accent);
-  padding: 0 0.2rem;
+  background: linear-gradient(to right, var(--accent) 50%, transparent 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
   color: var(--text-black);
   font-weight: 700;
+  padding: 0 0.2rem;
+  display: inline;
 }
 
 .text-bold {
@@ -2788,18 +2791,28 @@ input:checked+.slider:before {
   text-decoration-thickness: 2px;
 }
 
-.happy-accident__list {
-  list-style: none;
-  padding: 0;
+.happy-accident__feedback {
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: var(--text-body-large);
 }
 
-.happy-accident__list li {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--text-black);
+.happy-accident__line {
+  font-family: var(--font-body);
+  margin: 0;
+  line-height: 1.4;
 }
+
+.happy-accident__truth {
+  font-family: var(--font-title);
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-left: 0.5rem;
+}
+
 
 .happy-accident__visuals {
   position: relative;
@@ -2923,7 +2936,7 @@ input:checked+.slider:before {
 }
 
 /* LIGHTBULB TRANSITION SECTION */
-
+/* --- CONTAINER --- */
 .transition-bulb {
   position: relative;
   background-color: var(--bg-blue);
@@ -2933,6 +2946,7 @@ input:checked+.slider:before {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  /* Crucial so the yellow explosion doesn't spill */
   padding: 0 1.5rem;
   box-sizing: border-box;
 }
@@ -2943,25 +2957,70 @@ input:checked+.slider:before {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 2rem;
+  gap: 3rem;
+  /* Space between image and text */
   z-index: 2;
   width: 100%;
 }
 
+/* --- THE VISUAL LAYERS --- */
 .bulb-visual {
-  width: 120px;
+  position: relative;
+  width: 180px;
+  /* Adjust based on Dirk's image width */
+  height: auto;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* Layer 1: The Yellow Glow (Starts small behind head) */
+.bulb-glow {
+  position: absolute;
+  top: -20px;
+  /* Align near head area */
+  left: 50%;
+  width: 50px;
+  /* Start size */
+  height: 50px;
+  background-color: var(--accent);
+  /* YOUR YELLOW */
+  border-radius: 50%;
+  transform: translateX(-50%) scale(0);
+  /* Start hidden */
+  z-index: 1;
+  /* Behind Dirk */
+  pointer-events: none;
+}
+
+/* Layer 2: Dirk (Base Image) */
+.dirk-img {
+  width: 100%;
   height: auto;
   position: relative;
-}
-
-.bulb-img {
-  width: 100%;
+  z-index: 2;
   display: block;
-  animation: bulb-pulse 3s infinite ease-in-out;
 }
 
-/* --- TEXT CONTENT --- */
+/* Layer 3: The Bulb (Floating on top) */
+.bulb-img {
+  position: absolute;
+  width: 60px;
+  /* Adjust bulb size */
+  top: -50px;
+  /* Floating above head */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  opacity: 0;
+  /* Start invisible (JS will pop it in) */
+}
+
+/* --- TEXT STYLING (YOUR ORIGINAL) --- */
 .bulb-content {
+  position: relative;
+  z-index: 4;
+  /* Ensure text sits above everything initially */
   font-family: var(--font-title);
   line-height: 1.1;
   color: var(--accent);
@@ -2985,33 +3044,16 @@ input:checked+.slider:before {
   text-transform: uppercase;
 }
 
-/* ANIMATIONS */
-
-@keyframes bulb-pulse {
-  0% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 10px rgba(231, 252, 147, 0.4));
-  }
-
-  50% {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 30px rgba(231, 252, 147, 0.7));
-  }
-
-  100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 10px rgba(231, 252, 147, 0.4));
-  }
-}
-
-
+/* --- MEDIA QUERIES --- */
 @media (min-width: 768px) {
-  .bulb-container {
-    gap: 3rem;
+  .bulb-visual {
+    width: 220px;
+    /* Bigger on desktop */
   }
 
-  .bulb-visual {
-    width: 160px;
+  .bulb-img {
+    width: 80px;
+    top: -70px;
   }
 
   .bulb-intro {
@@ -3023,11 +3065,10 @@ input:checked+.slider:before {
   }
 }
 
-
 /* TYPOGRAPHIC PLAY SECTION */
-
-.typo-breakthrough {
-  background-color: #E7FC93;
+/* --- BLOCK --- */
+.breakthrough {
+  background-color: var(--accent);
   color: var(--text-black);
   min-height: 100vh;
   padding: 3rem 1.5rem;
@@ -3036,23 +3077,28 @@ input:checked+.slider:before {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  /* Crucial for stacking on top of pinned section */
+  position: relative;
+  z-index: 10;
 }
 
-.typo-container {
+/* --- ELEMENTS --- */
+.breakthrough__container {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
 }
 
-.typo-header {
+.breakthrough__header {
   margin-bottom: 1rem;
   z-index: 10;
   position: relative;
   text-align: center;
 }
 
-.main-title {
+.breakthrough__title {
   font-family: var(--font-title);
   font-size: 3.5rem;
   line-height: 0.9;
@@ -3062,21 +3108,21 @@ input:checked+.slider:before {
   letter-spacing: -0.03em;
 }
 
-.story-text {
+.breakthrough__text {
   font-family: var(--font-body);
   font-size: 1.1rem;
   line-height: 1.4;
   margin: 0 auto;
 }
 
-.highlight-blue {
+.breakthrough__highlight {
   color: var(--bg-blue);
   font-weight: 700;
   display: block;
   margin-top: 0.5rem;
 }
 
-.composition-layer {
+.breakthrough__composition {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -3085,28 +3131,22 @@ input:checked+.slider:before {
   align-items: center;
 }
 
-.image-float {
-  order: 1;
+/* --- GROUPS & MODIFIERS --- */
+.breakthrough__group {
   width: 100%;
-  max-width: 350px;
-  position: relative;
-  margin: 0;
-  transform: rotate(-3deg);
 }
 
-.leather-pos {
+.breakthrough__group--leather {
   order: 2;
-  width: 100%;
   text-align: left;
 }
 
-.lycra-pos {
+.breakthrough__group--lycra {
   order: 3;
-  width: 100%;
   text-align: right;
 }
 
-.giant-word {
+.breakthrough__word {
   font-family: var(--font-title);
   font-size: 3rem;
   line-height: 0.8;
@@ -3115,81 +3155,93 @@ input:checked+.slider:before {
   letter-spacing: -0.04em;
 }
 
-.solid {
+.breakthrough__word--solid {
   color: #000;
 }
 
-.outline {
+.breakthrough__word--outline {
   color: transparent;
   -webkit-text-stroke: 1px #000;
 }
 
-.small-desc {
+.breakthrough__desc {
   font-family: var(--font-body);
   font-size: 1rem;
   margin-top: 0.2rem;
   display: block;
 }
 
-.kiss-img {
+/* --- VISUALS --- */
+.breakthrough__visual {
+  order: 1;
+  width: 100%;
+  max-width: 350px;
+  position: relative;
+  margin: 0;
+  transform: rotate(-3deg);
+}
+
+.breakthrough__img {
   width: 100%;
   height: auto;
   display: block;
   filter: drop-shadow(10px 10px 0px rgba(0, 0, 0, 0.1));
 }
 
-.img-caption {
+.breakthrough__caption {
   display: none;
 }
 
-/* DESKTOP */
+/* --- DESKTOP MEDIA QUERY --- */
 @media (min-width: 1024px) {
 
-  .typo-breakthrough {
+  .breakthrough {
     padding: 4rem;
     display: block;
   }
 
-  .typo-header {
+  .breakthrough__header {
     width: 40%;
     margin-bottom: 0;
     text-align: left;
   }
 
-  .main-title {
+  .breakthrough__title {
     font-size: clamp(3rem, 12vw, 5rem);
   }
 
-  .composition-layer {
+  .breakthrough__composition {
     display: block;
     height: 60vh;
     margin-top: -50px;
   }
 
-  .image-float,
-  .leather-pos,
-  .lycra-pos {
+  /* Reset ordering and alignment */
+  .breakthrough__visual,
+  .breakthrough__group--leather,
+  .breakthrough__group--lycra {
     order: unset;
     width: auto;
     text-align: left;
   }
 
-  .giant-word {
+  .breakthrough__word {
     font-size: clamp(5rem, 20vw, 12rem);
   }
 
-  .outline {
+  .breakthrough__word--outline {
     -webkit-text-stroke: 2px #000;
   }
 
-  .leather-pos {
+  /* Absolute Positioning for Desktop Composition */
+  .breakthrough__group--leather {
     position: absolute;
     bottom: 0;
     left: 0;
     z-index: 1;
   }
 
-  .lycra-pos {
+  .breakthrough__group--lycra {
     position: absolute;
     top: 0;
     right: 0;
@@ -3197,19 +3249,21 @@ input:checked+.slider:before {
     text-align: right;
   }
 
-  .lycra-pos .small-desc {
+  /* Descriptions specific tweaks */
+  .breakthrough__group--lycra .breakthrough__desc {
     margin-right: 1rem;
     margin-top: -0.5rem;
     display: inline-block;
   }
 
-  .leather-pos .small-desc {
+  .breakthrough__group--leather .breakthrough__desc {
     margin-top: -0.5rem;
     margin-left: 0.5rem;
     display: inline-block;
   }
 
-  .image-float {
+  /* Floating Image Center */
+  .breakthrough__visual {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -3220,12 +3274,12 @@ input:checked+.slider:before {
     transition: transform 0.5s ease;
   }
 
-  .image-float:hover {
+  .breakthrough__visual:hover {
     transform: translate(-50%, -50%) rotate(0deg) scale(1.05);
     z-index: 10;
   }
 
-  .img-caption {
+  .breakthrough__caption {
     display: block;
     position: absolute;
     bottom: 10px;

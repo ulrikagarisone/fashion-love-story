@@ -563,6 +563,63 @@ const initCaptainAnimation = () => {
   });
 };
 
+const initHighlighter = () => {
+  // Select all highlights (in case you use it multiple times)
+  const highlights = document.querySelectorAll(".highlight-yellow");
+
+  highlights.forEach((highlight) => {
+    gsap.to(highlight, {
+      scrollTrigger: {
+        trigger: highlight,
+        start: "top 85%", // Triggers when the text enters the viewport
+        toggleActions: "play none none reverse"
+      },
+      backgroundPosition: "0% 0", // Slide the yellow side in
+      duration: 0.8,
+      ease: "power2.out"
+    });
+  });
+};
+
+const initBulbTransition = () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".transition-bulb",
+      start: "top top",     // Start when section hits top
+      end: "+=150%",        // Scroll distance to complete animation
+      scrub: 1,             // Smooth scrubbing
+      pin: true,            // Lock the screen in place
+      anticipatePin: 1
+    }
+  });
+
+  // STEP 1: Bulb Pops Up above head
+  tl.to(".bulb-img", {
+    autoAlpha: 1,
+    y: 0,
+    scale: 1.2, /* Slight pulse size */
+    ease: "back.out(1.7)",
+    duration: 1
+  });
+
+  // STEP 2: The Explosion (Yellow Circle fills screen)
+  tl.to(".bulb-glow", {
+    scale: 150, /* Massive scale to cover 100vh/100vw */
+    duration: 3,
+    ease: "power2.inOut"
+  }, "+=0.2"); // Small pause before exploding
+
+  // STEP 3: Hide content (Dirk/Text) so next section is clean
+  // We fade them out as the yellow covers them
+  tl.to([".dirk-img", ".bulb-img", ".bulb-content"], {
+    autoAlpha: 0,
+    duration: 0.5
+  }, "<60%"); // Start fading when glow is 60% done
+
+};
+
 
 function init() {
   playHeroAnimations();
@@ -584,6 +641,12 @@ function init() {
 
 
   initCaptainAnimation();
+
+
+  initHighlighter();
+
+
+  initBulbTransition();
   console.log('Fashion Love Story Ready');
 }
 init();
