@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
 
 :root {
+  
   /* Colors */
   --bg: #F5F5F5;
   --bg-blue: #178FEA;
@@ -81,6 +82,14 @@ body {
 
 .highlight-text {
   color: var(--accent);
+}
+
+html,
+body {
+  overflow-x: clip !important;
+  /* 'clip' is safer than 'hidden' for sticky */
+  overflow-y: visible !important;
+  height: auto !important;
 }
 
 /* Navigation */
@@ -3420,11 +3429,127 @@ input:checked+.slider:before {
 }
 
 /* SAN SIRO EXPERIENCE */
+.clapping-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.98);
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.clapping-modal--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.clapping-modal__content {
+  text-align: center;
+  max-width: 600px;
+}
+
+.clapping-modal__title {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 8vw, 5rem);
+  margin-bottom: 1rem;
+}
+
+.clapping-modal__subtitle {
+  color: var(--accent);
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  margin-bottom: 2rem;
+  letter-spacing: 0.2em;
+}
+
+.clapping-modal__bar-wrapper {
+  width: 30px;
+  height: 100px;
+  background: #222;
+  margin: 2rem auto 1rem;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #333;
+}
+
+.clapping-modal__bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 0%;
+  background: var(--accent);
+  transition: height 0.05s;
+  box-shadow: 0 0 20px var(--accent);
+}
+
+.clapping-modal__instruction {
+  font-family: var(--font-title);
+  color: var(--accent);
+  font-size: 1.5rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.clapping-modal__progress {
+  width: 100%;
+  max-width: 400px;
+  height: 12px;
+  background: #222;
+  margin: 2rem auto 1rem;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid #333;
+}
+
+.clapping-modal__fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.1s;
+  box-shadow: 0 0 20px var(--accent);
+}
+
+.clapping-modal__label {
+  font-size: 1.2rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.clapping-modal__skip {
+  color: #ff4444;
+  margin-top: 2rem;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+.clapping-modal__skip:hover {
+  color: #ff6666;
+}
+
+/* SAN SIRO SECTION */
 .san-siro {
   position: relative;
-  background-color: var(--text-black);
-  overflow: visible;
-  width: 100%;
+  background-color: #000;
 }
 
 .san-siro__stage {
@@ -3445,203 +3570,127 @@ input:checked+.slider:before {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0.7;
   z-index: 1;
 }
 
-/* GAME OVERLAY */
 .san-siro__dark-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 1);
-  z-index: 999;
+  height: 100%;
+  z-index: 10;
+  background: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(0, 0, 0, 0.95) 30%);
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: var(--space-md);
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.san-siro__dark-overlay--hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .san-siro__intro-text {
-  max-width: 600px;
-  width: 100%;
+  padding: 2rem;
+  max-width: 900px;
 }
 
 .san-siro__title {
   font-family: var(--font-title);
-  font-size: var(--text-xl);
-  margin-bottom: var(--space-sm);
-  color: var(--text-light);
+  font-size: clamp(3rem, 12vw, 10rem);
+  font-weight: 900;
+  line-height: 0.85;
+  margin-bottom: 1.5rem;
+  mix-blend-mode: difference;
 }
 
 .san-siro__location {
   font-family: var(--font-title);
-  font-size: var(--text-lg);
+  font-size: clamp(1rem, 3vw, 2rem);
   color: var(--accent);
-  margin-bottom: var(--space-md);
+  letter-spacing: 0.3em;
+  margin-bottom: 2rem;
 }
 
-.san-siro__pill {
-  background: transparent;
-  border: 2px solid var(--accent);
-  color: var(--accent);
-  padding: var(--space-sm) var(--space-md);
-  display: inline-block;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  margin-bottom: var(--space-md);
-  font-size: var(--text-sm);
-}
-
-.cheer-btn {
+.san-siro__start-btn {
   background: var(--accent);
   border: none;
-  color: var(--text-black);
-  padding: var(--space-sm) var(--space-lg);
+  color: #000;
+  padding: 1.5rem 3rem;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: 900;
-  font-size: var(--text-md);
-  transition: all 0.3s;
+  font-size: clamp(1rem, 3vw, 1.2rem);
   border-radius: 5px;
+  transition: all 0.3s;
+  animation: btnPulse 2s infinite;
+  pointer-events: auto !important;
 }
 
-.cheer-btn:hover {
+.san-siro__start-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 0 30px var(--accent);
 }
 
-.cheer-btn:active {
+.san-siro__start-btn:active {
   transform: scale(0.95);
 }
 
-.visualizer-container {
-  margin-top: var(--space-lg);
-}
-
-.volume-bar-wrapper {
-  width: clamp(20px, 5vw, 30px);
-  height: clamp(80px, 15vh, 120px);
-  background: #222;
-  margin: 0 auto var(--space-sm);
-  border-radius: 15px;
-  position: relative;
-  overflow: hidden;
-  border: 2px solid #333;
-}
-
-.volume-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background: var(--accent);
-  transition: height 0.05s;
-  box-shadow: 0 0 20px var(--accent);
-}
-
-.instruction-text {
-  font-family: var(--font-title);
-  color: var(--accent);
-  margin: var(--space-sm) 0;
-  font-size: var(--text-md);
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
+@keyframes btnPulse {
 
   0%,
   100% {
-    opacity: 0.6;
     transform: scale(1);
   }
 
   50% {
-    opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 }
 
-.progress-wrapper {
-  margin-top: var(--space-md);
-}
-
-.progress-track {
-  width: 100%;
-  max-width: 400px;
-  height: 12px;
-  background: #222;
-  margin: 0 auto var(--space-sm);
-  border-radius: 6px;
-  overflow: hidden;
-  border: 2px solid #333;
-}
-
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: var(--accent);
-  transition: width 0.1s linear;
-  box-shadow: 0 0 20px var(--accent);
-}
-
-.progress-label {
-  font-size: var(--text-base);
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-weight: 700;
-}
-
-.error-text {
-  color: #ff4444;
-  margin-top: var(--space-sm);
-  font-size: var(--text-base);
-  cursor: pointer;
-}
-
-/* MODEL CONTAINER */
 .san-siro__model-container {
   position: relative;
   z-index: 5;
-  height: clamp(60vh, 85vh, 85vh);
+  height: 85vh;
   width: auto;
+  aspect-ratio: 1/2;
   margin-top: 5vh;
 }
 
 .san-siro__model {
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  width: 100%;
   height: 100%;
-  width: auto;
   object-fit: contain;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transform: translateY(30px);
+  transition: all 0.7s ease;
 }
 
 .san-siro__model--active {
   opacity: 1;
+  transform: translateY(0);
 }
 
-/* YEAR DISPLAY */
 .san-siro__year-display {
   position: absolute;
-  bottom: var(--space-sm);
-  right: var(--space-sm);
+  bottom: clamp(2rem, 5vh, 5rem);
+  right: clamp(1rem, 5vw, 5rem);
   font-family: var(--font-title);
-  font-size: var(--text-2xl);
+  font-size: clamp(4rem, 15vw, 12rem);
+  font-weight: 900;
   color: transparent;
-  -webkit-text-stroke: 2px var(--accent);
-  z-index: 50;
+  -webkit-text-stroke: 3px rgba(231, 252, 147, 0.3);
+  z-index: 4;
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.6s;
   pointer-events: none;
 }
 
@@ -3649,73 +3698,10 @@ input:checked+.slider:before {
   opacity: 1;
 }
 
-@media (min-width: 768px) {
-  .san-siro__year-display {
-    bottom: var(--space-md);
-    right: var(--space-md);
-    font-size: var(--text-3xl);
-    -webkit-text-stroke: 2px var(--accent);
-  }
-
-  .san-siro__year-display--visible {
-    opacity: 0.5;
-  }
-}
-
-/* SCROLL INDICATOR */
-.san-siro__scroll-indicator {
-  position: fixed;
-  bottom: var(--space-lg);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-xs);
-  opacity: 0;
-  transition: opacity 0.5s;
-  pointer-events: none;
-}
-
-.san-siro__scroll-indicator--visible {
-  display: flex;
-  opacity: 1;
-  animation: bounce 2s ease-in-out infinite;
-}
-
-.san-siro__scroll-text {
-  font-family: var(--font-title);
-  font-size: var(--text-sm);
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-}
-
-.san-siro__scroll-arrow {
-  width: 30px;
-  height: 30px;
-  border-right: 3px solid var(--accent);
-  border-bottom: 3px solid var(--accent);
-  transform: rotate(45deg);
-}
-
-@keyframes bounce {
-
-  0%,
-  100% {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  50% {
-    transform: translateX(-50%) translateY(10px);
-  }
-}
-
-/* TIMELINE */
 .san-siro__timeline {
   position: relative;
   z-index: 20;
+  margin-top: -100vh;
 }
 
 .san-siro__trigger {
@@ -3723,43 +3709,21 @@ input:checked+.slider:before {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: var(--space-md);
+  padding: clamp(1.5rem, 5vw, 3rem);
 }
 
 .san-siro__card {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(10, 10, 10, 0.92);
   border: 2px solid var(--accent);
-  color: var(--text-light);
-  padding: var(--space-md);
-  max-width: 400px;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  max-width: 550px;
   width: 100%;
   opacity: 0;
   transform: translateY(50px);
-  transition: all 0.5s ease;
-  backdrop-filter: blur(10px);
-}
-
-.san-siro__card h3 {
-  font-family: var(--font-title);
-  font-size: var(--text-lg);
-  color: var(--accent);
-  margin-bottom: var(--space-sm);
-}
-
-.san-siro__card p {
-  margin-bottom: var(--space-sm);
-  line-height: 1.6;
-  color: var(--text-light);
-  font-size: var(--text-base);
-}
-
-.san-siro__highlight {
-  color: var(--accent);
-  font-weight: 700;
-}
-
-.text-acid {
-  color: var(--accent);
+  transition: all 0.7s ease;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  pointer-events: auto;
 }
 
 .san-siro__trigger--active .san-siro__card {
@@ -3767,25 +3731,56 @@ input:checked+.slider:before {
   transform: translateY(0);
 }
 
-/* RESPONSIVE */
-@media (min-width: 768px) {
-  .san-siro__trigger {
-    padding: var(--space-lg);
-  }
+.san-siro__card h3 {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  font-weight: 900;
+  line-height: 0.9;
+}
 
+.san-siro__card p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: #e8e8e8;
+}
+
+.san-siro__highlight {
+  border-left: 4px solid var(--accent);
+  padding-left: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 2rem;
+}
+
+.text-acid {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.san-siro__list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.san-siro__list li {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 800;
+  color: var(--accent);
+  border-bottom: 2px solid rgba(231, 252, 147, 0.2);
+  padding: 1rem 0;
+}
+
+@media (min-width: 768px) {
   .san-siro__card {
     transform: translateX(50px);
-    padding: var(--space-lg);
   }
 
   .san-siro__trigger--active .san-siro__card {
     transform: translateX(0);
-  }
-}
-
-@media (min-width: 1024px) {
-  .san-siro__card {
-    max-width: 500px;
   }
 }
 
@@ -3814,7 +3809,7 @@ input:checked+.slider:before {
 
 .lineup__subtitle {
   font-family: var(--font-body);
-  font-size: var(--text-body-large);
+  font-size: var(--text-body-tablet-size);
 }
 
 .lineup__list {
@@ -3893,34 +3888,17 @@ input:checked+.slider:before {
 }
 
 /* --- BLOCK: TICKET --- */
-/* --- BLOCK: TICKET SECTION --- */
-.ticket-section {
-  padding: 4rem 1rem;
-  background: var(--bg-blue);
-  display: flex;
-  justify-content: center;
-  perspective: 1000px;
-  overflow-x: hidden;
-  /* Prevent horizontal scroll here */
-}
-
-/* --- BLOCK: TICKET --- */
 .ticket {
   display: flex;
-  flex-direction: column;
-  /* Default to mobile stack */
   width: 100%;
   max-width: 900px;
   background: var(--text-black);
   color: var(--text-light);
   transform-style: preserve-3d;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Element: Side (Base) */
 .ticket__side {
-  padding: 2rem;
-  /* Reduced padding for mobile */
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
 }
@@ -3928,10 +3906,7 @@ input:checked+.slider:before {
 /* Modifier: Left */
 .ticket__side--left {
   flex: 2;
-  border-right: none;
-  /* No border on mobile */
-  border-bottom: 2px dashed #333;
-  /* Dashed line on bottom for mobile */
+  border-right: 2px dashed #333;
   position: relative;
 }
 
@@ -3940,8 +3915,6 @@ input:checked+.slider:before {
   flex: 1;
   background: #1a1a1a;
   justify-content: space-between;
-  gap: 2rem;
-  /* Add space between elements on mobile */
 }
 
 .ticket__meta {
@@ -3952,25 +3925,22 @@ input:checked+.slider:before {
   margin-bottom: 2rem;
   font-family: monospace;
   color: #888;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .ticket__title {
   font-family: var(--font-title);
-  /* Responsive Title Size */
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: 3.5rem;
   line-height: 0.9;
   color: var(--text-light);
   margin-bottom: 2rem;
-  transform-origin: left;
-  /* Scale from left */
+  transform: scaleX(1.1);
 }
 
 .ticket__details {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
   margin-bottom: 2.5rem;
-  flex-wrap: wrap;
 }
 
 .ticket__detail-group {
@@ -4000,78 +3970,123 @@ input:checked+.slider:before {
   text-transform: uppercase;
   transition: transform 0.2s;
   align-self: flex-start;
+  /* Fix for flex container */
 }
 
 .ticket__cta:hover {
   transform: scale(1.05);
 }
 
-/* Rip Styles - Mobile Horizontal */
+/* Element: Rip */
 .ticket__rip {
-  width: 100%;
-  height: 4px;
+  width: 4px;
   position: relative;
-  background-image: linear-gradient(to right, #333 50%, transparent 50%);
-  background-size: 20px 2px;
+  background-image: linear-gradient(to bottom, #333 50%, transparent 50%);
+  background-size: 2px 20px;
+  background-repeat: repeat-y;
+  background-position: center;
 }
 
+/* Pseudo-elements for the holes */
 .ticket__rip::before,
 .ticket__rip::after {
   content: '';
   position: absolute;
-  width: 20px;
-  height: 20px;
+  left: -10px;
+  width: 24px;
+  height: 24px;
   background: var(--bg-blue);
   border-radius: 50%;
   z-index: 10;
 }
 
-/* Holes on left/right for horizontal rip */
 .ticket__rip::before {
-  top: -8px;
-  left: -10px;
+  top: -12px;
 }
 
 .ticket__rip::after {
-  top: -8px;
-  right: -10px;
+  bottom: -12px;
 }
 
-/* Desktop Ticket Styles */
-@media (min-width: 768px) {
-  .ticket {
-    flex-direction: row;
-  }
+.ticket__text {
+  color: #aaa;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
 
-  .ticket__side {
-    padding: 2.5rem;
+/* --- BLOCK: ROSTER FORM --- */
+.roster-form__wrapper {
+  display: flex;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+
+.roster-form__input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-light);
+  padding: 0.8rem 0;
+  outline: none;
+  font-family: var(--font-body);
+}
+
+.roster-form__btn {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* --- BLOCK: BARCODE --- */
+.ticket__barcode {
+  display: flex;
+  height: 25px;
+  gap: 4px;
+  opacity: 0.4;
+}
+
+.ticket__barcode span {
+  background: #fff;
+  flex: 1;
+}
+
+.ticket__barcode-thin {
+  flex: 0.5 !important;
+  /* Force override flex 1 */
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .ticket {
+    flex-direction: column;
   }
 
   .ticket__side--left {
-    border-right: 2px dashed #333;
-    border-bottom: none;
+    border-right: none;
+  }
+
+  .archive-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
   }
 
   .ticket__rip {
-    width: 4px;
-    height: auto;
-    background-image: linear-gradient(to bottom, #333 50%, transparent 50%);
-    background-size: 2px 20px;
-    background-repeat: repeat-y;
+    width: 100%;
+    height: 4px;
+    background-image: linear-gradient(to right, #333 50%, transparent 50%);
+    background-size: 20px 2px;
   }
 
-  /* Holes on top/bottom for vertical rip */
   .ticket__rip::before {
-    top: -12px;
-    left: -8px;
-    bottom: auto;
-    right: auto;
+    top: -10px;
+    left: -12px;
   }
 
   .ticket__rip::after {
-    bottom: -12px;
-    left: -8px;
-    top: auto;
-    right: auto;
+    top: -10px;
+    right: -12px;
+    left: auto;
   }
 }
