@@ -4,12 +4,6 @@ import '../styles/style.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// 1. HERO ANIMATIONS
-const initHero = () => {
-  const football = document.querySelector('.hero__football');
-  if (!football) return;
-  setTimeout(() => football.classList.add('is-active'), 4200);
-};
 
 // 2. HERO SCROLL MODEL
 function initHeroScrollModel() {
@@ -373,7 +367,6 @@ const initFailedQuotes = () => {
 
 function init() {
 
-  initHero();
   initHeroScrollModel();
   initTransitionRunway();
   initSeparateWorldsPopIn();
