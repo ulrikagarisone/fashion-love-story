@@ -2763,7 +2763,7 @@ input:checked+.slider:before {
   font-size: clamp(1.2rem, 4vw, 2.2rem);
   font-weight: 400;
   line-height: 1.2;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   max-width: 500px;
 }
 
@@ -2988,7 +2988,6 @@ input:checked+.slider:before {
   position: relative;
   z-index: 2;
   display: block;
-  filter: grayscale(100%) brightness(0.8);
 }
 
 .idea-flash__bulb {
@@ -3084,26 +3083,30 @@ input:checked+.slider:before {
 
 .breakthrough__title {
   font-family: var(--font-title);
-  font-size: 3.5rem;
-  line-height: 0.9;
+  font-size: var(--text-2xl);
+  line-height: 0.8;
   font-weight: 900;
+  text-align: left;
   text-transform: uppercase;
-  margin: 0 0 1rem 0;
-  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem 0;
+}
+
+.breakthrough__subtitle {
+  font-family: var(--font-title);
+  color: var(--bg-blue);
+  font-size: clamp(1.2rem, 4vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: left;
+  margin-bottom: 1.5rem;
 }
 
 .breakthrough__text {
   font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1.4;
+  font-size: var(--text-body-desktop-size);
+  line-height: 1.6;
   margin: 0 auto;
-}
-
-.breakthrough__highlight {
-  color: var(--bg-blue);
-  font-weight: 700;
-  display: block;
-  margin-top: 0.5rem;
+  text-align: left;
 }
 
 .breakthrough__composition {
@@ -3136,7 +3139,7 @@ input:checked+.slider:before {
   line-height: 0.8;
   margin: 0;
   padding: 0;
-  letter-spacing: -0.04em;
+  font-weight: 600;
 }
 
 .breakthrough__word--solid {
@@ -3169,12 +3172,8 @@ input:checked+.slider:before {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(10px 10px 0px rgba(0, 0, 0, 0.1));
 }
 
-.breakthrough__caption {
-  display: none;
-}
 
 /* --- DESKTOP MEDIA QUERY --- */
 @media (min-width: 1024px) {
@@ -3191,7 +3190,7 @@ input:checked+.slider:before {
   }
 
   .breakthrough__title {
-    font-size: clamp(3rem, 12vw, 5rem);
+    font-size: var(--text-2xl);
   }
 
   .breakthrough__composition {
@@ -3261,20 +3260,6 @@ input:checked+.slider:before {
   .breakthrough__visual:hover {
     transform: translate(-50%, -50%) rotate(0deg) scale(1.05);
     z-index: 10;
-  }
-
-  .breakthrough__caption {
-    display: block;
-    position: absolute;
-    bottom: 10px;
-    right: -10px;
-    background: var(--text-black);
-    color: var(--text-light);
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    padding: 5px 10px;
-    font-weight: 700;
-    transform: rotate(-5deg);
   }
 }
 
