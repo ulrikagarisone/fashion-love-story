@@ -3266,21 +3266,33 @@ input:checked+.slider:before {
 /* STICKER LAB */
 .sticker-lab {
   background-color: var(--bg);
+  height: auto;
   min-height: 100vh;
-  padding: 4rem 1rem;
+  width: 100%;
+  overflow: hidden;
   font-family: var(--font-title);
   position: relative;
-  overflow: hidden;
+  margin-top: 100px;
+  padding-bottom: 100px;
 }
 
 .sticker-lab__container {
-  max-width: 1000px;
-  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* HEADER */
+.sticker-lab__header {
+  margin-bottom: 0.5rem;
   text-align: center;
+  z-index: 2;
 }
 
 .sticker-lab__title {
-  font-size: clamp(3rem, 10vw, 6rem);
+  font-size: var(--text-2xl);
   line-height: 0.9;
   margin-bottom: 1rem;
   font-weight: 900;
@@ -3297,110 +3309,123 @@ input:checked+.slider:before {
   font-family: var(--font-body);
   font-size: 1.2rem;
   color: var(--text-black);
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 .sticker-lab__icon {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   background: var(--accent);
-  width: 24px;
-  height: 24px;
-  line-height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border: 2px solid var(--text-black);
-  font-weight: bold;
+  border: 1px solid black;
+  font-size: 14px;
 }
 
+/* STAGE */
 .sticker-lab__stage {
   position: relative;
+  flex-grow: 0;
+  width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .sticker-lab__model-wrapper {
   position: relative;
-  width: 100%;
-  max-width: 450px;
+
+  /* Ensure wrapper hugs the image exactly */
+  height: auto;
+  max-height: 70vh;
+  aspect-ratio: 450/700;
+
+  /* Center the wrapper in the stage */
+  margin: 0 auto;
 }
 
 .sticker-lab__image {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  /* Forces image to fill the box edges so buttons don't float */
   display: block;
 }
 
+/* HOTSPOTS */
 .sticker-lab__hotspot {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
 }
 
-.sticker-lab__add-btn {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.sticker-lab__pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   background: var(--accent);
-  border: 3px solid var(--text-black);
-  font-size: 2rem;
-  font-weight: 900;
-  cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.sticker-lab__add-btn:hover {
-  transform: scale(1.1) rotate(90deg);
-  background: var(--text-light);
-}
-
-.sticker-lab__badge {
-  display: none;
-  width: 90px;
-  height: 90px;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
-  font-weight: 900;
-  color: var(--text-light);
-  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
-  animation: badgePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Modifiers for Badge */
-.sticker-lab__badge--leather {
-  display: flex;
-  background: var(--text-black);
-  transform: rotate(-8deg);
-}
-
-.sticker-lab__badge--leather::after {
-  content: "LEATHER";
-}
-
-.sticker-lab__badge--lycra {
-  display: flex;
-  background: var(--accent);
-  /* Blue */
   border-radius: 50%;
-  transform: rotate(8deg);
+  z-index: -1;
+  animation: pulse 1.5s infinite;
 }
 
-.sticker-lab__badge--lycra::after {
-  content: "LYCRA";
-}
-
-@keyframes badgePop {
+@keyframes pulse {
   0% {
-    transform: scale(0);
+    transform: scale(0.5);
+    opacity: 1;
   }
 
   100% {
-    transform: scale(1) rotate(var(--rot));
+    transform: scale(2.5);
+    opacity: 0;
   }
+}
+
+.sticker-lab__add-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid black;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: transform 0.2s;
+  display: block;
+}
+
+.sticker-lab__add-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  background: var(--text-black);
+  transform: translate(-50%, -50%);
+}
+
+/* THE VERTICAL LINE */
+.sticker-lab__add-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 50%;
+  width: 2px;
+  background: var(--text-black);
+  transform: translate(-50%, -50%);
+}
+
+.sticker-lab__add-btn:hover {
+  transform: scale(1.1);
+  background: var(--bg);
 }
 
 .sticker-lab__modal {
@@ -3409,15 +3434,15 @@ input:checked+.slider:before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(5px);
-  z-index: 100;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  z-index: 100;
+  transition: opacity 0.3s;
 }
 
 .sticker-lab__modal--active {
@@ -3426,79 +3451,199 @@ input:checked+.slider:before {
 }
 
 .sticker-lab__card {
-  background: #fff;
-  border: 4px solid #000;
-  padding: 2.5rem;
+  background: var(--bg);
+  border: 3px solid var(--text-black);
+  padding: 4rem 2rem;
   width: 90%;
-  max-width: 320px;
+  max-width: 650px;
   text-align: center;
-  box-shadow: 15px 15px 0px #E7FC93;
-  transform: translateY(50px) rotate(-2deg);
-  transition: transform 0.3s ease;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s;
 }
 
 .sticker-lab__modal--active .sticker-lab__card {
-  transform: translateY(0) rotate(0deg);
+  transform: translateY(0);
 }
 
-.sticker-lab__card-title {
+.sticker-lab__question {
+  font-family: var(--font-body);
   font-size: 1.8rem;
-  margin-bottom: 2rem;
-  text-transform: uppercase;
+  margin-bottom: 3rem;
+  line-height: 1.2;
+  font-weight: 500;
 }
 
 .sticker-lab__options {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 4rem;
 }
 
 .sticker-lab__option {
   background: none;
   border: none;
+  padding: 0;
+  margin: 0;
   cursor: pointer;
+  transition: transform 0.2s;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  transition: transform 0.2s;
 }
 
 .sticker-lab__option:hover {
   transform: scale(1.1);
 }
 
-/* Option Previews */
 .sticker-lab__preview {
-  width: 60px;
-  height: 60px;
-  border: 2px solid #000;
+  width: 90px;
+  height: 90px;
+  margin-bottom: 15px;
+  min-width: 90px;
+  min-height: 90px;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
 }
 
-.sticker-lab__preview--square {
-  background: #000;
+.sticker-lab__preview--rhombus {
+  background:var(--text-black);
+  transform: rotate(45deg);
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  margin: 0 auto 30px;
+  border-radius: 0;
 }
 
 .sticker-lab__preview--circle {
-  background: #2F80ED;
+  background: var(--accent);
   border-radius: 50%;
-  border: none;
+  border: 2px solid var(--text-black);
+  box-sizing: border-box;
 }
 
 .sticker-lab__label {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  font-size: 1rem;
 }
 
 .sticker-lab__close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
   background: none;
   border: none;
-  text-decoration: underline;
-  font-family: var(--font-body);
-  color: #888;
+  font-size: 0.8rem;
+  font-weight: 900;
   cursor: pointer;
+  color: #999;
+}
+
+.sticker-lab__close-btn:hover {
+  color: var(--text-black);
+}
+
+/* BADGES */
+.sticker-lab__badge {
+  display: none;
+  width: 80px;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.7rem;
+  z-index: 20;
+}
+
+.sticker-lab__badge--leather {
+  display: flex;
+  background: var(--text-black);
+  color: var(--accent);
+  transform: rotate(45deg);
+  aspect-ratio: 1/1;
+}
+
+.sticker-lab__badge--leather::after {
+  content: "LEATHER";
+  transform: rotate(-45deg);
+}
+
+.sticker-lab__badge--lycra {
+  display: flex;
+  background: var(--accent);
+  color: black;
+  border-radius: 50%;
+  border: 2px solid black;
+  aspect-ratio: 1/1;
+  box-sizing: border-box;
+}
+
+.sticker-lab__badge--lycra::after {
+  content: "LYCRA";
+}
+
+/* FEEDBACK WRAPPER */
+.sticker-lab__feedback {
+  font-family: var(--font-title); 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sticker-lab__feedback-text {
+  background: white; 
+  border: 3px solid black; 
+  padding: 1.5rem 4rem;    
+  border-radius: 0;        
+  font-size: 3rem; 
+  font-weight: 800;  
+  text-transform: uppercase;
+  text-align: center;
+  color: black;
+  font-style: normal;   
+  opacity: 0;
+  transform: translateY(20px); 
+  transition: opacity 0.2s ease, transform 0.2s ease; 
+  pointer-events: none;
+}
+
+/* ACTIVE STATE */
+.sticker-lab__feedback--show .sticker-lab__feedback-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sticker-lab__feedback-text.is-correct {
+  background-color: var(--accent, #ccff00); 
+  color: black;
+  border-color: black;
+}
+
+.sticker-lab__feedback-text.is-wrong {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+/* MOBILE ADJUSTMENT */
+@media (max-width: 600px) {
+  .sticker-lab__feedback-text {
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    border-width: 2px;
+    box-shadow: 5px 5px 0px black;
+  }
 }
 
 /* SAN SIRO EXPERIENCE */
