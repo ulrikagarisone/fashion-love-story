@@ -2936,8 +2936,7 @@ input:checked+.slider:before {
 }
 
 /* LIGHTBULB TRANSITION SECTION */
-/* --- CONTAINER --- */
-.transition-bulb {
+.idea-flash {
   position: relative;
   background-color: var(--bg-blue);
   width: 100%;
@@ -2946,87 +2945,71 @@ input:checked+.slider:before {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  /* Crucial so the yellow explosion doesn't spill */
   padding: 0 1.5rem;
   box-sizing: border-box;
 }
 
-.bulb-container {
+.idea-flash__container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   gap: 3rem;
-  /* Space between image and text */
   z-index: 2;
   width: 100%;
 }
 
-/* --- THE VISUAL LAYERS --- */
-.bulb-visual {
+.idea-flash__visual {
   position: relative;
-  width: 180px;
-  /* Adjust based on Dirk's image width */
+  width: 280px;
   height: auto;
   display: flex;
   justify-content: center;
   z-index: 2;
 }
 
-/* Layer 1: The Yellow Glow (Starts small behind head) */
-.bulb-glow {
+.idea-flash__glow {
   position: absolute;
   top: -20px;
-  /* Align near head area */
   left: 50%;
-  width: 50px;
-  /* Start size */
+  width: 90px;
   height: 50px;
   background-color: var(--accent);
-  /* YOUR YELLOW */
   border-radius: 50%;
   transform: translateX(-50%) scale(0);
-  /* Start hidden */
   z-index: 1;
-  /* Behind Dirk */
   pointer-events: none;
 }
 
-/* Layer 2: Dirk (Base Image) */
-.dirk-img {
+.idea-flash__dirk {
   width: 100%;
   height: auto;
   position: relative;
   z-index: 2;
   display: block;
+  filter: grayscale(100%) brightness(0.8);
 }
 
-/* Layer 3: The Bulb (Floating on top) */
-.bulb-img {
+.idea-flash__bulb {
   position: absolute;
   width: 60px;
-  /* Adjust bulb size */
   top: -50px;
-  /* Floating above head */
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
   opacity: 0;
-  /* Start invisible (JS will pop it in) */
 }
 
-/* --- TEXT STYLING (YOUR ORIGINAL) --- */
-.bulb-content {
+.idea-flash__content {
   position: relative;
   z-index: 4;
-  /* Ensure text sits above everything initially */
   font-family: var(--font-title);
   line-height: 1.1;
   color: var(--accent);
 }
 
-.bulb-intro {
+.idea-flash__intro {
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 400;
@@ -3034,9 +3017,9 @@ input:checked+.slider:before {
   opacity: 0.9;
 }
 
-.bulb-title {
+.idea-flash__title {
   display: block;
-  font-size: clamp(2.5rem, 12vw, 4rem);
+  font-family: var(--font-title);
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 0.9;
@@ -3044,29 +3027,32 @@ input:checked+.slider:before {
   text-transform: uppercase;
 }
 
-/* --- MEDIA QUERIES --- */
 @media (min-width: 768px) {
-  .bulb-visual {
-    width: 220px;
-    /* Bigger on desktop */
+  .idea-flash__visual {
+    width: 320px;
   }
 
-  .bulb-img {
-    width: 80px;
+  .idea-flash__bulb {
+    width: 100px;
     top: -70px;
   }
 
-  .bulb-intro {
+  .idea-flash__intro {
     font-size: 1.25rem;
   }
 
-  .bulb-title {
+  .idea-flash__title {
     font-size: clamp(4rem, 10vw, 7rem);
   }
 }
 
+@media (min-width: 1024px) {
+  .idea-flash__visual {
+    width: 380px;
+  }
+}
+
 /* TYPOGRAPHIC PLAY SECTION */
-/* --- BLOCK --- */
 .breakthrough {
   background-color: var(--accent);
   color: var(--text-black);
@@ -3077,8 +3063,6 @@ input:checked+.slider:before {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  /* Crucial for stacking on top of pinned section */
   position: relative;
   z-index: 10;
 }

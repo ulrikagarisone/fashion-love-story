@@ -586,37 +586,36 @@ const initBulbTransition = () => {
 
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: ".transition-bulb",
-      start: "top top",     // Start when section hits top
-      end: "+=150%",        // Scroll distance to complete animation
-      scrub: 1,             // Smooth scrubbing
-      pin: true,            // Lock the screen in place
+      trigger: ".idea-flash",       
+      start: "top top",
+      end: "+=150%",
+      scrub: 1,
+      pin: true,
       anticipatePin: 1
     }
   });
 
-  // STEP 1: Bulb Pops Up above head
-  tl.to(".bulb-img", {
+  // Bulb Pops Up
+  tl.to(".idea-flash__bulb", {     
     autoAlpha: 1,
     y: 0,
-    scale: 1.2, /* Slight pulse size */
+    scale: 1.2,
     ease: "back.out(1.7)",
     duration: 1
   });
 
-  // STEP 2: The Explosion (Yellow Circle fills screen)
-  tl.to(".bulb-glow", {
-    scale: 150, /* Massive scale to cover 100vh/100vw */
+  // The Explosion
+  tl.to(".idea-flash__glow", {      
+    scale: 150,
     duration: 3,
     ease: "power2.inOut"
-  }, "+=0.2"); // Small pause before exploding
+  }, "+=0.2");
 
-  // STEP 3: Hide content (Dirk/Text) so next section is clean
-  // We fade them out as the yellow covers them
-  tl.to([".dirk-img", ".bulb-img", ".bulb-content"], {
+  // Hide content
+  tl.to([".idea-flash__dirk", ".idea-flash__bulb", ".idea-flash__content"], { 
     autoAlpha: 0,
     duration: 0.5
-  }, "<60%"); // Start fading when glow is 60% done
+  }, "<60%");
 
 };
 
