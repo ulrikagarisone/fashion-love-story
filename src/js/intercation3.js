@@ -14,6 +14,7 @@ const initStickerLab = () => {
     const questionText = document.getElementById('question');
     const feedbackText = document.getElementById('feedbackText');
     const feedbackContainer = document.getElementById('feedback');
+    const closeBtn = document.querySelector('.sticker-lab__close-btn'); // SELECT IT HERE
 
     // Open Modal
     document.querySelectorAll('.sticker-lab__add-btn').forEach(btn => {
@@ -27,7 +28,6 @@ const initStickerLab = () => {
                 { scale: 0, rotation: -90 },
                 {
                     scale: 1,
-                    // Update check to look for 'rhombus' class
                     rotation: (i, t) => t.classList.contains('sticker-lab__preview--rhombus') ? 45 : 0,
                     duration: 0.5,
                     ease: "back.out(1.7)"
@@ -49,12 +49,11 @@ const initStickerLab = () => {
 
             // 2. Set Text & Color Class
             if (isCorrect) {
-                // Use plain uppercase text to match your style
                 feedbackText.textContent = "MATCH";
-                feedbackText.classList.add('is-correct'); // Turns it GREEN
+                feedbackText.classList.add('is-correct');
             } else {
                 feedbackText.textContent = "TRY AGAIN";
-                feedbackText.classList.add('is-wrong');   // Turns it BLACK/WHITE
+                feedbackText.classList.add('is-wrong');
             }
 
             // 3. Show Animation
@@ -80,11 +79,17 @@ const initStickerLab = () => {
             }
         });
     });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('sticker-lab__modal--active');
+        });
+    }
 };
- 
+
 const init = () => {
     initStickerLab();
-    console.log('Fashion Love Story 2intreaction3 Ready');
+    console.log('Fashion Love Story Ready');
 };
 
 init();
