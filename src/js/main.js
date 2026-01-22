@@ -1,15 +1,69 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { TextPlugin } from 'gsap/TextPlugin'; 
 import '../styles/style.css';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-// 1. HERO ANIMATIONS
-const initHero = () => {
-  const football = document.querySelector('.hero__football');
-  if (!football) return;
-  setTimeout(() => football.classList.add('is-active'), 4200);
-};
+// hero animation
+function playHeroAnimations() {
+  const tl = gsap.timeline();
+
+  // 1. KISSY FACE POPS 
+  tl.to('.hero__kissy', {
+    scale: 1,
+    rotation: 0,
+    opacity: 1,
+    duration: 0.8,
+    ease: "elastic.out(1, 0.5)"
+  })
+
+    // 2. ATHLETE SLIDES IN 
+    .to('.hero__football', {
+      x: 0,
+      rotation: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: "power3.out"
+    }, "-=0.6");
+}
+
+// INTRO SEQUENCER
+function initIntro() {
+  const tl = gsap.timeline();
+  const curtain = document.querySelector('.intro-curtain');
+  const introText = document.querySelector('.intro-curtain__text');
+  const introKiss = document.querySelector('.intro-curtain__img');
+
+  // If no curtain exists (e.g. dev mode), just play hero and return
+  if (!curtain) {
+    playHeroAnimations();
+    return;
+  }
+
+  // 1. Intro Animation
+  tl.to(introText, { opacity: 1, scale: 1, duration: 1 })
+    .to(introKiss, { opacity: 1, scale: 1, rotation: -15, ease: "elastic.out" }, "-=0.2")
+    .to({}, { duration: 0.5 }) // Pause
+
+    // 2. Lift Curtain
+    .to(curtain, {
+      y: '-100%',
+      duration: 1.1,
+      ease: "power3.inOut",
+      onStart: () => {
+        // Start hero animations while curtain is lifting
+        gsap.delayedCall(0.3, playHeroAnimations);
+      },
+      onComplete: () => {
+        // Hide the curtain element completely
+        curtain.style.display = 'none';
+
+        // Recalculate ALL ScrollTriggers because the page height just changed.
+        ScrollTrigger.refresh();
+      }
+    });
+}
 
 // 2. HERO SCROLL MODEL
 function initHeroScrollModel() {
@@ -67,24 +121,34 @@ function initTransitionRunway() {
 // 4. SEPARATE WORLDS POP-IN
 function initSeparateWorldsPopIn() {
   const closingStatement = document.querySelector('.two-worlds__closing');
-  if (!closingStatement) return;
+  const grid = document.querySelector('.two-worlds__grid');
 
-  gsap.fromTo(closingStatement,
-    { opacity: 0, scale: 0.5, y: 50 },
-    {
-      opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'back.out(1.7)',
-      scrollTrigger: {
-        trigger: closingStatement,
-        start: "top 90%",
-        toggleActions: "play none none reverse",
-      }
+  if (!closingStatement || !grid) return;
+
+  gsap.set(closingStatement, {
+    opacity: 0,
+    scale: 0.8,
+    y: 50,
+    position: 'relative',
+    zIndex: 10
+  });
+
+  gsap.to(closingStatement, {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    duration: 0.6,
+    ease: 'back.out(1.7)',
+    scrollTrigger: {
+      trigger: grid,       
+      start: "bottom 75%", // Triggers when bottom of images is 75% down screen
+      toggleActions: "play none none reverse",
     }
-  );
+  });
 }
 
 
 // 6. LEATHER YEARS LOGIC
-// Desktop scroll lock 
 function initLeatherYearsScrollLock() {
   const section = document.querySelector('.leather-years');
   const dirkSection = document.querySelector('.leather-years__dirk');
@@ -254,54 +318,64 @@ const initEyeTracker = () => {
 function initVortex() {
   const container = document.querySelector('.vortex-container');
   if (!container) return;
-  const vortexContainer = document.querySelector('.vortex-container');
-  if (!vortexContainer) return;
+
   const phrases = [
-    "Leather + Lycra?",
-    "What if...?",
-    "Is it even possible?",
-    "Impossible...",
-    "Two different worlds?",
-    "Could they work together?",
-    "Everyone would say it's impossible...",
-    "Crazy.",
-    "Visionary?",
-    "Risk.",
-    "What if...?",
-    "Two worlds colliding..."
+    "Leather + Lycra?", "What if...?", "Is it even possible?",
+    "Impossible...", "Two different worlds?", "Could they work together?",
+    "Everyone would say it's impossible...", "Crazy.", "Visionary?",
+    "Risk.", "What if...?", "Two worlds colliding..."
   ];
 
-
+  let vortexInterval = null;
 
   function createWord() {
+    if (!document.body.contains(container)) return;
+
     const word = document.createElement('div');
     word.classList.add('vortex-word');
     word.innerText = phrases[Math.floor(Math.random() * phrases.length)];
-    // Add random styling variant
+
+    // Random styling & Position
     const variant = Math.floor(Math.random() * 3) + 1;
     word.classList.add(`word-variant-${variant}`);
-    // Randomize position slightly
     const randomX = (Math.random() - 0.5) * 50;
     const randomY = (Math.random() - 0.5) * 50;
-    // Apply animation with dynamic duration
-    const duration = Math.random() * 2 + 3; // 3-5 seconds
+    const duration = Math.random() * 2 + 3;
+
     word.style.animation = `flyOut ${duration}s linear forwards`;
-    // Add offset
     word.style.marginLeft = `${randomX}vw`;
     word.style.marginTop = `${randomY}vh`;
-    // Append
-    vortexContainer.appendChild(word);
-    setTimeout(() => {
-      word.remove();
-    }, duration * 1000);
 
+    container.appendChild(word);
+
+    setTimeout(() => word.remove(), duration * 1000);
   }
 
-  setInterval(createWord, 400);
-  createWord();
-  setTimeout(createWord, 100);
-  setTimeout(createWord, 200);
+  // CONTROLS: Only run when visible
+  function startVortex() {
+    if (!vortexInterval) {
+      createWord();
+      vortexInterval = setInterval(createWord, 400);
+    }
+  }
 
+  function stopVortex() {
+    if (vortexInterval) {
+      clearInterval(vortexInterval);
+      vortexInterval = null;
+      container.innerHTML = ''; // Clean up to prevent lag
+    }
+  }
+
+  ScrollTrigger.create({
+    trigger: container,
+    start: "top bottom",
+    end: "bottom top",
+    onEnter: startVortex,
+    onLeave: stopVortex,
+    onEnterBack: startVortex,
+    onLeaveBack: stopVortex
+  });
 }
 
 
@@ -370,10 +444,186 @@ const initFailedQuotes = () => {
 
 //interaction 3
 
+function initCardFlip() {
+  const cards = document.querySelectorAll('.leather-years__item-image');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      // Only do click toggle on mobile/tablet (below 1024px)
+      if (window.innerWidth < 1024) {
+        card.classList.toggle('is-flipped');
+      }
+    });
+  });
+}
+
+
+// FAILED DATES ANIMATIONS
+function initFailedDates() {
+  const section = document.querySelector('.failed-dates');
+  const title = document.querySelector('.failed-title');
+  const closingStatement = document.querySelector('.failed-statement');
+
+  if (!section) return;
+
+  // THE "FALLING" TITLE
+  gsap.fromTo(title,
+    {
+      y: -50,   
+      rotation: 0
+    },
+    {
+      y: 100,   
+      rotation: 8, 
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top center", 
+        end: "bottom top",   
+        scrub: 1             
+      }
+    }
+  );
+
+  // THE POP-IN 
+  if (closingStatement) {
+    gsap.set(closingStatement, {
+      opacity: 0,
+      scale: 0.8,
+      y: 50,
+      position: 'relative',
+      zIndex: 10
+    });
+
+    gsap.to(closingStatement, {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'back.out(1.7)',
+      scrollTrigger: {
+        trigger: closingStatement,
+        start: "top 85%", 
+        toggleActions: "play none none reverse",
+      }
+    });
+  }
+}
+
+//Captain MOVE ANIMATION
+const initCaptainAnimation = () => {
+  //Only run on Desktop
+  if (window.innerWidth < 1024) return;
+  const source = document.querySelector('.blue-item:nth-child(3) .img-wrapper');
+  const sourceLabel = document.querySelector('.blue-item:nth-child(3) .tag-vertical');
+  const dest = document.querySelector('.happy-accident__hero-wrapper');
+
+  //Logic to calculate positions
+  const moveCaptain = () => {
+    const state1 = source.getBoundingClientRect();
+    const state2 = dest.getBoundingClientRect();
+
+    const deltaX = state2.left - state1.left;
+    const deltaY = state2.top - state1.top;
+
+    // Create Timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".blind-date-blue",
+        start: "top top",
+        end: "bottom center",
+        scrub: 1.5,
+      }
+    });
+
+    // FADE OUT THE LABEL
+    tl.to(sourceLabel, { autoAlpha: 0, duration: 0.1 }, 0.15);
+
+    // THE MOVE 
+    tl.to(source, {
+      x: deltaX,
+      y: deltaY,
+      width: state2.width,
+      height: state2.height,
+      rotation: -5,
+      borderRadius: "0px",
+      ease: "power2.inOut",
+      zIndex: 100
+    }, 0);
+
+    // THE SWAP 
+    tl.to(dest, { autoAlpha: 1, duration: 0.2 }, "-=0.2");
+    tl.to(source, { autoAlpha: 0, duration: 0.2 }, "<");
+  };
+
+  // Wait for layout to be stable
+  setTimeout(moveCaptain, 100);
+
+  window.addEventListener('resize', () => {
+    ScrollTrigger.refresh();
+  });
+};
+
+const initHighlighter = () => {
+  // Select all highlights (in case you use it multiple times)
+  const highlights = document.querySelectorAll(".highlight-yellow");
+
+  highlights.forEach((highlight) => {
+    gsap.to(highlight, {
+      scrollTrigger: {
+        trigger: highlight,
+        start: "top 85%", // Triggers when the text enters the viewport
+        toggleActions: "play none none reverse"
+      },
+      backgroundPosition: "0% 0", // Slide the yellow side in
+      duration: 0.8,
+      ease: "power2.out"
+    });
+  });
+};
+
+const initBulbTransition = () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".idea-flash",       
+      start: "top top",
+      end: "+=150%",
+      scrub: 1,
+      pin: true,
+      anticipatePin: 1
+    }
+  });
+
+  // Bulb Pops Up
+  tl.to(".idea-flash__bulb", {     
+    autoAlpha: 1,
+    y: 0,
+    scale: 1.2,
+    ease: "back.out(1.7)",
+    duration: 1
+  });
+
+  // The Explosion
+  tl.to(".idea-flash__glow", {      
+    scale: 150,
+    duration: 3,
+    ease: "power2.inOut"
+  }, "+=0.2");
+
+  // Hide content
+  tl.to([".idea-flash__dirk", ".idea-flash__bulb", ".idea-flash__content"], { 
+    autoAlpha: 0,
+    duration: 0.5
+  }, "<60%");
+
+};
+
 
 function init() {
-
-  initHero();
+  playHeroAnimations();
+  initIntro();
   initHeroScrollModel();
   initTransitionRunway();
   initSeparateWorldsPopIn();
@@ -385,6 +635,18 @@ function init() {
   initFailedQuotes();
   initSanSiro();
 
+  initCardFlip();
+
+  initFailedDates();
+
+
+  initCaptainAnimation();
+
+
+  initHighlighter();
+
+
+  initBulbTransition();
   console.log('Fashion Love Story Ready');
 }
 init();

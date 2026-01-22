@@ -1,4 +1,8 @@
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import '../styles/style.css';
 
+gsap.registerPlugin(ScrollTrigger);
 
 const initBlindDateArchive = () => {
     const section = document.getElementById('blind-date-section');
