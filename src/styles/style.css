@@ -3752,16 +3752,25 @@ input:checked+.slider:before {
   font-weight: 700;
 }
 
+/* THE "INVISIBLE" SKIP BUTTON */
 .clapping-modal__skip {
-  color: #ff4444;
-  margin-top: 2rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-top: 4rem;
+  font-size: 0.75rem; /* have to change for mobile bigger */
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  text-decoration: underline;
-  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .clapping-modal__skip:hover {
-  color: #ff6666;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transform: translateY(-2px);
 }
 
 /* SAN SIRO SECTION */
@@ -3828,17 +3837,17 @@ input:checked+.slider:before {
 
 .san-siro__title {
   font-family: var(--font-title);
-  font-size: clamp(3rem, 10vw, 8rem);
+  font-size: var(--text-2xl);
   font-weight: 900;
   line-height: 0.85;
   margin-bottom: 1.5rem;
-  color: #fff;
+  color: var(--accent);
   mix-blend-mode: difference;
 }
 
 .san-siro__description {
-  color: #fff;
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--bg);
+  font-size: var(--text-body-desktop-size);
   line-height: 1.6;
   margin-bottom: 3rem;
   font-weight: 400;
@@ -4012,7 +4021,38 @@ input:checked+.slider:before {
   border-bottom: 2px solid rgba(231, 252, 147, 0.2);
   padding: 1rem 0;
 }
+.san-siro__scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 1s ease 1s;
+  pointer-events: none;
+  animation: shortBob 1.5s ease-in-out infinite;
+}
 
+.san-siro__scroll-hint--visible {
+  opacity: 1;
+}
+
+.san-siro__scroll-hint svg {
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(204, 255, 0, 0.5));
+}
+
+@keyframes shortBob {
+
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(10px);
+  }
+}
 @media (min-width: 768px) {
   .san-siro__card {
     transform: translateX(50px);
