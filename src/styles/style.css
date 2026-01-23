@@ -2218,8 +2218,8 @@ body {
 /* THE BLIND DATE */
 .blind-date-blue {
   padding-top: 8vh;
-    /* Gives the title and gallery breathing room before the pin starts */
-    padding-bottom: 5vh;
+  /* Gives the title and gallery breathing room before the pin starts */
+  padding-bottom: 5vh;
   z-index: 5;
   position: relative;
   background: var(--bg-blue);
@@ -2228,6 +2228,7 @@ body {
   padding: 3rem 1.5rem;
   box-sizing: border-box;
 }
+
 /* BASE STYLES (Mobile First) */
 .blind-date-blue {
   background-color: var(--bg-blue) !important;
@@ -4505,5 +4506,200 @@ input:checked+.slider:before {
     top: -10px;
     right: -12px;
     left: auto;
+  }
+}
+
+/*  MOMU FOOTER*/
+
+.momu-footer {
+  background-color: var(--text-black);
+  color: var(--bg);
+  padding: 60px 20px 40px 20px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.footer-header {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.momu-svg {
+  width: 120px;
+  height: auto;
+  display: block;
+  fill: var(--bg);
+}
+
+.footer-svg-path {
+  fill: var(--bg);
+  transition: fill 0.3s ease;
+}
+
+.footer-logo:hover .footer-svg-path {
+  fill: var(--accent);
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footer-nav a {
+  color: var(--bg);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: color 0.3s;
+  width: fit-content;
+}
+
+/* Hover Accent Dot */
+.footer-nav a:hover {
+  color: var(--accent);
+}
+
+.footer-nav a::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -10px;
+  width: 5px;
+  height: 5px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.footer-nav a:hover::after {
+  opacity: 1;
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.footer-label {
+  font-size: 0.7rem;
+  color: #666;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.footer-title {
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 10px 0;
+}
+
+.footer-accent {
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.footer-text {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: #999;
+}
+
+/* Newsletter Form */
+.footer-form {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--text-black);
+  padding-bottom: 8px;
+}
+
+.footer-form input {
+  background: transparent;
+  border: none;
+  color: var(--bg);
+  font-size: 1rem;
+  width: 100%;
+  outline: none;
+}
+
+.footer-form button {
+  background: transparent;
+  border: none;
+  color: var(--bg);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* BOTTOM */
+.footer-legal {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 20px;
+  font-size: 0.75rem;
+  color: #555;
+  border-top: 1px solid #1a1a1a;
+  padding-top: 30px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-social a {
+  color: #555;
+  text-decoration: none;
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+  .momu-footer {
+    padding: 80px 40px 40px 40px;
+  }
+
+  .footer-container {
+    gap: 80px;
+  }
+
+  .footer-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .footer-nav {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-newsletter {
+    justify-self: end;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .footer-legal {
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
