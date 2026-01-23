@@ -458,7 +458,6 @@ function initCardFlip() {
 }
 
 
-// FAILED DATES ANIMATIONS
 function initFailedDates() {
   const section = document.querySelector('.failed-dates');
   const title = document.querySelector('.failed-title');
@@ -466,26 +465,32 @@ function initFailedDates() {
 
   if (!section) return;
 
-  // THE "FALLING" TITLE
-  gsap.fromTo(title,
-    {
-      y: -50,   
-      rotation: 0
-    },
-    {
-      y: 100,   
-      rotation: 8, 
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top center", 
-        end: "bottom top",   
-        scrub: 1             
-      }
-    }
-  );
+  // Create a MatchMedia object
+  let mm = gsap.matchMedia();
 
-  // THE POP-IN 
+  // ONLY RUN ON DESKTOP (Min-width 1024px)
+  mm.add("(min-width: 1024px)", () => {
+    // THE "FALLING" TITLE
+    gsap.fromTo(title,
+      {
+        y: -50,
+        rotation: 0
+      },
+      {
+        y: 100,
+        rotation: 8,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top center",
+          end: "bottom top",
+          scrub: 1
+        }
+      }
+    );
+  });
+
+  // THE POP-IN (Keep this for both Mobile and Desktop)
   if (closingStatement) {
     gsap.set(closingStatement, {
       opacity: 0,
@@ -503,79 +508,76 @@ function initFailedDates() {
       ease: 'back.out(1.7)',
       scrollTrigger: {
         trigger: closingStatement,
-        start: "top 85%", 
+        start: "top 85%",
         toggleActions: "play none none reverse",
       }
     });
   }
 }
 
-//Captain MOVE ANIMATION
 const initCaptainAnimation = () => {
-  //Only run on Desktop
-  if (window.innerWidth < 1024) return;
-  const source = document.querySelector('.blue-item:nth-child(3) .img-wrapper');
-  const sourceLabel = document.querySelector('.blue-item:nth-child(3) .tag-vertical');
-  const dest = document.querySelector('.happy-accident__hero-wrapper');
+  let mm = gsap.matchMedia();
 
-  //Logic to calculate positions
-  const moveCaptain = () => {
-    const state1 = source.getBoundingClientRect();
-    const state2 = dest.getBoundingClientRect();
+  // ONLY RUNS ON DESKTOP (Min-Width 1024px)
+  mm.add("(min-width: 1024px)", () => {
+    const source = document.querySelector('.blue-item:nth-child(3) .img-wrapper');
+    const sourceLabel = document.querySelector('.blue-item:nth-child(3) .tag-vertical');
+    const dest = document.querySelector('.happy-accident__hero-wrapper');
 
-    const deltaX = state2.left - state1.left;
-    const deltaY = state2.top - state1.top;
+    if (!source || !dest) return;
 
-    // Create Timeline
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".blind-date-blue",
-        start: "top top",
-        end: "bottom center",
-        scrub: 1.5,
-      }
-    });
+    const moveCaptain = () => {
+      // Clear existing transforms to get clean "starting" positions
+      gsap.set(source, { clearProps: "all" });
 
-    // FADE OUT THE LABEL
-    tl.to(sourceLabel, { autoAlpha: 0, duration: 0.1 }, 0.15);
+      const state1 = source.getBoundingClientRect();
+      const state2 = dest.getBoundingClientRect();
 
-    // THE MOVE 
-    tl.to(source, {
-      x: deltaX,
-      y: deltaY,
-      width: state2.width,
-      height: state2.height,
-      rotation: -5,
-      borderRadius: "0px",
-      ease: "power2.inOut",
-      zIndex: 100
-    }, 0);
+      const deltaX = state2.left - state1.left;
+      const deltaY = state2.top - state1.top;
 
-    // THE SWAP 
-    tl.to(dest, { autoAlpha: 1, duration: 0.2 }, "-=0.2");
-    tl.to(source, { autoAlpha: 0, duration: 0.2 }, "<");
-  };
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".blind-date-blue",
+          start: "top top",
+          end: "bottom center",
+          scrub: 1.5,
+          invalidateOnRefresh: true // Forces math update if window resizes
+        }
+      });
 
-  // Wait for layout to be stable
-  setTimeout(moveCaptain, 100);
+      tl.to(sourceLabel, { autoAlpha: 0, duration: 0.1 }, 0.15)
+        .to(source, {
+          x: deltaX,
+          y: deltaY,
+          width: state2.width,
+          height: state2.height,
+          rotation: -5,
+          borderRadius: "0px",
+          ease: "power2.inOut",
+          zIndex: 100
+        }, 0)
+        .to(dest, { autoAlpha: 1, duration: 0.2 }, "-=0.2")
+        .to(source, { autoAlpha: 0, duration: 0.2 }, "<");
+    };
 
-  window.addEventListener('resize', () => {
-    ScrollTrigger.refresh();
+    // Use ScrollTrigger.refresh() to ensure layout is settled before math
+    ScrollTrigger.addEventListener("refreshInit", () => gsap.set(source, { clearProps: "all" }));
+    setTimeout(moveCaptain, 200);
   });
 };
 
 const initHighlighter = () => {
-  // Select all highlights (in case you use it multiple times)
   const highlights = document.querySelectorAll(".highlight-yellow");
 
   highlights.forEach((highlight) => {
     gsap.to(highlight, {
       scrollTrigger: {
         trigger: highlight,
-        start: "top 85%", // Triggers when the text enters the viewport
+        start: "top 85%",
         toggleActions: "play none none reverse"
       },
-      backgroundPosition: "0% 0", // Slide the yellow side in
+      backgroundPosition: "0% 0",
       duration: 0.8,
       ease: "power2.out"
     });
@@ -621,6 +623,43 @@ const initBulbTransition = () => {
 };
 
 
+const initMobileHorizontalScroll = () => {
+  const gallery = document.querySelector('.blue-gallery');
+  const section = document.querySelector('.blind-date-blue');
+  if (!gallery || !section) return;
+
+  let mm = gsap.matchMedia();
+
+  //the DESKTOP behavior here
+  mm.add("(min-width: 1024px)", () => {
+    gsap.set(gallery, { x: 0 });
+    return () => { };
+  });
+
+  mm.add("(max-width: 1023px)", () => {
+    const scrollAmount = gallery.scrollWidth - window.innerWidth;
+
+    gsap.to(gallery, {
+      x: () => -(scrollAmount + 150),
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".blue-gallery",
+        start: "top 20%",      
+        end: () => `+=${scrollAmount + 400}`,
+        pin: ".blind-date-blue",
+        pinSpacing: true,     
+        scrub: 1,
+        invalidateOnRefresh: true,
+      }
+    });
+
+    return () => {
+      gsap.set(gallery, { x: 0 });
+    };
+  });
+};
+
+
 function init() {
   playHeroAnimations();
   initIntro();
@@ -638,7 +677,7 @@ function init() {
   initCardFlip();
 
   initFailedDates();
-
+  initMobileHorizontalScroll();
 
   initCaptainAnimation();
 
@@ -647,6 +686,7 @@ function init() {
 
 
   initBulbTransition();
+
   console.log('Fashion Love Story Ready');
 }
 init();
