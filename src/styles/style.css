@@ -15,16 +15,21 @@
   --font-body: 'Work Sans', sans-serif;
 
   /* Font sizes */
+  --font-hero-mobile: clamp(2.8rem, 9vw, 5rem);
   --text-body-mobile-size: 1.063rem;
   --text-smaller-mobile-size: 0.95rem;
   --text-quote-size-mobile: 1.5rem;
   --text-body-tablet-size: 1.188rem;
   --text-body-desktop-size: 1.25rem;
   --text-body-start: 2.5rem;
-  --text-body-large: clamp(1rem, 0.8rem + 1vw, 1.3125rem);
+
+
+  --text-body-large: clamp(1rem, 0.8rem + 1vw, 1.25rem);
+  --text-body-start-paragraph: clamp(1.25rem, 2vw, 2rem);
 
   --font-title: 'Myriad Pro', 'Arial Black', sans-serif;
   --font-body: 'Work Sans', sans-serif;
+
 
   /* Fluid Typography using clamp() */
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -97,10 +102,10 @@ body {
 .nav__logo {
   display: block;
   width: auto;
-  height: 100px;
+  height: 40px;
   text-decoration: none;
   transition: transform 0.3s ease;
-  transform: scale(1.05)
+  transform: scale(1.05);
 }
 
 
@@ -110,12 +115,10 @@ body {
   display: block;
 }
 
-/* First M - always black */
 .nav__m-1 {
   fill: #010101;
 }
 
-/* Second M - black by default, red on hover */
 .nav__m-2 {
   fill: #010101;
   transition: fill 0.3s ease;
@@ -203,21 +206,30 @@ body {
   position: relative;
   z-index: 2;
   width: 100%;
-  min-height: 100vh;
-  padding: 2rem 1.5rem;
+  min-height: 100svh;
+  padding-top: clamp(20px, 12vh, 30px);
+  padding-bottom: var(--space-md);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .hero__content {
   width: 100%;
   max-width: 1400px;
-  margin: 0 auto;
+
+  /* OLD: only centered vertically */
+  /* margin-top: auto; */
+  /* margin-bottom: auto; */
+
+  /* NEW: Centers Vertically AND Horizontally */
+  margin: auto;
+
   display: flex;
   flex-direction: column;
-  /* Stack Vertically */
-  gap: 2rem;
+  gap: var(--space-md);
 }
 
 .hero__main-image {
@@ -257,13 +269,13 @@ body {
 .hero__title {
   color: var(--text-black);
   line-height: 0.85;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 .hero__title-line {
   font-family: var(--font-title);
   font-weight: 900;
-  font-size: clamp(3.5rem, 10vw, 5rem);
+  font-size: var(--font-hero-mobile);
   display: inline-block;
 }
 
@@ -328,7 +340,11 @@ body {
   pointer-events: none;
 }
 
-@media (min-width: 460px) {
+@media (min-width: 28.75rem) {
+
+  .nav__logo {
+    height: 70px;
+  }
 
   .hero__container {
     padding: 0 3rem;
@@ -398,7 +414,7 @@ body {
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 50rem) {
   .hero__football {
     right: 10%;
     bottom: 0%;
@@ -411,9 +427,13 @@ body {
     bottom: 69%;
     width: 150px;
   }
+
+  .nav__logo {
+    height: 100px;
+  }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .hero__football {
     right: 15%;
     bottom: -13%;
@@ -429,7 +449,7 @@ body {
 }
 
 /* LARGE SCREENS */
-@media (min-width: 1400px) {
+@media (min-width: 87.5rem) {
   .hero__content {
     gap: 4rem;
   }
@@ -518,16 +538,16 @@ body {
 }
 
 .two-worlds__intro {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .two-worlds__headline {
   font-family: var(--font-title);
   color: var(--bg);
-  font-size: clamp(2rem, 5vw, 5rem);
+  font-size: clamp(1.5rem, 5vw, 2rem);
   font-weight: 400;
   line-height: 1.1;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .two-worlds__headline-line {
@@ -594,36 +614,12 @@ body {
 .two-worlds__image-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 4/5;
-  overflow: hidden;
-}
-
-.two-worlds__draggable {
-  cursor: grab;
-  user-select: none;
-  touch-action: none;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.two-worlds__draggable:active {
-  cursor: grabbing;
 }
 
 .two-worlds__image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-
-.two-worlds__decoration {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  top: -15px;
-  right: -15px;
-  z-index: 2;
-  pointer-events: none;
+  height: auto;
+  display: block;
 }
 
 .two-worlds__caption {
@@ -662,10 +658,10 @@ body {
 
 .two-worlds__statement-large {
   display: block;
-  font-size: clamp(2.2rem, 10vw, 5rem);
+  font-size: clamp(2rem, 8vw, 3.5rem);
   font-weight: 900;
   letter-spacing: -0.02em;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 /* Tablet */
@@ -681,7 +677,6 @@ body {
 
   .two-worlds__paragraph {
     max-width: 500px;
-    font-size: var(--text-body-large);
   }
 
   .two-worlds__grid {
@@ -689,11 +684,8 @@ body {
     gap: var(--space-lg);
   }
 
-  .two-worlds__decoration {
-    width: 90px;
-    height: 90px;
-    top: -20px;
-    right: -20px;
+  .two-worlds__headline-line--offset {
+    margin-left: 0rem;
   }
 }
 
@@ -711,12 +703,8 @@ body {
     padding: 7rem 3rem;
   }
 
-  .two-worlds__headline {
-    font-size: 3.5rem;
-  }
-
   .two-worlds__headline-line--offset {
-    margin-left: 8rem;
+    margin-left: 2rem;
   }
 
   .two-worlds__content {
@@ -749,17 +737,16 @@ body {
   .two-worlds__statement-small {
     font-size: 2rem;
   }
+}
 
-  .two-worlds__statement-large {
-    font-size: 5rem;
+@media (min-width: 1163px) {
+  .two-worlds__headline-line--offset {
+    margin-left: clamp(2rem, 6vw, 12rem);
   }
 }
 
 /* Large desktop */
 @media (min-width: 1440px) {
-  .two-worlds__headline {
-    font-size: 2.5rem;
-  }
 
   .two-worlds__headline-line--offset {
     margin-left: 12rem;
@@ -795,7 +782,7 @@ body {
 
 .leather-years__dirk-title {
   font-family: var(--font-title);
-  font-size: var(--text-2xl);
+  font-size: clamp(2.5rem, 10vw, 4rem);
   font-weight: 900;
   line-height: 0.9;
   margin-bottom: var(--space-lg);
@@ -838,7 +825,7 @@ body {
 
 .leather-years__matchmaker {
   font-family: var(--font-title);
-  font-size: var(--text-xl);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: 900;
   line-height: 0.9;
   color: var(--text-black);
@@ -863,9 +850,9 @@ body {
 
 .leather-years__timeline-title {
   font-family: var(--font-title);
-  font-size: var(--text-lg);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   font-weight: 900;
-  text-align: center;
+  text-align: left;
   line-height: 0.9;
   margin-bottom: var(--space-lg);
   padding: 0 var(--space-md);
@@ -936,27 +923,20 @@ body {
 
 .leather-years__year {
   font-family: var(--font-title);
-  font-size: var(--text-lg);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   font-weight: 700;
   color: var(--text-black);
 }
 
 .leather-years__description {
   font-family: var(--font-body);
-  font-size: var(--text-sm);
+  font-size: var(--text-body-large);
   line-height: 1.4;
   color: var(--text-black);
 }
 
 /* Tablet */
-@media (min-width: 768px) {
-  .leather-years__dirk-title {
-    font-size: var(--text-xl);
-  }
-
-  .leather-years__dirk-paragraph {
-    font-size: var(--text-body-large);
-  }
+@media (min-width: 48rem) {
 
   .leather-years__item--large {
     width: 300px;
@@ -968,7 +948,7 @@ body {
 }
 
 /* Desktop */
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .leather-years {
     position: relative;
     min-height: 100vh;
@@ -1013,7 +993,7 @@ body {
   }
 
   .leather-years__dirk-title {
-    font-size: var(--text-xl);
+    font-size: clamp(4rem, 6vw, 6rem);
     margin-bottom: var(--space-lg);
     flex-shrink: 0;
   }
@@ -1032,13 +1012,13 @@ body {
     display: none;
   }
 
-  /* Boot image - Relative positioning fix */
+  /* Boot image */
   .leather-years__dirk-image {
     position: relative;
-    right: 15%;
-    top: -30%;
+    right: 35%;
+    top: -50%;
     transform: none;
-    width: 220px;
+    width: 160px;
     max-width: none;
     margin: 0;
     margin-left: auto;
@@ -1046,7 +1026,6 @@ body {
   }
 
   .leather-years__matchmaker {
-    font-size: var(--text-lg);
     text-align: right;
     margin-top: auto;
     max-width: 400px;
@@ -1113,10 +1092,6 @@ body {
     aspect-ratio: 3/4;
   }
 
-  .leather-years__year {
-    font-size: var(--text-lg);
-  }
-
   .leather-years__description {
     font-size: var(--text-base);
   }
@@ -1127,14 +1102,18 @@ body {
   }
 }
 
+@media (min-width: 72rem) {
+.leather-years__dirk-image {
+    width: 200px;
+    right: 15%;
+    top: -70%;
+  }
+}
+
 /* Large desktop */
-@media (min-width: 1440px) {
+@media (min-width: 90rem) {
   .leather-years__dirk {
     padding: var(--space-xl) 5rem;
-  }
-
-  .leather-years__dirk-title {
-    font-size: var(--text-2xl);
   }
 
   .leather-years__dirk-text {
@@ -1142,15 +1121,21 @@ body {
   }
 
   .leather-years__dirk-image {
-    width: 250px;
+    width: 200px;
     right: 15%;
-    top: -70%;
+    top: -85%;
   }
 
-  .leather-years__matchmaker {
-    font-size: var(--text-lg);
-    max-width: 450px;
-  }
+ .leather-years__matchmaker {
+   position: absolute;
+   bottom: 3rem;
+   right: 0;
+   max-width: 350px;
+   width: 100%;
+   margin: 0;
+   text-align: right;
+   z-index: 10;
+ }
 
   .leather-years__timeline {
     padding: var(--space-xl) 5rem;
@@ -1165,7 +1150,7 @@ body {
   }
 }
 
-@media (min-width: 1700px) {
+@media (min-width: 106.25rem) {
   .leather-years__dirk-image {
     width: 300px;
     right: 15%;
@@ -1174,8 +1159,6 @@ body {
 }
 
 /* LEATHER YEARS FLIP CARD  */
-
-/* 1. The Container (Scene) */
 .leather-years__item-image {
   perspective: 1000px;
   /* Creates the 3D depth */
@@ -1196,19 +1179,16 @@ body {
   /* Keeps children in 3D space */
 }
 
-/* 3. HOVER EFFECT (Desktop) */
 @media (min-width: 1024px) {
   .leather-years__item-image:hover .leather-years__card-inner {
     transform: rotateY(180deg);
   }
 }
 
-/* 4. CLICK EFFECT (Mobile Class) */
 .leather-years__item-image.is-flipped .leather-years__card-inner {
   transform: rotateY(180deg);
 }
 
-/* 5. Front and Back Faces */
 .leather-years__card-front,
 .leather-years__card-back {
   position: absolute;
@@ -1221,12 +1201,10 @@ body {
   /* Keeps image inside corners */
 }
 
-/* Front is just the image */
 .leather-years__card-front {
   background-color: var(--bg);
 }
 
-/* Back is the text explanation */
 .leather-years__card-back {
   background-color: var(--text-black);
   color: var(--accent);
@@ -1357,7 +1335,7 @@ body {
 }
 
 /* Tablet */
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .watching-lycra {
     padding: 6rem 2rem;
     min-height: 70vh;
@@ -1393,7 +1371,7 @@ body {
 }
 
 /* Desktop */
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .watching-lycra {
     padding: 8rem 3rem;
     min-height: 80vh;
@@ -1429,7 +1407,7 @@ body {
 }
 
 /* Large desktop */
-@media (min-width: 1440px) {
+@media (min-width: 90rem) {
   .watching-lycra__container {
     max-width: 1200px;
   }
@@ -1579,7 +1557,7 @@ body {
 }
 
 /* Tablet */
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .vortex-section {
     height: 70vh;
   }
@@ -1595,7 +1573,7 @@ body {
 }
 
 /* Desktop */
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .vortex-section {
     height: 80vh;
   }
@@ -1611,7 +1589,7 @@ body {
 }
 
 /* Large desktop */
-@media (min-width: 1440px) {
+@media (min-width: 90rem) {
   .vortex-word {
     font-size: 2.2rem;
   }
