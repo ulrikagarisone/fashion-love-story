@@ -3758,7 +3758,8 @@ input:checked+.slider:before {
   border: none;
   padding: 0;
   margin-top: 4rem;
-  font-size: 0.75rem; /* have to change for mobile bigger */
+  font-size: 0.75rem;
+  /* have to change for mobile bigger */
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: rgba(255, 255, 255, 0.3);
@@ -3807,13 +3808,11 @@ input:checked+.slider:before {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 100; 
-  pointer-events: auto; 
-  background: radial-gradient(
-    circle 400px at var(--x, 50%) var(--y, 50%), 
-    transparent 0%, 
-    rgba(0, 0, 0, 0.98) 40%
-  );
+  z-index: 100;
+  pointer-events: auto;
+  background: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%),
+      transparent 0%,
+      rgba(0, 0, 0, 0.98) 40%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -3961,8 +3960,8 @@ input:checked+.slider:before {
 }
 
 .san-siro__card {
-  background: rgba(10, 10, 10, 0.92);
-  border: 2px solid var(--accent);
+  background: rgba(10, 10, 10, 0.72);
+  border: 1px solid var(--accent);
   padding: clamp(2rem, 4vw, 3.5rem);
   max-width: 550px;
   width: 100%;
@@ -3970,7 +3969,6 @@ input:checked+.slider:before {
   transform: translateY(50px);
   transition: all 0.7s ease;
   backdrop-filter: blur(15px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
   pointer-events: auto;
 }
 
@@ -3983,7 +3981,7 @@ input:checked+.slider:before {
   font-family: var(--font-title);
   font-size: clamp(2rem, 5vw, 3rem);
   color: var(--accent);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: 900;
   line-height: 0.9;
 }
@@ -3992,15 +3990,12 @@ input:checked+.slider:before {
   font-size: clamp(1rem, 2.5vw, 1.2rem);
   line-height: 1.7;
   margin-bottom: 1.5rem;
-  color: #e8e8e8;
+  color: var(--text-light);
 }
 
 .san-siro__highlight {
-  border-left: 4px solid var(--accent);
-  padding-left: 1.5rem;
   font-weight: 700;
-  color: #fff;
-  margin-top: 2rem;
+  color: var(--accent);
 }
 
 .text-acid {
@@ -4021,6 +4016,7 @@ input:checked+.slider:before {
   border-bottom: 2px solid rgba(231, 252, 147, 0.2);
   padding: 1rem 0;
 }
+
 .san-siro__scroll-hint {
   position: absolute;
   bottom: 2rem;
@@ -4053,6 +4049,7 @@ input:checked+.slider:before {
     transform: translateX(-50%) translateY(10px);
   }
 }
+
 @media (min-width: 768px) {
   .san-siro__card {
     transform: translateX(50px);
@@ -4064,6 +4061,7 @@ input:checked+.slider:before {
 }
 
 /* THE LINEUP */
+/* --- LINEUP SECTION --- */
 .lineup {
   padding: 5rem 1rem;
   background: var(--bg);
@@ -4077,17 +4075,24 @@ input:checked+.slider:before {
   padding-bottom: 1rem;
 }
 
+/* FIX 1: Responsive Title */
 .lineup__title {
   font-family: var(--font-title);
-  font-size: 3rem;
+  /* Use clamp to automatically shrink on mobile */
+  font-size: clamp(2rem, 8vw, 3rem);
   text-transform: uppercase;
-  transform: scaleX(1.1);
   margin-bottom: 0.5rem;
+
+  /* Reset the scale on mobile to prevent overflow, add it back on desktop */
+  transform: none;
+  transform-origin: left;
+  line-height: 1;
 }
 
 .lineup__subtitle {
   font-family: var(--font-body);
-  font-size: var(--text-body-tablet-size);
+  font-size: 1rem;
+  opacity: 0.7;
 }
 
 .lineup__list {
@@ -4095,12 +4100,15 @@ input:checked+.slider:before {
   margin: 0 auto;
 }
 
+/* FIX 2: The Grid Layout */
 .archive-row {
   display: grid;
+  /* Desktop: Date (fixed) | Content (flexible) | Status (fixed right) */
   grid-template-columns: 100px 1fr auto;
   gap: 1.5rem;
   padding: 1.5rem 0;
-  border-bottom: 1px solid var(--text-black);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  /* Lighter border looks cleaner */
   text-decoration: none;
   color: var(--text-black);
   align-items: center;
@@ -4108,13 +4116,16 @@ input:checked+.slider:before {
 }
 
 .archive-row:hover {
-  background: #e6e6e6;
+  background: #f4f4f4;
+  /* Subtle hover color */
 }
 
 .archive-row__date {
   font-family: var(--font-body);
-  font-weight: 500;
-  opacity: 0.6;
+  font-weight: 600;
+  font-size: 0.9rem;
+  opacity: 0.5;
+  letter-spacing: 0.05em;
 }
 
 .archive-row__content {
@@ -4127,8 +4138,9 @@ input:checked+.slider:before {
 .archive-row__name {
   font-family: var(--font-title);
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
+  line-height: 1.1;
 }
 
 .archive-row:hover .archive-row__name {
@@ -4137,22 +4149,81 @@ input:checked+.slider:before {
 
 .archive-row__tag {
   background: var(--text-black);
-  color: var(--bg);
-  padding: 2px 6px;
-  font-size: 0.8rem;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 0.7rem;
   border-radius: 4px;
+  font-weight: bold;
+  transform: translateY(-2px);
 }
 
 .archive-row__story {
   font-style: italic;
   font-weight: 500;
+  color: #666;
+  font-size: 0.9rem;
 }
 
 .archive-row__arrow {
-  font-weight: 600;
-  font-size: 1.2rem;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: right;
+  min-width: 80px;
 }
 
+.archive-row__arrow--soon,
+.archive-row__arrow--locked {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  border-radius: 50px;
+  text-transform: uppercase;
+}
+
+.archive-row__arrow--locked {
+  opacity: 0.4;
+  border-color: #999;
+}
+
+/* MOBILE LAYOUT */
+@media (max-width: 768px) {
+  .lineup__title {
+    width: 100%;
+    word-wrap: break-word;
+  }
+
+  .archive-row {
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+    padding: 1.2rem 0;
+  }
+
+  .archive-row__date {
+    grid-column: 1 / -1;
+    font-size: 0.75rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .archive-row__content {
+    grid-column: 1;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .archive-row__name {
+    font-size: 1.3rem;
+  }
+
+  .archive-row__arrow {
+    grid-column: 2;
+    align-self: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .lineup__title {
+    transform: scaleX(1.1);
+  }
+}
 
 /* --- BLOCK: TICKET SECTION --- */
 .ticket-section {
@@ -4211,6 +4282,7 @@ input:checked+.slider:before {
   color: var(--text-light);
   margin-bottom: 2rem;
   transform: scaleX(1.1);
+  transform-origin: left;
 }
 
 .ticket__details {
