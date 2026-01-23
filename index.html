@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A Fashion Love Story | Dirk Bikkembergs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://use.typekit.net/svm3fbd.css">
   <link rel="stylesheet" href="src/styles/reset.css">
   <link rel="icon" type="image/svg+xml" href="/svg/xoxo.svg">
@@ -76,7 +77,8 @@
           <div class="hero__floating-elements">
             <picture>
               <source type="image/avif" srcset="/dist/images/lycra-400.avif">
-              <img src="/dist/images/lycra-400.png" alt="Football player" class="hero__football" width="200" height="250">
+              <img src="/dist/images/lycra-400.png" alt="Football player" class="hero__football" width="200"
+                height="250">
             </picture>
             <picture>
               <source type="image/avif" srcset="/dist/images/kissy1-400.avif">
@@ -126,10 +128,11 @@
             <div class="two-worlds__item two-worlds__item--fashion">
               <div class="two-worlds__image-wrapper">
                 <picture>
-                  <source type="image/avif" srcset="/dist/images/kissy_leather-400.avif 400w, /dist/images/kissy_leather-800.avif 800w"
+                  <source type="image/avif"
+                    srcset="/dist/images/kissy_leather-400.avif 400w, /dist/images/kissy_leather-800.avif 800w"
                     sizes="(max-width: 768px) 300px, 400px">
-                  <img src="/dist/images/kissy_leather-400.png" alt="Black leather fashion boot" class="two-worlds__image" width="198"
-                    height="346" loading="lazy">
+                  <img src="/dist/images/kissy_leather-400.png" alt="Black leather fashion boot"
+                    class="two-worlds__image" width="198" height="346" loading="lazy">
                 </picture>
               </div>
               <p class="two-worlds__caption">
@@ -141,10 +144,11 @@
             <div class="two-worlds__item two-worlds__item--sports">
               <div class="two-worlds__image-wrapper">
                 <picture>
-                  <source type="image/avif" srcset="/dist/images/kissy_lycra-400.avif 400w, /dist/images/kissy_lycra-800.avif 800w"
+                  <source type="image/avif"
+                    srcset="/dist/images/kissy_lycra-400.avif 400w, /dist/images/kissy_lycra-800.avif 800w"
                     sizes="(max-width: 768px) 300px, 400px">
-                  <img src="/dist/images/kissy_lycra-400.png" alt="Athlete in striped Lycra sportswear" class="two-worlds__image"
-                    width="198" height="359" loading="lazy">
+                  <img src="/dist/images/kissy_lycra-400.png" alt="Athlete in striped Lycra sportswear"
+                    class="two-worlds__image" width="198" height="359" loading="lazy">
                 </picture>
               </div>
               <p class="two-worlds__caption">
@@ -609,9 +613,9 @@
         </div>
         <div class="blue-body">
           <div class="inspector-control">
-            <span class="control-label">ARCHIVE MODE</span>
+            <label for="inspector-switch" class="control-label">ARCHIVE MODE</label>
             <label class="switch">
-              <input type="checkbox" id="inspector-switch">
+              <input type="checkbox" id="inspector-switch" aria-label="Toggle Archive Mode">
               <span class="slider"></span>
             </label>
           </div>
@@ -1038,8 +1042,9 @@
           </p>
           <form class="roster-form">
             <div class="roster-form__wrapper">
-              <input class="roster-form__input" type="email" placeholder="PLAYER EMAIL" required>
-              <button class="roster-form__btn" type="submit">+</button>
+              <input id="roster-email" class="roster-form__input" type="email" placeholder="PLAYER EMAIL" required>
+              <label for="roster-email" class="sr-only">Email Address</label>
+              <button class="roster-form__btn" type="submit" aria-label="Add to roster">+</button>
             </div>
           </form>
           <div class="ticket__barcode">
@@ -1085,14 +1090,15 @@
           <p class="footer-text">Get more stories from MoMu delivered to you.</p>
 
           <form class="footer-form">
-            <input type="email" placeholder="Your email address" required>
-            <button type="submit">→</button>
+            <label for="footer-email" class="sr-only">Subscribe to our newsletter</label>
+            <input id="footer-email" type="email" placeholder="Your email address" required>
+            <button type="submit" aria-label="Submit subscription">→</button>
           </form>
         </div>
       </div>
 
       <div class="footer-legal">
-        <p>© 2025 MoMu Fashion Museum Antwerp</p>
+        <p>© 2026 MoMu Fashion Museum Antwerp</p>
         <div class="footer-social">
           <a href="#">Instagram</a>
           <a href="#">Facebook</a>
