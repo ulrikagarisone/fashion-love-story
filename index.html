@@ -1,988 +1,1119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-loading">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A Fashion Love Story | Dirk Bikkembergs</title>
+  <link rel="preconnect" href="https://p.typekit.net">
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://use.typekit.net/svm3fbd.css">
   <link rel="stylesheet" href="src/styles/reset.css">
-  <link rel="icon" type="image/svg+xml" href="/svg/xoxo.svg" />
-  <meta name="description"
-    content="Explore how Dirk Bikkembergs revolutionized fashion by merging sports and haute couture in the 1980s.">
+  <link rel="stylesheet" href="./src/styles/style.css">
+  <link rel="icon" type="image/svg+xml" href="/svg/xoxo.svg">
+  <meta name="description" content="Explore how Dirk Bikkembergs revolutionized fashion.">
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
-  <nav class="nav">
-    <div class="nav__container">
-      <a href="https://www.momu.be" class="nav__logo" target="_blank" rel="noopener noreferrer">
-        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 443.67 281.63"
-          class="nav__logo-svg">
-          <title>MoMu - Mode Museum Antwerp</title>
-          <path class="nav__m-1"
-            d="M46.08,33.51l80.9,193.11L204.4,33.51h10.74v201.59c0,.1-2,.1-2,0v-105.79l-43.68,105.82-41.99-.52-43.68-105.3v105.79h-45.95V33.51h8.24Z" />
-          <path class="nav__m-2"
-            d="M227.37,33.51l80.9,193.11,77.42-193.11h10.74v201.59c0,.1-2,.1-2,0v-106.29l-43.68,106.32-41.99-.52-43.68-105.3v105.79h-45.95V33.51h8.24Z" />
-        </svg>
-      </a>
-    </div>
-  </nav>
-
-  <!-- INTRO ANIMATION -->
-  <div class="intro-curtain">
+  <div class="intro-curtain preloader" aria-hidden="true">
     <div class="intro-curtain__content">
-      <h1 class="intro-curtain__text">XOXO</h1>
-      <img src="/images/kissy1.png" class="intro-curtain__img" alt="Kiss">
+      <div class="intro-curtain__text">XOXO</div>
+
+      <picture class="intro-curtain__picture">
+        <source type="image/avif" srcset="/images/kissy1-400.avif 400w, /images/kissy1-800.avif 800w">
+        <img src="/images/kissy1-400.png" alt="Kissy detail" class="intro-curtain__img global-scroll-model__img"
+          loading="lazy">
+      </picture>
+
+      <div class="preloader__percentage-wrapper">
+        <span class="preloader__percentage">0%</span>
+      </div>
     </div>
+    <div class="preloader__visual"></div>
   </div>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero__background">
-      <svg class="hero__xoxo" viewBox="0 0 1200 800" aria-hidden="true"><text class="hero__xoxo-text" x="50%" y="50%"
-          text-anchor="middle" dominant-baseline="middle">XOXO</text></svg>
-    </div>
+  <div class="global-scroll-model">
+    <picture>
+      <source type="image/avif" srcset="/images/leather_cutout-400.avif 400w, /images/leather_cutout-800.avif 800w">
+      <img src="/images/leather_cutout-400.png" alt="Leather athlete walking" class="global-scroll-model__img">
+    </picture>
+  </div>
 
-    <div class="hero__container">
-      <div class="hero__content">
-
-        <div class="hero__text-group">
-          <span class="hero__designer-name">DIRK BIKKEMBERGS</span>
-          <h1 class="hero__title">
-            <span class="hero__title-line hero__title-line--top">THE</span>
-            <span class="hero__title-line hero__title-line--middle">LOVE</span>
-            <span class="hero__title-line hero__title-line--bottom">STORY</span>
-          </h1>
-          <p class="hero__tagline">
-            One designer's vision.<br />
-            The story that changed fashion.
-          </p>
-        </div>
-
-        <div class="hero__main-image">
-          <img src="/images/model_hero.png" alt="Dirk Bikkembergs model" class="hero__model" width="550" height="700" />
-          <img src="/images/leather_cutout.png" alt="Leather athlete walking" class="hero__scroll-model" width="350"
-            height="500" />
-        </div>
-
-        <div class="hero__spacer"></div>
-
-        <div class="hero__floating-elements">
-          <img src="/images/lycra.png" alt="Football player" class="hero__football" />
-          <img src="/images/kissy1.png" alt="Kiss" class="hero__kissy" />
-        </div>
-
+  <header>
+    <!-- NAVIGATION -->
+    <nav class="nav">
+      <div class="nav__container">
+        <a href="https://www.momu.be" class="nav__logo" target="_blank" rel="noopener noreferrer">
+          <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 443.67 281.63"
+            class="nav__logo-svg">
+            <title>MoMu - Mode Museum Antwerp</title>
+            <path class="nav__m-1"
+              d="M46.08,33.51l80.9,193.11L204.4,33.51h10.74v201.59c0,.1-2,.1-2,0v-105.79l-43.68,105.82-41.99-.52-43.68-105.3v105.79h-45.95V33.51h8.24Z" />
+            <path class="nav__m-2"
+              d="M227.37,33.51l80.9,193.11,77.42-193.11h10.74v201.59c0,.1-2,.1-2,0v-106.29l-43.68,106.32-41.99-.52-43.68-105.3v105.79h-45.95V33.51h8.24Z" />
+          </svg>
+        </a>
       </div>
-    </div>
-  </section>
+    </nav>
+  </header>
 
-  <!-- TRANSITION SECTION -->
-  <section class="transition">
-    <div class="transition__svg-container">
-      <img src="/svg/two_worlds_apart.svg" alt="Two Worlds apart">
-    </div>
-
-    <div class="transition__model">
-      <img src="/images/leather_cutout.png" alt="Model walking down the runway" class="transition__model-image" />
-    </div>
-  </section>
-
-  <!-- TWO WORLDS SECTION -->
-  <section class="two-worlds">
-    <div class="two-worlds__container">
-
-      <div class="two-worlds__intro">
-        <h2 class="two-worlds__headline">
-          <span class="two-worlds__headline-line">In the 1980s, fashion and sports</span>
-          <span class="two-worlds__headline-line two-worlds__headline-line--offset">lived on different planets.</span>
-        </h2>
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero__background">
+        <svg class="hero__xoxo" viewBox="0 0 1200 800" aria-hidden="true"><text class="hero__xoxo-text" x="50%" y="50%"
+            text-anchor="middle" dominant-baseline="middle">XOXO</text></svg>
       </div>
 
-      <div class="two-worlds__content">
-        <div class="two-worlds__text">
-          <p class="two-worlds__paragraph">
-            Fashion lived on <span class="bold-text">runways</span> and <span class="bold-text">red carpets</span>. It
-            was about <span class="bold-text">exclusivity,
-              craftsmanship</span> and materials that had been perfected over centuries.
-            Meanwhile, sports occupied a completely <span class="bold-italic-text">different universe</span>—one of
-            function, performance, and cutting-edge synthetic materials designed for
-            one purpose: to help athletes <span class="highlight-text">move faster, jump higher, push harder.</span>
-          </p>
-          <p class="two-worlds__paragraph">
-            At that time, the world of sports and the world of fashion were <span class="bold-text">two
-              different planets</span>, with apparently nothing in common. Until I—the Matchmaker—changed the rules
-            forever.
-          </p>
-        </div>
-
-        <div class="two-worlds__grid">
-          <div class="two-worlds__item two-worlds__item--fashion">
-            <div class="two-worlds__image-wrapper two-worlds__draggable" data-draggable="left">
-              <img src="/images/kissy_lycra.png" alt="Black leather fashion boot" class="two-worlds__image" />
-              <img src="/images/kissy_leather.png" alt="Decorative element" class="two-worlds__decoration" />
-            </div>
-            <p class="two-worlds__caption">
-              <span class="two-worlds__caption-bold">Fashion shows:</span><br />
-              Leather everywhere.<br />
-              <span class="two-worlds__caption-accent">Lycra? Never.</span>
+      <div class="hero__container">
+        <div class="hero__content">
+          <div class="hero__text-group">
+            <span class="hero__designer-name">DIRK BIKKEMBERGS</span>
+            <h1 class="hero__title">
+              <span class="hero__title-line hero__title-line--top">THE</span>
+              <span class="hero__title-line hero__title-line--middle">LOVE</span>
+              <span class="hero__title-line hero__title-line--bottom">STORY</span>
+            </h1>
+            <p class="hero__tagline">One designer's vision.<br>
+              The story that changed fashion.
             </p>
           </div>
+          <div class="hero__main-image">
+            <picture>
+              <source type="image/avif" srcset="/images/model_hero-400.avif 400w, /images/model_hero-800.avif 800w">
+              <img src="/images/model_hero-400.png" alt="Dirk Bikkembergs model" class="hero__model" width="550"
+                height="700" fetchpriority="high">
+            </picture>
 
-          <div class="two-worlds__item two-worlds__item--sports">
-            <div class="two-worlds__image-wrapper two-worlds__draggable" data-draggable="right">
-              <img src="/images/kissy_lycra.png" alt="Athlete in striped Lycra sportswear" class="two-worlds__image" />
-              <img src="/images/kissy_lycra.png" alt="Decorative element" class="two-worlds__decoration" />
-            </div>
-            <p class="two-worlds__caption">
-              <span class="two-worlds__caption-bold">Sports stadiums:</span><br />
-              Lycra everywhere.<br />
-              <span class="two-worlds__caption-accent">Leather? Too stiff.</span>
-            </p>
+          </div>
+          <div class="hero__spacer"></div>
+          <div class="hero__floating-elements">
+            <picture>
+              <source type="image/avif" srcset="/images/lycra-400.avif">
+              <img src="/images/lycra-400.png" alt="Football player" class="hero__football" width="200" height="250">
+            </picture>
+            <picture>
+              <source type="image/avif" srcset="/images/kissy1-400.avif">
+              <img src="/images/kissy1-400.png" alt="Kiss" class="hero__kissy" width="150" height="150">
+            </picture>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="two-worlds__closing">
-        <p class="two-worlds__statement">
-          <span class="two-worlds__statement-small">They lived in</span><br />
-          <span class="two-worlds__statement-large">SEPARATE WORLDS</span>
-        </p>
+    <!-- TRANSITION SECTION -->
+    <div class="transition">
+      <div class="transition__svg-container">
+        <img src="/svg/two_worlds_apart.svg" alt="Two Worlds apart">
+      </div>
+      <div class="transition__model">
       </div>
     </div>
-  </section>
 
-  <!-- LEATHER YEARS SECTION -->
-  <section class="leather-years">
-    <div class="leather-years__dirk">
-      <div class="leather-years__dirk-content">
-
-        <div class="leather-years__top-group">
-          <h2 class="leather-years__dirk-title">
-            DIRK<br />
-            BIKKEMBERGS
+    <!-- TWO WORLDS SECTION -->
+    <section class="two-worlds">
+      <div class="two-worlds__container">
+        <div class="two-worlds__intro">
+          <h2 class="two-worlds__headline">
+            <span class="two-worlds__headline-line">In the 1980s, fashion and sports</span>
+            <span class="two-worlds__headline-line two-worlds__headline-line--offset">lived on different planets.</span>
           </h2>
-
-          <div class="leather-years__dirk-text">
-            <p class="leather-years__dirk-paragraph">
-              <strong>Leather</strong> has been my partner for years.<br />
-              Strong. Reliable. Beautiful.<br />
-              I know every technique. Every stitch.
+        </div>
+        <div class="two-worlds__content">
+          <div class="two-worlds__text">
+            <p class="two-worlds__paragraph">
+              Fashion lived on <span class="bold-text">runways</span> and <span class="bold-text">red carpets</span>. It
+              was about <span class="bold-text">exclusivity,
+                craftsmanship</span> and materials that had been perfected over centuries.
+              Meanwhile, sports occupied a completely <span class="bold-italic-text">different universe</span>—one of
+              function, performance, and cutting-edge synthetic materials designed for
+              one purpose: to help athletes <span class="highlight-yellow">move faster, jump higher, push harder.</span>
             </p>
-
-            <p class="leather-years__dirk-paragraph">
-              <strong>Military precision</strong> in every boot.<br />
-              <em>Italian craftsmanship</em> in every jacket. Metal hardware that meant business.<br />
-              <strong>Laces</strong> that threaded through soles in ways no one had seen before.
-            </p>
-
-            <p class="leather-years__dirk-paragraph">
-              By 1995, I had mastered it completely.<br> My language was leather, <strong>metal</strong>, and
-              <br><strong>REBELLION.</strong>
+            <p class="two-worlds__paragraph">
+              At that time, the world of sports and the world of fashion were <span class="bold-text">two
+                different planets</span>, with apparently nothing in common. Until I—the Matchmaker—changed the rules
+              forever.
             </p>
           </div>
-        </div>
-
-        <div class="leather-years__footer">
-          <p class="leather-years__matchmaker">THE<br />MATCH<br>MAKER</p>
-          <div class="leather-years__dirk-image">
-            <img src="/images/dirk_boot.png" alt="Dirk Bikkembergs iconic boot" class="leather-years__boot" />
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- RIGHT SIDE - HORIZONTAL SCROLL -->
-    <div class="leather-years__timeline">
-      <h3 class="leather-years__timeline-title">THE LEATHER YEARS</h3>
-
-      <div class="leather-years__scroll-container">
-        <div class="leather-years__items">
-          <!-- Item 1 -->
-          <div class="leather-years__item leather-years__item--large">
-            <div class="leather-years__item-image">
-              <div class="leather-years__card-inner">
-                <div class="leather-years__card-front">
-                  <img src="/images/80s_boots.webp" alt="Late 80s brown tall boots" />
-                </div>
-                <div class="leather-years__card-back">
-                  <p>This was my breakthrough innovation - laces that wrapped through the actual soles, never seen
-                    before in footwear.
-                    This technique became my signature.</p>
-                </div>
+          <div class="two-worlds__grid">
+            <div class="two-worlds__item two-worlds__item--fashion">
+              <div class="two-worlds__image-wrapper">
+                <picture>
+                  <source type="image/avif"
+                    srcset="/images/kissy_leather-400.avif 400w, /images/kissy_leather-800.avif 800w"
+                    sizes="(max-width: 768px) 300px, 400px">
+                  <img src="/images/kissy_leather-400.png" alt="Black leather fashion boot" class="two-worlds__image"
+                    width="198" height="346" loading="lazy">
+                </picture>
               </div>
-            </div>
-
-            <div class="leather-years__item-info">
-              <span class="leather-years__year">late 80's</span>
-              <p class="leather-years__description">Brown tall boots front wrapped by laces through the soles</p>
-            </div>
-          </div>
-
-          <!-- Item 2 -->
-          <div class="leather-years__item leather-years__item--small">
-            <div class="leather-years__item-image">
-              <div class="leather-years__card-inner">
-                <div class="leather-years__card-front">
-                  <img src="/images/leather_jacket.jpg" alt="Perfecto leather jacket" />
-                </div>
-                <div class="leather-years__card-back">
-                  <p>Military precision in every design. Italian craftsmanship in every detail. Sculptural back panel
-                    became iconic. Bold
-                    proportions. Statement hardware. Metal accents that meant rebellion. This defined my rebellious DNA.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="leather-years__item-info">
-              <span class="leather-years__year">1988</span>
-              <p class="leather-years__description">Perfecto leather jacket with metal details</p>
-            </div>
-          </div>
-
-          <!-- Item 3 -->
-          <div class="leather-years__item leather-years__item--large">
-            <div class="leather-years__item-image">
-              <div class="leather-years__card-inner">
-                <div class="leather-years__card-front">
-                  <img src="/images/military_boots.webp" alt="1989 Military Combat Boots" />
-                </div>
-                <div class="leather-years__card-back">
-                  <p>I brought street functionality to the runway. Heavy-duty soles with purpose. Metal hardware that
-                    meant business. My signature was written in bold hardware and rebellion.</p>
-                </div>
-              </div>
-            </div>
-            <div class="leather-years__item-info">
-              <span class="leather-years__year">1989</span>
-              <p class="leather-years__description">Military combat boots with metal hardware</p>
-            </div>
-          </div>
-
-          <!-- Item 4 -->
-          <div class="leather-years__item leather-years__item--small">
-            <div class="leather-years__item-image">
-              <div class="leather-years__card-inner">
-                <div class="leather-years__card-front">
-                  <img src="/images/zipper_pants.jpg" alt="1990s Zipper Leather Pants" />
-                </div>
-                <div class="leather-years__card-back">
-                  <p>I transformed ordinary pants into functional armor. Zippers placed unconventionally—function over
-                    form.
-                    Strategic placement. Deliberate detail. This was fashion that meant business.</p>
-                </div>
-              </div>
-            </div>
-            <div class="leather-years__item-info">
-              <span class="leather-years__year">Early 1990s</span>
-              <p class="leather-years__description">All around zipper leather pants</p>
-            </div>
-          </div>
-
-          <!-- Item 5 -->
-          <div class="leather-years__item leather-years__item--large">
-            <div class="leather-years__item-image">
-              <div class="leather-years__card-inner">
-                <div class="leather-years__card-front">
-                  <img src="/images/bondage_jacket.webp" alt="1992 Leather Biker Jacket with Straps" />
-                </div>
-                <div class="leather-years__card-back">
-                  <p>I deconstructed the biker jacket. Straps and buckles repositioned strategically. I didn't follow
-                    tradition—I
-                    questioned it. Structure became my rebellious tool. The jacket transformed into sculptural armor.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="leather-years__item-info">
-              <span class="leather-years__year">1992</span>
-              <p class="leather-years__description">Biker jacket with multiple straps and buckles</p>
-            </div>
-          </div>
-
-          <!-- Item 6 -->
-          <div class="leather-years__item leather-years__item--small">
-            <div class="leather-years__item-image">
-              <div class="leather-years__card-inner">
-                <div class="leather-years__card-front">
-                  <img src="/images/light_boots.webp" alt="1993 Light Leather Boots" />
-                </div>
-                <div class="leather-years__card-back">
-                  <p>My signature lacing evolved. Now through the heel.
-                    Threading boundaries of what footwear could be. I pushed technical limits with every stitch.
-                    Function merged with form
-                    in ways never seen. The heel became sculptural, purposeful, rebellious.</p>
-                </div>
-              </div>
-            </div>
-            <div class="leather-years__item-info">
-              <span class="leather-years__year">1993</span>
-              <p class="leather-years__description">Lace through heel boots</p>
-            </div>
-          </div>
-
-          <!-- Item 7 -->
-          <div class="leather-years__item leather-years__item--large">
-            <div class="leather-years__item-image">
-              <div class="leather-years__card-inner">
-                <div class="leather-years__card-front">
-                  <img src="/images/flap_boots.jpg" alt="1994 Black Boots with Flap and Laces" />
-                </div>
-                <div class="leather-years__card-back">
-                  <p>All signature elements merged into one. Military flaps. Strategic heel lacing. An aggressive
-                    silhouette that
-                    meant business. This was peak leather craftsmanship. The boot had become revolutionary.</p>
-                </div>
-              </div>
-            </div>
-            <div class="leather-years__item-info">
-              <span class="leather-years__year">1994</span>
-              <p class="leather-years__description">Black boots with flap and laces through the heel</p>
-            </div>
-          </div>
-
-          <!-- Item 8 -->
-          <div class="leather-years__item leather-years__item--small">
-            <div class="leather-years__item-image">
-              <div class="leather-years__card-inner">
-                <div class="leather-years__card-front">
-                  <img src="/images/hole_jacket.webp" alt="Leather jacket" />
-                </div>
-                <div class="leather-years__card-back">
-                  <p>Mastery. Complete. My final statement in pure leather. Before Lycra. Leather. Metal. Rebellion.
-                    Perfected.
-                    Crystallized. Undeniable. 1995 marked the end of one era. And the beginning of everything that would
-                    follow.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="leather-years__item-info">
-              <span class="leather-years__year">1995</span>
-              <p class="leather-years__description">Rebel leather jacket</p>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    </div>
-  </section>
-  <!-- WATCHING LYCRA SECTION -->
-  <section class="watching-lycra">
-    <div class="watching-lycra__container">
-
-      <div class="watching-lycra__content">
-        <p class="watching-lycra__text">
-          <span class="watching-lycra__line">But then I started</span>
-          <span class="watching-lycra__eye">
-            <span class="watching-lycra__pupil">
-              <span class="watching-lycra__glint"></span>
-            </span>
-          </span>
-          <span class="watching-lycra__eye">
-            <span class="watching-lycra__pupil">
-              <span class="watching-lycra__glint"></span>
-            </span>
-          </span>
-          <span class="watching-lycra__highlight watching-lycra__highlight--yellow">watching athletes.</span>
-        </p>
-
-        <p class="watching-lycra__text">
-          <span class="watching-lycra__line">I saw Lycra</span>
-          <span class="watching-lycra__highlight watching-lycra__highlight--blue">in action.</span>
-          <span class="watching-lycra__line">The way he moved.</span>
-        </p>
-
-        <p class="watching-lycra__text">
-          <span class="watching-lycra__line">The way he breathed. The way he performed.</span>
-        </p>
-
-        <p class="watching-lycra__text">
-          <span class="watching-lycra__line">There was something there.</span>
-        </p>
-
-        <p class="watching-lycra__text">
-          <span class="watching-lycra__line">Potential.</span>
-          <span class="watching-lycra__eye">
-            <span class="watching-lycra__pupil">
-              <span class="watching-lycra__glint"></span>
-            </span>
-          </span>
-          <span class="watching-lycra__eye">
-            <span class="watching-lycra__pupil">
-              <span class="watching-lycra__glint"></span>
-            </span>
-          </span>
-          <span class="watching-lycra__line">Power.</span>
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- QUESTIONS VORTEX SECTION -->
-  <section class="vortex-section">
-    <div class="vortex-container" id="vortex">
-      <span class="vortex-question visually-hidden">Leather + Lycra?</span>
-      <span class="vortex-question visually-hidden">What if...?</span>
-      <span class="vortex-question visually-hidden">Is it even possible?</span>
-      <span class="vortex-question visually-hidden">Everyone would say it's impossible...</span>
-      <span class="vortex-question visually-hidden">Two different worlds?</span>
-      <span class="vortex-question visually-hidden">Could they work together?</span>
-      <span class="vortex-question visually-hidden">What if...?</span>
-      <span class="vortex-question visually-hidden">Two different worlds?</span>
-      <span class="vortex-question visually-hidden">Everyone would say it's impossible...</span>
-      <span class="vortex-question visually-hidden">Is it even possible?</span>
-    </div>
-
-    <div class="vortex-center">
-      <img src="/images/dirk_thinking.png" alt="Dirk Bikkembergs thinking" class="vortex-center__image" />
-    </div>
-  </section>
-
-  <!-- THE MEETING SECTION -->
-  <section class="meeting">
-    <div class="meeting__container">
-
-      <div class="meeting__headline">
-        <div class="meeting__line-top">THE</div>
-
-        <div class="meeting__line-split">
-          <span class="meeting__text">MEET</span>
-
-          <div class="meeting__image-wrapper">
-            <img src="/images/meeting_photo.png" alt="Dirk Bikkembergs with model" class="meeting__image" />
-          </div>
-
-          <span class="meeting__text">ING</span>
-        </div>
-      </div>
-
-      <div class="meeting__content">
-        <h3 class="meeting__subtitle">I ARRANGED A MEETING</h3>
-
-        <p class="meeting__paragraph">
-          I was trying to <span class="highlight-yellow">FORCE them</span>
-          to be something they're not.<br>
-          Leather trying to stretch.<br>
-          Lycra trying to structure.<br>
-          But what if they don't have<br>
-          to change who they are?
-        </p>
-
-        <p class="meeting__big-question">
-          WHAT IF THEY DON'T COMPETE,<br>
-          BUT <span class="text-blue">COMPLEMENT?</span>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE FAILED DATES SECTION -->
-  <section class="failed-dates">
-    <div class="failed-container">
-
-      <!-- TITLE -->
-      <div class="failed-header">
-        <h2 class="failed-title">THE FAILED DATES</h2>
-      </div>
-
-      <!-- MAIN CONTENT -->
-      <div class="failed-body">
-
-        <!-- LEFT: TEXT -->
-        <div class="failed-text-col">
-
-          <h3 class="failed-subtitle">THE SUFFOCATING ROMANCE</h3>
-
-          <div class="failed-intro">
-            <p class="intro-line">In the late 1990s, I strayed</p>
-            <p class="intro-line intro-line--indent">from who I was.</p>
-          </div>
-
-          <div class="failed-content">
-            <span class="failed-number">01</span>
-            <div class="failed-prose">
-              <p class="failed-p">
-              I was the guy known for tough tailoring and rugged boots, but Paris wanted something else. The avant-garde world
-              demanded it. <strong>Elegant. Refined.</strong>
+              <p class="two-worlds__caption">
+                <span class="two-worlds__caption-bold">Fashion shows:</span><br>
+                Leather everywhere.<br>
+                <span class="two-worlds__caption-accent">Lycra? Never.</span>
               </p>
-              <p class="failed-p">
-                But deep down? It felt like a cage.
+            </div>
+            <div class="two-worlds__item two-worlds__item--sports">
+              <div class="two-worlds__image-wrapper">
+                <picture>
+                  <source type="image/avif"
+                    srcset="/images/kissy_lycra-400.avif 400w, /images/kissy_lycra-800.avif 800w"
+                    sizes="(max-width: 768px) 300px, 400px">
+                  <img src="/images/kissy_lycra-400.png" alt="Athlete in striped Lycra sportswear"
+                    class="two-worlds__image" width="198" height="359" loading="lazy">
+                </picture>
+              </div>
+              <p class="two-worlds__caption">
+                <span class="two-worlds__caption-bold">Sports stadiums:</span><br>
+                Lycra everywhere.<br>
+                <span class="two-worlds__caption-accent">Leather? Too stiff.</span>
               </p>
             </div>
           </div>
-
         </div>
+        <div class="two-worlds__closing">
+          <p class="two-worlds__statement">
+            <span class="two-worlds__statement-small">They lived in</span><br>
+            <span class="two-worlds__statement-large">SEPARATE WORLDS</span>
+          </p>
+        </div>
+      </div>
+    </section>
 
-        <!-- RIGHT: IMAGE WITH QUOTES -->
-        <div class="failed-image-col">
-          <div class="failed-image-wrapper">
+    <!-- LEATHER YEARS SECTION -->
+    <section class="leather-years">
+      <div class="leather-years__dirk">
+        <div class="leather-years__dirk-content">
+          <div class="leather-years__top-group">
+            <h2 class="leather-years__dirk-title">
+              DIRK<br>
+              BIKKEMBERGS
+            </h2>
+            <div class="leather-years__dirk-text">
+              <p class="leather-years__dirk-paragraph">
+                <span class="bold-text">Leather</span> has been my partner for years.<br>
+                Strong. Reliable. Beautiful.<br>
+                I know every technique. Every stitch.
+              </p>
+              <p class="leather-years__dirk-paragraph">
+                <span class="bold-text">Military precision</span> in every boot.<br>
+                <span class="bold-text">Italian craftsmanship</span> in every jacket. Metal hardware that meant
+                business.<br>
+                <span class="bold-text">Laces</span> that threaded through soles in ways no one had seen before.
+              </p>
+              <p class="leather-years__dirk-paragraph">
+                By 1995, I had mastered it completely.<br> My language was leather, <span
+                  class="bold-text">metal</span>, and
+                <br><span class="bold-text">REBELLION.</span>
+              </p>
+            </div>
+          </div>
+          <div class="leather-years__footer">
+            <p class="leather-years__matchmaker">THE<br>MATCH<br>MAKER</p>
+            <div class="leather-years__dirk-image">
+              <picture>
+                <source type="image/avif" srcset="/images/dirk_boot-400.avif 400w, /images/dirk_boot-800.avif 800w"
+                  sizes="(max-width: 768px) 160px, 400px">
+                <img src="/images/dirk_boot-400.png" alt="Dirk Bikkembergs iconic boot" class="leather-years__boot"
+                  width="160" height="265" loading="lazy">
+              </picture>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="failed-indicator">
-              <span class="indicator-icon">+</span>
-              <span class="indicator-text">READ NOTES</span>
+      <!-- RIGHT SIDE - HORIZONTAL SCROLL -->
+      <div class="leather-years__timeline">
+        <h3 class="leather-years__timeline-title">THE LEATHER YEARS</h3>
+        <div class="leather-years__scroll-container">
+          <div class="leather-years__items">
+            <!-- Item 1 -->
+            <div class="leather-years__item leather-years__item--large">
+              <div class="leather-years__item-image">
+                <div class="leather-years__card-inner">
+                  <div class="leather-years__card-front">
+                    <picture>
+                      <source type="image/avif"
+                        srcset="/images/80s_boots-400.avif 400w, /images/80s_boots-800.avif 800w">
+                      <img src="/images/80s_boots-400.jpg" alt="80s Boots" width="400" height="500" loading="lazy">
+                    </picture>
+                  </div>
+                  <div class="leather-years__card-back">
+                    <p>This was my breakthrough innovation - laces that wrapped through the actual soles, never seen
+                      before in footwear.
+                      This technique became my signature.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="leather-years__item-info">
+                <span class="leather-years__year">late 80's</span>
+                <p class="leather-years__description">Brown tall boots front wrapped by laces through the soles</p>
+              </div>
             </div>
 
-            <img src="/images/date1.png" alt="The Failed Date" class="failed-img">
-
-            <div class="failed-quotes">
-              <div class="failed-quote failed-quote--leather">
-                <span class="quote-label">LEATHER:</span>
-                <p>"I wanted to impress. I wore my finest. Metallic accessories. Delicate lattice work. Everything
-                  elegant.
-                  Everything refined."</p>
+            <!-- Item 2 -->
+            <div class="leather-years__item leather-years__item--small">
+              <div class="leather-years__item-image">
+                <div class="leather-years__card-inner">
+                  <div class="leather-years__card-front">
+                    <picture>
+                      <source type="image/avif"
+                        srcset="/images/leather_jacket-400.avif 400w, /images/leather_jacket-800.avif 800w">
+                      <img src="/images/leather_jacket-400.jpg" alt="Perfecto leather jacket" width="400" height="500"
+                        loading="lazy">
+                    </picture>
+                  </div>
+                  <div class="leather-years__card-back">
+                    <p>Military precision in every design. Italian craftsmanship in every detail. Sculptural back panel
+                      became iconic. Bold
+                      proportions. Statement hardware. Metal accents that meant rebellion. This defined my rebellious
+                      DNA.
+                    </p>
+                  </div>
+                </div>
               </div>
+              <div class="leather-years__item-info">
+                <span class="leather-years__year">1988</span>
+                <p class="leather-years__description">Perfecto leather jacket with metal details</p>
+              </div>
+            </div>
 
-              <div class="failed-quote failed-quote--lycra">
-                <span class="quote-label">LYCRA:</span>
-                <p>"But there's no room for me here. It's too... stiff. Too precious. I can't breathe. I can't move."
+            <!-- Item 3 -->
+            <div class="leather-years__item leather-years__item--large">
+              <div class="leather-years__item-image">
+                <div class="leather-years__card-inner">
+                  <div class="leather-years__card-front">
+                    <picture>
+                      <source type="image/avif"
+                        srcset="/images/military_boots-400.avif 400w, /images/military_boots-800.avif 800w">
+                      <img src="/images/military_boots-400.jpg" alt="1989 Military Combat Boots" width="400"
+                        height="500" loading="lazy">
+                    </picture>
+                  </div>
+                  <div class="leather-years__card-back">
+                    <p>I brought street functionality to the runway. Heavy-duty soles with purpose. Metal hardware that
+                      meant business. My signature was written in bold hardware and rebellion.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="leather-years__item-info">
+                <span class="leather-years__year">1989</span>
+                <p class="leather-years__description">Military combat boots with metal hardware</p>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="leather-years__item leather-years__item--small">
+              <div class="leather-years__item-image">
+                <div class="leather-years__card-inner">
+                  <div class="leather-years__card-front">
+                    <picture>
+                      <source type="image/avif"
+                        srcset="/images/zipper_pants-400.avif 400w, /images/zipper_pants-800.avif 800w">
+                      <img src="/images/zipper_pants-400.jpg" alt="1990s Zipper Leather Pants" width="400" height="500"
+                        loading="lazy">
+                    </picture>
+                  </div>
+                  <div class="leather-years__card-back">
+                    <p>I transformed ordinary pants into functional armor. Zippers placed unconventionally—function over
+                      form.
+                      Strategic placement. Deliberate detail. This was fashion that meant business.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="leather-years__item-info">
+                <span class="leather-years__year">Early 1990s</span>
+                <p class="leather-years__description">All around zipper leather pants</p>
+              </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="leather-years__item leather-years__item--large">
+              <div class="leather-years__item-image">
+                <div class="leather-years__card-inner">
+                  <div class="leather-years__card-front">
+                    <picture>
+                      <source type="image/avif"
+                        srcset="/images/bondage_jacket-400.avif 400w, /images/bondage_jacket-800.avif 800w">
+                      <img src="/images/bondage_jacket-400.jpg" alt="1992 Leather Biker Jacket with Straps" width="400"
+                        height="500" loading="lazy">
+                    </picture>
+                  </div>
+                  <div class="leather-years__card-back">
+                    <p>I deconstructed the biker jacket. Straps and buckles repositioned strategically. I didn't follow
+                      tradition—I
+                      questioned it. Structure became my rebellious tool. The jacket transformed into sculptural armor.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="leather-years__item-info">
+                <span class="leather-years__year">1992</span>
+                <p class="leather-years__description">Biker jacket with multiple straps and buckles</p>
+              </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="leather-years__item leather-years__item--small">
+              <div class="leather-years__item-image">
+                <div class="leather-years__card-inner">
+                  <div class="leather-years__card-front">
+                    <picture>
+                      <source type="image/avif"
+                        srcset="/images/light_boots-400.avif 400w, /images/light_boots-800.avif 800w">
+                      <img src="/images/light_boots-400.jpg" alt="1993 Light Leather Boots" width="400" height="500"
+                        loading="lazy">
+                    </picture>
+                  </div>
+                  <div class="leather-years__card-back">
+                    <p>My signature lacing evolved. Now through the heel.
+                      Threading boundaries of what footwear could be. I pushed technical limits with every stitch.
+                      Function merged with form
+                      in ways never seen. The heel became sculptural, purposeful, rebellious.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="leather-years__item-info">
+                <span class="leather-years__year">1993</span>
+                <p class="leather-years__description">Lace through heel boots</p>
+              </div>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="leather-years__item leather-years__item--large">
+              <div class="leather-years__item-image">
+                <div class="leather-years__card-inner">
+                  <div class="leather-years__card-front">
+                    <picture>
+                      <source type="image/avif"
+                        srcset="/images/flap_boots-400.avif 400w, /images/flap_boots-800.avif 800w">
+                      <img src="/images/flap_boots-400.jpg" alt="1994 Black Boots with Flap" width="400" height="500"
+                        loading="lazy">
+                    </picture>
+                  </div>
+                  <div class="leather-years__card-back">
+                    <p>All signature elements merged into one. Military flaps. Strategic heel lacing. An aggressive
+                      silhouette that
+                      meant business. This was peak leather craftsmanship. The boot had become revolutionary.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="leather-years__item-info">
+                <span class="leather-years__year">1994</span>
+                <p class="leather-years__description">Black boots with flap and laces through the heel</p>
+              </div>
+            </div>
+
+            <!-- Item 8 -->
+            <div class="leather-years__item leather-years__item--small">
+              <div class="leather-years__item-image">
+                <div class="leather-years__card-inner">
+                  <div class="leather-years__card-front">
+                    <picture>
+                      <source type="image/avif"
+                        srcset="/images/hole_jacket-400.avif 400w, /images/hole_jacket-800.avif 800w">
+                      <img src="/images/hole_jacket-400.jpg" alt="1995 Rebel Leather Jacket" width="400" height="500"
+                        loading="lazy">
+                    </picture>
+                  </div>
+                  <div class="leather-years__card-back">
+                    <p>Mastery. Complete. My final statement in pure leather. Before Lycra. Leather. Metal. Rebellion.
+                      Perfected.
+                      Crystallized. Undeniable. 1995 marked the end of one era. And the beginning of everything that
+                      would
+                      follow.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="leather-years__item-info">
+                <span class="leather-years__year">1995</span>
+                <p class="leather-years__description">Rebel leather jacket</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WATCHING LYCRA SECTION -->
+    <div class="watching-lycra">
+      <div class="watching-lycra__container">
+        <div class="watching-lycra__content">
+          <p class="watching-lycra__text">
+            <span class="watching-lycra__line">But then I started</span>
+            <span class="watching-lycra__eye">
+              <span class="watching-lycra__pupil">
+                <span class="watching-lycra__glint"></span>
+              </span>
+            </span>
+            <span class="watching-lycra__eye">
+              <span class="watching-lycra__pupil">
+                <span class="watching-lycra__glint"></span>
+              </span>
+            </span>
+            <span class="watching-lycra__highlight watching-lycra__highlight--yellow">watching athletes.</span>
+          </p>
+          <p class="watching-lycra__text">
+            <span class="watching-lycra__line">I saw Lycra</span>
+            <span class="watching-lycra__highlight watching-lycra__highlight--blue">in action.</span>
+            <span class="watching-lycra__line">The way he moved.</span>
+          </p>
+          <p class="watching-lycra__text">
+            <span class="watching-lycra__line">The way he breathed. The way he performed.</span>
+          </p>
+          <p class="watching-lycra__text">
+            <span class="watching-lycra__line">There was something there.</span>
+          </p>
+          <p class="watching-lycra__text">
+            <span class="watching-lycra__line">Potential.</span>
+            <span class="watching-lycra__eye">
+              <span class="watching-lycra__pupil">
+                <span class="watching-lycra__glint"></span>
+              </span>
+            </span>
+            <span class="watching-lycra__eye">
+              <span class="watching-lycra__pupil">
+                <span class="watching-lycra__glint"></span>
+              </span>
+            </span>
+            <span class="watching-lycra__line">Power.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS  -->
+    <div class="vortex-section">
+      <div class="vortex-container" id="vortex">
+        <span class="vortex-word">Leather + Lycra?</span>
+        <span class="vortex-word">What if...?</span>
+        <span class="vortex-word">Is it even possible?</span>
+        <span class="vortex-word">Impossible...</span>
+        <span class="vortex-word">Two different worlds?</span>
+        <span class="vortex-word">Could they work together?</span>
+        <span class="vortex-word">Risk.</span>
+        <span class="vortex-word">Visionary?</span>
+        <span class="vortex-word">Crazy.</span>
+        <span class="vortex-word">Two worlds colliding...</span>
+      </div>
+
+      <div class="vortex-center">
+        <picture>
+          <source type="image/avif" srcset="/images/dirk_thinking-400.avif 400w, /images/dirk_thinking-800.avif 800w">
+          <source type="image/webp" srcset="/images/dirk_thinking-400.webp 400w, /images/dirk_thinking-800.webp 800w">
+          <img src="/images/dirk_thinking-400.jpg" alt="Dirk Bikkembergs thinking" class="vortex-center__image"
+            width="400" height="400" loading="lazy">
+        </picture>
+      </div>
+    </div>
+
+    <!-- THE MEETING SECTION -->
+    <section class="meeting">
+      <div class="meeting__container">
+        <div class="meeting__headline">
+          <div class="meeting__line-top">THE</div>
+          <div class="meeting__line-split">
+            <span class="meeting__text">MEET</span>
+            <div class="meeting__image-wrapper">
+              <picture>
+                <source type="image/avif"
+                  srcset="/images/meeting_photo-400.avif 400w, /images/meeting_photo-800.avif 800w">
+                <img src="/images/meeting_photo-400.jpg" alt="Dirk Bikkembergs with model" class="meeting__image"
+                  width="150" height="200" loading="lazy">
+              </picture>
+            </div>
+            <span class="meeting__text">ING</span>
+          </div>
+        </div>
+        <div class="meeting__content">
+          <h3 class="meeting__subtitle">I ARRANGED A MEETING</h3>
+          <p class="meeting__paragraph">
+            I was trying to <span class="highlight-yellow">FORCE them</span>
+            to be something they're not.<br>
+            Leather trying to stretch.<br>
+            Lycra trying to structure.<br>
+            But what if they don't have<br>
+            to change who they are?
+          </p>
+          <p class="meeting__big-question">
+            WHAT IF THEY DON'T COMPETE,<br>
+            BUT <span class="text-blue">COMPLEMENT?</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE FAILED DATES SECTION -->
+    <section class="failed-dates">
+      <div class="failed-container">
+        <div class="failed-header">
+          <h2 class="failed-title">THE FAILED DATES</h2>
+        </div>
+        <div class="failed-body">
+          <div class="failed-text-col">
+            <h3 class="failed-subtitle">THE SUFFOCATING ROMANCE</h3>
+            <div class="failed-intro">
+              <p class="intro-line">In the late 1990s, I strayed</p>
+              <p class="intro-line intro-line--indent">from who I was.</p>
+            </div>
+            <div class="failed-content">
+              <span class="failed-number">01</span>
+              <div class="failed-prose">
+                <p class="failed-p">
+                  I was the guy known for tough tailoring and rugged boots, but Paris wanted something else. The
+                  avant-garde world demanded it. <span class="bold-text">Elegant. Refined.</span>
+                </p>
+                <p class="failed-p">
+                  But deep down? It felt like a cage.
                 </p>
               </div>
             </div>
 
           </div>
-        </div>
 
-      </div>
-
-      <!-- BOTTOM TEXT -->
-      <div class="failed-bottom">
-        <p class="failed-bottom-text">
-          Leather had tried to be someone else.<br>
-          And lycra? Lycra wasn't even in the picture yet.
-        </p>
-      </div>
-
-      <!-- CLOSING STATEMENT -->
-      <div class="failed-closing">
-        <p class="failed-statement">
-          <span class="failed-statement-small">Undeniable craft.</span><br>
-          <span class="failed-statement-large">FORCED FIT</span>
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="blind-date-blue" id="blind-date-section">
-    <div class="blue-container">
-      <div class="blue-header">
-        <h2 class="blue-title">BLIND<br> DATE WITH DESTINY</h2>
-      </div>
-
-      <div class="blue-body">
-
-        <div class="inspector-control">
-          <span class="control-label">ARCHIVE MODE</span>
-          <label class="switch">
-            <input type="checkbox" id="inspector-switch">
-            <span class="slider"></span>
-          </label>
-        </div>
-
-        <div class="blue-gallery">
-          <figure class="blue-item">
-            <div class="img-wrapper">
-              <img src="/images/look1.png" class="blue-img">
-              <div class="secret-layer">
-                <span class="scatter-txt" style="top:10%; left:10%;">TOO MUCH LYCRA</span>
-                <span class="scatter-txt" style="bottom:20%; right:5%;">[REJECTED]</span>
-                <span class="scatter-txt" style="top:50%; left:20%; transform:rotate(90deg);">NO SHAPE</span>
+          <div class="failed-image-col">
+            <div class="failed-image-wrapper">
+              <div class="failed-indicator">
+                <span class="indicator-icon">+</span>
+                <span class="indicator-text">READ NOTES</span>
+              </div>
+              <picture>
+                <source type="image/avif" srcset="/images/date1-400.avif 400w, /images/date1-800.avif 800w">
+                <source type="image/webp" srcset="/images/date1-400.webp 400w,  /images/date1-800.webp 800w">
+                <img src="/images/date1-400.jpg" alt="The Failed Date" class="failed-img" width="500" height="650"
+                  loading="lazy">
+              </picture>
+              <div class="failed-quotes">
+                <div class="failed-quote failed-quote--leather">
+                  <span class="quote-label">LEATHER:</span>
+                  <p>"I wanted to impress. I wore my finest. Metallic accessories. Delicate lattice work. Everything
+                    elegant.
+                    Everything refined."</p>
+                </div>
+                <div class="failed-quote failed-quote--lycra">
+                  <span class="quote-label">LYCRA:</span>
+                  <p>"But there's no room for me here. It's too... stiff. Too precious. I can't breathe. I can't move."
+                  </p>
+                </div>
               </div>
             </div>
-            <span class="tag-vertical">LOOK 01</span>
-          </figure>
+          </div>
+        </div>
 
-          <figure class="blue-item">
-            <div class="img-wrapper">
-              <img src="/images/look3.png" class="blue-img">
-              <div class="secret-layer">
-                <span class="scatter-txt" style="top:15%; right:10%;">STIFF LEATHER</span>
-                <span class="scatter-txt" style="bottom:10%; left:5%;">FAILED FIT</span>
-                <span class="scatter-txt" style="top:40%; right:20%;">NO MOVEMENT</span>
+        <div class="failed-bottom">
+          <p class="failed-bottom-text">
+            Leather had tried to be someone else.<br>
+            And lycra? Lycra wasn't even in the picture yet.
+          </p>
+        </div>
+
+        <div class="failed-closing">
+          <p class="failed-statement">
+            <span class="failed-statement-small">Undeniable craft.</span><br>
+            <span class="failed-statement-large">FORCED FIT</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE BLIND DATE WITH DESTINY SECTION -->
+    <section class="blind-date-blue" id="blind-date-section">
+      <div class="blue-container">
+        <div class="blue-header">
+          <h2 class="blue-title">BLIND DATE WITH DESTINY</h2>
+        </div>
+        <div class="blue-body">
+          <div class="inspector-control">
+            <label for="inspector-switch" class="control-label">ARCHIVE MODE</label>
+            <label class="switch">
+              <input type="checkbox" id="inspector-switch" aria-label="Toggle Archive Mode">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="blue-gallery">
+            <figure class="blue-item">
+              <div class="img-wrapper">
+                <picture>
+                  <source type="image/avif" srcset="/images/look1-400.avif 400w, /images/look1-800.avif 800w">
+                  <img src="/images/look1-400.jpg" class="blue-img" alt="Look 1 - Too much Lycra" width="400"
+                    height="600" loading="lazy">
+                </picture>
+                <div class="secret-layer">
+                  <span class="scatter-txt" style="top:10%; left:10%;">TOO MUCH LYCRA</span>
+                  <span class="scatter-txt" style="bottom:20%; right:5%;">[REJECTED]</span>
+                  <span class="scatter-txt" style="top:50%; left:20%; transform:rotate(90deg);">NO SHAPE</span>
+                </div>
               </div>
-            </div>
-            <span class="tag-vertical">LOOK 02</span>
-          </figure>
-
-          <figure class="blue-item">
-            <div class="img-wrapper">
-              <img src="/images/look2.png" class="blue-img">
-              <div class="secret-layer secret-layer--perfect">
-                <span class="scatter-txt" style="top:5%; left:30%;">PERFECT BALANCE</span>
-                <span class="scatter-txt" style="bottom:15%; right:15%;">PILOT SAMPLE</span>
-                <span class="scatter-txt" style="top:60%; left:10%; transform:rotate(-15deg);">THE CAPTAIN</span>
+              <span class="tag-vertical">LOOK 01</span>
+            </figure>
+            <figure class="blue-item">
+              <div class="img-wrapper">
+                <picture>
+                  <source type="image/avif" srcset="/images/look3-400.avif 400w, /images/look3-800.avif 800w">
+                  <img src="/images/look3-400.jpg" class="blue-img" alt="Look 2 - Stiff leather" width="400"
+                    height="600" loading="lazy">
+                </picture>
+                <div class="secret-layer">
+                  <span class="scatter-txt" style="top:15%; right:10%;">STIFF LEATHER</span>
+                  <span class="scatter-txt" style="bottom:10%; left:5%;">FAILED FIT</span>
+                  <span class="scatter-txt" style="top:40%; right:20%;">NO MOVEMENT</span>
+                </div>
               </div>
+              <span class="tag-vertical">LOOK 02</span>
+            </figure>
+            <figure class="blue-item">
+              <div class="img-wrapper">
+                <picture>
+                  <source type="image/avif" srcset="/images/look2-400.avif 400w, /images/look2-800.avif 800w">
+                  <img src="/images/look2-400.jpg" class="blue-img" alt="Look 3 - Perfect balance" width="400"
+                    height="600" loading="lazy">
+                </picture>
+                <div class="secret-layer secret-layer--perfect">
+                  <span class="scatter-txt" style="top:5%; left:30%;">PERFECT BALANCE</span>
+                  <span class="scatter-txt" style="bottom:15%; right:15%;">PILOT SAMPLE</span>
+                  <span class="scatter-txt" style="top:60%; left:10%; transform:rotate(-15deg);">THE CAPTAIN</span>
+                </div>
+              </div>
+              <span class="tag-vertical">LOOK 03</span>
+            </figure>
+          </div>
+          <div class="blue-content">
+            <div class="blue-prose">
+              <p class="blue-p">
+                <span class="blue-p-subtitle">Circa 2000</span> <br>
+                Disaster struck in Milan. My model fell ill. I had the clothes, but absolutely no one to fill them.
+              </p>
+              <p class="blue-p">
+                Desperate, I pulled a stockroom worker with similar measurements.
+                He wasn't just an employee; he was a captain.
+              </p>
             </div>
-            <span class="tag-vertical">LOOK 03</span>
+            <span class="giant-number">02</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE HAPPY ACCIDENT -->
+    <section class="happy-accident">
+      <div class="happy-accident__container">
+        <div class="happy-accident__content">
+          <div class="happy-accident__prose">
+            <h3 class="happy-accident__lead">
+              That stockroom worker wasn't just any employe
+            </h3>
+            <p class="happy-accident__text">
+              He was the captain of <span class="highlight-yellow">FC Fossombrone</span>,
+              a small-town Italian football club. A real athlete. Testing real designs.
+            </p>
+            <p class="happy-accident__text">
+              I started picking clothes based on his reactions. He showed me the truth:
+            </p>
+            <div class="happy-accident__feedback">
+              <p class="happy-accident__line">
+                Too much Leather? <span class="happy-accident__truth">He can't perform.</span>
+              </p>
+              <p class="happy-accident__line">
+                Too much Lycra? <span class="happy-accident__truth">He feels naked.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="happy-accident__visuals">
+          <figure class="happy-accident__team-wrapper">
+            <picture>
+              <source type="image/avif"
+                srcset="/images/football_team-400.avif 400w, /images/football_team-800.avif 800w">
+              <img src="/images/football_team-400.jpg" alt="FC Fossombrone team" class="happy-accident__team-img"
+                width="500" height="350" loading="lazy">
+            </picture>
+            <figcaption class="happy-accident__caption">FC FOSSOMBRONE, CIRCA 2000</figcaption>
           </figure>
-        </div>
-
-        <div class="blue-content">
-          <div class="blue-prose">
-            <p class="blue-p">
-              <span class="blue-p-subtitle">Circa 2000</span> <br>
-              Disaster struck in Milan. My model fell ill. I had the clothes, but absolutely no one to fill them.
-            </p>
-            <p class="blue-p">
-              Desperate, I pulled a stockroom worker with similar measurements.
-              He wasn't just an employee; he was a captain.
-            </p>
-          </div>
-          <span class="giant-number">02</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section class="happy-accident">
-    <div class="happy-accident__container">
-      <div class="happy-accident__content">
-        <div class="happy-accident__prose">
-          <h3 class="happy-accident__lead">
-            That stockroom worker wasn't just any employe
-          </h3>
-          <p class="happy-accident__text">
-            He was the captain of <span class="highlight-yellow">FC Fossombrone</span>,
-            a small-town Italian football club. A real athlete. Testing real designs.
-          </p>
-          <p class="happy-accident__text">
-            I started picking clothes based on his reactions. He showed me the truth:
-          </p>
-          <div class="happy-accident__feedback">
-            <p class="happy-accident__line">
-              Too much Leather? <span class="happy-accident__truth">He can't perform.</span>
-            </p>
-            <p class="happy-accident__line">
-              Too much Lycra? <span class="happy-accident__truth">He feels naked.</span>
-            </p>
+          <div class="happy-accident__hero-wrapper">
+            <picture>
+              <source type="image/avif" srcset="/images/model_cutout-400.avif 400w, /images/model_cutout-800.avif 800w">
+              <img src="/images/model_cutout-400.jpg" alt="The Captain" class="happy-accident__hero-img" width="450"
+                height="700" loading="lazy">
+            </picture>
+            <div class="happy-accident__tag">
+              <span class="happy-accident__tag-label">THE CAPTAIN</span>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="happy-accident__visuals">
-        <figure class="happy-accident__team-wrapper">
-          <img src="/images/football_team.png" alt="FC Fossombrone team" class="happy-accident__team-img">
-          <figcaption class="happy-accident__caption">FC FOSSOMBRONE, CIRCA 2000</figcaption>
-        </figure>
-        <div class="happy-accident__hero-wrapper">
-          <img src="/images/model_cutout.png" alt="The Captain" class="happy-accident__hero-img">
-          <div class="happy-accident__tag">
-            <span class="happy-accident__tag-label">THE CAPTAIN</span>
-          </div>
+    <!-- THE IDEA SECTION -->
+    <section class="idea-flash">
+      <div class="idea-flash__container">
+        <div class="idea-flash__visual">
+          <div class="idea-flash__glow"></div>
+          <picture>
+            <source type="image/avif" srcset="/images/dirk_drawing-400.avif 400w, /images/dirk_drawing-800.avif 800w">
+            <img src="/images/dirk_drawing-400.jpg" alt="Dirk Thinking" class="idea-flash__dirk" width="500"
+              height="600" loading="lazy">
+          </picture>
+          <picture>
+            <source type="image/avif" srcset="/images/light_bulb-400.avif 400w, /images/light_bulb-800.avif 800w">
+            <img src="/images/light_bulb-400.jpg" alt="Idea" class="idea-flash__bulb" width="200" height="200"
+              loading="lazy">
+          </picture>
+        </div>
+        <div class="idea-flash__content">
+          <p class="idea-flash__intro">I'm learning. I'm watching.</p>
+          <h2 class="idea-flash__title">I FOUND A WAY</h2>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="idea-flash">
-    <div class="idea-flash__container">
-      <div class="idea-flash__visual">
-        <div class="idea-flash__glow"></div>
-        <img src="/images/dirk_drawing.png" alt="Dirk Thinking" class="idea-flash__dirk">
-        <img src="/images/light_bulb.png" alt="Idea" class="idea-flash__bulb">
-      </div>
-      <div class="idea-flash__content">
-        <p class="idea-flash__intro">I'm learning. I'm watching.</p>
-        <h2 class="idea-flash__title">I FOUND A WAY</h2>
-      </div>
-    </div>
-  </section>
-
-  <section class="breakthrough">
-    <div class="breakthrough__container">
-      <div class="breakthrough__header">
-        <h2 class="breakthrough__title">THE UNION</h2>
-        <p class="breakthrough__subtitle">The solution to perfect love story</p>
-        <p class="breakthrough__text">
-          The problem wasn't the materials—it was the approach.
-          Why force structure? Why force movement?
-          What if they played their own game?
-        </p>
-      </div>
-      <div class="breakthrough__composition">
-        <div class="breakthrough__group breakthrough__group--leather">
-          <h3 class="breakthrough__word breakthrough__word--solid">LEATHER</h3>
-          <p class="breakthrough__desc">
-            <strong>STRUCTURE</strong><br>
-            Shoulders & Chest.
+    <!-- THE BREAKTHROUGH SECTION -->
+    <section class="breakthrough">
+      <div class="breakthrough__container">
+        <div class="breakthrough__header">
+          <h2 class="breakthrough__title">THE UNION</h2>
+          <p class="breakthrough__subtitle">The solution to perfect love story</p>
+          <p class="breakthrough__text">
+            The problem wasn't the materials—it was the approach.
+            Why force structure? Why force movement?
+            What if they played their own game?
           </p>
         </div>
-        <div class="breakthrough__group breakthrough__group--lycra">
-          <h3 class="breakthrough__word breakthrough__word--outline">LYCRA</h3>
-          <p class="breakthrough__desc breakthrough__desc--right">
-            <strong>MOVEMENT</strong><br>
-            Back & Underarms.
+        <div class="breakthrough__composition">
+          <div class="breakthrough__group breakthrough__group--leather">
+            <h3 class="breakthrough__word breakthrough__word--solid">LEATHER</h3>
+            <p class="breakthrough__desc">STRUCTURE<br>
+              Shoulders & Chest.
+            </p>
+          </div>
+          <div class="breakthrough__group breakthrough__group--lycra">
+            <h3 class="breakthrough__word breakthrough__word--outline">LYCRA</h3>
+            <p class="breakthrough__desc breakthrough__desc--right">
+              MOVEMENT<br>
+              Back & Underarms.
+            </p>
+          </div>
+          <div class="breakthrough__visual">
+            <picture>
+              <source type="image/avif"
+                srcset="/images/kissy_solution-400.avif 400w, /images/kissy_solution-800.avif 800w">
+              <source type="image/webp"
+                srcset="/images/kissy_solution-400.webp 400w, /images/kissy_solution-800.webp 800w">
+              <img src="/images/kissy_solution-400.jpg" alt="The Perfect Match" class="breakthrough__img" width="600"
+                height="800" loading="lazy">
+            </picture>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE STICKER LAB SECTION -->
+    <section class="sticker-lab">
+      <div class="sticker-lab__container">
+        <div class="sticker-lab__header">
+          <h2 class="sticker-lab__title">
+            STYLE THE <span class="sticker-lab__title--outline">ATHLETE</span>
+          </h2>
+          <p class="sticker-lab__instruction">
+            Tap the <span class="sticker-lab__icon">+</span> to dress the player.
           </p>
         </div>
-        <div class="breakthrough__visual">
-          <img src="/images/kissy_solution.png" alt="The Perfect Match" class="breakthrough__img">
+        <div class="sticker-lab__stage">
+          <div class="sticker-lab__model-wrapper">
+            <picture>
+              <source type="image/avif" srcset="/images/model_dress-400.avif 400w, /images/model_dress-800.avif 800w">
+              <img src="/images/model_dress-400.jpg" alt="Model" class="sticker-lab__image" width="500" height="750"
+                loading="lazy">
+            </picture>
+            <div class="sticker-lab__hotspot" style="top: 22%; left: 68%;">
+              <div class="sticker-lab__pulse"></div>
+              <button class="sticker-lab__add-btn" data-spot="shoulder"
+                data-text="The shoulders need protection. What protects like armor but moves like skin?">+</button>
+              <div class="sticker-lab__badge" data-badge="shoulder"></div>
+            </div>
+            <div class="sticker-lab__hotspot" style="top: 45%; left: 50%;">
+              <div class="sticker-lab__pulse"></div>
+              <button class="sticker-lab__add-btn" data-spot="core"
+                data-text="The core is where the athlete breathes. What stretches, moves, and never restricts?">+</button>
+              <div class="sticker-lab__badge" data-badge="core"></div>
+            </div>
+            <div class="sticker-lab__hotspot" style="top: 75%; left: 40%;">
+              <div class="sticker-lab__pulse"></div>
+              <button class="sticker-lab__add-btn" data-spot="knees"
+                data-text="Knees hit the ground. They slide. They need something tough. What can take the impact?">+</button>
+              <div class="sticker-lab__badge" data-badge="knees"></div>
+            </div>
+          </div>
         </div>
+        <div class="sticker-lab__modal" id="stickerModal">
+          <div class="sticker-lab__card">
+            <button class="sticker-lab__close-btn">✕ CLOSE</button>
+            <h3 class="sticker-lab__question" id="question">
+              <span class="visually-hidden">Question Placeholder</span>
+            </h3>
+            <div class="sticker-lab__options">
+              <button class="sticker-lab__option" data-material="leather">
+                <span class="sticker-lab__preview sticker-lab__preview--rhombus"></span>
+                <span class="sticker-lab__label">LEATHER</span>
+              </button>
+              <button class="sticker-lab__option" data-material="lycra">
+                <span class="sticker-lab__preview sticker-lab__preview--circle"></span>
+                <span class="sticker-lab__label">LYCRA</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="sticker-lab__feedback" id="feedback">
+          <div class="sticker-lab__feedback-text" id="feedbackText"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE CLAPPING MODAL -->
+    <div class="clapping-modal" id="clappingModal">
+      <div class="clapping-modal__content">
+        <h2 class="clapping-modal__title">LIGHT UP THE STADIUM</h2>
+        <p class="clapping-modal__subtitle">CLAP TO BEGIN THE SHOW</p>
+
+        <div class="clapping-modal__bar-wrapper">
+          <div id="volumeBar" class="clapping-modal__bar"></div>
+        </div>
+        <p class="clapping-modal__instruction">KEEP CLAPPING!</p>
+
+        <div class="clapping-modal__progress">
+          <div id="energyBar" class="clapping-modal__fill"></div>
+        </div>
+        <div class="clapping-modal__label" id="energyText">0%</div>
+
+        <p class="clapping-modal__skip" id="skipBtn">Skip clapping (Click here)</p>
       </div>
     </div>
-  </section>
 
-  <section class="sticker-lab">
-    <div class="sticker-lab__container">
-
-      <div class="sticker-lab__header">
-        <h2 class="sticker-lab__title">
-          STYLE THE <span class="sticker-lab__title--outline">ATHLETE</span>
-        </h2>
-        <p class="sticker-lab__instruction">
-          Tap the <span class="sticker-lab__icon">+</span> to dress the player.
-        </p>
-      </div>
-
-      <div class="sticker-lab__stage">
-        <div class="sticker-lab__model-wrapper">
-          <img src="/images/model_dress.png" alt="Model" class="sticker-lab__image">
-
-          <div class="sticker-lab__hotspot" style="top: 22%; left: 68%;">
-            <div class="sticker-lab__pulse"></div>
-            <button class="sticker-lab__add-btn" data-spot="shoulder"
-              data-text="The shoulders need protection. What protects like armor but moves like skin?">+</button>
-            <div class="sticker-lab__badge" data-badge="shoulder"></div>
-          </div>
-
-          <div class="sticker-lab__hotspot" style="top: 45%; left: 50%;">
-            <div class="sticker-lab__pulse"></div>
-            <button class="sticker-lab__add-btn" data-spot="core"
-              data-text="The core is where the athlete breathes. What stretches, moves, and never restricts?">+</button>
-            <div class="sticker-lab__badge" data-badge="core"></div>
-          </div>
-
-          <div class="sticker-lab__hotspot" style="top: 75%; left: 40%;">
-            <div class="sticker-lab__pulse"></div>
-            <button class="sticker-lab__add-btn" data-spot="knees"
-              data-text="Knees hit the ground. They slide. They need something tough. What can take the impact?">+</button>
-            <div class="sticker-lab__badge" data-badge="knees"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sticker-lab__modal" id="stickerModal">
-        <div class="sticker-lab__card">
-          <button class="sticker-lab__close-btn">✕ CLOSE</button>
-          <h3 class="sticker-lab__question" id="question"></h3>
-          <div class="sticker-lab__options">
-
-            <button class="sticker-lab__option" data-material="leather">
-              <div class="sticker-lab__preview sticker-lab__preview--rhombus"></div>
-              <span class="sticker-lab__label">LEATHER</span>
+    <!-- SAN SIRO SECTION -->
+    <section class="san-siro">
+      <div class="san-siro__stage" id="sanSiroStage">
+        <picture>
+          <source type="image/avif" srcset="/images/stadium-400.avif 400w, /images/stadium-800.avif 800w">
+          <img src="/images/stadium-400.jpg" class="san-siro__bg-image" alt="San Siro stadium background" width="1920"
+            height="1080" loading="lazy">
+        </picture>
+        <div class="san-siro__dark-overlay" id="spotlightOverlay">
+          <div class="san-siro__intro-text">
+            <h2 class="san-siro__title">PITCH BLACK</h2>
+            <p class="san-siro__description">
+              The stadium is silent. The models are waiting.<br>
+              The show can't start without the crowd's energy.
+            </p>
+            <button id="startExperience" class="san-siro__cta">
+              TURN ON THE LIGHTS
             </button>
+          </div>
+        </div>
 
-            <button class="sticker-lab__option" data-material="lycra">
-              <div class="sticker-lab__preview sticker-lab__preview--circle"></div>
-              <span class="sticker-lab__label">LYCRA</span>
-            </button>
+        <div class="san-siro__scroll-hint" id="scrollHint">
+          <svg width="30" height="40" viewBox="0 0 30 40">
+            <line x1="15" y1="0" x2="15" y2="40" stroke="var(--accent)" stroke-width="3" />
+            <polyline points="5,30 15,40 25,30" fill="none" stroke="var(--accent)" stroke-width="3" />
+          </svg>
+        </div>
 
+        <div class="san-siro__model-container">
+          <picture>
+            <source type="image/avif" srcset="/images/2001_model-400.avif 400w, /images/2001_model-800.avif 800w">
+            <img src="/images/2001_model-400.png" class="san-siro__model san-siro__model--active" data-step="1"
+              alt="2001 collection" width="500" height="800" loading="lazy">
+          </picture>
+          <picture>
+            <source type="image/avif" srcset="/images/2006_models-400.avif 400w, /images/2006_models-800.avif 800w">
+            <img src="/images/2006_models-400.png" class="san-siro__model" data-step="2" alt="2006 collection"
+              width="500" height="800" loading="lazy">
+          </picture>
+          <picture>
+            <source type="image/avif" srcset="/images/2011_model-400.avif 400w, /images/2011_model-800.avif 800w">
+            <img src="/images/2011_model-400.png" class="san-siro__model" data-step="3" alt="2011 collection"
+              width="500" height="800" loading="lazy">
+          </picture>
+        </div>
+        <div class="san-siro__year-display" id="yearDisplay">2001</div>
+      </div>
+      <div class="san-siro__timeline">
+        <div class="san-siro__trigger san-siro__trigger--intro"></div>
+        <div class="san-siro__trigger" data-target="1" data-year="2001">
+          <div class="san-siro__card">
+            <h3>THE WEDDING</h3>
+            <p>In San Siro Stadium, Milan I brought them together in front of the world. The fashion elite watched as
+              two
+              opposites became one.</p>
+            <p>I became the first designer to marry <span class="text-acid">football and fashion</span> on a runway.
+              The stadium became their chapel. Leather met Lycra.
+              And in that moment, <span class="text-acid">fashion changed forever.</span>
+            </p>
+          </div>
+        </div>
+        <div class="san-siro__trigger" data-target="2" data-year="2006">
+          <div class="san-siro__card">
+            <h3>THE GOLDEN YEARS</h3>
+            <p>In 2003, I dressed Inter Milan in custom suits. Real athletes wearing the union of Leather and Lycra. The
+              partnership became unstoppable. They worked together season after season, proving the balance was real.
+            </p>
+            <p class="text-acid">From 2001 to 2011, I watched them prove everyone wrong.</p>
+          </div>
+        </div>
+
+        <div class="san-siro__trigger" data-target="3" data-year="2011">
+          <div class="san-siro__card">
+            <h3>FOREVER INSEPARABLE</h3>
+            <p>I left fashion in 2011. My job as matchmaker was done.But Leather and Lycra? They couldn't be apart.</p>
+            <p>
+              Look around today. Every jacket with stretch. Every suit that moves. That is <span class="text-acid">their
+                love story</span>, living on forever.
+            </p>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="sticker-lab__feedback" id="feedback">
-        <div class="sticker-lab__feedback-text" id="feedbackText"></div>
+    <!-- THE LINEUP SECTION -->
+    <section class="lineup">
+      <div class="lineup__header">
+        <h3 class="lineup__title">THE LINEUP</h3>
+        <p class="lineup__subtitle">Discover other icons in the MoMu archive.</p>
       </div>
+      <div class="lineup__list">
+        <a href="#" class="archive-row">
+          <div class="archive-row__date">STORY 01</div>
+          <div class="archive-row__content">
+            <span class="archive-row__name">WALTER VAN BEIRENDONCK</span>
+            <span class="archive-row__tag">EST. 1980</span>
+            <span class="archive-row__story">THE DREAMER</span>
+          </div>
+          <div class="archive-row__arrow">&rarr;</div>
+        </a>
 
-    </div>
-  </section>
+        <a href="#" class="archive-row">
+          <div class="archive-row__date">STORY 02</div>
+          <div class="archive-row__content">
+            <span class="archive-row__name">CHRISTIAN DIOR</span>
+            <span class="archive-row__tag">EST. 1947</span>
+            <span class="archive-row__story">THE ARCHITECT</span>
+          </div>
+          <div class="archive-row__arrow archive-row__arrow--soon">SOON</div>
+        </a>
 
-  <div class="clapping-modal" id="clappingModal">
-    <div class="clapping-modal__content">
-      <h2 class="clapping-modal__title">LIGHT UP THE STADIUM</h2>
-      <p class="clapping-modal__subtitle">CLAP TO BEGIN THE SHOW</p>
-
-      <div class="clapping-modal__bar-wrapper">
-        <div id="volumeBar" class="clapping-modal__bar"></div>
+        <a href="#" class="archive-row">
+          <div class="archive-row__date">STORY 03</div>
+          <div class="archive-row__content">
+            <span class="archive-row__name">MARTIN MARGIELA</span>
+            <span class="archive-row__tag">EST. 1988</span>
+            <span class="archive-row__story">THE INVISIBLE</span>
+          </div>
+          <div class="archive-row__arrow archive-row__arrow--locked">LOCKED</div>
+        </a>
       </div>
-      <p class="clapping-modal__instruction">KEEP CLAPPING!</p>
+    </section>
 
-      <div class="clapping-modal__progress">
-        <div id="energyBar" class="clapping-modal__fill"></div>
-      </div>
-      <div class="clapping-modal__label" id="energyText">0%</div>
-
-      <p class="clapping-modal__skip" id="skipBtn">Skip clapping (Click here)</p>
-    </div>
-  </div>
-
-  <!-- SAN SIRO SECTION -->
-  <section class="san-siro">
-
-    <div class="san-siro__stage" id="sanSiroStage">
-
-      <img src="/images/stadium.png" class="san-siro__bg-image">
-
-      <div class="san-siro__dark-overlay" id="spotlightOverlay">
-        <div class="san-siro__intro-text">
-          <h2 class="san-siro__title">PITCH BLACK</h2>
-          <p class="san-siro__description">
-            The stadium is silent. The models are waiting.<br>
-            The show can't start without the crowd's energy.
+    <!-- THE TICKETS SECTION -->
+    <section class="ticket-section">
+      <div class="ticket" id="ticket3D">
+        <div class="ticket__side ticket__side--left">
+          <div class="ticket__meta">
+            <span class="ticket__label">SEASON 26/27</span>
+            <span class="ticket__id">SECTOR: ARCHIVE</span>
+          </div>
+          <h2 class="ticket__title">THE<br>PERFECT<br>MATCH</h2>
+          <div class="ticket__details">
+            <div class="ticket__detail-group">
+              <span class="ticket__detail-label">STADIUM</span>
+              <span class="ticket__detail-value">MOMU ANTWERP</span>
+            </div>
+            <div class="ticket__detail-group">
+              <span class="ticket__detail-label">KICKOFF</span>
+              <span class="ticket__detail-value">NOW OPEN</span>
+            </div>
+          </div>
+          <a href="https://www.momu.be" target="_blank" class="ticket__cta">SECURE YOUR SEAT &rarr;</a>
+        </div>
+        <div class="ticket__rip"></div>
+        <div class="ticket__side ticket__side--right">
+          <div class="ticket__meta">
+            <span class="ticket__label">TEAM SELECTION</span>
+          </div>
+          <p class="ticket__text">
+            Fashion is a contact sport.<br>
+            Don't sit on the bench.<br>
+            Join the starting lineup.
           </p>
-          <button id="startExperience" class="san-siro__cta">
-            TURN ON THE LIGHTS
-          </button>
-        </div>
-      </div>
-
-      <div class="san-siro__scroll-hint" id="scrollHint">
-        <svg width="30" height="40" viewBox="0 0 30 40">
-          <line x1="15" y1="0" x2="15" y2="40" stroke="var(--accent)" stroke-width="3" />
-          <polyline points="5,30 15,40 25,30" fill="none" stroke="var(--accent)" stroke-width="3" />
-        </svg>
-      </div>
-
-      <div class="san-siro__model-container">
-        <img src="/images/2001_model.png" class="san-siro__model san-siro__model--active" data-step="1">
-        <img src="/images/model2.png" class="san-siro__model" data-step="2">
-        <img src="/images/look3.png" class="san-siro__model" data-step="3">
-      </div>
-
-      <div class="san-siro__year-display" id="yearDisplay">2001</div>
-    </div>
-
-    <div class="san-siro__timeline">
-      <div class="san-siro__trigger san-siro__trigger--intro"></div>
-
-      <div class="san-siro__trigger" data-target="1" data-year="2001">
-        <div class="san-siro__card">
-          <h3>THE WEDDING</h3>
-          <p>In San Siro Stadium, Milan I brought them together in front of the world. The fashion elite watched as two opposites became one.</p>
-          <p>I became the first designer to marry <span class="text-acid">football and fashion</span> on a runway.
-            The stadium became their chapel. Leather met Lycra.
-            And in that moment, <span class="text-acid">fashion changed forever.</span>
-          </p>
-        </div>
-      </div>
-
-      <div class="san-siro__trigger" data-target="2" data-year="2006">
-        <div class="san-siro__card">
-          <h3>THE GOLDEN YEARS</h3>
-          <p>In 2003, I dressed Inter Milan in custom suits. Real athletes wearing the union of Leather and Lycra. The partnership became unstoppable. They worked together season after season, proving the balance was real.</p>
-          <p class="text-acid">From 2001 to 2011, I watched them prove everyone wrong.</p>
-        </div>
-      </div>
-
-      <div class="san-siro__trigger" data-target="3" data-year="2011">
-        <div class="san-siro__card">
-          <h3>FOREVER INSEPARABLE</h3>
-          <p>I left fashion in 2011. My job as matchmaker was done.But Leather and Lycra? They couldn't be apart.</p>
-          <p>
-            Look around today. Every jacket with stretch. Every suit that moves. That is <span class="text-acid">their love story</span>, living on forever.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="lineup">
-
-    <div class="lineup__header">
-      <h3 class="lineup__title">THE LINEUP</h3>
-      <p class="lineup__subtitle">Discover other icons in the MoMu archive.</p>
-    </div>
-
-    <div class="lineup__list">
-
-      <a href="#" class="archive-row">
-        <div class="archive-row__date">STORY 01</div>
-        <div class="archive-row__content">
-          <span class="archive-row__name">WALTER VAN BEIRENDONCK</span>
-          <span class="archive-row__tag">EST. 1980</span>
-          <span class="archive-row__story">THE DREAMER</span>
-        </div>
-        <div class="archive-row__arrow">&rarr;</div>
-      </a>
-
-      <a href="#" class="archive-row">
-        <div class="archive-row__date">STORY 02</div>
-        <div class="archive-row__content">
-          <span class="archive-row__name">CHRISTIAN DIOR</span>
-          <span class="archive-row__tag">EST. 1947</span>
-          <span class="archive-row__story">THE ARCHITECT</span>
-        </div>
-        <div class="archive-row__arrow archive-row__arrow--soon">SOON</div>
-      </a>
-
-      <a href="#" class="archive-row">
-        <div class="archive-row__date">STORY 03</div>
-        <div class="archive-row__content">
-          <span class="archive-row__name">MARTIN MARGIELA</span>
-          <span class="archive-row__tag">EST. 1988</span>
-          <span class="archive-row__story">THE INVISIBLE</span>
-        </div>
-        <div class="archive-row__arrow archive-row__arrow--locked">LOCKED</div>
-      </a>
-
-    </div>
-  </section>
-
-  <section class="ticket-section">
-
-    <div class="ticket" id="ticket3D">
-
-      <div class="ticket__side ticket__side--left">
-        <div class="ticket__meta">
-          <span class="ticket__label">SEASON 26/27</span>
-          <span class="ticket__id">SECTOR: ARCHIVE</span>
-        </div>
-
-        <h2 class="ticket__title">THE<br>PERFECT<br>MATCH</h2>
-
-        <div class="ticket__details">
-          <div class="ticket__detail-group">
-            <span class="ticket__detail-label">STADIUM</span>
-            <span class="ticket__detail-value">MOMU ANTWERP</span>
-          </div>
-          <div class="ticket__detail-group">
-            <span class="ticket__detail-label">KICKOFF</span>
-            <span class="ticket__detail-value">NOW OPEN</span>
+          <form class="roster-form">
+            <div class="roster-form__wrapper">
+              <input id="roster-email" class="roster-form__input" type="email" placeholder="PLAYER EMAIL" required>
+              <label for="roster-email" class="sr-only">Email Address</label>
+              <button class="roster-form__btn" type="submit" aria-label="Add to roster">+</button>
+            </div>
+          </form>
+          <div class="ticket__barcode">
+            <span></span><span></span><span class="ticket__barcode-thin"></span>
+            <span></span><span class="ticket__barcode-thin"></span><span></span>
+            <span></span><span class="ticket__barcode-thin"></span><span></span>
           </div>
         </div>
-
-        <a href="https://www.momu.be" target="_blank" class="ticket__cta">SECURE YOUR SEAT &rarr;</a>
       </div>
+    </section>
+  </main>
 
-      <div class="ticket__rip"></div>
+  <footer class="momu-footer">
+    <div class="footer-container">
 
-      <div class="ticket__side ticket__side--right">
-        <div class="ticket__meta">
-          <span class="ticket__label">TEAM SELECTION</span>
+      <div class="footer-header">
+        <div class="footer-logo">
+          <svg viewBox="0 0 443.67 281.63" class="momu-svg" xmlns="http://www.w3.org/2000/svg">
+            <path class="footer-svg-path"
+              d="M46.08,33.51l80.9,193.11L204.4,33.51h10.74v201.59c0,.1-2,.1-2,0v-105.79l-43.68,105.82-41.99-.52-43.68-105.3v105.79h-45.95V33.51h8.24Z" />
+            <path class="footer-svg-path"
+              d="M227.37,33.51l80.9,193.11,77.42-193.11h10.74v201.59c0,.1-2,.1-2,0v-106.29l-43.68,106.32-41.99-.52-43.68-105.3v105.79h-45.95V33.51h8.24Z" />
+          </svg>
         </div>
 
-        <p class="ticket__text">
-          Fashion is a contact sport.<br>
-          Don't sit on the bench.<br>
-          <strong>Join the starting lineup.</strong>
-        </p>
+        <nav class="footer-nav">
+          <a href="#">Visit</a>
+          <a href="#">About MoMu</a>
+          <a href="#">Contact</a>
+          <a href="#">Collection Stories</a>
+        </nav>
+      </div>
 
-        <form class="roster-form">
-          <div class="roster-form__wrapper">
-            <input class="roster-form__input" type="email" placeholder="PLAYER EMAIL" required>
-            <button class="roster-form__btn" type="submit">+</button>
-          </div>
-        </form>
+      <div class="footer-main">
+        <div class="footer-info">
+          <p class="footer-label">CURRENTLY READING</p>
+          <h3 class="footer-title">Leather & Lycra: A Fashion Love Story</h3>
+          <p class="footer-accent">Part of the MoMu Digital Stories Series</p>
+        </div>
 
-        <div class="ticket__barcode">
-          <span></span><span></span><span class="ticket__barcode-thin"></span>
-          <span></span><span class="ticket__barcode-thin"></span><span></span>
-          <span></span><span class="ticket__barcode-thin"></span><span></span>
+        <div class="footer-newsletter">
+          <p class="footer-label">STAY UPDATED</p>
+          <p class="footer-text">Get more stories from MoMu delivered to you.</p>
+
+          <form class="footer-form">
+            <label for="footer-email" class="sr-only">Subscribe to our newsletter</label>
+            <input id="footer-email" type="email" placeholder="Your email address" required>
+            <button type="submit" aria-label="Submit subscription">→</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-legal">
+        <p>© 2026 MoMu Fashion Museum Antwerp</p>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">LinkedIn</a>
         </div>
       </div>
 
     </div>
-  </section>
+  </footer>
   <script type="module" src="/src/js/main.js"></script>
-  <script type="module" src="/src/js/meeting.js"></script>
-  <script type="module" src="/src/js/interaction1.js"></script>
-  <script type="module" src="/src/js/intercation3.js"></script>
-  <script type="module" src="/src/js/interaction2.js"></script>
 </body>
 
 </html>
