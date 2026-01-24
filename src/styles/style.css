@@ -663,6 +663,7 @@ body {
 .two-worlds__closing {
   margin-top: var(--space-lg);
   text-align: center;
+  will-change: transform, opacity;
 }
 
 .two-worlds__statement {

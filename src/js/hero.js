@@ -35,29 +35,16 @@ function initGlobalScroll() {
     const tl = gsap.timeline({
         scrollTrigger: {
             trigger: hero,
-            start: "top top",      // Starts exactly when hero hits the top
+            start: "top top",
             endTrigger: transitionSection,
             end: "bottom top",
-            scrub: 1.5,          
+            scrub: 1.5,
         }
     });
 
-    tl.to(model, {
-        opacity: 1,                
-        scale: 0.85,
-        duration: 0.2             
-    })
-        .to(model, {
-            y: "70vh",                 
-            rotate: -5,
-            scale: 0.6,                
-            ease: "none"               
-        })
-        .to(model, {
-            opacity: 0,
-            filter: "blur(10px)",      
-            duration: 0.2
-        });
+    tl.to(model, { opacity: 1, scale: 0.85, duration: 0.2 })
+        .to(model, { y: "70vh", rotate: -5, scale: 0.6, ease: "none" })
+        .to(model, { opacity: 0, filter: "blur(10px)", duration: 0.2 });
 }
 
 // 3. THE INTRO
@@ -68,6 +55,9 @@ function initIntro() {
     const curtain = document.querySelector('.intro-curtain');
 
     if (!curtain || !text || !kiss) return;
+
+    // LOCK SCROLL: Prevents user from scrolling away during intro
+    document.body.style.overflow = 'hidden';
 
     tl.fromTo(text, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 1 })
         .fromTo(kiss, { opacity: 0, scale: 3, rotation: 10 }, { opacity: 1, scale: 1, rotation: -15, duration: 0.8, ease: "elastic.out" }, "-=0.5")
@@ -81,13 +71,23 @@ function initIntro() {
             },
             onComplete: () => {
                 curtain.style.display = 'none';
-                // START SCROLL LOGIC ONCE INTRO IS DONE
+
+                document.body.style.overflow = 'auto';
+
                 initGlobalScroll();
+                ScrollTrigger.refresh();
             }
         });
 }
 
 const init = () => {
+    // FORCE TOP: Immediately jumps to the top on every reload
+    window.scrollTo(0, 0);
+    // Extra safety for some browsers (like Chrome/Safari)
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
     gsap.set('.hero__football', { x: '100vw', opacity: 0 });
     gsap.set('.hero__kissy', { scale: 0, opacity: 0 });
     gsap.set('.intro-curtain', { display: 'block', visibility: 'visible' });
