@@ -107,6 +107,23 @@ const setupTicket3D = () => {
     ticket.addEventListener('mouseleave', () => ticket.style.transform = `rotateX(0deg) rotateY(0deg)`);
 };
 
+const initHighlighter = () => {
+    const highlights = document.querySelectorAll(".highlight-yellow");
+
+    highlights.forEach((highlight) => {
+        gsap.to(highlight, {
+            backgroundPosition: "0% 0", // Moves the yellow gradient into view
+            duration: 1,
+            ease: "power2.inOut",
+            scrollTrigger: {
+                trigger: highlight,
+                start: "top 85%",
+                toggleActions: "play none none reverse",
+            }
+        });
+    });
+};
+
 /**
  * MASTER INIT (The Export)
  */
@@ -116,17 +133,7 @@ export const initGeneralInteractions = () => {
     setupMobileGalleryScroll();
     setupBulbTransition();
     setupTicket3D();
-
-    // Universal Pop-ins
-    ['.two-worlds__closing', '.failed-statement', '.highlight-yellow'].forEach(selector => {
-        const items = document.querySelectorAll(selector);
-        items.forEach(el => {
-            gsap.from(el, {
-                opacity: 0, scale: 0.9, y: 30, duration: 0.8,
-                scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none reverse" }
-            });
-        });
-    });
+    initHighlighter();
 
     console.log("All general interactions (Falling dates, walking models, etc) loaded.");
 };

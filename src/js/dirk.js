@@ -3,11 +3,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * 1. DESKTOP LOGIC (Pinning & Animations)
- */
-
+// 1. DESKTOP LOGIC
 const handleDesktopPinning = (section, dirkSection) => {
+    if (!section || !dirkSection) return;
     const rect = section.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
 
@@ -21,6 +19,11 @@ const handleDesktopPinning = (section, dirkSection) => {
 };
 
 const setupDesktopAnimations = () => {
+    // Kill existing triggers to prevent duplicates on resize
+    ScrollTrigger.getAll().forEach(t => {
+        if (t.trigger && t.trigger.classList.contains('leather-years__item')) t.kill();
+    });
+
     const items = document.querySelectorAll('.leather-years__item');
     items.forEach((item) => {
         gsap.from(item, {
@@ -36,61 +39,22 @@ const setupDesktopAnimations = () => {
     });
 };
 
-/**
- * 2. MOBILE LOGIC (Touch & Horizontal Scroll)
- */
-
-const setupMobileScroll = (scrollContainer, section) => {
-    let isScrolling = false;
-
-    // Detect if user is inside the section
-    const checkVisibility = () => {
-        const rect = section.getBoundingClientRect();
-        isScrolling = (rect.top < window.innerHeight && rect.bottom > 0);
-    };
-
-    // Transform vertical wheel to horizontal scroll
-    const onWheel = (e) => {
-        if (!isScrolling) return;
-        e.preventDefault();
-        scrollContainer.scrollLeft += e.deltaY;
-    };
-
-    // Touch logic for mobile
-    const onTouchMove = (e) => {
-        if (!isScrolling || !scrollContainer.dataset.touchStartY) return;
-        const deltaY = parseFloat(scrollContainer.dataset.touchStartY) - e.touches[0].clientY;
-        const startX = parseFloat(scrollContainer.dataset.touchStartX);
-        e.preventDefault();
-        scrollContainer.scrollLeft = startX + (deltaY * 2);
-    };
-
-    window.addEventListener('scroll', checkVisibility);
-    scrollContainer.addEventListener('wheel', onWheel, { passive: false });
-    scrollContainer.addEventListener('touchmove', onTouchMove, { passive: false });
-
-    // Initial check
-    checkVisibility();
-};
-
-/**
- * 3. INTERACTION HELPERS
- */
-
+// 2. INTERACTION HELPERS
 const setupCardFlips = () => {
     const cards = document.querySelectorAll('.leather-years__item-image');
     cards.forEach(card => {
-        card.addEventListener('click', () => {
+        // Use a named function so we can remove it if needed
+        const toggleFlip = () => {
             if (window.innerWidth < 1024) {
                 card.classList.toggle('is-flipped');
             }
-        });
+        };
+        card.removeEventListener('click', toggleFlip); // Prevent double-binding
+        card.addEventListener('click', toggleFlip);
     });
 };
 
-/**
- * 4. THE MAIN EXPORT initDirk
- */
+// 3. MAIN EXPORT
 export const initDirk = () => {
     const section = document.querySelector('.leather-years');
     const dirkSection = document.querySelector('.leather-years__dirk');
@@ -98,23 +62,34 @@ export const initDirk = () => {
 
     if (!section) return;
 
-    // Route logic based on device size
-    if (window.innerWidth >= 1024) {
-        // Desktop Setup
-        if (dirkSection) {
-            window.addEventListener('scroll', () => handleDesktopPinning(section, dirkSection));
-            handleDesktopPinning(section, dirkSection);
-        }
-        setupDesktopAnimations();
-    } else {
-        // Mobile Setup
-        if (scrollContainer) {
-            setupMobileScroll(scrollContainer, section);
-        }
-    }
+    const runLayoutLogic = () => {
+        const isDesktop = window.innerWidth >= 1024;
 
-    // Common Interactions
+        if (isDesktop) {
+            // Desktop logic
+            const pinHandler = () => handleDesktopPinning(section, dirkSection);
+            window.removeEventListener('scroll', pinHandler);
+            window.addEventListener('scroll', pinHandler);
+            handleDesktopPinning(section, dirkSection); // Initial check
+            setupDesktopAnimations();
+        } else {
+            // Mobile logic
+            if (scrollContainer) {
+                scrollContainer.style.webkitOverflowScrolling = 'touch';
+            }
+        }
+    };
+
+    // Run on init
+    runLayoutLogic();
     setupCardFlips();
+
+    // Re-run on resize (Optional but recommended)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(runLayoutLogic, 250);
+    });
 
     console.log('Dirk Leather Years initialized');
 };
