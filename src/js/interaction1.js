@@ -1,6 +1,5 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import '../styles/style.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,9 +64,7 @@ const initBlindDateArchive = () => {
     });
 };
 
-const init = () => {
+export const initInteraction1 = () => {
     initBlindDateArchive();
     console.log('Fashion Love Story interaction1 ready');
 };
-
-init();
