@@ -124,6 +124,19 @@ const initHighlighter = () => {
     });
 };
 
+const setupFailedQuotes = () => {
+    const wrapper = document.querySelector('.failed-image-wrapper');
+    if (!wrapper) return;
+
+    wrapper.addEventListener('click', () => {
+        // We check width if you only want this behavior on mobile
+        if (window.innerWidth < 1024) {
+            wrapper.classList.toggle('is-active');
+            console.log("Quote toggled");
+        }
+    });
+};
+
 /**
  * MASTER INIT (The Export)
  */
@@ -134,6 +147,7 @@ export const initGeneralInteractions = () => {
     setupBulbTransition();
     setupTicket3D();
     initHighlighter();
+    setupFailedQuotes();
 
     console.log("All general interactions (Falling dates, walking models, etc) loaded.");
 };

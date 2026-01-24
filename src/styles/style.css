@@ -1822,6 +1822,7 @@ body {
 
 /* Content resets */
 .meeting__content {
+  font-family: var(--font-body);
   margin-top: 2rem;
   padding: 0;
 }
@@ -2008,14 +2009,14 @@ body {
 
 .failed-title {
   font-family: var(--font-title);
-  font-size: clamp(4rem, 12vw, 7rem);
+  font-size: clamp(3.5rem, 12vw, 7rem);
   font-weight: 900;
   text-align: center;
   line-height: 0.8;
   color: transparent;
   -webkit-text-stroke: 1px var(--accent);
   text-transform: uppercase;
-  margin-bottom: var(--space-sm);
+  margin-bottom: 6rem;
 }
 
 .failed-body {
@@ -2117,6 +2118,8 @@ body {
 }
 
 .failed-quotes {
+  font-family: var(--font-body);
+  line-height: 1.4;
   position: absolute;
   top: 100%;
   left: 0;
@@ -2129,10 +2132,6 @@ body {
   width: 100%;
   height: auto;
   transition: filter 0.4s ease;
-}
-
-.failed-image-wrapper:hover .failed-img {
-  filter: grayscale(0%);
 }
 
 .failed-quote {
@@ -2229,6 +2228,7 @@ body {
   }
 
   .failed-title {
+    margin-bottom: 3rem;
     -webkit-text-stroke: 2px var(--accent);
   }
 
@@ -2315,7 +2315,7 @@ body {
   }
 
   .failed-quote--lycra {
-    bottom: 45%;
+    bottom: 5%;
     right: 55px;
     color: var(--accent);
     left: auto
@@ -2792,20 +2792,19 @@ input:checked+.slider:before {
 
   .blue-body {
     display: grid;
-    grid-template-columns: 2fr 1.3fr;
-    gap: 4rem;
+    grid-template-columns: 1fr 1fr;
     align-items: start;
   }
 
   .blue-gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    width: 100%;
     gap: 1.5rem;
     padding-left: 1.5rem;
     overflow: visible;
+    width: 100% !important;
     margin: 0;
-    padding-bottom: 0;
+    padding: 0;
     transform: none !important;
     order: 1;
     align-items: flex-start;
@@ -2845,7 +2844,7 @@ input:checked+.slider:before {
 
   .blue-prose {
     text-align: right;
-    max-width: 500px;
+    max-width: 600px;
     order: 1;
   }
 
@@ -2910,6 +2909,11 @@ input:checked+.slider:before {
     font-size: 8rem;
     order: 2;
   }
+     .blue-prose {
+       text-align: right;
+       max-width: 500px;
+       order: 1;
+     }
 }
 
 /* THE HAPPY ACCIDENT */
