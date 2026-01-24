@@ -105,7 +105,45 @@ body {
   fill: var(--bg-blue);
 }
 
+/* SCROOL MODEL */
+.global-scroll-model {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18vw;
+  max-width: 240px;
+  z-index: 99;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.global-scroll-model__img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero,
+.transition {
+  overflow: visible !important;
+}
+
 /* INTRO ANIMATION */
+.intro-curtain {
+  z-index: 10000 !important;
+  background-color: var(--bg);
+}
+
+.intro-curtain__text,
+.intro-curtain__img,
+.hero__football,
+.hero__kissy {
+  opacity: 1;
+  transform: none;
+}
+
 .intro-curtain__content {
   display: grid;
   place-items: center;
@@ -123,7 +161,6 @@ body {
   line-height: 1;
   white-space: nowrap;
   color: var(--bg-blue);
-  opacity: 0;
 }
 
 .intro-curtain__img {
@@ -131,8 +168,6 @@ body {
   z-index: 2;
   width: 28vw;
   height: auto;
-  transform: rotate(-15deg) scale(3);
-  opacity: 0;
 }
 
 /* HERO SECTION */
@@ -191,6 +226,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.hero__football,
+.hero__kissy {
+  opacity: 1;
+  transform: none;
 }
 
 .hero__content {
@@ -277,7 +318,7 @@ body {
   bottom: 14%;
   width: clamp(340px, 30vw, 350px);
   height: auto;
-  opacity: 0;
+  opacity: 1;
   transform: translateX(-120vw) rotate(-45deg);
   transform-origin: center;
   transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -294,20 +335,26 @@ body {
   height: auto;
   bottom: 86%;
   left: 5%;
-  opacity: 0;
+  opacity: 1;
 }
 
 .hero__scroll-model {
-  position: absolute;
+  position: fixed;
+  /* Change from absolute to fixed */
   left: 50%;
-  transform: translateX(-50%);
-  top: 1%;
+  top: 50%;
+  /* Center it vertically in the viewport */
+  transform: translate(-50%, -50%);
+  /* Perfect centering */
   width: 50%;
   max-width: 300px;
   height: auto;
-
-  z-index: 10;
+  z-index: 100;
+  /* Ensure it stays above everything */
   pointer-events: none;
+  opacity: 0;
+  /* Start hidden, GSAP will show it */
+  will-change: transform, opacity;
 }
 
 @media (min-width: 28.75rem) {
@@ -434,7 +481,7 @@ body {
 
   .hero__main-image {
     width: auto;
-    max-width: 550px;
+    max-width: 500px;
   }
 
   .hero__football {

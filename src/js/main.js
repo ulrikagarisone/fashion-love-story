@@ -1,122 +1,9 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TextPlugin } from 'gsap/TextPlugin'; 
+import { TextPlugin } from 'gsap/TextPlugin';
 import '../styles/style.css';
 
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
-
-// hero animation
-function playHeroAnimations() {
-  const tl = gsap.timeline();
-
-  // 1. KISSY FACE POPS 
-  tl.to('.hero__kissy', {
-    scale: 1,
-    rotation: 0,
-    opacity: 1,
-    duration: 0.8,
-    ease: "elastic.out(1, 0.5)"
-  })
-
-    // 2. ATHLETE SLIDES IN 
-    .to('.hero__football', {
-      x: 0,
-      rotation: 0,
-      opacity: 1,
-      duration: 1.2,
-      ease: "power3.out"
-    }, "-=0.6");
-}
-
-// INTRO SEQUENCER
-function initIntro() {
-  const tl = gsap.timeline();
-  const curtain = document.querySelector('.intro-curtain');
-  const introText = document.querySelector('.intro-curtain__text');
-  const introKiss = document.querySelector('.intro-curtain__img');
-
-  // If no curtain exists (e.g. dev mode), just play hero and return
-  if (!curtain) {
-    playHeroAnimations();
-    return;
-  }
-
-  // 1. Intro Animation
-  tl.to(introText, { opacity: 1, scale: 1, duration: 1 })
-    .to(introKiss, { opacity: 1, scale: 1, rotation: -15, ease: "elastic.out" }, "-=0.2")
-    .to({}, { duration: 0.5 }) // Pause
-
-    // 2. Lift Curtain
-    .to(curtain, {
-      y: '-100%',
-      duration: 1.1,
-      ease: "power3.inOut",
-      onStart: () => {
-        // Start hero animations while curtain is lifting
-        gsap.delayedCall(0.3, playHeroAnimations);
-      },
-      onComplete: () => {
-        // Hide the curtain element completely
-        curtain.style.display = 'none';
-
-        // Recalculate ALL ScrollTriggers because the page height just changed.
-        ScrollTrigger.refresh();
-      }
-    });
-}
-
-// 2. HERO SCROLL MODEL
-function initHeroScrollModel() {
-  const heroSection = document.querySelector('.hero');
-  const secondModel = document.querySelector('.hero__scroll-model');
-  if (!heroSection || !secondModel) return;
-
-  gsap.set(secondModel, { y: 0, opacity: 1 });
-  gsap.to(secondModel, {
-    y: '120vh',
-    ease: 'none',
-    scrollTrigger: {
-      trigger: heroSection,
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 1.5,
-    }
-  });
-}
-
-// 3. TRANSITION RUNWAY
-function initTransitionRunway() {
-  const transitionSection = document.querySelector('.transition');
-  const runwayModel = document.querySelector('.transition__model');
-  if (!transitionSection || !runwayModel) return;
-
-  gsap.set(runwayModel, { y: '-50%', opacity: 1, scale: 1.2 });
-
-  gsap.to(runwayModel, {
-    y: '0%',
-    opacity: 1,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: transitionSection,
-      start: 'top center',
-      end: 'bottom center',
-      scrub: 1.5,
-    }
-  });
-
-  gsap.to(runwayModel, {
-    x: '-120vw',
-    rotation: -15,
-    opacity: 0,
-    ease: 'power2.in',
-    scrollTrigger: {
-      trigger: transitionSection,
-      start: 'bottom 80%',
-      end: 'bottom 20%',
-      scrub: 1.5,
-    }
-  });
-}
 
 // 4. SEPARATE WORLDS POP-IN
 function initSeparateWorldsPopIn() {
@@ -140,7 +27,7 @@ function initSeparateWorldsPopIn() {
     duration: 0.6,
     ease: 'back.out(1.7)',
     scrollTrigger: {
-      trigger: grid,       
+      trigger: grid,
       start: "bottom 75%", // Triggers when bottom of images is 75% down screen
       toggleActions: "play none none reverse",
     }
@@ -589,7 +476,7 @@ const initBulbTransition = () => {
 
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: ".idea-flash",       
+      trigger: ".idea-flash",
       start: "top top",
       end: "+=150%",
       scrub: 1,
@@ -599,7 +486,7 @@ const initBulbTransition = () => {
   });
 
   // Bulb Pops Up
-  tl.to(".idea-flash__bulb", {     
+  tl.to(".idea-flash__bulb", {
     autoAlpha: 1,
     y: 0,
     scale: 1.2,
@@ -608,14 +495,14 @@ const initBulbTransition = () => {
   });
 
   // The Explosion
-  tl.to(".idea-flash__glow", {      
+  tl.to(".idea-flash__glow", {
     scale: 150,
     duration: 3,
     ease: "power2.inOut"
   }, "+=0.2");
 
   // Hide content
-  tl.to([".idea-flash__dirk", ".idea-flash__bulb", ".idea-flash__content"], { 
+  tl.to([".idea-flash__dirk", ".idea-flash__bulb", ".idea-flash__content"], {
     autoAlpha: 0,
     duration: 0.5
   }, "<60%");
@@ -644,10 +531,10 @@ const initMobileHorizontalScroll = () => {
       ease: "none",
       scrollTrigger: {
         trigger: ".blue-gallery",
-        start: "top 20%",      
+        start: "top 20%",
         end: () => `+=${scrollAmount + 400}`,
         pin: ".blind-date-blue",
-        pinSpacing: true,     
+        pinSpacing: true,
         scrub: 1,
         invalidateOnRefresh: true,
       }
@@ -661,10 +548,8 @@ const initMobileHorizontalScroll = () => {
 
 
 function init() {
-  playHeroAnimations();
-  initIntro();
-  initHeroScrollModel();
-  initTransitionRunway();
+
+
   initSeparateWorldsPopIn();
   initLeatherYearsMobileScroll();
   initEyeTracker();

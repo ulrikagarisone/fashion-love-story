@@ -66,12 +66,7 @@
               <img src="/dist/images/model_hero-400.png" alt="Dirk Bikkembergs model" class="hero__model" width="550"
                 height="700" fetchpriority="high">
             </picture>
-            <picture>
-              <source type="image/avif"
-                srcset="/dist/images/leather_cutout-400.avif 400w, /dist/images/leather_cutout-800.avif 800w">
-              <img src="/dist/images/leather_cutout-400.png" alt="Leather athlete walking" class="hero__scroll-model"
-                width="350" height="500" fetchpriority="high">
-            </picture>
+            
           </div>
           <div class="hero__spacer"></div>
           <div class="hero__floating-elements">
@@ -95,7 +90,6 @@
         <img src="/svg/two_worlds_apart.svg" alt="Two Worlds apart">
       </div>
       <div class="transition__model">
-        <img src="/images/leather_cutout.png" alt="Model walking down the runway" class="transition__model-image">
       </div>
     </div>
 
@@ -1108,7 +1102,14 @@
 
     </div>
   </footer>
-
+  <div class="global-scroll-model">
+    <picture>
+      <source type="image/avif"
+        srcset="/dist/images/leather_cutout-400.avif 400w, /dist/images/leather_cutout-800.avif 800w">
+      <img src="/dist/images/leather_cutout-400.png" alt="Leather athlete walking" class="global-scroll-model__img">
+    </picture>
+  </div>
+<script type="module" src="/src/js/hero.js"></script>
   <script type="module" src="/src/js/main.js"></script>
   <script type="module" src="/src/js/meeting.js"></script>
   <script type="module" src="/src/js/interaction1.js"></script>

@@ -4,11 +4,9 @@ import '../styles/style.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// hero animation
+// 1. HERO ENTRANCE
 function playHeroAnimations() {
     const tl = gsap.timeline();
-
-    // 1. KISSY FACE POPS 
     tl.to('.hero__kissy', {
         scale: 1,
         rotation: 0,
@@ -16,52 +14,85 @@ function playHeroAnimations() {
         duration: 0.8,
         ease: "elastic.out(1, 0.5)"
     })
-
-        // 2. ATHLETE SLIDES IN 
         .to('.hero__football', {
-            x: 0, 
-            rotation: 0,
+            x: 0,
             opacity: 1,
             duration: 1.2,
             ease: "power3.out"
-        }, "-=0.6"); 
+        }, "-=0.4");
 }
 
-// INTRO SEQUENCER
+// 2. SCROLLING MODEL 
+function initGlobalScroll() {
+    const model = document.querySelector('.global-scroll-model');
+    const hero = document.querySelector('.hero');
+    const transitionSection = document.querySelector('.transition');
+
+    if (!model || !hero || !transitionSection) return;
+
+    gsap.set(model, { opacity: 0, scale: 0.5, y: 0 });
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: hero,
+            start: "top top",      // Starts exactly when hero hits the top
+            endTrigger: transitionSection,
+            end: "bottom top",
+            scrub: 1.5,          
+        }
+    });
+
+    tl.to(model, {
+        opacity: 1,                
+        scale: 0.85,
+        duration: 0.2             
+    })
+        .to(model, {
+            y: "70vh",                 
+            rotate: -5,
+            scale: 0.6,                
+            ease: "none"               
+        })
+        .to(model, {
+            opacity: 0,
+            filter: "blur(10px)",      
+            duration: 0.2
+        });
+}
+
+// 3. THE INTRO
 function initIntro() {
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({ delay: 0.1 });
+    const text = document.querySelector('.intro-curtain__text');
+    const kiss = document.querySelector('.intro-curtain__img');
     const curtain = document.querySelector('.intro-curtain');
-    const introText = document.querySelector('.intro-curtain__text');
-    const introKiss = document.querySelector('.intro-curtain__img');
 
-    if (!curtain) return;
+    if (!curtain || !text || !kiss) return;
 
-    // 1. Intro Animation (The Curtain Content)
-    tl.to(introText, { opacity: 1, scale: 1, duration: 1 })
-        .to(introKiss, { opacity: 1, scale: 1, rotation: -15, ease: "elastic.out" }, "-=0.2")
-        .to({}, { duration: 0.5 }) // Pause to look at it
-
-        // 2. Lift Curtain
+    tl.fromTo(text, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 1 })
+        .fromTo(kiss, { opacity: 0, scale: 3, rotation: 10 }, { opacity: 1, scale: 1, rotation: -15, duration: 0.8, ease: "elastic.out" }, "-=0.5")
+        .to({}, { duration: 0.8 })
         .to(curtain, {
             y: '-100%',
-            duration: 1.1,
-            ease: "power3.inOut",
+            duration: 1.2,
+            ease: "power4.inOut",
             onStart: () => {
-                gsap.delayedCall(0.3, playHeroAnimations);
+                gsap.delayedCall(0.5, playHeroAnimations);
             },
-
             onComplete: () => {
                 curtain.style.display = 'none';
+                // START SCROLL LOGIC ONCE INTRO IS DONE
+                initGlobalScroll();
             }
         });
 }
 
 const init = () => {
-    gsap.set('.hero', { opacity: 1, visibility: 'visible' });
-    gsap.set('.hero__football', { x: '120%', opacity: 0 });
+    gsap.set('.hero__football', { x: '100vw', opacity: 0 });
     gsap.set('.hero__kissy', { scale: 0, opacity: 0 });
+    gsap.set('.intro-curtain', { display: 'block', visibility: 'visible' });
 
     initIntro();
-}
+};
 
 init();
