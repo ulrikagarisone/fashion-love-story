@@ -1,21 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-loading">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A Fashion Love Story | Dirk Bikkembergs</title>
+  <link rel="preconnect" href="https://p.typekit.net">
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://use.typekit.net/svm3fbd.css">
-  <link rel="stylesheet" href="./src/styles/style.css">
   <link rel="stylesheet" href="src/styles/reset.css">
+  <link rel="stylesheet" href="./src/styles/style.css">
   <link rel="icon" type="image/svg+xml" href="/svg/xoxo.svg">
-  <meta name="description"
-    content="Explore how Dirk Bikkembergs revolutionized fashion by merging sports and haute couture in the 1980s.">
+  <meta name="description" content="Explore how Dirk Bikkembergs revolutionized fashion.">
 </head>
 
 <body>
-  <main>
+
+  <!-- INTRO ANIMATION -->
+  <div class="intro-curtain preloader" aria-hidden="true">
+    <div class="intro-curtain__content">
+      <div class="intro-curtain__text">XOXO</div>
+      <div class="preloader__percentage-wrapper">
+        <span class="preloader__percentage">0%</span>
+      </div>
+    </div>
+    <div class="preloader__visual"></div>
+  </div>
+
+  <div class="global-scroll-model">
+    <picture>
+      <source type="image/avif"
+        srcset="/dist/images/leather_cutout-400.avif 400w, /dist/images/leather_cutout-800.avif 800w">
+      <img src="/dist/images/leather_cutout-400.png" alt="Leather athlete walking" class="global-scroll-model__img">
+    </picture>
+  </div>
+
+  <header>
     <!-- NAVIGATION -->
     <nav class="nav">
       <div class="nav__container">
@@ -31,15 +52,9 @@
         </a>
       </div>
     </nav>
+  </header>
 
-    <!-- INTRO ANIMATION -->
-    <div class="intro-curtain">
-      <div class="intro-curtain__content">
-        <div class="intro-curtain__text">XOXO</div>
-        <img src="/images/kissy1.png" class="intro-curtain__img" alt="Kiss">
-      </div>
-    </div>
-
+  <main>
     <!-- HERO SECTION -->
     <section class="hero">
       <div class="hero__background">
@@ -174,25 +189,33 @@
             </h2>
             <div class="leather-years__dirk-text">
               <p class="leather-years__dirk-paragraph">
-                <strong>Leather</strong> has been my partner for years.<br>
+                <span class="bold-text">Leather</span> has been my partner for years.<br>
                 Strong. Reliable. Beautiful.<br>
                 I know every technique. Every stitch.
               </p>
               <p class="leather-years__dirk-paragraph">
-                <strong>Military precision</strong> in every boot.<br>
-                <em>Italian craftsmanship</em> in every jacket. Metal hardware that meant business.<br>
-                <strong>Laces</strong> that threaded through soles in ways no one had seen before.
+                <span class="bold-text">Military precision</span> in every boot.<br>
+                <span class="bold-text">Italian craftsmanship</span> in every jacket. Metal hardware that meant
+                business.<br>
+                <span class="bold-text">Laces</span> that threaded through soles in ways no one had seen before.
               </p>
               <p class="leather-years__dirk-paragraph">
-                By 1995, I had mastered it completely.<br> My language was leather, <strong>metal</strong>, and
-                <br><strong>REBELLION.</strong>
+                By 1995, I had mastered it completely.<br> My language was leather, <span
+                  class="bold-text">metal</span>, and
+                <br><span class="bold-text">REBELLION.</span>
               </p>
             </div>
           </div>
           <div class="leather-years__footer">
             <p class="leather-years__matchmaker">THE<br>MATCH<br>MAKER</p>
             <div class="leather-years__dirk-image">
-              <img src="/images/dirk_boot.png" alt="Dirk Bikkembergs iconic boot" class="leather-years__boot">
+              <picture>
+                <source type="image/avif"
+                  srcset="/dist/images/dirk_boot-400.avif 400w, /dist/images/dirk_boot-800.avif 800w"
+                  sizes="(max-width: 768px) 160px, 400px">
+                <img src="/dist/images/dirk_boot-400.png" alt="Dirk Bikkembergs iconic boot" class="leather-years__boot"
+                  width="160" height="265" loading="lazy">
+              </picture>
             </div>
           </div>
         </div>
@@ -493,13 +516,13 @@
           <div class="meeting__line-top">THE</div>
           <div class="meeting__line-split">
             <span class="meeting__text">MEET</span>
-              <div class="meeting__image-wrapper">
-                <picture>
-                  <source type="image/avif"
-                    srcset="/dist/images/meeting_photo-400.avif 400w, /dist/images/meeting_photo-800.avif 800w">
-                  <img src="/dist/images/meeting_photo-400.jpg" alt="Dirk Bikkembergs with model" class="meeting__image"
-                    width="150" height="200" loading="lazy">
-                </picture>
+            <div class="meeting__image-wrapper">
+              <picture>
+                <source type="image/avif"
+                  srcset="/dist/images/meeting_photo-400.avif 400w, /dist/images/meeting_photo-800.avif 800w">
+                <img src="/dist/images/meeting_photo-400.jpg" alt="Dirk Bikkembergs with model" class="meeting__image"
+                  width="150" height="200" loading="lazy">
+              </picture>
             </div>
             <span class="meeting__text">ING</span>
           </div>
@@ -540,8 +563,7 @@
               <div class="failed-prose">
                 <p class="failed-p">
                   I was the guy known for tough tailoring and rugged boots, but Paris wanted something else. The
-                  avant-garde world
-                  demanded it. <strong>Elegant. Refined.</strong>
+                  avant-garde world demanded it. <span class="bold-text">Elegant. Refined.</span>
                 </p>
                 <p class="failed-p">
                   But deep down? It felt like a cage.
@@ -765,15 +787,14 @@
         <div class="breakthrough__composition">
           <div class="breakthrough__group breakthrough__group--leather">
             <h3 class="breakthrough__word breakthrough__word--solid">LEATHER</h3>
-            <p class="breakthrough__desc">
-              <strong>STRUCTURE</strong><br>
+            <p class="breakthrough__desc">STRUCTURE<br>
               Shoulders & Chest.
             </p>
           </div>
           <div class="breakthrough__group breakthrough__group--lycra">
             <h3 class="breakthrough__word breakthrough__word--outline">LYCRA</h3>
             <p class="breakthrough__desc breakthrough__desc--right">
-              <strong>MOVEMENT</strong><br>
+              MOVEMENT<br>
               Back & Underarms.
             </p>
           </div>
@@ -1029,7 +1050,7 @@
           <p class="ticket__text">
             Fashion is a contact sport.<br>
             Don't sit on the bench.<br>
-            <strong>Join the starting lineup.</strong>
+            Join the starting lineup.
           </p>
           <form class="roster-form">
             <div class="roster-form__wrapper">
@@ -1099,15 +1120,8 @@
 
     </div>
   </footer>
-  <div class="global-scroll-model">
-    <picture>
-      <source type="image/avif"
-        srcset="/dist/images/leather_cutout-400.avif 400w, /dist/images/leather_cutout-800.avif 800w">
-      <img src="/dist/images/leather_cutout-400.png" alt="Leather athlete walking" class="global-scroll-model__img">
-    </picture>
-  </div>
-  <script type="module" src="/src/js/main.js"></script>
   <script type="module" src="/src/js/hero.js"></script>
+  <script type="module" src="/src/js/main.js"></script>
   <script type="module" src="/src/js/dirk.js"></script>
   <script type="module" src="/src/js/main.js"></script>
   <script type="module" src="/src/js/meeting.js"></script>
