@@ -1,7 +1,6 @@
 const init = () => {
     console.log('Init started');
 
-    // --- 1. ELEMENTS ---
     const modal = document.querySelector('#clappingModal');
     const startBtn = document.querySelector('#startExperience');
     const skipBtn = document.querySelector('#skipBtn');
@@ -11,25 +10,22 @@ const init = () => {
     const overlay = document.querySelector('#spotlightOverlay');
     const stage = document.querySelector('#sanSiroStage');
     const yearDisplay = document.querySelector('#yearDisplay');
-    const scrollHint = document.querySelector('#scrollHint'); // NEW ELEMENT
+    const scrollHint = document.querySelector('#scrollHint');
 
-    // --- 2. STATE ---
     let energy = 0;
     let unlocked = false;
     let currentStream = null; // Store stream to stop it later
 
-    // --- 3. HELPER FUNCTIONS ---
-
-    // Stop Microphone Completely
+    // Stop microphone completely
     const killMicrophone = () => {
         if (currentStream) {
             currentStream.getTracks().forEach(track => track.stop());
-            console.log('🎤 Microphone disconnected completely.');
+            console.log(' Microphone disconnected completely.');
             currentStream = null;
         }
     };
 
-    // CLAPPING LOGIC
+    // Clapping logic
     const startClapping = (stream) => {
         currentStream = stream; // Save for later
 
@@ -48,7 +44,7 @@ const init = () => {
         const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
         const checkVolume = () => {
-            // STOP LOOP if game is won
+            // Stop loop if game is won
             if (unlocked) {
                 ctx.close(); // Close audio processor
                 return;
@@ -64,11 +60,10 @@ const init = () => {
             // UI Update
             if (volBar) volBar.style.height = Math.min(100, vol * 2) + '%';
 
-            // --- CHANGE 1: HARDER DIFFICULTY ---
-            if (vol > 20) {
-                energy += 0.4; // Was 2. Now 0.4 (approx 4-5 seconds of clapping)
+            if (vol > 15) {
+                energy += 1.5; 
             } else {
-                energy -= 0.5; // Decays fast if you stop
+                energy -= 0.5; 
             }
 
             energy = Math.max(0, Math.min(100, energy));
@@ -80,19 +75,19 @@ const init = () => {
             if (energy >= 100) {
                 unlocked = true;
 
-                // 1. Hide Game Modal
+                // Hide game modal
                 if (modal) modal.classList.remove('clapping-modal--active');
 
-                // 2. Hide Dark Overlay
+                // Hide dark overlay
                 if (overlay) overlay.classList.add('san-siro__dark-overlay--hidden');
 
-                // 3. Show Scroll Hint
+                // Show scroll hint
                 if (scrollHint) scrollHint.classList.add('san-siro__scroll-hint--visible');
 
-                // 4. STOP MICROPHONE (Privacy)
+                // Stop microphone
                 killMicrophone();
 
-                console.log('🔓 Unlocked & Mic Stopped!');
+                console.log('Unlocked & Mic Stopped!');
             } else {
                 requestAnimationFrame(checkVolume);
             }
@@ -128,7 +123,7 @@ const init = () => {
         startMicrophoneCheck();
     };
 
-    // --- 4. EVENT LISTENERS ---
+    //  EVENT LISTENERS 
     window.openModal = openModal;
 
     if (startBtn) startBtn.addEventListener('click', openModal);
@@ -143,7 +138,7 @@ const init = () => {
         });
     }
 
-    // --- 5. SPOTLIGHT & SCROLL ---
+    //  SPOTLIGHT & SCROLL 
     if (stage && overlay) {
         stage.addEventListener('mousemove', (e) => {
             if (!overlay.classList.contains('san-siro__dark-overlay--hidden')) {
@@ -157,7 +152,7 @@ const init = () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     if (entry.target.classList.contains('san-siro__trigger--intro')) {
-                        // Optional: reset logic if they scroll back up
+                        //  reset logic if they scroll back up
                     } else {
                         overlay.classList.add('san-siro__dark-overlay--hidden');
                         // Hide the scroll hint once they actually scroll down
@@ -184,7 +179,7 @@ const init = () => {
 
         document.querySelectorAll('.san-siro__trigger').forEach(el => observer.observe(el));
     }
-
+    document.body.classList.add('js-enabled');
     console.log('Init finished');
 };
 

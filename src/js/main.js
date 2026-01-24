@@ -69,70 +69,6 @@ const initEyeTracker = () => {
   lycraSection.addEventListener('touchstart', handleMove, { passive: true });
 };
 
-// 7. VORTEX ANIMATION
-function initVortex() {
-  const container = document.querySelector('.vortex-container');
-  if (!container) return;
-
-  const phrases = [
-    "Leather + Lycra?", "What if...?", "Is it even possible?",
-    "Impossible...", "Two different worlds?", "Could they work together?",
-    "Everyone would say it's impossible...", "Crazy.", "Visionary?",
-    "Risk.", "What if...?", "Two worlds colliding..."
-  ];
-
-  let vortexInterval = null;
-
-  function createWord() {
-    if (!document.body.contains(container)) return;
-
-    const word = document.createElement('div');
-    word.classList.add('vortex-word');
-    word.innerText = phrases[Math.floor(Math.random() * phrases.length)];
-
-    // Random styling & Position
-    const variant = Math.floor(Math.random() * 3) + 1;
-    word.classList.add(`word-variant-${variant}`);
-    const randomX = (Math.random() - 0.5) * 50;
-    const randomY = (Math.random() - 0.5) * 50;
-    const duration = Math.random() * 2 + 3;
-
-    word.style.animation = `flyOut ${duration}s linear forwards`;
-    word.style.marginLeft = `${randomX}vw`;
-    word.style.marginTop = `${randomY}vh`;
-
-    container.appendChild(word);
-
-    setTimeout(() => word.remove(), duration * 1000);
-  }
-
-  // CONTROLS: Only run when visible
-  function startVortex() {
-    if (!vortexInterval) {
-      createWord();
-      vortexInterval = setInterval(createWord, 400);
-    }
-  }
-
-  function stopVortex() {
-    if (vortexInterval) {
-      clearInterval(vortexInterval);
-      vortexInterval = null;
-      container.innerHTML = ''; // Clean up to prevent lag
-    }
-  }
-
-  ScrollTrigger.create({
-    trigger: container,
-    start: "top bottom",
-    end: "bottom top",
-    onEnter: startVortex,
-    onLeave: stopVortex,
-    onEnterBack: startVortex,
-    onLeaveBack: stopVortex
-  });
-}
-
 
 // 8. SAN SIRO / TICKET (WRAPPED IN FUNCTION TO PREVENT CRASH)
 function initSanSiro() {
@@ -194,23 +130,6 @@ const initFailedQuotes = () => {
   });
 };
 
-
-// interaction 2 
-
-//interaction 3
-
-function initCardFlip() {
-  const cards = document.querySelectorAll('.leather-years__item-image');
-
-  cards.forEach(card => {
-    card.addEventListener('click', () => {
-      // Only do click toggle on mobile/tablet (below 1024px)
-      if (window.innerWidth < 1024) {
-        card.classList.toggle('is-flipped');
-      }
-    });
-  });
-}
 
 
 function initFailedDates() {
@@ -420,11 +339,9 @@ function init() {
 
   initSeparateWorldsPopIn();
   initEyeTracker();
-  initVortex();
   initFailedQuotes();
   initSanSiro();
 
-  initCardFlip();
 
   initFailedDates();
   initMobileHorizontalScroll();

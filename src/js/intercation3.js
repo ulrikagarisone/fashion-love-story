@@ -1,7 +1,6 @@
 import gsap from 'gsap';
 
 const initStickerLab = () => {
-    // 1. Correct Answers
     const correctAnswers = {
         shoulder: 'leather',
         core: 'lycra',
@@ -10,20 +9,21 @@ const initStickerLab = () => {
 
     let currentSpot = null;
 
-    const modal = document.getElementById('stickerModal');
-    const questionText = document.getElementById('question');
-    const feedbackText = document.getElementById('feedbackText');
-    const feedbackContainer = document.getElementById('feedback');
-    const closeBtn = document.querySelector('.sticker-lab__close-btn'); // SELECT IT HERE
+    const modal = document.querySelector('#stickerModal');
+    const questionText = document.querySelector('#question');
+    const feedbackText = document.querySelector('#feedbackText');
+    const feedbackContainer = document.querySelector('#feedback');
+    const closeBtn = document.querySelector('.sticker-lab__close-btn');
 
-    // Open Modal
+    if (!modal || !questionText) return;
+
+    // Open Modal logic
     document.querySelectorAll('.sticker-lab__add-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             currentSpot = btn.dataset.spot;
             questionText.textContent = btn.dataset.text;
             modal.classList.add('sticker-lab__modal--active');
 
-            // Animation for shapes entering
             gsap.fromTo(".sticker-lab__preview",
                 { scale: 0, rotation: -90 },
                 {
@@ -36,7 +36,7 @@ const initStickerLab = () => {
         });
     });
 
-    // Check Answer
+    // Check Answer logic
     document.querySelectorAll('.sticker-lab__option').forEach(opt => {
         opt.addEventListener('click', () => {
             const chosenMaterial = opt.dataset.material;
@@ -44,10 +44,8 @@ const initStickerLab = () => {
 
             const isCorrect = correctAnswers[currentSpot] === chosenMaterial;
 
-            // 1. Reset Classes
             feedbackText.classList.remove('is-correct', 'is-wrong');
 
-            // 2. Set Text & Color Class
             if (isCorrect) {
                 feedbackText.textContent = "MATCH";
                 feedbackText.classList.add('is-correct');
@@ -56,10 +54,8 @@ const initStickerLab = () => {
                 feedbackText.classList.add('is-wrong');
             }
 
-            // 3. Show Animation
             feedbackContainer.classList.add('sticker-lab__feedback--show');
 
-            // 4. Hide after 1.5s
             setTimeout(() => {
                 feedbackContainer.classList.remove('sticker-lab__feedback--show');
             }, 1500);

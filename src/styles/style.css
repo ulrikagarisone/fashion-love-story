@@ -930,6 +930,28 @@ body {
   overflow: hidden;
 }
 
+.leather-years__item-image::after {
+  content: "READ MORE+";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-black);
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 10px;
+  padding: 4px 12px;
+  border-top: 1px solid #444;
+  border-left: 1px solid #444;
+  border-right: 1px solid #444;
+  z-index: 5;
+  transition: opacity 0.3s ease;
+}
+
+.is-flipped .leather-years__item-image::after {
+  opacity: 0;
+}
+
 .leather-years__item-image img {
   width: 100%;
   height: 100%;
@@ -970,6 +992,11 @@ body {
 
 /* Desktop */
 @media (min-width: 64rem) {
+
+  .leather-years__item-image::after {
+    display: none;
+  }
+
   .leather-years {
     position: relative;
     min-height: 100vh;
@@ -1449,6 +1476,7 @@ body {
 }
 
 /*  VORTEX / QUESTIONS SECTION */
+/* VORTEX SECTION BASE */
 .vortex-section {
   position: relative;
   height: 60vh;
@@ -1462,7 +1490,6 @@ body {
   z-index: 10;
 }
 
-/* Hypnotic spiral background */
 .vortex-section::before {
   content: '';
   position: absolute;
@@ -1471,11 +1498,7 @@ body {
   transform: translate(-50%, -50%);
   width: 200vmax;
   height: 200vmax;
-  background: repeating-radial-gradient(circle at center,
-      #1a1a1a 0,
-      #1a1a1a 20px,
-      var(--text-black) 21px,
-      var(--text-black) 40px);
+  background: repeating-radial-gradient(circle at center, #1a1a1a 0, #1a1a1a 20px, var(--text-black) 21px, var(--text-black) 40px);
   opacity: 0.3;
   animation: spinBackground 60s linear infinite;
   z-index: 1;
@@ -1490,52 +1513,91 @@ body {
   pointer-events: none;
 }
 
-/* Hide the HTML text questions */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-/* Flying Words - dynamically created by JS */
+/* THE FLYING WORDS */
 .vortex-word {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) translateZ(-1000px);
   color: var(--text-light);
   font-family: var(--font-title);
   font-size: 1.5rem;
   font-weight: 500;
   font-style: italic;
-  text-transform: none;
   white-space: nowrap;
   opacity: 0;
   will-change: transform, opacity;
+  /* All words use the same animation, but different delays */
+  animation: flyOut 5s linear infinite;
 }
 
-/* Word style variants */
-.word-variant-1 {
-  color: var(--text-light);
-}
-
-.word-variant-2 {
+/* INDIVIDUAL POSITIONING & DELAYS (The "Random" Feel) */
+.vortex-word:nth-child(1) {
+  animation-delay: 0s;
+  margin-left: -15vw;
+  margin-top: -10vh;
   color: var(--accent);
-  font-style: italic;
-  font-weight: 700;
 }
 
-.word-variant-3 {
+.vortex-word:nth-child(2) {
+  animation-delay: 0.5s;
+  margin-left: 20vw;
+  margin-top: 5vh;
+}
+
+.vortex-word:nth-child(3) {
+  animation-delay: 1s;
+  margin-left: -10vw;
+  margin-top: 15vh;
   color: var(--bg-blue);
 }
 
-/* Center - Dirk Image */
+.vortex-word:nth-child(4) {
+  animation-delay: 1.5s;
+  margin-left: 15vw;
+  margin-top: -15vh;
+}
+
+.vortex-word:nth-child(5) {
+  animation-delay: 2s;
+  margin-left: -25vw;
+  margin-top: 0vh;
+  font-weight: 800;
+}
+
+.vortex-word:nth-child(6) {
+  animation-delay: 2.5s;
+  margin-left: 10vw;
+  margin-top: 10vh;
+  color: var(--accent);
+}
+
+.vortex-word:nth-child(7) {
+  animation-delay: 3s;
+  margin-left: -5vw;
+  margin-top: -20vh;
+}
+
+.vortex-word:nth-child(8) {
+  animation-delay: 3.5s;
+  margin-left: 25vw;
+  margin-top: -5vh;
+  font-style: normal;
+}
+
+.vortex-word:nth-child(9) {
+  animation-delay: 4s;
+  margin-left: -15vw;
+  margin-top: 20vh;
+  color: var(--bg-blue);
+}
+
+.vortex-word:nth-child(10) {
+  animation-delay: 4.5s;
+  margin-left: 5vw;
+  margin-top: -10vh;
+}
+
+/* CENTER IMAGE */
 .vortex-center {
   position: relative;
   z-index: 5;
@@ -1547,7 +1609,6 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  display: block;
 }
 
 /* ANIMATIONS */
@@ -1557,13 +1618,17 @@ body {
     transform: translate(-50%, -50%) translateZ(-1000px) rotate(0deg);
   }
 
-  20% {
+  15% {
+    opacity: 1;
+  }
+
+  85% {
     opacity: 1;
   }
 
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) translateZ(800px) rotate(180deg);
+    transform: translate(-50%, -50%) translateZ(1000px) rotate(120deg);
   }
 }
 
@@ -1577,7 +1642,7 @@ body {
   }
 }
 
-/* Tablet */
+/* RESPONSIVE UPDATES */
 @media (min-width: 48rem) {
   .vortex-section {
     height: 70vh;
@@ -1588,36 +1653,18 @@ body {
   }
 
   .vortex-center {
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
   }
 }
 
-/* Desktop */
 @media (min-width: 64rem) {
   .vortex-section {
     height: 80vh;
   }
 
   .vortex-word {
-    font-size: 2rem;
-  }
-
-  .vortex-center {
-    width: 350px;
-    height: 350px;
-  }
-}
-
-/* Large desktop */
-@media (min-width: 90rem) {
-  .vortex-word {
     font-size: 2.2rem;
-  }
-
-  .vortex-center {
-    width: 450px;
-    height: 450px;
   }
 }
 
@@ -1680,6 +1727,15 @@ body {
   margin-top: 1.5rem;
   overflow: hidden;
   position: relative;
+  clip-path: inset(0 0% 0 0%);
+  opacity: 1;
+}
+
+.meeting__line-top,
+.meeting__text,
+.meeting__content>* {
+  opacity: 1;
+  transform: none;
 }
 
 .meeting__image {
@@ -3855,6 +3911,7 @@ input:checked+.slider:before {
 }
 
 .san-siro__dark-overlay {
+  display: none !important;
   position: absolute;
   top: 0;
   left: 0;
@@ -3877,6 +3934,14 @@ input:checked+.slider:before {
   opacity: 0;
   pointer-events: none;
   z-index: -1;
+}
+
+.js-enabled .san-siro__dark-overlay {
+  display: flex !important;
+}
+
+.js-enabled .san-siro__dark-overlay--hidden {
+  display: none !important;
 }
 
 .san-siro__intro-text {
@@ -3966,12 +4031,23 @@ input:checked+.slider:before {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  opacity: 0;
+  opacity: 1;
+  transform: none;
   transform: translateY(30px);
   transition: all 0.7s ease;
 }
 
 .san-siro__model--active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js-enabled .san-siro__model {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.js-enabled .san-siro__model--active {
   opacity: 1;
   transform: translateY(0);
 }
@@ -4017,11 +4093,22 @@ input:checked+.slider:before {
   padding: clamp(2rem, 4vw, 3.5rem);
   max-width: 550px;
   width: 100%;
-  opacity: 0;
+  opacity: 1;
+  transform: none;
   transform: translateY(50px);
   transition: all 0.7s ease;
   backdrop-filter: blur(15px);
   pointer-events: auto;
+}
+
+.js-enabled .san-siro__card {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.js-enabled .san-siro__trigger--active .san-siro__card {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .san-siro__trigger--active .san-siro__card {
