@@ -333,6 +333,7 @@ body {
   color: var(--text-black);
   line-height: 0.85;
   margin-bottom: var(--space-xs);
+  text-transform: uppercase;
 }
 
 .hero__title-line {
@@ -857,6 +858,7 @@ body {
 
 .leather-years__dirk-title {
   font-family: var(--font-title);
+  text-transform: uppercase;
   font-size: clamp(2.5rem, 10vw, 4rem);
   font-weight: 900;
   line-height: 0.9;
@@ -900,6 +902,7 @@ body {
 
 .leather-years__matchmaker {
   font-family: var(--font-title);
+  text-transform: uppercase;
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: 900;
   line-height: 0.9;
@@ -932,6 +935,7 @@ body {
   margin-bottom: var(--space-lg);
   padding: 0 var(--space-md);
   color: var(--text-black);
+  text-transform: uppercase;
 }
 
 .leather-years__scroll-container {
@@ -1767,6 +1771,7 @@ body {
   display: block;
   margin-bottom: 2rem;
   width: 100%;
+  text-transform: uppercase;
 }
 
 .meeting__line-top {
@@ -2115,6 +2120,7 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
+  text-transform: uppercase;
 }
 
 .failed-quotes {
@@ -2199,8 +2205,13 @@ body {
   font-weight: 900;
   letter-spacing: -0.02em;
   margin-top: 0.25rem;
+  text-transform: uppercase;
 }
 
+.quote-label {
+  font-family: var(--font-title);
+  text-transform: uppercase;
+}
 
 /* DESKTOP */
 @media (min-width: 64rem) {
@@ -2295,7 +2306,6 @@ body {
     font-family: var(--font-title);
     font-size: 0.75rem;
     font-weight: 700;
-    text-transform: uppercase;
     letter-spacing: 1px;
     display: block;
     margin-bottom: 0.5rem;
@@ -2421,6 +2431,7 @@ body {
   font-weight: 900;
   text-align: left;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .blue-p-subtitle {
@@ -2704,6 +2715,7 @@ input:checked+.slider:before {
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
+  text-transform: uppercase;
   /* Performance hint for Safari */
   will-change: mask-image, opacity;
 }
@@ -3029,6 +3041,7 @@ input:checked+.slider:before {
 
 .happy-accident__tag {
   position: absolute;
+  text-transform: uppercase;
   top: 20%;
   left: -20px;
   background: var(--accent);
@@ -3303,6 +3316,7 @@ input:checked+.slider:before {
   margin: 0;
   padding: 0;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 .breakthrough__word--solid {
@@ -3319,6 +3333,7 @@ input:checked+.slider:before {
   font-size: 1rem;
   margin-top: 0.2rem;
   display: block;
+  text-transform: uppercase;
 }
 
 .breakthrough__visual {
@@ -3674,6 +3689,7 @@ input:checked+.slider:before {
 }
 
 .sticker-lab__label {
+  text-transform: uppercase;
   font-weight: 900;
   letter-spacing: 1px;
   font-size: 1rem;
@@ -3681,6 +3697,7 @@ input:checked+.slider:before {
 
 .sticker-lab__close-btn {
   position: absolute;
+  text-transform: uppercase;
   top: 20px;
   right: 20px;
   background: none;
@@ -3830,6 +3847,7 @@ input:checked+.slider:before {
 }
 
 .clapping-modal__title {
+  text-transform: uppercase;
   font-family: var(--font-title);
   font-size: clamp(2rem, 8vw, 5rem);
   margin-bottom: 1rem;
@@ -3838,6 +3856,7 @@ input:checked+.slider:before {
 .clapping-modal__subtitle {
   font-family: var(--font-body);
   color: var(--accent);
+  text-transform: uppercase;
   font-size: clamp(1rem, 3vw, 1.5rem);
   margin-bottom: 2rem;
 }
@@ -3866,6 +3885,7 @@ input:checked+.slider:before {
 .clapping-modal__instruction {
   font-family: var(--font-title);
   color: var(--accent);
+  text-transform: uppercase;
   font-size: 1.5rem;
   animation: pulse 1.5s infinite;
 }
@@ -4002,6 +4022,7 @@ input:checked+.slider:before {
   line-height: 0.85;
   margin-bottom: 1.5rem;
   color: var(--accent);
+  text-transform: uppercase;
   mix-blend-mode: difference;
 }
 
@@ -4163,6 +4184,7 @@ input:checked+.slider:before {
 .san-siro__card h3 {
   font-family: var(--font-title);
   font-size: clamp(2rem, 5vw, 3rem);
+  text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 1rem;
   font-weight: 900;
@@ -4336,6 +4358,7 @@ input:checked+.slider:before {
 
 .archive-row__date {
   font-family: var(--font-body);
+  text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.05em;
   grid-column: 1 / -1;
@@ -4367,11 +4390,13 @@ input:checked+.slider:before {
   font-size: 0.7rem;
   font-weight: bold;
   transform: translateY(-2px);
+  text-transform: uppercase;
   width: fit-content;
 }
 
 .archive-row__story {
   font-family: var(--font-body);
+  text-transform: uppercase;
   font-style: italic;
   font-weight: 500;
   color: #666;
@@ -4386,6 +4411,7 @@ input:checked+.slider:before {
   min-width: 80px;
   grid-column: 2;
   align-self: center;
+  text-transform: uppercase;
 }
 
 @media (min-width: 48rem) {
@@ -4486,6 +4512,7 @@ input:checked+.slider:before {
 
 .ticket__meta {
   display: flex;
+  text-transform: uppercase;
   justify-content: space-between;
   border-bottom: 1px solid #333;
   padding-bottom: 0.5rem;
@@ -4498,6 +4525,7 @@ input:checked+.slider:before {
 .ticket__title {
   font-family: var(--font-title);
   font-size: clamp(2.5rem, 10vw, 4rem);
+  text-transform: uppercase;
   font-weight: 600;
   line-height: 0.9;
   color: var(--text-light);
@@ -4515,6 +4543,7 @@ input:checked+.slider:before {
 .ticket__detail-group {
   display: flex;
   flex-direction: column;
+  text-transform: uppercase;
 }
 
 .ticket__detail-label {
@@ -4729,7 +4758,6 @@ input:checked+.slider:before {
 .footer-label {
   font-size: 0.85rem;
   color: var(--accent);
-  /* Using accent color for labels to make them pop */
   font-weight: 700;
   letter-spacing: 1px;
   margin-bottom: 12px;

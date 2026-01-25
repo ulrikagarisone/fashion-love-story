@@ -3,10 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * LOGIC: The "FLIP" animation for the Captain image
- * Moving an element from a gallery to a hero position on scroll.
- */
+
 const runCaptainTransition = () => {
     const source = document.querySelector('.blue-item:nth-child(3) .img-wrapper');
     const sourceLabel = document.querySelector('.blue-item:nth-child(3) .tag-vertical');
@@ -14,21 +11,21 @@ const runCaptainTransition = () => {
 
     if (!source || !dest) return;
 
-    // 1. Get the starting and ending positions
+    // Get the starting and ending positions
     const state1 = source.getBoundingClientRect();
     const state2 = dest.getBoundingClientRect();
-
+    //Calculate distance to target
     const deltaX = state2.left - state1.left;
     const deltaY = state2.top - state1.top;
 
-    // 2. Build the timeline
+    // the timeline
     const tl = gsap.timeline({
         scrollTrigger: {
             trigger: ".blind-date-blue",
             start: "top top",
             end: "bottom center",
             scrub: 1.5,
-            invalidateOnRefresh: true 
+            invalidateOnRefresh: true // Re - calculate on resize
         }
     });
 
@@ -43,17 +40,15 @@ const runCaptainTransition = () => {
           ease: "power2.inOut",
           zIndex: 100
       }, 0)
-      .to(dest, { autoAlpha: 1, duration: 0.2 }, "-=0.2")
-      .to(source, { autoAlpha: 0, duration: 0.2 }, "<");
+        .to(dest, { autoAlpha: 1, duration: 0.2 }, "-=0.2")// Show hero image
+        .to(source, { autoAlpha: 0, duration: 0.2 }, "<");// Hide flying image
 };
 
-/**
- * MASTER EXPORT
- */
+
 export const initCaptainAnimation = () => {
     let mm = gsap.matchMedia();
 
-    // ONLY RUNS ON DESKTOP (Min-Width 1024px)
+    // ONLY RUNS ON DESKTOP
     mm.add("(min-width: 1024px)", () => {
         // Clear props on refresh to ensure math is always correct
         ScrollTrigger.addEventListener("refreshInit", () => {

@@ -3,14 +3,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// 1. DESKTOP LOGIC
+// DESKTOP LOGIC
 const handleDesktopPinning = (section, dirkSection) => {
     if (!section || !dirkSection) return;
     const rect = section.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
 
     if (rect.top <= 0 && rect.bottom > viewportHeight) {
-        dirkSection.className = 'leather-years__dirk is-fixed';
+        dirkSection.className = 'leather-years__dirk is-fixed';// Stick to screen
     } else if (rect.top > 0) {
         dirkSection.className = 'leather-years__dirk';
     } else if (rect.bottom <= viewportHeight) {
@@ -24,6 +24,7 @@ const setupDesktopAnimations = () => {
         if (t.trigger && t.trigger.classList.contains('leather-years__item')) t.kill();
     });
 
+    //Fade items on scroll
     const items = document.querySelectorAll('.leather-years__item');
     items.forEach((item) => {
         gsap.from(item, {
@@ -39,11 +40,11 @@ const setupDesktopAnimations = () => {
     });
 };
 
-// 2. INTERACTION HELPERS
+// Toggle mobile card flip
 const setupCardFlips = () => {
     const cards = document.querySelectorAll('.leather-years__item-image');
     cards.forEach(card => {
-        // Use a named function so we can remove it if needed
+        // Use a named function so i can remove it if needed
         const toggleFlip = () => {
             if (window.innerWidth < 1024) {
                 card.classList.toggle('is-flipped');
@@ -54,7 +55,6 @@ const setupCardFlips = () => {
     });
 };
 
-// 3. MAIN EXPORT
 export const initDirk = () => {
     const section = document.querySelector('.leather-years');
     const dirkSection = document.querySelector('.leather-years__dirk');
@@ -66,10 +66,9 @@ export const initDirk = () => {
         const isDesktop = window.innerWidth >= 1024;
 
         if (isDesktop) {
-            // Desktop logic
             const pinHandler = () => handleDesktopPinning(section, dirkSection);
-            window.removeEventListener('scroll', pinHandler);
-            window.addEventListener('scroll', pinHandler);
+            window.removeEventListener('scroll', pinHandler);  //Clean up old
+            window.addEventListener('scroll', pinHandler);  //Every time the user scrolls, run the pinning check
             handleDesktopPinning(section, dirkSection); // Initial check
             setupDesktopAnimations();
         } else {
