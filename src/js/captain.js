@@ -3,6 +3,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * LOGIC: The "FLIP" animation for the Captain image
+ * Moving an element from a gallery to a hero position on scroll.
+ */
 const runCaptainTransition = () => {
     const source = document.querySelector('.blue-item:nth-child(3) .img-wrapper');
     const sourceLabel = document.querySelector('.blue-item:nth-child(3) .tag-vertical');
@@ -24,26 +28,28 @@ const runCaptainTransition = () => {
             start: "top top",
             end: "bottom center",
             scrub: 1.5,
-            invalidateOnRefresh: true
+            invalidateOnRefresh: true 
         }
     });
 
     tl.to(sourceLabel, { autoAlpha: 0, duration: 0.1 }, 0.15)
-        .to(source, {
-            x: deltaX,
-            y: deltaY,
-            width: state2.width,
-            height: state2.height,
-            rotation: -5,
-            borderRadius: "0px",
-            ease: "power2.inOut",
-            zIndex: 100
-        }, 0)
-        .to(dest, { autoAlpha: 1, duration: 0.2 }, "-=0.2")
-        .to(source, { autoAlpha: 0, duration: 0.2 }, "<");
+      .to(source, {
+          x: deltaX,
+          y: deltaY,
+          width: state2.width,
+          height: state2.height,
+          rotation: -5,
+          borderRadius: "0px",
+          ease: "power2.inOut",
+          zIndex: 100
+      }, 0)
+      .to(dest, { autoAlpha: 1, duration: 0.2 }, "-=0.2")
+      .to(source, { autoAlpha: 0, duration: 0.2 }, "<");
 };
 
-
+/**
+ * MASTER EXPORT
+ */
 export const initCaptainAnimation = () => {
     let mm = gsap.matchMedia();
 

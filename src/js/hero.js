@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const CRITICAL_IMAGES = [
     "/fashion-love-story/images/kissy1-400.avif",
     "/fashion-love-story/images/model_hero-800.avif",
-    "/fashion-love-story/images/leather_cutout-800.avif"
+    "/fashion-love-story/images/lycra-1200.avif"
 ];
 
 /* 2. THE GLOBAL SCROLL MODEL) */

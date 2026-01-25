@@ -3,6 +3,58 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const setupTwoWorldsStatement = () => {
+    const smallText = document.querySelector('.two-worlds__statement-small');
+    const largeText = document.querySelector('.two-worlds__statement-large');
+    const closingSection = document.querySelector('.two-worlds__closing');
+
+    if (smallText !== null) {
+        if (largeText !== null) {
+            if (closingSection !== null) {
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: closingSection,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+
+                // First: "They lived in" slides up
+                tl.fromTo(smallText,
+                    {
+                        opacity: 0,
+                        y: 30
+                    },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    }
+                );
+
+                // Second: "SEPARATE WORLDS" pops in with a slight "back" ease
+                tl.fromTo(largeText,
+                    {
+                        opacity: 0,
+                        y: 40,
+                        scale: 0.9
+                    },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 1,
+                        ease: "back.out(1.5)"
+                    },
+                    "-=0.5" // This starts the large text halfway through the first animation
+                );
+            }
+        }
+    }
+};
+
 /**
  * 1. VISUAL EFFECTS
  */
@@ -53,6 +105,36 @@ const setupFailedDates = () => {
             }
         );
     });
+};
+
+const setupFailedStatement = () => {
+    const smallText = document.querySelector('.failed-statement-small');
+    const largeText = document.querySelector('.failed-statement-large');
+
+    if (smallText !== null) {
+        if (largeText !== null) {
+
+            // Create a timeline so they animate one after the other
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".failed-closing",
+                    start: "top 80%", // Starts when the bottom section is 80% down the screen
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            tl.fromTo(smallText,
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+            );
+
+            tl.fromTo(largeText,
+                { opacity: 0, scale: 0.8, y: 30 },
+                { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.7)" },
+                "-=0.4" // Starts slightly before the small text finishes
+            );
+        }
+    }
 };
 
 /**
@@ -124,30 +206,18 @@ const initHighlighter = () => {
     });
 };
 
-const setupFailedQuotes = () => {
-    const wrapper = document.querySelector('.failed-image-wrapper');
-    if (!wrapper) return;
-
-    wrapper.addEventListener('click', () => {
-        // We check width if you only want this behavior on mobile
-        if (window.innerWidth < 1024) {
-            wrapper.classList.toggle('is-active');
-            console.log("Quote toggled");
-        }
-    });
-};
-
 /**
  * MASTER INIT (The Export)
  */
 export const initGeneralInteractions = () => {
+    setupTwoWorldsStatement();
     setupEyeTracker();
     setupFailedDates();
+    setupFailedStatement();
     setupMobileGalleryScroll();
     setupBulbTransition();
     setupTicket3D();
     initHighlighter();
-    setupFailedQuotes();
 
     console.log("All general interactions (Falling dates, walking models, etc) loaded.");
 };

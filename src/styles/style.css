@@ -3903,6 +3903,7 @@ input:checked+.slider:before {
 }
 
 .clapping-modal__label {
+  font-family: var(--font-body);
   font-size: 1.2rem;
   color: var(--accent);
   font-weight: 700;
