@@ -920,12 +920,12 @@ body {
 /* TIMELINE - MOBILE HORIZONTAL SCROLL */
 .leather-years__timeline {
   background: var(--bg);
-  padding: var(--space-xl) 0;
+  padding: 3rem 0rem 0rem 0rem;
 }
 
 .leather-years__timeline-title {
   font-family: var(--font-title);
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-size: clamp(1.5rem, 2.5vw, 1.75rem);
   font-weight: 900;
   text-align: left;
   line-height: 0.9;
@@ -2394,6 +2394,7 @@ body {
   gap: 2rem;
   padding: 0 10vw;
   width: fit-content;
+
 }
 
 .blue-container {
@@ -2909,11 +2910,12 @@ input:checked+.slider:before {
     font-size: 8rem;
     order: 2;
   }
-     .blue-prose {
-       text-align: right;
-       max-width: 500px;
-       order: 1;
-     }
+
+  .blue-prose {
+    text-align: right;
+    max-width: 500px;
+    order: 1;
+  }
 }
 
 /* THE HAPPY ACCIDENT */
@@ -3002,6 +3004,7 @@ input:checked+.slider:before {
 }
 
 .happy-accident__caption {
+  font-family: var(--font-body);
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05px;
@@ -3014,8 +3017,8 @@ input:checked+.slider:before {
   right: 0;
   width: 25%;
   z-index: 5;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
 }
 
 .happy-accident__hero-img {
@@ -3087,6 +3090,7 @@ input:checked+.slider:before {
     width: 40%;
     right: -2rem;
     bottom: -10%;
+    opacity: 0;
   }
 }
 
@@ -3832,10 +3836,10 @@ input:checked+.slider:before {
 }
 
 .clapping-modal__subtitle {
+  font-family: var(--font-body);
   color: var(--accent);
   font-size: clamp(1rem, 3vw, 1.5rem);
   margin-bottom: 2rem;
-  letter-spacing: 0.5rem;
 }
 
 .clapping-modal__bar-wrapper {
@@ -3879,6 +3883,7 @@ input:checked+.slider:before {
 }
 
 .clapping-modal__progress {
+  font-family: var(--font-body);
   width: 100%;
   max-width: 400px;
   height: 12px;
@@ -3904,6 +3909,7 @@ input:checked+.slider:before {
 }
 
 .clapping-modal__skip {
+  font-family: var(--font-body);
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.6);
   padding: 1.5rem;
@@ -3981,6 +3987,7 @@ input:checked+.slider:before {
 }
 
 .san-siro__intro-text {
+  font-family: var(--font-body);
   padding: 2rem;
   max-width: 800px;
   position: relative;
@@ -3998,6 +4005,7 @@ input:checked+.slider:before {
 }
 
 .san-siro__description {
+  font-family: var(--font-body);
   color: var(--bg);
   font-size: var(--text-body-large);
   line-height: 1.6;
@@ -4028,7 +4036,6 @@ input:checked+.slider:before {
   text-transform: uppercase;
   cursor: pointer;
   pointer-events: auto;
-  margin-top: 2rem;
   transition: transform 0.2s;
 }
 
@@ -4162,6 +4169,7 @@ input:checked+.slider:before {
 }
 
 .san-siro__card p {
+  font-family: var(--font-body);
   font-size: clamp(1rem, 2.5vw, 1.2rem);
   line-height: 1.7;
   margin-bottom: 1.5rem;
@@ -4351,6 +4359,7 @@ input:checked+.slider:before {
 }
 
 .archive-row__tag {
+  font-family: var(--font-body);
   background: var(--text-black);
   color: var(--bg);
   padding: 4px 8px;
@@ -4361,6 +4370,7 @@ input:checked+.slider:before {
 }
 
 .archive-row__story {
+  font-family: var(--font-body);
   font-style: italic;
   font-weight: 500;
   color: #666;
@@ -4368,6 +4378,7 @@ input:checked+.slider:before {
 }
 
 .archive-row__arrow {
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1rem;
   text-align: right;
@@ -4506,6 +4517,7 @@ input:checked+.slider:before {
 }
 
 .ticket__detail-label {
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #888;
   margin-bottom: 0.25rem;
@@ -4518,12 +4530,14 @@ input:checked+.slider:before {
 }
 
 .ticket__cta {
+  font-family: var(--font-title);
   display: inline-block;
   background: var(--accent);
   color: var(--text-black);
   padding: 1rem 2rem;
   text-decoration: none;
   font-weight: 600;
+  font-size: 1.5rem;
   text-transform: uppercase;
   transition: transform 0.2s;
   align-self: flex-start;
@@ -4533,10 +4547,9 @@ input:checked+.slider:before {
   transform: scale(1.05);
 }
 
-/* RIP LINE - MOBILE BASE */
+/* RIP LINE */
 .ticket__rip {
   position: relative;
-  /* From your Mobile Styles: */
   width: 100%;
   height: 4px;
   background-image: linear-gradient(to right, #333 50%, transparent 50%);
@@ -4567,6 +4580,7 @@ input:checked+.slider:before {
 }
 
 .ticket__text {
+  font-family: var(--font-body);
   color: #aaa;
   font-size: 0.95rem;
   line-height: 1.3;
@@ -4646,10 +4660,12 @@ input:checked+.slider:before {
 }
 
 /*  MOMU FOOTER*/
+/* MOMU FOOTER */
 .momu-footer {
   background-color: var(--text-black);
-  color: var(--bg);
-  padding: 60px 20px 40px 20px;
+  color: #FFFFFF;
+  /* Forced high-contrast white */
+  padding: 60px 24px 40px 24px;
   font-family: var(--font-title);
 }
 
@@ -4664,63 +4680,42 @@ input:checked+.slider:before {
 .footer-header {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 30px;
 }
 
 .momu-svg {
-  width: 120px;
+  width: 140px;
+  /* Made slightly larger for mobile visibility */
   height: auto;
   display: block;
-  fill: var(--bg);
-}
-
-.footer-svg-path {
-  fill: var(--bg);
-  transition: fill 0.3s ease;
-}
-
-.footer-logo:hover .footer-svg-path {
-  fill: var(--accent);
+  fill: #FFFFFF;
 }
 
 .footer-nav {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
+  /* Tighter gap because the buttons themselves are now large */
 }
 
+/* TOUCH TARGET FIX: Ensuring every link is easy to tap */
 .footer-nav a {
-  color: var(--bg);
+  color: #FFFFFF;
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
+  /* Increased from 0.9rem for readability */
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  position: relative;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  /* Standard mobile touch target size */
   transition: color 0.3s;
-  width: fit-content;
 }
 
-/* Hover Accent Dot */
 .footer-nav a:hover {
   color: var(--accent);
-}
-
-.footer-nav a::after {
-  content: '';
-  position: absolute;
-  top: -2px;
-  right: -10px;
-  width: 5px;
-  height: 5px;
-  background-color: var(--accent);
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.footer-nav a:hover::after {
-  opacity: 1;
 }
 
 .footer-main {
@@ -4729,77 +4724,108 @@ input:checked+.slider:before {
   gap: 40px;
 }
 
+/* READABILITY FIX: Lighter colors for dark background */
 .footer-label {
-  font-size: 0.7rem;
-  color: #666;
+  font-size: 0.85rem;
+  color: var(--accent);
+  /* Using accent color for labels to make them pop */
   font-weight: 700;
   letter-spacing: 1px;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   text-transform: uppercase;
 }
 
 .footer-title {
-  font-size: 1.8rem;
-  font-weight: 400;
-  line-height: 1.2;
-  margin: 0 0 10px 0;
-}
-
-.footer-accent {
-  color: var(--accent);
-  font-size: 0.85rem;
+  font-size: 2rem;
+  /* Larger for mobile impact */
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 15px 0;
+  color: #FFFFFF;
 }
 
 .footer-text {
-  font-size: 0.95rem;
-  margin-bottom: 20px;
-  color: #999;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 25px;
+  color: #CCCCCC;
+  /* Lighter gray so it doesn't disappear into the black */
 }
 
-/* Newsletter Form */
+/* Newsletter Form - Better contrast */
 .footer-form {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--text-black);
-  padding-bottom: 8px;
+  border-bottom: 2px solid #444;
+  /* Thicker, visible border */
+  padding-bottom: 12px;
 }
 
 .footer-form input {
   background: transparent;
   border: none;
-  color: var(--bg);
-  font-size: 1rem;
+  color: #FFFFFF;
+  font-size: 1.1rem;
   width: 100%;
   outline: none;
+}
+
+.footer-form input::placeholder {
+  color: #888;
 }
 
 .footer-form button {
   background: transparent;
   border: none;
-  color: var(--bg);
-  font-size: 1.2rem;
+  color: var(--accent);
+  font-size: 1.4rem;
+  font-weight: 900;
   cursor: pointer;
+  padding: 10px;
 }
 
-/* BOTTOM */
+/* BOTTOM SECTION */
 .footer-legal {
   display: flex;
   flex-direction: column-reverse;
-  gap: 20px;
-  font-size: 0.75rem;
-  color: #555;
-  border-top: 1px solid #1a1a1a;
+  gap: 30px;
+  align-items: center;
+  border-top: 1px solid #333;
   padding-top: 30px;
+  color: #BBBBBB;
 }
 
+/* THE BUTTONS */
 .footer-social {
   display: flex;
-  gap: 24px;
+  gap: 15px;
 }
 
 .footer-social a {
-  color: #555;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  border-radius: 50%;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
   text-decoration: none;
+}
+
+/* HOVER EFFECT */
+.footer-social a:hover {
+  background-color: var(--accent);
+  transform: translateY(-3px);
+  color: #000000;
+}
+
+/* THE ICONS */
+.social-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 
 .sr-only {
@@ -4814,31 +4840,15 @@ input:checked+.slider:before {
   border-width: 0;
 }
 
-.footer-nav a,
-.footer-social a,
-.footer-form button,
-.roster-form__btn {
-  min-width: 44px;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* DESKTOP */
+/* DESKTOP REFINEMENTS */
 @media (min-width: 64rem) {
   .momu-footer {
-    padding: 80px 40px 40px 40px;
-  }
-
-  .footer-container {
-    gap: 80px;
+    padding: 100px 60px 60px 60px;
   }
 
   .footer-header {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
   }
 
   .footer-nav {
@@ -4847,17 +4857,18 @@ input:checked+.slider:before {
   }
 
   .footer-main {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .footer-newsletter {
-    justify-self: end;
-    width: 100%;
-    max-width: 400px;
+    grid-template-columns: 1.5fr 1fr;
   }
 
   .footer-legal {
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-social a {
+    background: transparent;
+    width: auto;
+    height: auto;
   }
 }
