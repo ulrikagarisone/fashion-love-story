@@ -20,7 +20,7 @@ const setupTwoWorldsStatement = () => {
                     }
                 });
 
-                // First: "They lived in" slides up
+                // slides up
                 tl.fromTo(smallText,
                     {
                         opacity: 0,
@@ -34,7 +34,7 @@ const setupTwoWorldsStatement = () => {
                     }
                 );
 
-                // Second: "SEPARATE WORLDS" pops in with a slight "back" ease
+                // pops in with a slight big then small ease
                 tl.fromTo(largeText,
                     {
                         opacity: 0,
@@ -48,41 +48,65 @@ const setupTwoWorldsStatement = () => {
                         duration: 1,
                         ease: "back.out(1.5)"
                     },
-                    "-=0.5" // This starts the large text halfway through the first animation
+                    "-=0.5" // starts the large text halfway through the first animation
                 );
             }
         }
     }
 };
 
-/**
- * 1. VISUAL EFFECTS
- */
+
 const setupEyeTracker = () => {
     const lycraSection = document.querySelector('.watching-lycra');
     const pupils = document.querySelectorAll('.watching-lycra__pupil');
-    if (!lycraSection || pupils.length === 0) return;
+
+    // stop if elements are missing
+    if (!lycraSection || pupils.length === 0) {
+        return;
+    }
 
     const handleMove = (e) => {
-        const xCoord = e.touches ? e.touches[0].clientX : e.clientX;
-        const yCoord = e.touches ? e.touches[0].clientY : e.clientY;
+        let xCoord;
+        let yCoord;
+
+        //Check if the user is using a Touch Screen or a Mouse
+        if (e.touches) {
+            xCoord = e.touches[0].clientX;
+            yCoord = e.touches[0].clientY;
+        } else {
+            // It's a mouse
+            xCoord = e.clientX;
+            yCoord = e.clientY;
+        }
+
         pupils.forEach((pupil) => {
             const eye = pupil.parentElement;
             const rect = eye.getBoundingClientRect();
+
+            // Find the exact middle of the eyeball
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
+
+            // Math to find the direction of the mouse/finger
             const angle = Math.atan2(yCoord - centerY, xCoord - centerX);
+
+            // Limit how far the pupil can move
             const distance = Math.min(rect.width / 4, 15);
-            pupil.style.transform = `translate(calc(-50% + ${Math.cos(angle) * distance}px), calc(-50% + ${Math.sin(angle) * distance}px))`;
+
+            // Calculate the move
+            const moveX = Math.cos(angle) * distance;
+            const moveY = Math.sin(angle) * distance;
+
+            // Apply the movement
+            pupil.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
         });
     };
+
     lycraSection.addEventListener('mousemove', handleMove);
     lycraSection.addEventListener('touchmove', handleMove, { passive: true });
 };
 
-/**
- * 2. FAILED DATES (Falling Title & Pop-in)
- */
+
 const setupFailedDates = () => {
     const section = document.querySelector('.failed-dates');
     const title = document.querySelector('.failed-title');
@@ -90,7 +114,7 @@ const setupFailedDates = () => {
 
     let mm = gsap.matchMedia();
 
-    // The Falling Animation (Desktop Only)
+    // The falling aimation 
     mm.add("(min-width: 1024px)", () => {
         gsap.fromTo(title,
             { y: -50, rotation: 0 },
@@ -124,23 +148,38 @@ const setupFailedStatement = () => {
             });
 
             tl.fromTo(smallText,
-                { opacity: 0, y: 20 },
-                { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+                {
+                    opacity: 0,
+                    y: 20
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    ease: "power2.out"
+                }
             );
 
             tl.fromTo(largeText,
-                { opacity: 0, scale: 0.8, y: 30 },
-                { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.7)" },
+                {
+                    opacity: 0,
+                    scale: 0.8,
+                    y: 30
+                },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "back.out(1.7)"
+                },
                 "-=0.4" // Starts slightly before the small text finishes
             );
         }
     }
 };
 
-/**
- * 3. MOBILE HORIZONTAL SCROLL (Blind Date Blue)
- * This makes the models "walk" sideways on mobile
- */
+
 const setupMobileGalleryScroll = () => {
     const gallery = document.querySelector('.blue-gallery');
     const section = document.querySelector('.blind-date-blue');
@@ -148,45 +187,87 @@ const setupMobileGalleryScroll = () => {
 
     let mm = gsap.matchMedia();
 
-    mm.add("(max-width: 1023px)", () => {
-        const scrollAmount = gallery.scrollWidth - window.innerWidth;
-        gsap.to(gallery, {
-            x: () => -(scrollAmount + 150),
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".blue-gallery",
-                start: "top 20%",
-                end: () => `+=${scrollAmount + 400}`,
-                pin: ".blind-date-blue",
-                scrub: 1,
-                invalidateOnRefresh: true,
-            }
-        });
+    mm.add("(min-width: 0px)", () => {
+        // sideways walk if the screen is actually small
+        if (window.innerWidth < 1024) {
+
+            const scrollAmount = gallery.scrollWidth - window.innerWidth;  //how many pixels the gallery needs to move to reach the end
+
+            gsap.to(gallery, {
+                x: () => -(scrollAmount + 150), //moves the gallery to the left
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".blue-gallery",
+                    start: "top 20%",
+                    end: () => `+=${scrollAmount + 400}`,
+                    pin: ".blind-date-blue",  //page stays still while the images slide by
+                    scrub: 1,
+                    invalidateOnRefresh: true,
+                }
+            });
+        }
     });
 };
 
-/**
- * 4. OTHER INTERACTION HELPERS
- */
+
 const setupBulbTransition = () => {
     const section = document.querySelector(".idea-flash");
+
     if (!section) return;
-    const tl = gsap.timeline({ scrollTrigger: { trigger: section, start: "top top", end: "+=150%", scrub: 1, pin: true } });
-    tl.to(".idea-flash__bulb", { autoAlpha: 1, y: 0, scale: 1.2, ease: "back.out(1.7)", duration: 1 })
-        .to(".idea-flash__glow", { scale: 150, duration: 3, ease: "power2.inOut" }, "+=0.2")
-        .to([".idea-flash__dirk", ".idea-flash__bulb", ".idea-flash__content"], { autoAlpha: 0, duration: 0.5 }, "<60%");
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "+=150%",      // stay for 1.5 screen-lengths of scrolling
+            scrub: 1,
+            pin: true           // freeze the screen during the flash
+        }
+    });
+
+    tl.to(".idea-flash__bulb", {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1.2,
+        ease: "back.out(1.7)",
+        duration: 1
+    })
+
+        .to(".idea-flash__glow", {
+            scale: 150,             // Grow massive to cover everything
+            duration: 3,
+            ease: "power2.inOut"
+        }, "+=0.2")                 // Start 0.2s after bulb pops
+
+        .to([".idea-flash__dirk", ".idea-flash__bulb", ".idea-flash__content"], {
+            autoAlpha: 0,
+            duration: 0.5
+        }, "<60%");                 // Start when the glow is 60% finished
 };
 
+
 const setupTicket3D = () => {
-    const ticket = document.getElementById('ticket3D');
+    const ticket = document.querySelector('.ticket');
+
     if (!ticket) return;
+
     ticket.addEventListener('mousemove', (e) => {
+        // Find the ticke position, size on the screen
         const rect = ticket.getBoundingClientRect();
+
+        // calculate how far your mouse is from the center verticaly
         const xRot = ((e.clientY - rect.top) / rect.height - 0.5) * -10;
+
+        // now horizontall
         const yRot = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+
+        // Apply the 3D tilt
         ticket.style.transform = `rotateX(${xRot}deg) rotateY(${yRot}deg)`;
     });
-    ticket.addEventListener('mouseleave', () => ticket.style.transform = `rotateX(0deg) rotateY(0deg)`);
+
+    ticket.addEventListener('mouseleave', () => {
+        ticket.style.transform = `rotateX(0deg) rotateY(0deg)`;// Reset
+    });
 };
 
 const initHighlighter = () => {
@@ -206,9 +287,7 @@ const initHighlighter = () => {
     });
 };
 
-/**
- * MASTER INIT (The Export)
- */
+
 export const initGeneralInteractions = () => {
     setupTwoWorldsStatement();
     setupEyeTracker();

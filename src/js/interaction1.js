@@ -8,7 +8,6 @@ const initBlindDateArchive = () => {
     const toggle = document.querySelector('#inspector-switch');
     const layers = document.querySelectorAll('.secret-layer');
 
-    // Exit if elements don't exist
     if (!section || !toggle) return;
 
     // Toggle change logic
@@ -16,6 +15,7 @@ const initBlindDateArchive = () => {
         if (e.target.checked) {
             section.classList.add('is-inspecting');
 
+            // for mobile just makae evrithing visable
             if (window.innerWidth < 1024) {
                 layers.forEach(layer => {
                     layer.style.opacity = "1";
@@ -24,6 +24,7 @@ const initBlindDateArchive = () => {
                 });
             }
         } else {
+            //if switch off hide evrithing and reset
             section.classList.remove('is-inspecting');
             layers.forEach(layer => {
                 layer.style.opacity = "0";
@@ -35,8 +36,9 @@ const initBlindDateArchive = () => {
         }
     });
 
-    // Desktop mouse move
     section.addEventListener('mousemove', (e) => {
+
+        //if the switch is ON and the user is on a compute
         if (toggle.checked && window.innerWidth >= 1024) {
             layers.forEach(layer => {
                 const rect = layer.getBoundingClientRect();
@@ -49,17 +51,17 @@ const initBlindDateArchive = () => {
                 layer.style.webkitMaskRepeat = 'no-repeat';
                 layer.style.maskRepeat = 'no-repeat';
 
-                const maskCss = `radial-gradient(circle 120px at ${x}px ${y}px, black 50%, rgba(0,0,0,0) 100%)`;
+                const maskCss = `radial-gradient(circle 120px at ${x}px ${y}px, black 50%, rgba(0,0,0,0) 100%)`; //circle that follows mouse coordinates
                 layer.style.webkitMaskImage = maskCss;
-                layer.style.maskImage = maskCss;
+                layer.style.maskImage = maskCss; //apply this mask to the secret layer
             });
         }
     });
 
-    // Desktop mouse leave
+    // desktop mouse leave
     section.addEventListener('mouseleave', () => {
         if (toggle.checked && window.innerWidth >= 1024) {
-            layers.forEach(layer => layer.style.opacity = '0');
+            layers.forEach(layer => layer.style.opacity = '0'); //hide layers when mouse leaves
         }
     });
 };

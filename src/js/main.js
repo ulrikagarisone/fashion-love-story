@@ -6,7 +6,6 @@ import { initInteraction1 } from './interaction1.js';
 import { initInteraction2 } from './interaction2.js';
 import { initInteraction3 } from './interaction3.js';
 import { initDirk } from './dirk.js';
-import { initMeeting } from './meeting.js';
 import { initGeneralInteractions } from './general.js';
 import { initCaptainAnimation } from './captain.js';
 
@@ -17,7 +16,6 @@ const init = () => {
   initInteraction2(); 
   initInteraction3();   
   initDirk();
-  initMeeting();
   initGeneralInteractions();
   initCaptainAnimation();
 };
