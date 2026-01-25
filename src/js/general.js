@@ -131,6 +131,36 @@ const setupFailedDates = () => {
     });
 };
 
+
+const initFailedDates = () => {
+    const indicator = document.querySelector('.failed-indicator');
+    const wrapper = document.querySelector('.failed-image-wrapper');
+
+    if (indicator && wrapper) {
+        indicator.addEventListener('click', (e) => {
+            // prevent any weird scrolling behavior
+            e.preventDefault();
+
+            // toggle the quote class 
+            wrapper.classList.toggle('is-active');
+
+            const text = indicator.querySelector('.indicator-text');
+
+            // check if the text element exists
+            if (text) {
+                // Iif now active close show
+                if (wrapper.classList.contains('is-active')) {
+                    text.textContent = 'Close Notes';
+                }
+                else {
+                    text.textContent = 'Read Notes';
+                }
+            }
+        });
+    }
+};
+
+
 const setupFailedStatement = () => {
     const smallText = document.querySelector('.failed-statement-small');
     const largeText = document.querySelector('.failed-statement-large');
@@ -292,6 +322,7 @@ export const initGeneralInteractions = () => {
     setupTwoWorldsStatement();
     setupEyeTracker();
     setupFailedDates();
+    initFailedDates();
     setupFailedStatement();
     setupMobileGalleryScroll();
     setupBulbTransition();

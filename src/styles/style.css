@@ -85,7 +85,6 @@ body {
   transform: scale(1.05);
 }
 
-
 .nav__logo-svg {
   width: auto;
   height: 100%;
@@ -1850,7 +1849,7 @@ body {
   line-height: 1.2;
 }
 
-/* --- TABLET  --- */
+/*  TABLET */
 @media (min-width: 48rem) {
   .meeting {
     padding: 4rem 2rem;
@@ -3090,7 +3089,7 @@ input:checked+.slider:before {
     width: 40%;
     right: -2rem;
     bottom: -10%;
-    opacity: 0;
+    opacity: 1;
   }
 }
 
@@ -3320,7 +3319,6 @@ input:checked+.slider:before {
   font-size: 1rem;
   margin-top: 0.2rem;
   display: block;
-  text-transform: uppercase;
 }
 
 .breakthrough__visual {
@@ -4340,7 +4338,6 @@ input:checked+.slider:before {
   text-decoration: none;
   color: var(--text-black);
   align-items: center;
-  transition: background 0.3s ease;
 }
 
 .archive-row__date {
@@ -4458,7 +4455,7 @@ input:checked+.slider:before {
   border-color: #999;
 }
 
-/* --- TICKET SECTION (Mobile-First Base) --- */
+/* TICKET SECTION */
 .ticket-section {
   padding: 4rem 1rem;
   background: var(--bg-blue);
@@ -4474,7 +4471,6 @@ input:checked+.slider:before {
   background: var(--text-black);
   color: var(--text-light);
   transform-style: preserve-3d;
-  /* From your Mobile Styles: */
   flex-direction: column;
 }
 
@@ -4487,7 +4483,6 @@ input:checked+.slider:before {
 .ticket__side--left {
   flex: 2;
   position: relative;
-  /* From your Mobile Styles: */
   border-right: none;
 }
 
@@ -4584,7 +4579,6 @@ input:checked+.slider:before {
   z-index: 10;
 }
 
-/* From your Mobile Styles: */
 .ticket__rip::before {
   top: -10px;
   left: -12px;
@@ -4677,11 +4671,9 @@ input:checked+.slider:before {
 }
 
 /*  MOMU FOOTER*/
-/* MOMU FOOTER */
 .momu-footer {
   background-color: var(--text-black);
   color: #FFFFFF;
-  /* Forced high-contrast white */
   padding: 60px 24px 40px 24px;
   font-family: var(--font-title);
 }
@@ -4702,7 +4694,6 @@ input:checked+.slider:before {
 
 .momu-svg {
   width: 140px;
-  /* Made slightly larger for mobile visibility */
   height: auto;
   display: block;
   fill: #FFFFFF;
@@ -4712,22 +4703,18 @@ input:checked+.slider:before {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  /* Tighter gap because the buttons themselves are now large */
 }
 
-/* TOUCH TARGET FIX: Ensuring every link is easy to tap */
 .footer-nav a {
   color: #FFFFFF;
   text-decoration: none;
   font-weight: 700;
   font-size: 1.1rem;
-  /* Increased from 0.9rem for readability */
   text-transform: uppercase;
   letter-spacing: 1px;
   display: flex;
   align-items: center;
   min-height: 48px;
-  /* Standard mobile touch target size */
   transition: color 0.3s;
 }
 
@@ -4741,7 +4728,6 @@ input:checked+.slider:before {
   gap: 40px;
 }
 
-/* READABILITY FIX: Lighter colors for dark background */
 .footer-label {
   font-size: 0.85rem;
   color: var(--accent);
@@ -4753,7 +4739,6 @@ input:checked+.slider:before {
 
 .footer-title {
   font-size: 2rem;
-  /* Larger for mobile impact */
   font-weight: 700;
   line-height: 1.1;
   margin: 0 0 15px 0;
@@ -4765,15 +4750,12 @@ input:checked+.slider:before {
   line-height: 1.5;
   margin-bottom: 25px;
   color: #CCCCCC;
-  /* Lighter gray so it doesn't disappear into the black */
 }
 
-/* Newsletter Form - Better contrast */
 .footer-form {
   display: flex;
   align-items: center;
   border-bottom: 2px solid #444;
-  /* Thicker, visible border */
   padding-bottom: 12px;
 }
 
@@ -4830,7 +4812,6 @@ input:checked+.slider:before {
   text-decoration: none;
 }
 
-/* HOVER EFFECT */
 .footer-social a:hover {
   background-color: var(--accent);
   transform: translateY(-3px);
@@ -4856,7 +4837,7 @@ input:checked+.slider:before {
   border-width: 0;
 }
 
-/* DESKTOP REFINEMENTS */
+/* DESKTOP */
 @media (min-width: 64rem) {
   .momu-footer {
     padding: 100px 60px 60px 60px;
